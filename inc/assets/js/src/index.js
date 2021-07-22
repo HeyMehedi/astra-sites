@@ -27,7 +27,11 @@
                 
                     // Handlers
                     bindHandlers() {
-                        oldMediaFrameSelect.prototype.bindHandlers.apply( this, arguments );
+                        if ( astraImages.is_elementor_editor ) {
+                            oldMediaFramePost.prototype.bindHandlers.apply( this, arguments );
+                        } else {
+                            oldMediaFrameSelect.prototype.bindHandlers.apply( this, arguments );
+                        }
                         this.on( 'content:create:astraimages', this.astraimages, this );
                     },
                 

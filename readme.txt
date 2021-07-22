@@ -149,6 +149,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
+v2.6.17 - 22-July-2021
+- Fix: Fixed the missing 'Create Gallery' button in Media Popup for Elementor editor.
+
 v2.6.16 - 19-July-2021
 - Fix: Fixed the issue where Free Images by Pixabay were not available on Elementor Editor.
 
