@@ -77,7 +77,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 			);
 		}
 
-		function get_cta_links( ) {
+		function get_cta_links() {
 			return array(
 				'elementor' => 'https://wpastra.com/elementor-starter-templates/?utm_source=elementor-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
 				'beaver-builder' => 'https://wpastra.com/beaver-builder-starter-templates/?utm_source=beaver-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 
 			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 			$cta_links = $this->get_cta_links();
-			$link = isset( $cta_links[ $default_page_builder ]) ? $cta_links[ $default_page_builder ] : 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin';
+			$link = isset( $cta_links[ $default_page_builder ] ) ? $cta_links[ $default_page_builder ] : 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin';
 
 			$custom_cta_content_data = apply_filters(
 				'astra_sites_custom_cta_vars',
