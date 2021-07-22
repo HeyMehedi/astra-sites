@@ -1,31 +1,15 @@
 name: CI
 
 # Run the deployment only when code is committed to the branch.
-on:
-  pull_request:
-    branches:
-      - master
-      - next-release
+on: pull_request
 
 jobs:
   lint-and-audit:
 
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node: [5.6, 7.4, 8.0]
-
+    runs-on: self-hosted
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.node }}
-        coverage: none
-        tools: composer
 
     - name: Get Composer Cache Directory
       id: composer-cache
