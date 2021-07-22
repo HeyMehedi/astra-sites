@@ -1,33 +1,23 @@
-name: CI
+name: PHP_CodeSniffer
 
-# Run the deployment only when code is committed to the branch.
 on: pull_request
 
 jobs:
-  lint-and-audit:
-
-    runs-on: self-hosted
+  phpcs:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Get Composer Cache Directory
-      id: composer-cache
-      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer
 
-    - name: Configure Composer cache
-      uses: actions/cache@v2
-      with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-suggest --no-progress
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
-
-    - name: Detect coding standard violations
-      run: vendor/bin/phpcs
-    
-    - name: PHP Syntax Errors
-      run: if find . -name "*.php" ! -path "./vendor/*" ! -path "./admin/bsf-core/*" -exec php -l {} \; | grep "Errors parsing"; then exit 1; fi
+      - name: Detect coding standard violations
+        run: vendor/bin/phpcs
