@@ -68,6 +68,22 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 
 			wp_enqueue_style( 'astra-sites-admin-page', ASTRA_SITES_URI . 'assets/css/admin.css', ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-admin-js', ASTRA_SITES_URI . 'assets/js/admin.js', array( 'jquery' ), ASTRA_SITES_VER, true );
+			wp_localize_script(
+				'astra-sites-admin-js',
+				'AstraSitesAdminVars',
+				array(
+					'cta_links' => $this->get_cta_links(),
+				)
+			);
+		}
+
+		function get_cta_links( ) {
+			return array(
+				'elementor' => 'https://wpastra.com/elementor-starter-templates/?utm_source=elementor-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'beaver-builder' => 'https://wpastra.com/beaver-builder-starter-templates/?utm_source=beaver-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'gutenberg' => 'https://wpastra.com/starter-templates-plans/?utm_source=gutenberg-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'brizy' => 'https://wpastra.com/starter-templates-plans/?utm_source=brizy-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+			);
 		}
 
 		/**
@@ -83,19 +99,24 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 			if ( Astra_Sites_White_Label::get_instance()->is_white_labeled() ) {
 				return;
 			}
+
+			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+			$cta_links = $this->get_cta_links();
+			$link = isset( $cta_links[ $default_page_builder ]) ? $cta_links[ $default_page_builder ] : 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin';
+
 			$custom_cta_content_data = apply_filters(
 				'astra_sites_custom_cta_vars',
 				array(
 					'text'        => __( 'Get unlimited access to all premium Starter Templates and more, at a single low cost!', 'astra-sites' ),
 					'button_text' => __( 'Get Essential Bundle', 'astra-sites' ),
-					'cta_link'    => 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin',
+					'cta_link'    => $link,
 				)
 			);
 
 			$html  = '<div class="astra-sites-custom-cta-wrap">';
 			$html .= '<span class="astra-sites-cta-title">' . esc_html( $custom_cta_content_data['text'] ) . '</span>';
 			$html .= '<span class="astra-sites-cta-btn">';
-			$html .= '<a href="' . esc_url( $custom_cta_content_data['cta_link'] ) . '"  target="_blank" >' . esc_html( $custom_cta_content_data['button_text'] ) . '</a>';
+			$html .= '<a class="astra-sites-cta-link" href="' . esc_url( $custom_cta_content_data['cta_link'] ) . '"  target="_blank" >' . esc_html( $custom_cta_content_data['button_text'] ) . '</a>';
 			$html .= '</span>';
 			$html .= '</div>';
 			echo wp_kses_post( $html );

@@ -2050,6 +2050,7 @@ var AstraSitesAjaxQueue = (function () {
 							AstraSitesAdmin.add_sites(response.data);
 
 							AstraSitesAdmin._autocomplete();
+							$(document).trigger('astra-sites-change-page-builder', page_builder_slug, response.data, response);
 						}
 					});
 

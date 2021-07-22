@@ -24,6 +24,16 @@
          */
         _bind: function () {
             $(window).on('scroll', StarterTemplatesAdmin._addCustomCTAInfobar);
+            $(document).on('astra-sites-change-page-builder', StarterTemplatesAdmin._changeCTALink);
+		},
+
+		_changeCTALink: function(event, page_builder) {
+			var link = AstraSitesAdminVars.cta_links[page_builder] || '';
+
+			if( link ) {
+				$('.astra-sites-cta-link').attr( 'href', link );
+			}
+
         },
 
         /**
