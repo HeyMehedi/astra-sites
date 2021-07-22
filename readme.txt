@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.8
-Stable tag: 2.6.16
+Stable tag: 2.6.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,10 @@ We are open to suggestions and would love to work on topics that our users are l
 7. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v2.6.17 - 22-July-2021
+- Improvement: Avoided loading the Gutenberg Blocks scripts in the customizer screen.
+- Fix: Fixed the missing 'Create Gallery' button in Media Popup for Elementor editor.
 
 v2.6.16 - 19-July-2021
 - Fix: Fixed the issue where Free Images by Pixabay were not available on Elementor Editor.
