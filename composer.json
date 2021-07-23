@@ -1,6 +1,6 @@
 {
-    "name": "brainstormforce/astra-pro-sites",
-    "description": "Import the Professionally designed, ready-made websites build with Astra Theme with just a few clicks",   
+    "name": "brainstormforce/astra-sites",
+    "description": "[![pipeline status](https://github.com/brainstormforce/astra-sites/badges/master/pipeline.svg)](https://github.com/brainstormforce/astra-sites/commits/master)",  
     "require": {
         "brainstormforce/astra-notices": "^1.1",
         "brainstormforce/gutenberg-templates": "^1"

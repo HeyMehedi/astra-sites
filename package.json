@@ -3,7 +3,7 @@
   "version": "2.6.17",
   "main": "Gruntfile.js",
   "author": "Brainstorm Force",
-  "description": "Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.",
+  "description": "[![pipeline status](https://github.com/brainstormforce/astra-sites/badges/master/pipeline.svg)](https://github.com/brainstormforce/astra-sites/commits/master)",
   "scripts": {
     "check-engines": "wp-scripts check-engines",
     "check-licenses": "wp-scripts check-licenses",
