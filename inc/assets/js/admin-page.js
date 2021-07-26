@@ -238,6 +238,7 @@ var AstraSitesAjaxQueue = (function () {
 		import_start_time: '',
 		import_end_time: '',
 		search_terms: [],
+		search_terms_with_count: [],
 		page_settings_flag: true,
 		delay_in_request: false,
 		delay_value : 10000, // 10 seconds.
@@ -748,12 +749,13 @@ var AstraSitesAjaxQueue = (function () {
 				return;
 			}
 			AstraSitesAdmin.search_terms = [];
+			AstraSitesAdmin.search_terms_with_count = [];
 		},
 
 		_sendHeartbeat: function (e, data) {
 			// Add additional data to Heartbeat data.
 			if (AstraSitesAdmin.search_terms.length > 0) {
-				data['ast-sites-search-terms'] = AstraSitesAdmin.search_terms;
+				data['ast-sites-search-terms'] = AstraSitesAdmin.search_terms_with_count;
 			}
 		},
 
@@ -765,7 +767,9 @@ var AstraSitesAjaxQueue = (function () {
 			}
 
 			if (!AstraSitesAdmin.search_terms.includes(term)) {
+				let count = $( '#astra-sites .ast-sites__search-wrap > div' ).length;
 				AstraSitesAdmin.search_terms.push(term);
+				AstraSitesAdmin.search_terms_with_count.push({'term': term, 'count': count });
 			}
 		},
 
@@ -2499,7 +2503,6 @@ var AstraSitesAjaxQueue = (function () {
 				beforeSend: function () {
 					console.groupCollapsed('Import Complete!');
 					AstraSitesAdmin._log_title('Import Complete!');
-					// console.groupCollapsed( 'Import Complete!' );
 				}
 			})
 				.fail(function (jqXHR) {
@@ -2580,7 +2583,7 @@ var AstraSitesAjaxQueue = (function () {
 				})
 					.fail(function (jqXHR) {
 						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage(jqXHR.status + ' ' + jqXHR.statusText, 'Import Widgets Failed!', jqXHR);
+						AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Import Widgets Failed!' );
 						console.groupEnd();
 					})
 					.done(function (response) {
@@ -2589,8 +2592,7 @@ var AstraSitesAjaxQueue = (function () {
 
 						// 4. Fail - Import Widgets.
 						if (false === response.success) {
-							AstraSitesAdmin._importFailMessage(response.data, 'Import Widgets Failed!');
-
+							AstraSitesAdmin._failed( response.data, 'Import Widgets Failed!' );
 						} else {
 
 							// 4. Pass - Import Widgets.
@@ -2624,14 +2626,14 @@ var AstraSitesAjaxQueue = (function () {
 				})
 					.fail(function (jqXHR) {
 						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage(jqXHR.status + ' ' + jqXHR.statusText, 'Import Site Options Failed!', jqXHR);
+						AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Import Site Options Failed!' );
 						console.groupEnd();
 					})
 					.done(function (response) {
 						AstraSitesAdmin._log(response);
 						// 3. Fail - Import Site Options.
 						if (false === response.success) {
-							AstraSitesAdmin._importFailMessage(response.data, 'Import Site Options Failed!');
+							AstraSitesAdmin._failed( response.data, 'Import Site Options Failed!' );
 							console.groupEnd();
 						} else {
 							console.groupEnd();
@@ -2813,7 +2815,7 @@ var AstraSitesAjaxQueue = (function () {
 				})
 					.fail(function (jqXHR) {
 						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage(jqXHR.status + ' ' + jqXHR.statusText, 'Import Cartflows Flow Failed!', jqXHR);
+						AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Import Cartflows Flow Failed!' );
 						console.groupEnd();
 					})
 					.done(function (response) {
@@ -2821,7 +2823,7 @@ var AstraSitesAjaxQueue = (function () {
 
 						// 1. Fail - Import WPForms Options.
 						if (false === response.success) {
-							AstraSitesAdmin._importFailMessage(response.data, 'Import Cartflows Flow Failed!');
+							AstraSitesAdmin._failed( response.data, 'Import Cartflows Flow Failed!' );
 							console.groupEnd();
 						} else {
 							console.groupEnd();
@@ -2857,7 +2859,7 @@ var AstraSitesAjaxQueue = (function () {
 				})
 					.fail(function (jqXHR) {
 						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage(jqXHR.status + ' ' + jqXHR.statusText, 'Import WP Forms Failed!', jqXHR);
+						AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Import WP Forms Failed' );
 						console.groupEnd();
 					})
 					.done(function (response) {
@@ -2865,7 +2867,7 @@ var AstraSitesAjaxQueue = (function () {
 
 						// 1. Fail - Import WPForms Options.
 						if (false === response.success) {
-							AstraSitesAdmin._importFailMessage(response.data, 'Import WP Forms Failed!');
+							AstraSitesAdmin._failed( response.data, 'Import WP Forms Failed' );
 							console.groupEnd();
 						} else {
 							console.groupEnd();
@@ -2900,8 +2902,8 @@ var AstraSitesAjaxQueue = (function () {
 					},
 				})
 					.fail(function (jqXHR) {
+						AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Import Customizer Settings Failed!' );
 						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage(jqXHR.status + ' ' + jqXHR.statusText, 'Import Customizer Settings Failed!', jqXHR);
 						console.groupEnd();
 					})
 					.done(function (response) {
@@ -2909,7 +2911,7 @@ var AstraSitesAjaxQueue = (function () {
 
 						// 1. Fail - Import Customizer Options.
 						if (false === response.success) {
-							AstraSitesAdmin._importFailMessage(response.data, 'Import Customizer Settings Failed!');
+							AstraSitesAdmin._failed( response.data, 'Import Customizer Settings Failed!' );
 							console.groupEnd();
 						} else {
 							console.groupEnd();
@@ -2938,6 +2940,16 @@ var AstraSitesAjaxQueue = (function () {
 				.attr('target', '_blank')
 				.append('<i class="dashicons dashicons-external"></i>')
 				.attr('href', astraSitesVars.siteURL);
+		},
+
+		_failed: function( errMessage, titleMessage ) {
+
+			var link = astraSitesVars.process_failed_secondary;
+				link = link.replace( '#DEMO_URL#', AstraSitesAdmin.templateData['astra-site-url'] );
+				link = link.replace( '#SUBJECT#', encodeURI('AJAX failed: ' + errMessage ) );
+			
+			AstraSitesAdmin._importFailMessage( errMessage, titleMessage, '', astraSitesVars.process_failed_primary, link);
+					
 		},
 
 		/**
@@ -3731,7 +3743,7 @@ var AstraSitesAjaxQueue = (function () {
 
 					// Remove loader.
 					$('.required-plugins').removeClass('loading').html('');
-					AstraSitesAdmin._importFailMessage(jqXHR.status + jqXHR.statusText, 'Required Plugins Failed!', jqXHR);
+					AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Required Plugins Failed!' );
 					console.groupEnd();
 				})
 				.done(function (response) {
@@ -3740,7 +3752,7 @@ var AstraSitesAjaxQueue = (function () {
 					console.groupEnd();
 
 					if (false === response.success) {
-						AstraSitesAdmin._importFailMessage(response.data, 'Required Plugins Failed!', '', astraSitesVars.importFailedRequiredPluginsMessage);
+						AstraSitesAdmin._failed( response.data, 'Required Plugins Failed!' );
 					} else {
 						AstraSitesAdmin.start_import( response );
 					}
@@ -3953,7 +3965,7 @@ var AstraSitesAjaxQueue = (function () {
 			})
 				.fail(function (jqXHR) {
 					AstraSitesAdmin._log(jqXHR);
-					AstraSitesAdmin._importFailMessage(jqXHR.status + jqXHR.statusText, 'Import WP Forms Failed!', jqXHR);
+					AstraSitesAdmin._failed( jqXHR.status + ' ' + jqXHR.statusText, 'Import WP Forms Failed' );
 					console.groupEnd();
 				})
 				.done(function (response) {
@@ -3962,7 +3974,7 @@ var AstraSitesAjaxQueue = (function () {
 
 					// 1. Fail - Import WPForms Options.
 					if (false === response.success) {
-						AstraSitesAdmin._importFailMessage(response.data, 'Import WP Forms Failed!');
+						AstraSitesAdmin._failed( response.data, 'Import WP Forms Failed' );
 					} else {
 						if (callback && typeof callback == "function") {
 							callback(response);

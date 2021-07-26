@@ -53,9 +53,16 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 			add_filter( 'astra_sites_quick_links', array( $this, 'change_quick_links' ) );
 		}
 
+		/**
+		 * Change quick links
+		 *
+		 * @since x.x.x
+		 * @param array $links  All quick links.
+		 * @return array
+		 */
 		public function change_quick_links( $links = array() ) {
 
-			if( ! isset( $links['links']['upgrade'] ) ) {
+			if ( ! isset( $links['links']['upgrade'] ) ) {
 				return $links;
 			}
 

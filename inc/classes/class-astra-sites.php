@@ -155,30 +155,32 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			$data = apply_filters( 'astra_sites_quick_links', array(
-				'default_logo' => array(
-					'title' => __( 'See Quick Links', 'astra-sites' ),
-					'url'   => ASTRA_SITES_URI . 'inc/assets/images/quick-link-logo.svg',
-				),
-				'links'        => array(
-					'upgrade' => array(
-						'label'   => __( 'Upgrade to Premium', 'astra-sites' ),
-						'icon'    => 'dashicons-star-filled',
-						'url'     => 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin',
-						'bgcolor' => '#ffa500',
+			$data = apply_filters(
+				'astra_sites_quick_links', array(
+					'default_logo' => array(
+						'title' => __( 'See Quick Links', 'astra-sites' ),
+						'url'   => ASTRA_SITES_URI . 'inc/assets/images/quick-link-logo.svg',
 					),
-					'support' => array(
-						'label' => __( 'Support & Docs', 'astra-sites' ),
-						'icon'  => 'dashicons-book',
-						'url'   => 'https://wpastra.com/docs-category/starter-templates/',
+					'links'        => array(
+						'upgrade' => array(
+							'label'   => __( 'Upgrade to Premium', 'astra-sites' ),
+							'icon'    => 'dashicons-star-filled',
+							'url'     => 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin',
+							'bgcolor' => '#ffa500',
+						),
+						'support' => array(
+							'label' => __( 'Support & Docs', 'astra-sites' ),
+							'icon'  => 'dashicons-book',
+							'url'   => 'https://wpastra.com/docs-category/starter-templates/',
+						),
+						'join-facebook' => array(
+							'label' => __( 'Join Facebook Group', 'astra-sites' ),
+							'icon'  => 'dashicons-groups',
+							'url'   => 'https://www.facebook.com/groups/wpastra/',
+						),
 					),
-					'join-facebook' => array(
-						'label' => __( 'Join Facebook Group', 'astra-sites' ),
-						'icon'  => 'dashicons-groups',
-						'url'   => 'https://www.facebook.com/groups/wpastra/',
-					),
-				),
-			) );
+				)
+			);
 
 			if ( defined( 'ASTRA_PRO_SITES_VER' ) ) {
 				unset( $data['links']['upgrade'] );
@@ -251,11 +253,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'blocking'  => true,
 				'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
 				'body'      => array(
-					'search' => array_unique( $data['ast-sites-search-terms'] ),
+					'search' => $data['ast-sites-search-terms'],
 					'url'    => esc_url( site_url() ),
+					'type'   => 'astra-sites',
 				),
 			);
-
 			$result                             = wp_remote_post( $this->search_url, $args );
 			$response['ast-sites-search-terms'] = wp_remote_retrieve_body( $result );
 
@@ -1393,6 +1395,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'ajax_request_failed_secondary'      => sprintf( __( '%1$sRead <a href="%2$s" target="_blank">article</a> to resolve the issue and continue importing template.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/docs/internal-server-error-starter-templates/' ), '</p>' ),
 					'cta_links' => $this->get_cta_links(),
 					'cta_link' => $this->get_cta_link(),
+					/* translators: %s URL to document. */
+					'process_failed_primary'        => sprintf( __( '%1$sWe could not complete the import process due to failed AJAX request and this is the message:%2$s', 'astra-sites' ), '<p>', '</p>' ),
+					/* translators: %s URL to document. */
+					'process_failed_secondary'      => sprintf( __( '%1$sPlease report this <a href="%2$s" target="_blank">here</a>.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/starter-templates-support/?url=#DEMO_URL#&subject=#SUBJECT#' ), '</p>' ),
 				)
 			);
 
@@ -1491,7 +1497,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$compatibilities['warnings']['wp-debug'] = $data['wp-debug'];
 			}
 
-			if ( ! class_exists( 'XMLReader' ) ) {
+			if ( class_exists( 'XMLReader' ) ) {
 				$compatibilities['errors']['xmlreader'] = $data['xmlreader'];
 			}
 
