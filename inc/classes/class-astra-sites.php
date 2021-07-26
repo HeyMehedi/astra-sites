@@ -155,33 +155,33 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			$data = array(
+			$data = apply_filters( 'astra_sites_quick_links', array(
 				'default_logo' => array(
 					'title' => __( 'See Quick Links', 'astra-sites' ),
 					'url'   => ASTRA_SITES_URI . 'inc/assets/images/quick-link-logo.svg',
 				),
 				'links'        => array(
-					array(
+					'upgrade' => array(
 						'label'   => __( 'Upgrade to Premium', 'astra-sites' ),
 						'icon'    => 'dashicons-star-filled',
 						'url'     => 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin',
 						'bgcolor' => '#ffa500',
 					),
-					array(
+					'support' => array(
 						'label' => __( 'Support & Docs', 'astra-sites' ),
 						'icon'  => 'dashicons-book',
 						'url'   => 'https://wpastra.com/docs-category/starter-templates/',
 					),
-					array(
+					'join-facebook' => array(
 						'label' => __( 'Join Facebook Group', 'astra-sites' ),
 						'icon'  => 'dashicons-groups',
 						'url'   => 'https://www.facebook.com/groups/wpastra/',
 					),
 				),
-			);
+			) );
 
 			if ( defined( 'ASTRA_PRO_SITES_VER' ) ) {
-				array_shift( $data['links'] );
+				unset( $data['links']['upgrade'] );
 			}
 
 			bsf_quick_links( $data );
@@ -1256,6 +1256,30 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
+		 * Get CTA link.
+		 */
+		public function get_cta_link() {
+			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+			$cta_links = $this->get_cta_links();
+			return isset( $cta_links[ $default_page_builder ] ) ? $cta_links[ $default_page_builder ] : 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin';
+		}
+
+		/**
+		 * Get CTA Links
+		 *
+		 * @since x.x.x
+		 * @return array
+		 */
+		public function get_cta_links() {
+			return array(
+				'elementor' => 'https://wpastra.com/elementor-starter-templates/?utm_source=elementor-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'beaver-builder' => 'https://wpastra.com/beaver-builder-starter-templates/?utm_source=beaver-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'gutenberg' => 'https://wpastra.com/starter-templates-plans/?utm_source=gutenberg-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'brizy' => 'https://wpastra.com/starter-templates-plans/?utm_source=brizy-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+			);
+		}
+
+		/**
 		 * Returns Localization Variables.
 		 *
 		 * @since 2.0.0
@@ -1367,6 +1391,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'ajax_request_failed_primary'        => sprintf( __( '%1$sWe could not start the import process due to failed AJAX request and this is the message from WordPress:%2$s', 'astra-sites' ), '<p>', '</p>' ),
 					/* translators: %s URL to document. */
 					'ajax_request_failed_secondary'      => sprintf( __( '%1$sRead <a href="%2$s" target="_blank">article</a> to resolve the issue and continue importing template.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/docs/internal-server-error-starter-templates/' ), '</p>' ),
+					'cta_links' => $this->get_cta_links(),
+					'cta_link' => $this->get_cta_link(),
 				)
 			);
 

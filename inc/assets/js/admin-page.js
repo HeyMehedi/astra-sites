@@ -170,6 +170,7 @@ var AstraSitesAjaxQueue = (function () {
 
 	AstraSitesAdmin = {
 
+		default_cta_link: astraSitesVars.cta_link,
 		import_source: 'legacy',
 		wpcontent_left_margin: $('#wpcontent').css('margin-left'),
 		header: $('#astra-sites-menu-page .nav-tab-wrapper'),
@@ -2050,6 +2051,7 @@ var AstraSitesAjaxQueue = (function () {
 							AstraSitesAdmin.add_sites(response.data);
 
 							AstraSitesAdmin._autocomplete();
+							AstraSitesAdmin.default_cta_link = astraSitesVars.cta_links[ page_builder_slug ];
 							$(document).trigger('astra-sites-change-page-builder', page_builder_slug, response.data, response);
 						}
 					});
