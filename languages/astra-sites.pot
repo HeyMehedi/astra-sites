@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Starter Templates 2.6.17\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2021-07-22 07:41:38+00:00\n"
+"POT-Creation-Date: 2021-07-23 08:03:33+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,39 +69,39 @@ msgstr ""
 msgid "Starter Templates"
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:89
+#: classes/class-astra-sites-admin.php:116
 msgid ""
 "Get unlimited access to all premium Starter Templates and more, at a single "
 "low cost!"
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:90
+#: classes/class-astra-sites-admin.php:117
 msgid "Get Essential Bundle"
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:146
+#: classes/class-astra-sites-admin.php:173
 #. translators: %1$s white label plugin name and %2$s deactivation link
 msgid ""
 "Hello! Seems like you have used Starter Templates to build this website "
 "&mdash; Thanks a ton!"
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:147
+#: classes/class-astra-sites-admin.php:174
 msgid ""
 "Could you please do us a BIG favor and give it a 5-star rating on "
 "WordPress? This would boost our motivation and help other users make a "
 "comfortable decision while choosing the Starter Templates."
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:149
+#: classes/class-astra-sites-admin.php:176
 msgid "Ok, you deserve it"
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:151
+#: classes/class-astra-sites-admin.php:178
 msgid "Nope, maybe later"
 msgstr ""
 
-#: classes/class-astra-sites-admin.php:152
+#: classes/class-astra-sites-admin.php:179
 msgid "I already did"
 msgstr ""
 
