@@ -172,7 +172,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Site_Import' ) ) :
 
 			// We want to show the status on all admin screens.
 			// So, Only avoided the customizer screen.
-			if( is_customize_preview() ) {
+			if ( is_customize_preview() ) {
 				return;
 			}
 

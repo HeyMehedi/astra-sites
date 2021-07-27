@@ -1211,7 +1211,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			// Avoid scripts from customizer.
-			if( is_customize_preview() ) {
+			if ( is_customize_preview() ) {
 				return;
 			}
 
@@ -1502,7 +1502,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$compatibilities['warnings']['wp-debug'] = $data['wp-debug'];
 			}
 
-			if ( ! class_exists( 'XMLReader' ) ) {
+			if ( class_exists( 'XMLReader' ) ) {
 				$compatibilities['errors']['xmlreader'] = $data['xmlreader'];
 			}
 

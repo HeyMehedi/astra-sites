@@ -1,6 +1,6 @@
 {
   "name": "astra-sites",
-  "version": "2.6.17",
+  "version": "2.6.18",
   "main": "Gruntfile.js",
   "author": "Brainstorm Force",
   "description": "[![pipeline status](https://github.com/brainstormforce/astra-sites/badges/master/pipeline.svg)](https://github.com/brainstormforce/astra-sites/commits/master)",

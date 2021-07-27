@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.8
-Stable tag: 2.6.17
+Stable tag: 2.6.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,11 @@ We are open to suggestions and would love to work on topics that our users are l
 7. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v2.6.18 - 27-July-2021
+- Improvement: Avoided loading a few scripts in the customizer screen.
+- Improvement: Free Images from Pixabay can be downloaded from the main grid too with the use of a download icon.
+- Fix: Updated the Quick Links to Upgrade the plugin, page builder wise. 
 
 v2.6.17 - 22-July-2021
 - Improvement: Avoided loading the Gutenberg Blocks scripts in the customizer screen.
