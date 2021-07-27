@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Starter Templates 2.6.18\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2021-07-27 09:31:15+00:00\n"
+"POT-Creation-Date: 2021-07-27 12:22:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -285,8 +285,8 @@ msgid "The demo you are importing is a premium demo."
 msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:402
-#: inc/classes/class-astra-sites.php:1336
-#: inc/classes/class-astra-sites.php:1592 inc/includes/templates.php:302
+#: inc/classes/class-astra-sites.php:1369
+#: inc/classes/class-astra-sites.php:1630 inc/includes/templates.php:302
 msgid "Get Access!"
 msgstr ""
 
@@ -802,23 +802,23 @@ msgstr ""
 msgid "Installing..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1338
+#: inc/classes/class-astra-sites.php:1371
 msgid "Upgrade"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1342
+#: inc/classes/class-astra-sites.php:1375
 msgid ""
 "Syncing template library in the background. The process can take anywhere "
 "between 2 to 3 minutes. We will notify you once done."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1343
+#: inc/classes/class-astra-sites.php:1376
 msgid ""
 "Some of the files required during the import process are "
 "missing.<br/><br/>Please try again after some time."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1344
+#: inc/classes/class-astra-sites.php:1377
 msgid ""
 "<p>WordPress debug mode is currently enabled on your website. This has "
 "interrupted the import process..</p><p>Kindly disable debug mode and try "
@@ -827,7 +827,7 @@ msgid ""
 "mode.</p><p><code>define('WP_DEBUG', false);</code></p>"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1346
+#: inc/classes/class-astra-sites.php:1379
 #. translators: %s is a documentation link.
 msgid ""
 "<p>We are facing a temporary issue in importing this template.</p><p>Read "
@@ -835,7 +835,7 @@ msgid ""
 "continue importing template.</p>"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1348
+#: inc/classes/class-astra-sites.php:1381
 #. translators: %s is a documentation link.
 msgid ""
 "<p>We are facing a temporary issue in installing the required plugins for "
@@ -843,206 +843,206 @@ msgid ""
 "resolve the issue and continue importing template.</p>"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1352
+#: inc/classes/class-astra-sites.php:1385
 #. translators: %s are white label strings.
 msgid ""
 "Warning! %1$s Import process is not complete. Don't close the window until "
 "import process complete. Do you still want to leave the window?"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1353
+#: inc/classes/class-astra-sites.php:1386
 msgid "Done! View Site"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1356
+#: inc/classes/class-astra-sites.php:1389
 #. translators: %s is a template name
 msgid "Import \"%s\" Template"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1359
+#: inc/classes/class-astra-sites.php:1392
 msgid "Installing Required Plugins.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1361
+#: inc/classes/class-astra-sites.php:1394
 #. translators: %s are white label strings.
 msgid "Installing %1$s Theme.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1383
+#: inc/classes/class-astra-sites.php:1416
 msgid "Dismiss this notice."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1385 inc/includes/admin-page.php:770
+#: inc/classes/class-astra-sites.php:1418 inc/includes/admin-page.php:770
 msgid "One Last Step.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1386 inc/includes/admin-page.php:793
+#: inc/classes/class-astra-sites.php:1419 inc/includes/admin-page.php:793
 msgid "Your Selected Website is Being Imported."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1387 inc/includes/admin-page.php:795
+#: inc/classes/class-astra-sites.php:1420 inc/includes/admin-page.php:795
 msgid "Your Selected Template is Being Imported."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1389
+#: inc/classes/class-astra-sites.php:1422
 msgid ""
 "We have sent you a surprise gift on your email address! Please check your "
 "inbox!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1391
+#: inc/classes/class-astra-sites.php:1424
 msgid "Looks like the template you are importing is temporarily not available."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1392
+#: inc/classes/class-astra-sites.php:1425
 msgid ""
 "We could not start the import process and this is the message from "
 "WordPress:"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1393
+#: inc/classes/class-astra-sites.php:1426
 msgid "There was an error connecting to the Starter Templates API."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1394
+#: inc/classes/class-astra-sites.php:1427
 msgid "There was an error while importing the content."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1395
+#: inc/classes/class-astra-sites.php:1428
 msgid ""
 "To import content, WordPress needs to store XML file in /wp-content/ "
 "folder. Please get in touch with your hosting provider."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1396
+#: inc/classes/class-astra-sites.php:1429
 msgid ""
 "Looks like your host probably could not store XML file in /wp-content/ "
 "folder."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1398
+#: inc/classes/class-astra-sites.php:1431
 #. translators: %s HTML tags
 msgid ""
 "%1$sWe could not start the import process due to failed AJAX request and "
 "this is the message from WordPress:%2$s"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1400
+#: inc/classes/class-astra-sites.php:1433
 #. translators: %s URL to document.
 msgid ""
 "%1$sRead <a href=\"%2$s\" target=\"_blank\">article</a> to resolve the "
 "issue and continue importing template.%3$s"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1404
+#: inc/classes/class-astra-sites.php:1442
 #. translators: %s URL to document.
 msgid ""
 "%1$sWe could not complete the import process due to failed AJAX request and "
 "this is the message:%2$s"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1406
+#: inc/classes/class-astra-sites.php:1444
 #. translators: %s URL to document.
 msgid "%1$sPlease report this <a href=\"%2$s\" target=\"_blank\">here</a>.%3$s"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1455
+#: inc/classes/class-astra-sites.php:1493
 msgid "XMLReader Support Missing"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1457
+#: inc/classes/class-astra-sites.php:1495
 #. translators: %s doc link.
 msgid ""
 "You're close to importing the template. To complete the process, enable "
 "XMLReader support on your website.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1457
-#: inc/classes/class-astra-sites.php:1462
-#: inc/classes/class-astra-sites.php:1467
+#: inc/classes/class-astra-sites.php:1495
+#: inc/classes/class-astra-sites.php:1500
+#: inc/classes/class-astra-sites.php:1505
 msgid ""
 "Read an article <a href=\"%s\" target=\"_blank\">here</a> to resolve the "
 "issue."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1460
+#: inc/classes/class-astra-sites.php:1498
 msgid "cURL Support Missing"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1462
+#: inc/classes/class-astra-sites.php:1500
 #. translators: %s doc link.
 msgid "To run a smooth import, kindly enable cURL support on your website."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1465
+#: inc/classes/class-astra-sites.php:1503
 msgid "Disable Debug Mode"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1467
+#: inc/classes/class-astra-sites.php:1505
 #. translators: %s doc link.
 msgid ""
 "WordPress debug mode is currently enabled on your website. With this, any "
 "errors from third-party plugins might affect the import process."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1467
+#: inc/classes/class-astra-sites.php:1505
 msgid ""
 "Kindly disable it to continue importing the Starter Template. To do so, you "
 "can add the following code into the wp-config.php file."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1470
+#: inc/classes/class-astra-sites.php:1508
 msgid "Update Plugin"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1472
+#: inc/classes/class-astra-sites.php:1510
 #. translators: %s update page link.
 msgid "Updates are available for plugins used in this starter template."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1472
+#: inc/classes/class-astra-sites.php:1510
 msgid ""
 "Kindly <a href=\"%s\" target=\"_blank\">update</a> them for a successful "
 "import. Skipping this step might break the template design/feature."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1475 inc/includes/admin-page.php:491
+#: inc/classes/class-astra-sites.php:1513 inc/includes/admin-page.php:491
 #: inc/includes/templates.php:442
 msgid "Required Plugins Missing"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1476 inc/includes/admin-page.php:495
+#: inc/classes/class-astra-sites.php:1514 inc/includes/admin-page.php:495
 msgid ""
 "This starter template requires premium plugins. As these are third party "
 "premium plugins, you'll need to purchase, install and activate them first."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1479
+#: inc/classes/class-astra-sites.php:1517
 msgid "Dynamic Page"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1480 inc/includes/admin-page.php:708
+#: inc/classes/class-astra-sites.php:1518 inc/includes/admin-page.php:708
 msgid ""
 "The page template you are about to import contains a dynamic widget/module. "
 "Please note this dynamic data will not be available with the imported page."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1480 inc/includes/admin-page.php:709
+#: inc/classes/class-astra-sites.php:1518 inc/includes/admin-page.php:709
 msgid "You will need to add it manually on the page."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1480 inc/includes/admin-page.php:710
+#: inc/classes/class-astra-sites.php:1518 inc/includes/admin-page.php:710
 msgid "This dynamic content will be available when you import the entire site."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1566
+#: inc/classes/class-astra-sites.php:1604
 #. translators: %s are link.
 msgid ""
 "This is a premium template available with Essential Bundle and Growth "
 "Bundle. you can purchase it from <a href=\"%s\" target=\"_blank\">here</a>."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1570
+#: inc/classes/class-astra-sites.php:1608
 #. translators: %s are link.
 msgid ""
 "This is a premium template available with Essential Bundle and Growth "
@@ -1050,48 +1050,48 @@ msgid ""
 "import this template."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1596
+#: inc/classes/class-astra-sites.php:1634
 msgid "Template"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1597
+#: inc/classes/class-astra-sites.php:1635
 msgid "Block"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1598 inc/includes/templates.php:59
+#: inc/classes/class-astra-sites.php:1636 inc/includes/templates.php:59
 msgid "Dismiss"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1599 inc/includes/admin-page.php:855
+#: inc/classes/class-astra-sites.php:1637 inc/includes/admin-page.php:855
 msgid "Install Required Plugins"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1603
+#: inc/classes/class-astra-sites.php:1641
 #. translators: %s are link.
 msgid ""
 "You can locate <strong>Starter Templates Settings</strong> under the "
 "<strong>Page Settings</strong> of the Style Tab."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1605
+#: inc/classes/class-astra-sites.php:1643
 msgid "Read More →"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1722
+#: inc/classes/class-astra-sites.php:1760
 msgid "Error: You don't have the required permissions to install plugins."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1758
+#: inc/classes/class-astra-sites.php:1796
 msgid "Plugin Activated"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:1882
+#: inc/classes/class-astra-sites.php:1920
 msgid ""
 "Insufficient Permission. Please contact your Super Admin to allow the "
 "install required plugin permissions."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:2074
+#: inc/classes/class-astra-sites.php:2112
 msgid "Template library refreshed!"
 msgstr ""
 
@@ -1406,7 +1406,7 @@ msgstr ""
 msgid ""
 "<span class=\"highlighted-note\">This is a premium template available with "
 "Essential and Growth Bundle.</span><br /> <a "
-"href=\"{{AstraSitesAdmin.default_cta_link}}\" target=\"_blank\">Get "
+"href=\"{{AstraSitesAdmin.premium_popup_cta_link}}\" target=\"_blank\">Get "
 "access</a> to this premium template."
 msgstr ""
 
