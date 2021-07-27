@@ -1263,11 +1263,16 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
-		 * Get CTA link.
+		 * Get CTA link
+		 *
+		 * @param string $source    The source of the link.
+		 * @param string $medium    The medium of the link.
+		 * @param string $campaign  The campaign of the link.
+		 * @return array
 		 */
-		public function get_cta_link() {
+		public function get_cta_link( $source = '', $medium = '', $campaign = '' ) {
 			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
-			$cta_links = $this->get_cta_links();
+			$cta_links = $this->get_cta_links( $source, $medium, $campaign );
 			return isset( $cta_links[ $default_page_builder ] ) ? $cta_links[ $default_page_builder ] : 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin';
 		}
 
@@ -1275,14 +1280,42 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * Get CTA Links
 		 *
 		 * @since 2.6.18
+		 *
+		 * @param string $source    The source of the link.
+		 * @param string $medium    The medium of the link.
+		 * @param string $campaign  The campaign of the link.
 		 * @return array
 		 */
-		public function get_cta_links() {
+		public function get_cta_links( $source = '', $medium = '', $campaign = '' ) {
 			return array(
-				'elementor' => 'https://wpastra.com/elementor-starter-templates/?utm_source=elementor-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
-				'beaver-builder' => 'https://wpastra.com/beaver-builder-starter-templates/?utm_source=beaver-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
-				'gutenberg' => 'https://wpastra.com/starter-templates-plans/?utm_source=gutenberg-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
-				'brizy' => 'https://wpastra.com/starter-templates-plans/?utm_source=brizy-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend',
+				'elementor' => add_query_arg(
+					array(
+						'utm_source' => ! empty( $source ) ? $source : 'elementor-templates',
+						'utm_medium' => 'dashboard',
+						'utm_campaign' => 'Starter-Template-Backend',
+					), 'https://wpastra.com/elementor-starter-templates/'
+				),
+				'beaver-builder' => add_query_arg(
+					array(
+						'utm_source' => ! empty( $source ) ? $source : 'beaver-templates',
+						'utm_medium' => 'dashboard',
+						'utm_campaign' => 'Starter-Template-Backend',
+					), 'https://wpastra.com/beaver-builder-starter-templates/'
+				),
+				'gutenberg' => add_query_arg(
+					array(
+						'utm_source' => ! empty( $source ) ? $source : 'gutenberg-templates',
+						'utm_medium' => 'dashboard',
+						'utm_campaign' => 'Starter-Template-Backend',
+					), 'https://wpastra.com/starter-templates-plans/'
+				),
+				'brizy' => add_query_arg(
+					array(
+						'utm_source' => ! empty( $source ) ? $source : 'brizy-templates',
+						'utm_medium' => 'dashboard',
+						'utm_campaign' => 'Starter-Template-Backend',
+					), 'https://wpastra.com/starter-templates-plans/'
+				),
 			);
 		}
 
@@ -1399,7 +1432,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					/* translators: %s URL to document. */
 					'ajax_request_failed_secondary'      => sprintf( __( '%1$sRead <a href="%2$s" target="_blank">article</a> to resolve the issue and continue importing template.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/docs/internal-server-error-starter-templates/' ), '</p>' ),
 					'cta_links' => $this->get_cta_links(),
+					'cta_quick_corner_links' => $this->get_cta_links( 'quick-links-corner' ),
+					'cta_premium_popup_links' => $this->get_cta_links( 'get-premium-access-popup' ),
 					'cta_link' => $this->get_cta_link(),
+					'cta_quick_corner_link' => $this->get_cta_link( 'quick-links-corner' ),
+					'cta_premium_popup_link' => $this->get_cta_link( 'get-premium-access-popup' ),
+
 					/* translators: %s URL to document. */
 					'process_failed_primary'        => sprintf( __( '%1$sWe could not complete the import process due to failed AJAX request and this is the message:%2$s', 'astra-sites' ), '<p>', '</p>' ),
 					/* translators: %s URL to document. */

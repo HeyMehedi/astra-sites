@@ -30,11 +30,14 @@
 		},
 
 		_changeCTALink: function(event) {
-			if( ! AstraSitesAdmin.default_cta_link ) {
-				return;
+			if( AstraSitesAdmin.default_cta_link ) {
+				$('.astra-sites-cta-link').attr( 'href', AstraSitesAdmin.default_cta_link );
 			}
 
-			$('.astra-sites-cta-link, .bsf-quick-link-item-upgrade').attr( 'href', AstraSitesAdmin.default_cta_link );
+			if( AstraSitesAdmin.quick_corner_cta_link ) {
+				$('.bsf-quick-link-item-upgrade').attr( 'href', AstraSitesAdmin.quick_corner_cta_link );
+			}
+
         },
 
 		/**
