@@ -970,7 +970,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				return new WP_Error( 'astra_sites_cron_error', esc_html__( 'ERROR! Cron schedules are disabled by setting constant ALTERNATE_WP_CRON to true.<br/>To start the import process please enable the cron by setting the constant to false. E.g. define( \'ALTERNATE_WP_CRON\', false );', 'astra-sites' ) );
 			}
 
-			$cached_status = get_transient( 'astra-portfolio-cron-test-ok' );
+			$cached_status = get_transient( 'astra-sites-cron-test-ok' );
 
 			if ( $cache && $cached_status ) {
 				return true;
