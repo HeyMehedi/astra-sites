@@ -963,11 +963,11 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			global $wp_version;
 
 			if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
-				return new WP_Error( 'wp_portfolio_cron_error', esc_html__( 'ERROR! Cron schedules are disabled by setting constant DISABLE_WP_CRON to true.<br/>To start the import process please enable the cron by setting the constant to false. E.g. define( \'DISABLE_WP_CRON\', false );', 'astra-sites' ) );
+				return new WP_Error( 'astra_sites_cron_error', esc_html__( 'ERROR! Cron schedules are disabled by setting constant DISABLE_WP_CRON to true.<br/>To start the import process please enable the cron by setting the constant to false. E.g. define( \'DISABLE_WP_CRON\', false );', 'astra-sites' ) );
 			}
 
 			if ( defined( 'ALTERNATE_WP_CRON' ) && ALTERNATE_WP_CRON ) {
-				return new WP_Error( 'wp_portfolio_cron_error', esc_html__( 'ERROR! Cron schedules are disabled by setting constant ALTERNATE_WP_CRON to true.<br/>To start the import process please enable the cron by setting the constant to false. E.g. define( \'ALTERNATE_WP_CRON\', false );', 'astra-sites' ) );
+				return new WP_Error( 'astra_sites_cron_error', esc_html__( 'ERROR! Cron schedules are disabled by setting constant ALTERNATE_WP_CRON to true.<br/>To start the import process please enable the cron by setting the constant to false. E.g. define( \'ALTERNATE_WP_CRON\', false );', 'astra-sites' ) );
 			}
 
 			$cached_status = get_transient( 'astra-portfolio-cron-test-ok' );
@@ -1008,7 +1008,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 					)
 				);
 			} else {
-				set_transient( 'astra-portfolio-cron-test-ok', 1, 3600 );
+				set_transient( 'astra-sites-cron-test-ok', 1, 3600 );
 				return true;
 			}
 
