@@ -67,7 +67,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 			}
 
 			// Change default call to action link.
-			$links['links']['upgrade']['url'] = Astra_Sites::get_instance()->get_cta_link();
+			$links['links']['upgrade']['url'] = Astra_Sites::get_instance()->get_cta_link( 'quick-links-corner' );
 
 			return $links;
 		}

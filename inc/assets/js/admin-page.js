@@ -171,6 +171,8 @@ var AstraSitesAjaxQueue = (function () {
 	AstraSitesAdmin = {
 
 		default_cta_link: astraSitesVars.cta_link,
+		quick_corner_cta_link: astraSitesVars.cta_quick_corner_link,
+		premium_popup_cta_link: astraSitesVars.cta_premium_popup_link,
 		import_source: 'legacy',
 		wpcontent_left_margin: $('#wpcontent').css('margin-left'),
 		header: $('#astra-sites-menu-page .nav-tab-wrapper'),
@@ -2055,6 +2057,8 @@ var AstraSitesAjaxQueue = (function () {
 							AstraSitesAdmin.add_sites(response.data);
 
 							AstraSitesAdmin._autocomplete();
+							AstraSitesAdmin.quick_corner_cta_link = astraSitesVars.cta_quick_corner_links[ page_builder_slug ];
+							AstraSitesAdmin.premium_popup_cta_link = astraSitesVars.cta_premium_popup_links[ page_builder_slug ];
 							AstraSitesAdmin.default_cta_link = astraSitesVars.cta_links[ page_builder_slug ];
 							$(document).trigger('astra-sites-change-page-builder', page_builder_slug, response.data, response);
 						}
@@ -2947,9 +2951,9 @@ var AstraSitesAjaxQueue = (function () {
 			var link = astraSitesVars.process_failed_secondary;
 				link = link.replace( '#DEMO_URL#', AstraSitesAdmin.templateData['astra-site-url'] );
 				link = link.replace( '#SUBJECT#', encodeURI('AJAX failed: ' + errMessage ) );
-			
+
 			AstraSitesAdmin._importFailMessage( errMessage, titleMessage, '', astraSitesVars.process_failed_primary, link);
-					
+
 		},
 
 		/**

@@ -409,7 +409,7 @@ $site_import_options = apply_filters(
 <script type="text/template" id="tmpl-astra-sites-pro-site-description">
 	<p>
 		<?php
-			_e( '<span class="highlighted-note">This is a premium template available with Essential and Growth Bundle.</span><br /> <a href="{{AstraSitesAdmin.default_cta_link}}" target="_blank">Get access</a> to this premium template.', 'astra-sites' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
+			_e( '<span class="highlighted-note">This is a premium template available with Essential and Growth Bundle.</span><br /> <a href="{{AstraSitesAdmin.premium_popup_cta_link}}" target="_blank">Get access</a> to this premium template.', 'astra-sites' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
 		?>
 	</p>
 	<p>
