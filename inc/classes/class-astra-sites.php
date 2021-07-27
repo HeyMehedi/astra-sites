@@ -1160,8 +1160,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'vertical'   => __( 'Vertical', 'astra-sites' ),
 						'horizontal' => __( 'Horizontal', 'astra-sites' ),
 					),
-					'title'               => __( 'Free Images from Pixabay', 'astra-sites' ),
-					'search_placeholder'  => __( 'Pixabay Search - Ex: flowers', 'astra-sites' ),
+					'title'               => __( 'Free Images', 'astra-sites' ),
+					'search_placeholder'  => __( 'Search - Ex: flowers', 'astra-sites' ),
 					'downloading'         => __( 'Downloading...', 'astra-sites' ),
 					'validating'          => __( 'Validating...', 'astra-sites' ),
 					'empty_api_key'       => __( 'Please enter an API key.', 'astra-sites' ),
@@ -1540,7 +1540,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$compatibilities['warnings']['wp-debug'] = $data['wp-debug'];
 			}
 
-			if ( class_exists( 'XMLReader' ) ) {
+			if ( ! class_exists( 'XMLReader' ) ) {
 				$compatibilities['errors']['xmlreader'] = $data['xmlreader'];
 			}
 

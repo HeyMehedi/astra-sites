@@ -168,7 +168,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Site_Import' ) ) :
 		/**
 		 * Enqueue Scripts
 		 *
-		 * @param string $hook  Current page hook.
+		 * @param  string $hook Current hook name.
 		 */
 		public function enqueue_scripts( $hook = '' ) {
 
