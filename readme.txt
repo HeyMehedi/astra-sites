@@ -149,10 +149,10 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
-v2.6.18 - 27-July-2021
+v2.6.18 - 28-July-2021
 - Improvement: Avoided loading a few scripts in the customizer screen.
 - Improvement: Free Images from Pixabay can be downloaded from the main grid too with the use of a download icon.
-- Fix: Updated the Quick Links to Upgrade the plugin, page builder wise. 
+- Fix: Updated the Quick Links to Upgrade the plugin, page builder wise.
 
 v2.6.17 - 22-July-2021
 - Improvement: Avoided loading the Gutenberg Blocks scripts in the customizer screen.
