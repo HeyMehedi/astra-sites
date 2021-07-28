@@ -365,7 +365,7 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 		 */
 		public function template_assets() {
 
-			if ( ! is_admin() ) {
+			if ( is_customize_preview() ) {
 				return;
 			}
 

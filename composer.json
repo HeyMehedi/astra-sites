@@ -1,6 +1,9 @@
 {
+    "name": "brainstormforce/astra-sites",
+    "description": "Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.",  
     "require": {
-        "brainstormforce/astra-notices": "^1.1"
+        "brainstormforce/astra-notices": "^1.1",
+        "brainstormforce/gutenberg-templates": "^1"
       },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
@@ -10,16 +13,18 @@
     "extra": {
         "installer-paths": {
             "inc/lib/{$name}/": [
-            "brainstormforce/astra-notices"
+                "brainstormforce/astra-notices",
+                "brainstormforce/gutenberg-templates"
             ]
         }
     },
     "repositories": [
-        {
+		{
+            "name": "brainstormforce/gutenberg-templates",
             "type": "vcs",
-            "url": "git@github.com:brainstormforce/astra-notices.git"
+            "url": "git@github.com:brainstormforce/gutenberg-templates.git"
         }
-    ],
+	],
     "scripts": {
         "format": "phpcbf",
         "lint": "phpcs"

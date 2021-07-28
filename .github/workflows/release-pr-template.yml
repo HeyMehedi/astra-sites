@@ -31,8 +31,7 @@ jobs:
             ### Checklist:
             - [ ] Finalize readme.txt
             - [ ] Add doc links in the readme.txt
-            - [ ] Check if Starter Templates Blocks library is updated to latest.
-            - [ ] Check if astra-notice library is updated to latest
+            - [ ] Check if Gutenberg Blocks/Astra Notices library is updated to latest - Run `composer update`
             - [ ] Run to update packages        : `npm audit fix`
             - [ ] Run to produce rtl files : `grunt rtl`
             - [ ] Run to update the Template Library    : `wp astra-sites sync --force`
