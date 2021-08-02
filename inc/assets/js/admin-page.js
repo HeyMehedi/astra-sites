@@ -3312,67 +3312,55 @@ var AstraSitesAjaxQueue = (function () {
 			var site_id = $('#site-pages').attr('data-site-id') || '';
 			site_id = AstraSitesAdmin._get_id(site_id);
 
-			// AstraSitesAdmin.required_plugins_list_markup();
-			if (AstraSitesAdmin.visited_sites_and_pages[site_id]) {
+			// Add Params for API request.
+			AstraSitesAdmin._api_params = {};
 
-				AstraSitesAdmin.templateData = AstraSitesAdmin.visited_sites_and_pages[site_id];
+			AstraSitesAdmin._apiAddParam_status();
+			AstraSitesAdmin._apiAddParam_astra_site_category();
+			AstraSitesAdmin._apiAddParam_astra_site_page_builder();
+			AstraSitesAdmin._apiAddParam_astra_page_parent_category();
+			AstraSitesAdmin._apiAddParam_site_url();
+			AstraSitesAdmin._apiAddParam_purchase_key();
+			var api_post = {
+				id: astraSitesVars.cpt_slug,
+				slug: astraSitesVars.cpt_slug + '/' + site_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
+			};
 
-				AstraSitesAdmin.process_site_data(AstraSitesAdmin.templateData);
-			} else {
+			setTimeout(function() {
+				$.ajax({
+					url: astraSitesVars.ajaxurl,
+					type: 'POST',
+					data: {
+						action: 'astra-sites-api-request',
+						url: astraSitesVars.cpt_slug + '/' + site_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
+					},
+					beforeSend: function () {
+						console.groupCollapsed('Requesting API');
+					}
+				})
+				.fail(function (jqXHR) {
+					AstraSitesAdmin._log(jqXHR);
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.statusText, '', jqXHR, astraSitesVars.ajax_request_failed_primary, astraSitesVars.ajax_request_failed_secondary );
+					console.groupEnd();
+					AstraSitesAdmin.delay_in_request = false;
+				})
+				.done(function (response) {
+					console.log('Template API Response:');
+					AstraSitesAdmin.delay_in_request = false;
+					AstraSitesAdmin._log(response);
+					console.groupEnd();
+					if (response.success) {
+						AstraSitesAdmin.visited_sites_and_pages[response.data.id] = response.data;
 
+						AstraSitesAdmin.templateData = response.data;
 
-				// AstraSitesAdmin.templateData
-				// Add Params for API request.
-				AstraSitesAdmin._api_params = {};
+						AstraSitesAdmin.process_site_data(AstraSitesAdmin.templateData);
+					} else {
+						AstraSitesAdmin.handle_error( response, site_id );
+					}
+				});
 
-				AstraSitesAdmin._apiAddParam_status();
-				AstraSitesAdmin._apiAddParam_astra_site_category();
-				AstraSitesAdmin._apiAddParam_astra_site_page_builder();
-				AstraSitesAdmin._apiAddParam_astra_page_parent_category();
-				AstraSitesAdmin._apiAddParam_site_url();
-				AstraSitesAdmin._apiAddParam_purchase_key();
-				var api_post = {
-					id: astraSitesVars.cpt_slug,
-					slug: astraSitesVars.cpt_slug + '/' + site_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
-				};
-
-				setTimeout(function() {
-					$.ajax({
-						url: astraSitesVars.ajaxurl,
-						type: 'POST',
-						data: {
-							action: 'astra-sites-api-request',
-							url: astraSitesVars.cpt_slug + '/' + site_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
-						},
-						beforeSend: function () {
-							console.groupCollapsed('Requesting API');
-						}
-					})
-					.fail(function (jqXHR) {
-						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.statusText, '', jqXHR, astraSitesVars.ajax_request_failed_primary, astraSitesVars.ajax_request_failed_secondary );
-						console.groupEnd();
-						AstraSitesAdmin.delay_in_request = false;
-					})
-					.done(function (response) {
-						console.log('Template API Response:');
-						AstraSitesAdmin.delay_in_request = false;
-						AstraSitesAdmin._log(response);
-						console.groupEnd();
-						if (response.success) {
-							AstraSitesAdmin.visited_sites_and_pages[response.data.id] = response.data;
-
-							AstraSitesAdmin.templateData = response.data;
-
-							AstraSitesAdmin.process_site_data(AstraSitesAdmin.templateData);
-						} else {
-							AstraSitesAdmin.handle_error( response, site_id );
-						}
-					});
-
-				}, delay);
-
-			}
+			}, delay);
 
 		},
 
@@ -3474,62 +3462,54 @@ var AstraSitesAjaxQueue = (function () {
 			AstraSitesAdmin.action_slug = 'site-pages';
 			astraSitesVars.cpt_slug = 'site-pages';
 
-			if (AstraSitesAdmin.visited_sites_and_pages[page_id]) {
+			// Add Params for API request.
+			AstraSitesAdmin._api_params = {};
 
-				AstraSitesAdmin.templateData = AstraSitesAdmin.visited_sites_and_pages[page_id];
+			AstraSitesAdmin._apiAddParam_status();
+			AstraSitesAdmin._apiAddParam_per_page();
+			AstraSitesAdmin._apiAddParam_astra_site_category();
+			AstraSitesAdmin._apiAddParam_astra_site_page_builder();
+			AstraSitesAdmin._apiAddParam_astra_page_parent_category();
+			AstraSitesAdmin._apiAddParam_site_url();
+			AstraSitesAdmin._apiAddParam_purchase_key();
 
-				AstraSitesAdmin.required_plugins_list_markup(AstraSitesAdmin.templateData['site-pages-required-plugins']);
-			} else {
+			setTimeout( function() {
+				// Request.
+				$.ajax({
+					url: astraSitesVars.ajaxurl,
+					type: 'POST',
+					data: {
+						action: 'astra-sites-api-request',
+						url: astraSitesVars.cpt_slug + '/' + page_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
+					},
+					beforeSend: function () {
+						console.groupCollapsed('Requesting API URL');
+						AstraSitesAdmin._log('Requesting API URL');
+					}
+				})
+				.fail(function (jqXHR) {
+					AstraSitesAdmin._log(jqXHR);
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.statusText, 'Page Import API Request Failed!', jqXHR, astraSitesVars.ajax_request_failed_primary, astraSitesVars.ajax_request_failed_secondary );
+					console.groupEnd();
+					AstraSitesAdmin.delay_in_request = false;
+				})
+				.done(function (response) {
+					AstraSitesAdmin._log(response);
+					console.groupEnd();
+					AstraSitesAdmin.delay_in_request = false;
 
-				// AstraSitesAdmin.templateData
-				// Add Params for API request.
-				AstraSitesAdmin._api_params = {};
+					if (response.success) {
+						AstraSitesAdmin.visited_sites_and_pages[response.data.id] = response.data;
 
-				AstraSitesAdmin._apiAddParam_status();
-				AstraSitesAdmin._apiAddParam_per_page();
-				AstraSitesAdmin._apiAddParam_astra_site_category();
-				AstraSitesAdmin._apiAddParam_astra_site_page_builder();
-				AstraSitesAdmin._apiAddParam_astra_page_parent_category();
-				AstraSitesAdmin._apiAddParam_site_url();
-				AstraSitesAdmin._apiAddParam_purchase_key();
+						AstraSitesAdmin.templateData = response.data;
 
-				setTimeout( function() {
-					// Request.
-					$.ajax({
-						url: astraSitesVars.ajaxurl,
-						type: 'POST',
-						data: {
-							action: 'astra-sites-api-request',
-							url: astraSitesVars.cpt_slug + '/' + page_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
-						},
-						beforeSend: function () {
-							console.groupCollapsed('Requesting API URL');
-							AstraSitesAdmin._log('Requesting API URL');
-						}
-					})
-					.fail(function (jqXHR) {
-						AstraSitesAdmin._log(jqXHR);
-						AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.statusText, 'Page Import API Request Failed!', jqXHR, astraSitesVars.ajax_request_failed_primary, astraSitesVars.ajax_request_failed_secondary );
-						console.groupEnd();
-						AstraSitesAdmin.delay_in_request = false;
-					})
-					.done(function (response) {
-						AstraSitesAdmin._log(response);
-						console.groupEnd();
-						AstraSitesAdmin.delay_in_request = false;
+						AstraSitesAdmin.required_plugins_list_markup(AstraSitesAdmin.templateData['site-pages-required-plugins']);
+					} else {
+						AstraSitesAdmin.handle_error( response, page_id );
+					}
+				});
+			}, delay );
 
-						if (response.success) {
-							AstraSitesAdmin.visited_sites_and_pages[response.data.id] = response.data;
-
-							AstraSitesAdmin.templateData = response.data;
-
-							AstraSitesAdmin.required_plugins_list_markup(AstraSitesAdmin.templateData['site-pages-required-plugins']);
-						} else {
-							AstraSitesAdmin.handle_error( response, page_id );
-						}
-					});
-				}, delay );
-			}
 		},
 
 		show_page_popup_from_search: function (event) {
