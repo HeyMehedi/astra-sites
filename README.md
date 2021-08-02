@@ -150,8 +150,8 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 
 v2.6.19 - 2-August-2021
-- Fix: The same demo re-import not works due to an empty response.
-- Fix: The Pixabay image library is not visible for the multiple-image instances.
+- Fix: Fixed the "Customizer data is empty!" AJAX failed request while importing.
+- Fix: The Pixabay image library not visible for the multiple image instances.
 
 v2.6.18 - 28-July-2021
 - Improvement: Avoided loading a few scripts in the customizer screen.
