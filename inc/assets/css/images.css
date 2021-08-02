@@ -486,6 +486,10 @@
     margin-right: 5px;
 }
 
+.ast-attachments-browser .ast-image__save.installing:before {
+	display: none;
+}
+
 .ast-attachments-browser .ast-image__save.installing:after {
     content: "\f463";
     display: inline-block;

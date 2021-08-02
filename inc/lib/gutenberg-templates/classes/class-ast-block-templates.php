@@ -365,6 +365,7 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 		 */
 		public function template_assets() {
 
+			// Avoided to load scripts in customizer.
 			if ( is_customize_preview() ) {
 				return;
 			}
