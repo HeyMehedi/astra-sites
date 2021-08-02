@@ -1,5 +1,5 @@
 (function($){
-    
+
     $scope = {};
 
     AstraImageCommon = {
@@ -129,8 +129,9 @@
             if ( thisBtn.data( 'import-status' ) ) {
                 return;
             }
+            thisBtn.removeClass( 'updating-message' );
 
-            thisBtn.text( astraImages.downloading );
+			thisBtn.text( astraImages.downloading );
             thisBtn.addClass( 'installing' );
 
             AstraImageCommon.canSave = false;
@@ -247,19 +248,13 @@
                 return;
             }
 
-            if ( AstraImageCommon.scopeSet ) {
-                return;
-            }
-            
             $( 'body' ).data( 'page', 1 );
             let skeleton = $( '#tmpl-ast-image-skeleton' ).text();
             $scope.append( skeleton );
 
             let pixabay_filter = wp.template( 'ast-image-filters' );
-            if ( $scope.find( '.ast-image__filter-wrap' ).length > 0 ) {
-                $scope.find( '.ast-image__filter-wrap' ).replaceWith( pixabay_filter() );
-            } else {
-                $scope.find( '.ast-attachments-search-wrap' ).append( pixabay_filter() );
+            if ( ! $scope.find( '.ast-image__filter-wrap' ).length ) {
+            	$scope.find( '.ast-attachments-search-wrap' ).append( pixabay_filter() );
             }
 
             AstraImageCommon.offset = AstraImageCommon.frame.outerHeight();
@@ -272,13 +267,13 @@
             AstraImageCommon.scopeSet = true;
         },
 
-        _initImages: function() {  
+        _initImages: function() {
 
             let loop = wp.template( 'ast-image-list' );
             let list_html = loop( wp.media.view.AstraAttachmentsBrowser.images );
             let container = document.querySelector( '.ast-image__skeleton' );
             $scope.find( '.ast-image__loader-wrap' ).show();
-            
+
             if ( AstraImageCommon.infiniteLoad ) {
                 AstraImageCommon.images.push( wp.media.view.AstraAttachmentsBrowser.images );
                 $scope.find( '.ast-image__skeleton' ).append( list_html );
@@ -320,7 +315,7 @@
                         AstraImageCommon.loadingStatus = false;
                         AstraImageCommon.infiniteLoad = true;
                         AstraImageCommon.config.page = page;
-                         
+
                         $( 'body' ).data( 'page', page );
 
                         $scope.find( '.ast-image__search' ).trigger( 'infinite' );
