@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.8
-Stable tag: 2.6.19
+Stable tag: 2.6.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,9 @@ We are open to suggestions and would love to work on topics that our users are l
 7. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v2.6.20 - 8-August-2021
+Improvement: Better handling of 500 errors on the import screen.
 
 v2.6.19 - 2-August-2021
 - Fix: Fixed the "Customizer data is empty!" AJAX failed request while importing.
