@@ -83,6 +83,14 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		public $wp_upload_url = '';
 
 		/**
+		 * Ajax
+		 *
+		 * @since  2.6.20
+		 * @var (Array) $ajax
+		 */
+		private $ajax = array();
+
+		/**
 		 * Instance of Astra_Sites.
 		 *
 		 * @since  1.0.0
@@ -121,24 +129,63 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'elementor/preview/enqueue_styles', array( $this, 'popup_styles' ) );
 
 			// AJAX.
-			add_action( 'wp_ajax_astra-required-plugins', array( $this, 'required_plugin' ) );
-			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
-			add_action( 'wp_ajax_astra-sites-backup-settings', array( $this, 'backup_settings' ) );
-			add_action( 'wp_ajax_astra-sites-set-reset-data', array( $this, 'get_reset_data' ) );
-			add_action( 'wp_ajax_astra-sites-activate-theme', array( $this, 'activate_theme' ) );
-			add_action( 'wp_ajax_astra-sites-create-page', array( $this, 'create_page' ) );
-			add_action( 'wp_ajax_astra-sites-import-media', array( $this, 'import_media' ) );
-			add_action( 'wp_ajax_astra-sites-create-template', array( $this, 'create_template' ) );
-			add_action( 'wp_ajax_astra-sites-create-image', array( $this, 'create_image' ) );
-			add_action( 'wp_ajax_astra-sites-getting-started-notice', array( $this, 'getting_started_notice' ) );
-			add_action( 'wp_ajax_astra-sites-favorite', array( $this, 'add_to_favorite' ) );
-			add_action( 'wp_ajax_astra-sites-api-request', array( $this, 'api_request' ) );
-			add_action( 'wp_ajax_astra-page-elementor-batch-process', array( $this, 'elementor_batch_process' ) );
+			$this->ajax = array(
+				'astra-required-plugins' => 'required_plugin',
+				'astra-required-plugin-activate' => 'required_plugin_activate',
+				'astra-sites-backup-settings' => 'backup_settings',
+				'astra-sites-set-reset-data' => 'get_reset_data',
+				'astra-sites-activate-theme' => 'activate_theme',
+				'astra-sites-create-page' => 'create_page',
+				'astra-sites-import-media' => 'import_media',
+				'astra-sites-create-template' => 'create_template',
+				'astra-sites-create-image' => 'create_image',
+				'astra-sites-getting-started-notice' => 'getting_started_notice',
+				'astra-sites-favorite' => 'add_to_favorite',
+				'astra-sites-api-request' => 'api_request',
+				'astra-page-elementor-batch-process' => 'elementor_batch_process',
+				'astra-sites-update-subscription' => 'update_subscription',
+			);
+
+			foreach ( $this->ajax as $ajax_hook => $ajax_callback ) {
+				add_action( 'wp_ajax_' . $ajax_hook, array( $this, $ajax_callback ) );
+			}
 
 			add_action( 'delete_attachment', array( $this, 'delete_astra_images' ) );
 			add_filter( 'heartbeat_received', array( $this, 'search_push' ), 10, 2 );
-			add_action( 'wp_ajax_astra-sites-update-subscription', array( $this, 'update_subscription' ) );
 			add_action( 'admin_footer', array( $this, 'add_quick_links' ) );
+			add_filter( 'status_header', array( $this, 'status_header' ), 10, 4 );
+		}
+
+		/**
+		 * Filters an HTTP status header.
+		 *
+		 * @since 2.6.20
+		 *
+		 * @param string $status_header HTTP status header.
+		 * @param int    $code          HTTP status code.
+		 * @param string $description   Description for the status code.
+		 * @param string $protocol      Server protocol.
+		 *
+		 * @return mixed
+		 */
+		public function status_header( $status_header, $code, $description, $protocol ) {
+
+			if ( ! isset( $_REQUEST['action'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				return $status_header;
+			}
+
+			if ( ! in_array( $_REQUEST['action'], array_keys( $this->ajax ), true ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				return $status_header;
+			}
+
+			$error = error_get_last();
+			if ( empty( $error ) ) {
+				return $status_header;
+			}
+
+			$message = isset( $error['message'] ) ? $error['message'] : $description;
+
+			return "$protocol $code $message";
 		}
 
 		/**
