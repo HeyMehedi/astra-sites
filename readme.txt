@@ -150,7 +150,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v2.6.20 - 8-August-2021
-Improvement: Displaying 500 errors on the import screen.
+Improvement: Better handling of 500 errors on the import screen.
 
 v2.6.19 - 2-August-2021
 - Fix: Fixed the "Customizer data is empty!" AJAX failed request while importing.
