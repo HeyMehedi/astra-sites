@@ -3332,7 +3332,7 @@ var AstraSitesAjaxQueue = (function () {
 					type: 'POST',
 					data: {
 						action: 'astra-sites-api-request',
-						url: astraSitesVars.cpt_slug + '/' + site_id + '?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
+						url: astraSitesVars.cpt_slug + '/' + site_id + '/?' + decodeURIComponent($.param(AstraSitesAdmin._api_params)),
 					},
 					beforeSend: function () {
 						console.groupCollapsed('Requesting API');
