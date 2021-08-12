@@ -1,12 +1,12 @@
 # Starter Templates — Elementor, Gutenberg & Beaver Builder Templates #
-**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
-**Donate link:** https://wpastra.com/pro/  
-**Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites  
-**Requires at least:** 4.4  
-**Requires PHP:** 5.3  
-**Tested up to:** 5.8  
-**Stable tag:** 2.6.21  
-**License:** GPLv2 or later  
+**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)
+**Donate link:** https://wpastra.com/pro/
+**Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
+**Requires at least:** 4.4
+**Requires PHP:** 5.3
+**Tested up to:** 5.8
+**Stable tag:** 2.6.21
+**License:** GPLv2 or later
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 The growing library of 300+ ready-to-use templates that work with all WordPress themes including Astra, Hello, OceanWP, GeneratePress and more
