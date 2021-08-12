@@ -1,13 +1,13 @@
 # Starter Templates — Elementor, Gutenberg & Beaver Builder Templates #
-**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)
-**Donate link:** https://wpastra.com/pro/
-**Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
-**Requires at least:** 4.4
-**Requires PHP:** 5.3
-**Tested up to:** 5.8
-**Stable tag:** 2.6.20
-**License:** GPLv2 or later
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
+**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
+**Donate link:** https://wpastra.com/pro/  
+**Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites  
+**Requires at least:** 4.4  
+**Requires PHP:** 5.3  
+**Tested up to:** 5.8  
+**Stable tag:** 2.6.21  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 The growing library of 300+ ready-to-use templates that work with all WordPress themes including Astra, Hello, OceanWP, GeneratePress and more
 
@@ -149,8 +149,12 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v2.6.21 - 13-August-2021
+- Improvement: Rectified the condition to load the scripts in other screens.
+- Fix: Starter template button not visible when gutenberg plugin is activated.
+
 v2.6.20 - 8-August-2021
-Improvement: Better handling of 500 errors on the import screen.
+- Improvement: Better handling of 500 errors on the import screen.
 
 v2.6.19 - 2-August-2021
 - Fix: Fixed the "Customizer data is empty!" AJAX failed request while importing.
