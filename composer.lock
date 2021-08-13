@@ -50,16 +50,16 @@
         },
         {
             "name": "brainstormforce/gutenberg-templates",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "git@github.com:brainstormforce/gutenberg-templates.git",
-                "reference": "ac937c4db2e0a322a324cba0be6b5ad1fe3c88d7"
+                "reference": "5c87b8c9db44c3994d2b10ac55ed6f1f7018b5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brainstormforce/gutenberg-templates/zipball/ac937c4db2e0a322a324cba0be6b5ad1fe3c88d7",
-                "reference": "ac937c4db2e0a322a324cba0be6b5ad1fe3c88d7",
+                "url": "https://api.github.com/repos/brainstormforce/gutenberg-templates/zipball/5c87b8c9db44c3994d2b10ac55ed6f1f7018b5ab",
+                "reference": "5c87b8c9db44c3994d2b10ac55ed6f1f7018b5ab",
                 "shasum": ""
             },
             "require": {
@@ -91,10 +91,10 @@
             ],
             "description": "Gutenberg single page templates, and blocks library to imported your website easily.",
             "support": {
-                "source": "https://github.com/brainstormforce/gutenberg-templates/tree/1.0.9",
+                "source": "https://github.com/brainstormforce/gutenberg-templates/tree/1.0.10",
                 "issues": "https://github.com/brainstormforce/gutenberg-templates/issues"
             },
-            "time": "2021-08-02T10:59:17+00:00"
+            "time": "2021-08-12T11:02:20+00:00"
         },
         {
             "name": "composer/installers",

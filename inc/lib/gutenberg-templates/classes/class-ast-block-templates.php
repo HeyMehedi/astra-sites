@@ -365,8 +365,9 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 		 */
 		public function template_assets() {
 
-			// Avoided to load scripts in customizer.
-			if ( is_customize_preview() ) {
+			$post_types = get_post_types( array( 'public' => true ), 'names' );
+
+			if ( ! array_key_exists( get_current_screen()->post_type, $post_types ) ) {
 				return;
 			}
 
