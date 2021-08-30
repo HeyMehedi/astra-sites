@@ -269,6 +269,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 */
 		public function update_library_complete() {
 			Astra_Sites_Importer::get_instance()->update_latest_checksums();
+			do_action( 'starter_templates_save_sites_count_as_per_page_builder' );
 
 			update_site_option( 'astra-sites-batch-is-complete', 'no', 'no' );
 			update_site_option( 'astra-sites-manual-sync-complete', 'yes', 'no' );
