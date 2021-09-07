@@ -5,9 +5,9 @@
 **Requires at least:** 4.4
 **Requires PHP:** 5.3
 **Tested up to:** 5.8
-**Stable tag:** 2.6.21
+**Stable tag:** 2.6.22
 **License:** GPLv2 or later
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 The growing library of 300+ ready-to-use templates that work with all WordPress themes including Astra, Hello, OceanWP, GeneratePress and more
 
@@ -148,6 +148,9 @@ We are open to suggestions and would love to work on topics that our users are l
 7. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v2.6.22 - 7-September-2021
+- Fix: Contact Forms not appearing after the import process is complete.
 
 v2.6.21 - 13-August-2021
 - Improvement: Rectified the condition to load the scripts in other screens.
