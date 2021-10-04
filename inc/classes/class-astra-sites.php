@@ -154,6 +154,46 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_filter( 'heartbeat_received', array( $this, 'search_push' ), 10, 2 );
 			add_action( 'admin_footer', array( $this, 'add_quick_links' ) );
 			add_filter( 'status_header', array( $this, 'status_header' ), 10, 4 );
+			add_filter( 'wp_php_error_message', array( $this, 'php_error_message' ), 10, 2 );
+		}
+
+		/**
+		 * Check is Starter Templates AJAX request.
+		 *
+		 * @since 2.7.0
+		 * @return boolean
+		 */
+		public function is_starter_templates_request() {
+
+			if ( isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], array_keys( $this->ajax ), true ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Filters the message that the default PHP error template displays.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param string $message HTML error message to display.
+		 * @param array  $error   Error information retrieved from `error_get_last()`.
+		 * @return mixed
+		 */
+		public function php_error_message( $message, $error ) {
+
+			if ( ! $this->is_starter_templates_request() ) {
+				return $message;
+			}
+
+			if ( empty( $error ) ) {
+				return $message;
+			}
+
+			$message = isset( $error['message'] ) ? $error['message'] : $message;
+
+			return $message;
 		}
 
 		/**
@@ -170,11 +210,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public function status_header( $status_header, $code, $description, $protocol ) {
 
-			if ( ! isset( $_REQUEST['action'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				return $status_header;
-			}
-
-			if ( ! in_array( $_REQUEST['action'], array_keys( $this->ajax ), true ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! $this->is_starter_templates_request() ) {
 				return $status_header;
 			}
 
