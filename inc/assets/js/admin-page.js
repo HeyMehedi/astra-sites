@@ -758,6 +758,7 @@ var AstraSitesAjaxQueue = (function () {
 			// Add additional data to Heartbeat data.
 			if (AstraSitesAdmin.search_terms.length > 0) {
 				data['ast-sites-search-terms'] = AstraSitesAdmin.search_terms_with_count;
+				data['ast-sites-builder'] = astraSitesVars.default_page_builder;
 			}
 		},
 

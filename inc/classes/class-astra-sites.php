@@ -301,6 +301,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
 				'body'      => array(
 					'search' => $data['ast-sites-search-terms'],
+					'builder' => isset( $data['ast-sites-builder'] ) ? $data['ast-sites-builder'] : 'gutenberg',
 					'url'    => esc_url( site_url() ),
 					'type'   => 'astra-sites',
 				),
