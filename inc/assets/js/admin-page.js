@@ -2109,6 +2109,12 @@ var AstraSitesAjaxQueue = (function () {
 					console.log('error');
 					return;
 				}
+
+				// Stores Subscription form data into the local storage.
+				AstraSitesAdmin._saveSubscriptionFormData(
+					$('[name="wp_user_type"]').val(),
+					$('[name="build_website_for"]').val(),
+				);
 			}
 
 			$('.site-import-cancel').show();
@@ -3562,6 +3568,9 @@ var AstraSitesAjaxQueue = (function () {
 
 		start_import: function( response ) {
 
+			// Retrieve Subscription form data from Local storage.
+			const savedFormData = JSON.parse(localStorage.getItem('subscriptionFormData'));
+
 			if (AstraSitesAdmin.subscribe_skiped || AstraSitesAdmin.subscription_form_submitted == 'yes') {
 				$('.user-building-for-title').hide();
 				$('.astra-sites-advanced-options-heading').hide();
@@ -3579,6 +3588,23 @@ var AstraSitesAjaxQueue = (function () {
 				} else {
 					$('#astra-sites-subscription-form-one').html(wp.template('astra-sites-subscription-form-one'));
 					$('#astra-sites-subscription-form-two').html(wp.template('astra-sites-subscription-form-two'));
+				}
+
+				// Auto fill the form if any data found on local storage.
+				if (savedFormData !== null && (savedFormData?.userTypeVal !== 0 && savedFormData?.buildForVal !== 0)) {
+					$('#astra-sites-subscription-form-one .subscription-field-wrap').eq(0).addClass('subscription-anim subscription-success');
+					$('#astra-sites-subscription-form-one .subscription-field-wrap').eq(1).addClass('subscription-anim subscription-success');
+					
+					if (
+						$('#astra-sites-subscription-form-two .subscription-field-wrap').has('[name="wp_user_type"]').length
+						&& $('#astra-sites-subscription-form-two .subscription-field-wrap').has('[name="build_website_for"]').length
+					) {
+						$('#astra-sites-subscription-form-two .subscription-field-wrap').eq(0).addClass('subscription-anim subscription-success');
+						$('#astra-sites-subscription-form-two .subscription-field-wrap').eq(1).addClass('subscription-anim subscription-success');
+					}
+					
+					$('[name="wp_user_type"]').val(savedFormData.userTypeVal);
+					$('[name="build_website_for"]').val(savedFormData.buildForVal);
 				}
 			}
 
@@ -4073,7 +4099,24 @@ var AstraSitesAjaxQueue = (function () {
 			return jQuery.grep(pluginsList, function (value) {
 				return value.slug != removeItem;
 			});
-		}
+		},
+
+		/**
+		 * Stoers the subscription form data into the local storage.
+		 */
+		 _saveSubscriptionFormData: function(userTypeField, buildForField) {
+			const savedData = JSON.parse(localStorage.getItem('subscriptionFormData'));
+
+			if (
+				savedData === null 
+				|| (savedData?.userTypeVal !== Number(userTypeField) && savedData?.buildForVal !== Number(buildForField))
+			) {
+				localStorage.setItem('subscriptionFormData', JSON.stringify({
+					userTypeVal: userTypeField,
+					buildForVal: buildForField
+				}));
+			}
+		},
 
 	};
 
