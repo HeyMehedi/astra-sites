@@ -2978,6 +2978,11 @@ var AstraSitesAjaxQueue = (function () {
 				var output = topContent || astraSitesVars.importFailedMessage;
 
 				if (message) {
+
+					if( jqXHR.responseText ) {
+						message = message + '<br/>' + jqXHR.responseText;
+					}
+
 					output += '<div class="current-importing-status">Error: ' + message + '</div>';
 				}
 
