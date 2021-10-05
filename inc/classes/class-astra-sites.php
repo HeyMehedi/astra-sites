@@ -1645,6 +1645,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$page_builders = self::get_instance()->get_page_builders();
 			$has_elementor = false;
 
+			// Use this filter to remove the Starter Templates button from Elementor Editor.
+			$elementor_add_ast_site_button = apply_filters( 'starter_templates_elementor_button', true );
+
 			foreach ( $page_builders as $page_builder ) {
 
 				if ( 'elementor' === $page_builder['slug'] ) {
@@ -1664,7 +1667,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// Image Search assets.
 			$this->image_search_assets();
 
-			wp_enqueue_script( 'astra-sites-elementor-admin-page', ASTRA_SITES_URI . 'inc/assets/js/elementor-admin-page.js', array( 'jquery', 'wp-util', 'updates', 'masonry', 'imagesloaded' ), ASTRA_SITES_VER, true );
+			if ( $elementor_add_ast_site_button ) {
+				wp_enqueue_script( 'astra-sites-elementor-admin-page', ASTRA_SITES_URI . 'inc/assets/js/elementor-admin-page.js', array( 'jquery', 'wp-util', 'updates', 'masonry', 'imagesloaded' ), ASTRA_SITES_VER, true );
+			}
+
 			wp_add_inline_script( 'astra-sites-elementor-admin-page', sprintf( 'var pagenow = "%s";', ASTRA_SITES_NAME ), 'after' );
 			wp_enqueue_style( 'astra-sites-admin', ASTRA_SITES_URI . 'inc/assets/css/admin.css', ASTRA_SITES_VER, true );
 			wp_style_add_data( 'astra-sites-admin', 'rtl', 'replace' );
