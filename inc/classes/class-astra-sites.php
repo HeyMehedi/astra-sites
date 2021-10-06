@@ -1646,7 +1646,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$has_elementor = false;
 
 			// Use this filter to remove the Starter Templates button from Elementor Editor.
-			$elementor_add_ast_site_button = apply_filters( 'starter_templates_elementor_button', true );
+			$elementor_add_ast_site_button = apply_filters( 'starter_templates_hide_elementor_button', false );
 
 			foreach ( $page_builders as $page_builder ) {
 
@@ -1659,7 +1659,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			if ( ! $elementor_add_ast_site_button ) {
+			if ( $elementor_add_ast_site_button ) {
 				return;
 			}
 
