@@ -456,7 +456,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @since 2.0.0
 		 */
 		public function api_request() {
-			$url = isset( $_POST['url'] ) ? esc_url_raw( $_POST['url'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$url = isset( $_POST['url'] ) ? sanitize_text_field( $_POST['url'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 			if ( empty( $url ) ) {
 				wp_send_json_error( __( 'Provided API URL is empty! Please try again!', 'astra-sites' ) );
@@ -1430,7 +1430,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra_sites_api_params',
 				array(
 					'purchase_key' => '',
-					'site_url'     => '',
+					'site_url'     => get_site_url(),
 					'per-page'     => 15,
 				)
 			);
