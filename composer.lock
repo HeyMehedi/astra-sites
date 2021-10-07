@@ -50,16 +50,16 @@
         },
         {
             "name": "brainstormforce/gutenberg-templates",
-            "version": "1.0.10",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:brainstormforce/gutenberg-templates.git",
-                "reference": "5c87b8c9db44c3994d2b10ac55ed6f1f7018b5ab"
+                "reference": "5b5c3634c3650f70adc0c9fef319fe529dee662d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brainstormforce/gutenberg-templates/zipball/5c87b8c9db44c3994d2b10ac55ed6f1f7018b5ab",
-                "reference": "5c87b8c9db44c3994d2b10ac55ed6f1f7018b5ab",
+                "url": "https://api.github.com/repos/brainstormforce/gutenberg-templates/zipball/5b5c3634c3650f70adc0c9fef319fe529dee662d",
+                "reference": "5b5c3634c3650f70adc0c9fef319fe529dee662d",
                 "shasum": ""
             },
             "require": {
@@ -91,23 +91,23 @@
             ],
             "description": "Gutenberg single page templates, and blocks library to imported your website easily.",
             "support": {
-                "source": "https://github.com/brainstormforce/gutenberg-templates/tree/1.0.10",
+                "source": "https://github.com/brainstormforce/gutenberg-templates/tree/1.1.0",
                 "issues": "https://github.com/brainstormforce/gutenberg-templates/issues"
             },
-            "time": "2021-08-12T11:02:20+00:00"
+            "time": "2021-10-04T10:59:29+00:00"
         },
         {
             "name": "composer/installers",
-            "version": "v1.11.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "ae03311f45dfe194412081526be2e003960df74b"
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/ae03311f45dfe194412081526be2e003960df74b",
-                "reference": "ae03311f45dfe194412081526be2e003960df74b",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
                 "shasum": ""
             },
             "require": {
@@ -206,6 +206,7 @@
                 "modx",
                 "moodle",
                 "osclass",
+                "pantheon",
                 "phpbb",
                 "piwik",
                 "ppi",
@@ -228,7 +229,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.11.0"
+                "source": "https://github.com/composer/installers/tree/v1.12.0"
             },
             "funding": [
                 {
@@ -244,7 +245,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-28T06:42:17+00:00"
+            "time": "2021-09-13T08:19:44+00:00"
         }
     ],
     "packages-dev": [

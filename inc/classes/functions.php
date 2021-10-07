@@ -82,3 +82,31 @@ if ( ! function_exists( 'astra_get_site_data' ) ) :
 		return '';
 	}
 endif;
+
+/**
+ * Check is valid URL
+ *
+ * @param string $url  The site URL.
+ *
+ * @since 2.7.1
+ * @return string
+ */
+function astra_sites_is_valid_url( $url = '' ) {
+	if ( empty( $url ) ) {
+		return false;
+	}
+
+	$parse_url = wp_parse_url( $url );
+	if ( empty( $parse_url ) || ! is_array( $parse_url ) ) {
+		return false;
+	}
+
+	$api_domain_parse_url = wp_parse_url( Astra_Sites::get_instance()->get_api_domain() );
+
+	// Validate host.
+	if ( $parse_url['host'] === $api_domain_parse_url['host'] ) {
+		return true;
+	}
+
+	return false;
+}

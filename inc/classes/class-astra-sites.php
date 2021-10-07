@@ -415,7 +415,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
-			if ( ! isset( $_POST['url'] ) ) {
+			$api_url = isset( $_POST['url'] ) ? esc_url_raw( $_POST['url'] ) : '';
+
+			if ( ! astra_sites_is_valid_url( $api_url ) ) {
 				wp_send_json_error( __( 'Invalid API URL', 'astra-sites' ) );
 			}
 
@@ -432,7 +434,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			$meta    = json_decode( $data['post-meta']['_elementor_data'], true );
-			$post_id = $_POST['id'];
+			$post_id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
 
 			if ( empty( $post_id ) || empty( $meta ) ) {
 				wp_send_json_error( __( 'Invalid Post ID or Elementor Meta', 'astra-sites' ) );
@@ -454,7 +456,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @since 2.0.0
 		 */
 		public function api_request() {
-			$url = isset( $_POST['url'] ) ? $_POST['url'] : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$url = isset( $_POST['url'] ) ? esc_url_raw( $_POST['url'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 			if ( empty( $url ) ) {
 				wp_send_json_error( __( 'Provided API URL is empty! Please try again!', 'astra-sites' ) );
@@ -802,7 +804,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'edit_posts' ) ) {
+			if ( ! current_user_can( 'upload_files' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
