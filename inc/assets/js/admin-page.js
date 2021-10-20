@@ -3592,15 +3592,18 @@ var AstraSitesAjaxQueue = (function () {
 
 				// Auto fill the form if any data found on local storage.
 				if (savedFormData !== null && (savedFormData?.userTypeVal !== 0 && savedFormData?.buildForVal !== 0)) {
-					$('#astra-sites-subscription-form-one .subscription-field-wrap').eq(0).addClass('subscription-anim subscription-success');
-					$('#astra-sites-subscription-form-one .subscription-field-wrap').eq(1).addClass('subscription-anim subscription-success');
+					const subscriptionFieldForm_1 = $('#astra-sites-subscription-form-one .subscription-field-wrap');
+					const subscriptionFieldForm_2 = $('#astra-sites-subscription-form-two .subscription-field-wrap');
+
+					subscriptionFieldForm_1.eq(0).addClass('subscription-anim subscription-success');
+					subscriptionFieldForm_1.eq(1).addClass('subscription-anim subscription-success');
 					
 					if (
-						$('#astra-sites-subscription-form-two .subscription-field-wrap').has('[name="wp_user_type"]').length
-						&& $('#astra-sites-subscription-form-two .subscription-field-wrap').has('[name="build_website_for"]').length
+						subscriptionFieldForm_2.has('[name="wp_user_type"]').length
+						&& subscriptionFieldForm_2.has('[name="build_website_for"]').length
 					) {
-						$('#astra-sites-subscription-form-two .subscription-field-wrap').eq(0).addClass('subscription-anim subscription-success');
-						$('#astra-sites-subscription-form-two .subscription-field-wrap').eq(1).addClass('subscription-anim subscription-success');
+						subscriptionFieldForm_2.eq(0).addClass('subscription-anim subscription-success');
+						subscriptionFieldForm_2.eq(1).addClass('subscription-anim subscription-success');
 					}
 					
 					$('[name="wp_user_type"]').val(savedFormData.userTypeVal);
