@@ -8,12 +8,12 @@
 		 * _api_params = {
 		 * 		'search'                  : '',
 		 * 		'per_page'                : '',
-		 * 		'astra-site-category'     : '',
+		 * 		'astra-sites-site-category'     : '',
 		 * 		'astra-site-page-builder' : '',
 		 * 		'page'                    : '',
 		 *   };
 		 *
-		 * E.g. per_page=<page-id>&astra-site-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
+		 * E.g. per_page=<page-id>&astra-sites-site-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
 		 */
 		_api_params		: {},
 		_breakpoint		: 768,
@@ -77,7 +77,7 @@
 
 			event.preventDefault();
 
-			if( $( this ).parents('.astra-site-category').length && ! $('body').hasClass('page-builder-selected') ) {
+			if( $( this ).parents('.astra-sites-site-category').length && ! $('body').hasClass('page-builder-selected') ) {
 				return;
 			}
 
@@ -89,7 +89,7 @@
 			$('.astra-sites-suggestions').remove();
 
 			// Empty the search input only click on category filter not on page builder filter.
-			if( $(this).parents('.filter-links').hasClass('astra-site-category') ) {
+			if( $(this).parents('.filter-links').hasClass('astra-sites-site-category') ) {
 				$('#wp-filter-search-input').val('');
 			}
 			$('#astra-sites').hide().css('height', '');
@@ -199,15 +199,15 @@
 		},
 
 		_apiAddParam_astra_site_category: function() {
-			// Add 'astra-site-category'
-			var selected_category_id = jQuery('.filter-links.astra-site-category').find('.current').data('group') || '';
+			// Add 'astra-sites-site-category'
+			var selected_category_id = jQuery('.filter-links.astra-sites-site-category').find('.current').data('group') || '';
 			if( '' !== selected_category_id && 'all' !== selected_category_id ) {
-				AstraRender._api_params['astra-site-category'] =  selected_category_id;
+				AstraRender._api_params['astra-sites-site-category'] =  selected_category_id;
 			} else if( astraRenderGrid.sites && astraRenderGrid['categories'].include ) {
 				if( AstraRender._isArray( astraRenderGrid['categories'].include ) ) {
-					AstraRender._api_params['astra-site-category'] = astraRenderGrid['categories'].include.join(',');
+					AstraRender._api_params['astra-sites-site-category'] = astraRenderGrid['categories'].include.join(',');
 				} else {
-					AstraRender._api_params['astra-site-category'] = astraRenderGrid['categories'].include;
+					AstraRender._api_params['astra-sites-site-category'] = astraRenderGrid['categories'].include;
 				}
 			}
 		},
@@ -253,7 +253,7 @@
 		/**
 		 * Show Sites
 		 * 
-		 * 	Params E.g. per_page=<page-id>&astra-site-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
+		 * 	Params E.g. per_page=<page-id>&astra-sites-site-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
 		 *
 		 * @param  {Boolean} resetPagedCount Reset Paged Count.
 		 * @param  {String}  trigger         Filtered Trigger.
@@ -442,7 +442,7 @@
 				} );
 
 				// Pre-Send `category` request to avoid the loader.
-				var category_slug = 'astra-site-category';
+				var category_slug = 'astra-sites-site-category';
 				var category = {
 					slug          : category_slug + '/',
 					id            : category_slug,
@@ -521,7 +521,7 @@
 			/**
 			 * Categories
 			 */
-			var category_slug = 'astra-site-category';
+			var category_slug = 'astra-sites-site-category';
 			var category = {
 				slug          : category_slug + AstraRender._getCategoryParams( category_slug ),
 				id            : category_slug,
@@ -594,7 +594,7 @@
 			}
 
 			// Re-Send `categories` sites request to avoid the loader.
-			var categories = AstraSitesAPI._stored_data['astra-site-category'];
+			var categories = AstraSitesAPI._stored_data['astra-sites-site-category'];
 			if( categories && AstraRender._first_time_loaded ) {
 				
 				var per_page_val = 30;
@@ -610,7 +610,7 @@
 
 				$.each( categories, function( index, category ) {
 
-					api_params['astra-site-category'] =  category.id;
+					api_params['astra-sites-site-category'] =  category.id;
 
 					api_params['page'] = 1;
 
