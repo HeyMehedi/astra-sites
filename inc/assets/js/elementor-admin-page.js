@@ -1031,7 +1031,7 @@ var AstraSitesAjaxQueue = (function () {
 
 			} else {
 
-				let url = (undefined != AstraElementorSitesAdmin.templateData['post-meta']) ? AstraElementorSitesAdmin.templateData['post-meta']['astra-blocks-wpform'] : '';
+				let url = (undefined != AstraElementorSitesAdmin.templateData['post-meta']) ? AstraElementorSitesAdmin.templateData['post-meta']['astra-site-wpforms-path'] : '';
 
 				AstraElementorSitesAdmin._importWPForm(url, function (form_response) {
 					AstraElementorSitesAdmin.insertData = AstraElementorSitesAdmin.templateData;
