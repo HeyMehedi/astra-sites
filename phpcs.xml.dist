@@ -46,4 +46,6 @@
 	<exclude-pattern>*/admin/bsf-core/*</exclude-pattern>
 	<exclude-pattern>*/inc/assets/js/dist/*</exclude-pattern>
 	<exclude-pattern>*/inc/lib/*</exclude-pattern>
+	<exclude-pattern>inc/assets/js/main.asset.php</exclude-pattern>
+
 </ruleset>
