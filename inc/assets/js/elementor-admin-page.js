@@ -88,7 +88,6 @@ var AstraSitesAjaxQueue = (function () {
 
 		var elementTop = $(this).offset().top;
 		var elementBottom = elementTop + $(this).outerHeight();
-
 		var viewportTop = $(window).scrollTop();
 		var viewportBottom = viewportTop + $(window).height();
 
@@ -558,7 +557,7 @@ var AstraSitesAjaxQueue = (function () {
 
 		_importWPForm: function (wpforms_url, callback) {
 
-			if ('' == wpforms_url || 0 == wpforms_url) {
+			if ( ! wpforms_url) {
 				if (callback && typeof callback == "function") {
 					callback('');
 				}
@@ -1624,7 +1623,9 @@ var AstraSitesAjaxQueue = (function () {
 						required_plugins = response.data['required_plugins'];
 
 						if (response.data['third_party_required_plugins'].length) {
-							output += '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>';
+							$( response.data['third_party_required_plugins'] ).each(function (index, plugin) {
+								output += '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>';
+							});
 						}
 
 						/**
