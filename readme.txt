@@ -44,8 +44,7 @@ Businesses like restaurants, lawyers, agencies, interior designers, artist shops
 
 - [Elementor Free Website Templates](https://wpastra.com/elementor-templates-free-downloads/)
 - [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
-- [Gutenberg Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free)
-- [Brizy Free Website Templates](https://wpastra.com/ready-websites/?page-builder=brizy&category=free)
+- [Block Editor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free)
 
 You can extend this library with premium ready-to-use website demos by purchasing one of the Astra Bundles, i.e. either the Essential Bundle or the Growth Bundle.
 
@@ -114,7 +113,7 @@ All you need to do is install the Starter Templates plugin and select the websit
 
 = Will you add more website demos? =
 
-Yes! We are working on many more free website demos built using Elementor, Beaver Builder, Gutenberg and Brizy.
+Yes! We are working on many more free website demos built using Elementor, Beaver Builder and the Block Editor.
 
 = What if I do not find a website for the topic I am looking for? =
 
