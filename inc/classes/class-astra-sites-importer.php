@@ -225,8 +225,14 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 									}
 								}
 							}
+						} else {
+							wp_send_json_error( __( 'Invalid JSON file for WP Forms.', 'astra-sites' ) );
 						}
+					} else {
+						wp_send_json_error( __( 'There was an error downloading the WP Forms file.', 'astra-sites' ) );
 					}
+				} else {
+					wp_send_json_error( __( 'There was an error downloading the WP Forms file.', 'astra-sites' ) );
 				}
 			}
 
@@ -271,8 +277,14 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 							if ( ! empty( $flows ) ) {
 								CartFlows_Importer::get_instance()->import_from_json_data( $flows );
 							}
+						} else {
+							wp_send_json_error( __( 'Invalid file for CartFlows flows', 'astra-sites' ) );
 						}
+					} else {
+						wp_send_json_error( __( 'There was an error downloading the CartFlows flows file.', 'astra-sites' ) );
 					}
+				} else {
+					wp_send_json_error( __( 'There was an error downloading the CartFlows flows file.', 'astra-sites' ) );
 				}
 			}
 

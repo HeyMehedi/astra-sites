@@ -1,0 +1,36 @@
+.welcome-screen {
+    width: 770px;
+    margin: 0 auto;
+
+    h1 {
+        grid-gap: 10px;
+    }
+    .video-showcase {
+        padding: 15px;
+        background: var(--st-background-primary);
+        box-shadow: 0px 10px 15px -2px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-radius: var(--st-border-radius-4);
+        position: relative;
+    }
+    
+    .youtube-btn {
+        cursor: pointer;
+    }
+    .click-btn-text {
+        position: absolute;
+        left: 13em;
+        top: 2.5em;
+    }
+    
+    .get-started-wrap {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .middle-content {
+        top: 50%;
+    }
+}
+
