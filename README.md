@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 2.7.5  
+**Stable tag:** 3.0.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -148,6 +148,13 @@ We are open to suggestions and would love to work on topics that our users are l
 7. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.0
+- New: All new user interface to make it easier to select and customize the templates when you are building your website.
+- New: Amazing search to find the template suitable for your needs.
+- New: Ability to try the logo, colors and typography before importing.
+- New: Improved stability. We have improved our importer, which already was very stable. Now after this release, imports will rarely fail.
+- New: Brizy starter templates are deprecated in this release, you will still be able to import Brizy starter templates after you enable option in <code>Settings -> General -> Starter Templates</code>
 
 v2.7.5 - 27-October-2021
 - Fix: Elementor blocks not being imported due to missing required plugins.
