@@ -149,7 +149,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
-v3.0.0
+v3.0.0 - 7-December-2021
 - New: All new user interface to make it easier to select and customize the templates when you are building your website.
 - New: Amazing search to find the template suitable for your needs.
 - New: Ability to try the logo, colors and typography before importing.
