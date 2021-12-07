@@ -83,6 +83,21 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			if ( version_compare( get_bloginfo( 'version' ), '5.1.0', '>=' ) ) {
 				add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
 			}
+
+			add_action( 'init', array( $this, 'disable_default_woo_pages_creation' ), 2 );
+		}
+
+		/**
+		 * Restrict WooCommerce Pages Creation process
+		 *
+		 * Why? WooCommerce creates set of pages on it's activation
+		 * These pages are re created via our XML import step.
+		 * In order to avoid the duplicacy we restrict these page creation process.
+		 *
+		 * @since 3.0.0
+		 */
+		public function disable_default_woo_pages_creation() {
+			add_filter( 'woocommerce_create_pages', '__return_empty_array' );
 		}
 
 		/**
