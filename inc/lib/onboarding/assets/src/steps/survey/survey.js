@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 
 const SurveyForm = ( { updateFormDetails } ) => {
+	const [ selectedIndex, setSelectedIndex ] = useState( {
+		option1: 0,
+		option2: 0,
+	} );
+
 	return (
 		<>
 			<p className="label-text row-label">
@@ -28,11 +33,22 @@ const SurveyForm = ( { updateFormDetails } ) => {
 				/>
 				<select
 					name="wp_user_type"
-					className="survey-select-input"
+					className={
+						selectedIndex.option1 !== 0
+							? 'survey-select-input'
+							: 'survey-select-input initial'
+					}
 					defaultValue=""
 					onBlur={ ( e ) =>
 						updateFormDetails( 'wp_user_type', e.target.value )
 					}
+					onChange={ ( e ) => {
+						updateFormDetails( 'wp_user_type', e.target.value );
+						setSelectedIndex( {
+							...selectedIndex,
+							option1: e.target.selectedIndex,
+						} );
+					} }
 				>
 					<option value="" disabled>
 						{ __( 'I am…', 'astra-sites' ) }
@@ -47,11 +63,21 @@ const SurveyForm = ( { updateFormDetails } ) => {
 				</select>
 				<select
 					name="build_website_for"
-					className="survey-select-input"
+					className={
+						selectedIndex.option2 !== 0
+							? 'survey-select-input'
+							: 'survey-select-input initial'
+					}
 					defaultValue=""
 					onBlur={ ( e ) =>
 						updateFormDetails( 'build_website_for', e.target.value )
 					}
+					onChange={ ( e ) => {
+						setSelectedIndex( {
+							...selectedIndex,
+							option2: e.target.selectedIndex,
+						} );
+					} }
 				>
 					<option value="" disabled>
 						{ __( 'I am building website for…', 'astra-sites' ) }

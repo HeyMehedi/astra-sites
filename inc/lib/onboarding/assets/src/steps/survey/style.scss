@@ -64,7 +64,10 @@
         border-radius: var(--st-border-radius-3);
         padding: 10px 15px;
         width: 100%;
-        color: var(--st-color-placeholder);
+        color: #2c3338;
+        option:not(:first-of-type) {
+            color: #2c3338;
+        }
         &::placeholder {
             color: var(--st-color-placeholder);
         }
@@ -72,6 +75,9 @@
             border-color: var(--st-color-accent);
         }
         &:hover {
+            color: #2c3338;
+        }
+        &.initial {
             color: var(--st-color-placeholder);
         }
     }
