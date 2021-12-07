@@ -9,7 +9,8 @@
     "check-licenses": "wp-scripts check-licenses",
     "format:js": "wp-scripts format-js",
     "lint:css": "wp-scripts lint-style",
-    "lint:js": "wp-scripts lint-js",
+    "lint:js": "wp-scripts lint-js ./inc/lib/onboarding/assets/src ./inc/lib/onboarding/packages/starter-templates-components/src",
+    "lint:js:fix": "wp-scripts lint-js ./inc/lib/onboarding/assets/src ./inc/lib/onboarding/packages/starter-templates-components/src --fix",
     "lint:md:docs": "wp-scripts lint-md-docs",
     "lint:md:js": "wp-scripts lint-md-js",
     "lint:pkg-json": "wp-scripts lint-pkg-json",
@@ -17,16 +18,24 @@
     "package": "rm -rf astra-sites && npm run build && grunt release-depracated",
     "release": "rm -rf astra-sites && npm run build && grunt release",
     "build": "wp-scripts build --entry=./inc/assets/js/src/ --output-path=./inc/assets/js/dist",
-    "start": "wp-scripts start --entry=./inc/assets/js/src/ --output-path=./inc/assets/js/dist"
+    "start": "wp-scripts start --entry=./inc/assets/js/src/ --output-path=./inc/assets/js/dist",
+    "start:onboarding": "wp-scripts start --entry=./inc/lib/onboarding/assets/src --output-path=./inc/lib/onboarding/assets/dist",
+    "build:onboarding": "wp-scripts build --entry=./inc/lib/onboarding/assets/src --output-path=./inc/lib/onboarding/assets/dist",
+    "build-package": "npm run build:onboarding"
   },
   "keywords": [
     "reactjs",
     "components"
   ],
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.9.0 <7"
+  },
   "license": "ISC",
   "devDependencies": {
+    "@brainstormforce/starter-templates": "file:./inc/lib/onboarding/packages/starter-templates-components/src",
     "@wordpress/scripts": "^14.1.0",
-    "grunt": "^1.3.0",
+    "grunt": "^1.4.1",
     "grunt-bumpup": "^0.6.3",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-compress": "^2.0.0",
@@ -34,11 +43,34 @@
     "grunt-rtlcss": "^2.0.2",
     "grunt-text-replace": "^0.4.0",
     "grunt-wp-i18n": "^1.0.3",
-    "webpack-cli": "^4.6.0",
+    "prettier": "npm:wp-prettier@^2.2.1-beta-1",
+    "rtlcss-webpack-plugin": "^4.0.6",
+    "webpack-cli": "^4.9.0",
     "grunt-wp-readme-to-markdown": "^2.0.1"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/lab": "4.0.0-alpha.60",
+    "@wordpress/api-fetch": "^5.2.6",
+    "@wordpress/block-editor": "^6.1.4",
+    "@wordpress/components": "^14.1.3",
+    "@wordpress/data": "^5.1.2",
+    "@wordpress/dom-ready": "^3.1.1",
+    "@wordpress/element": "^3.1.1",
+    "@wordpress/hooks": "^3.1.1",
+    "@wordpress/html-entities": "^3.2.3",
+    "@wordpress/i18n": "^4.1.1",
+    "@wordpress/media-utils": "^2.1.1",
+    "@wordpress/url": "^3.1.1",
+    "canvas-confetti": "^1.4.0",
+    "lodash": "^4.17.21",
+    "qs": "^6.10.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-lottie-player": "^1.4.1",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.3.0",
+    "underscore": "^1.13.1",
+    "uuid": "^8.3.2"
   }
 }
