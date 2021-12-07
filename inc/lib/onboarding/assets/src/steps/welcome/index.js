@@ -55,7 +55,7 @@ const Welcome = () => {
 							</div>
 						) }
 						<iframe
-							src="https://www.youtube-nocookie.com/embed/Uzna4qK8umc?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&modestbranding=1&loop=1"
+							src="https://www.youtube-nocookie.com/embed/Ch6Yg-9eCyc?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&modestbranding=1&loop=1"
 							frameBorder="0"
 							allow="autoplay; encrypted-media"
 							allowFullScreen
