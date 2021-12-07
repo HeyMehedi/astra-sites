@@ -19,7 +19,7 @@ const getTotalTime = ( value ) => {
 };
 
 const Congrats = () => {
-	const [ { confettiDone }, dispatch ] = useStateValue();
+	const [ { confettiDone, builder }, dispatch ] = useStateValue();
 
 	const istConfetti = confetti.create(
 		document.getElementById( 'ist-bashcanvas' ),
@@ -122,6 +122,8 @@ const Congrats = () => {
 		setShowClickToPlay( false );
 	};
 
+	const ytId = builder === 'gutenberg' ? 'Zb2DU4vzNWE' : '3dARpNLcL30';
+
 	return (
 		<DefaultStep
 			content={
@@ -146,7 +148,7 @@ const Congrats = () => {
 							</div>
 						) }
 						<iframe
-							src="https://www.youtube-nocookie.com/embed/QUb3gRPtWQg?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&modestbranding=1&loop=1"
+							src={ `https://www.youtube-nocookie.com/embed/${ ytId }?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&modestbranding=1&loop=1` }
 							frameBorder="0"
 							allow="autoplay; encrypted-media"
 							allowFullScreen
