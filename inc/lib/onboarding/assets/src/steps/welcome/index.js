@@ -60,8 +60,6 @@ const Welcome = () => {
 							allow="autoplay; encrypted-media"
 							allowFullScreen
 							title="st-welcome-video"
-							height="415"
-							width="740"
 							id="st-welcome-video"
 						/>
 					</div>

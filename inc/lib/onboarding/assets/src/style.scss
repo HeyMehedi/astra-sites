@@ -747,6 +747,16 @@ body.step-import-site:not( .st-error ) .step-header a {
 	inset:0;
 }
 
+#st-welcome-video,
+#st-information-video {
+	width: 770px;
+	height: 446px;
+	left: 0px;
+	top: 0px;
+	border: 15px solid var(--st-color-white);
+	box-shadow: 0px 10px 15px -2px rgb(0 0 0 / 10%), 0px 4px 6px -2px rgb(0 0 0 / 5%);
+	border-radius: var(--st-border-radius-4);
+}
 
 .ist-fadeinUp {
     -webkit-animation: ist-fadeinUp 500ms ease-in-out;
