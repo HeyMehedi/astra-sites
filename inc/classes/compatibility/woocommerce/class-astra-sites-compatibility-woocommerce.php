@@ -104,7 +104,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_WooCommerce' ) ) :
 					$attribute_name = wc_sanitize_taxonomy_name( str_replace( 'pa_', '', $data['taxonomy'] ) );
 
 					// Create the taxonomy.
-					if ( ! in_array( $attribute_name, wc_get_attribute_taxonomies() ) ) {
+					if ( ! in_array( $attribute_name, wc_get_attribute_taxonomies(), true ) ) {
 						$attribute = array(
 							'attribute_label'   => $attribute_name,
 							'attribute_name'    => $attribute_name,
