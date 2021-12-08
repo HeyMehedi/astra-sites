@@ -330,7 +330,7 @@ const ImportSite = () => {
 	/**
 	 * Reset Terms and Forms.
 	 */
-	const performResetTermsAndForms = async () => {
+	const performResetTermsAndForms = () => {
 		const formOption = new FormData();
 		formOption.append( 'action', 'astra-sites-reset-terms-and-forms' );
 		formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
@@ -340,16 +340,51 @@ const ImportSite = () => {
 			importStatus: __( 'Resetting terms and forms.', 'astra-sites' ),
 		} );
 
-		await fetch( ajaxurl, {
+		fetch( ajaxurl, {
 			method: 'post',
 			body: formOption,
-		} );
+		} )
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const response = JSON.parse( text );
+					if ( response.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+							resetCustomizer: true,
+						} );
+					} else {
+						throw response.data;
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting customizer failed.', 'astra-sites' ),
+						'',
+						`${ error }`,
+						'',
+						'',
+						`${ text }`
+					);
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Resetting customizer failed.', 'astra-sites' ),
+					'',
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
+				);
+			} );
 	};
 
 	/**
 	 * Reset Posts.
 	 */
-	const performResetPosts = async () => {
+	const performResetPosts = () => {
 		const formOption = new FormData();
 		formOption.append( 'action', 'astra-sites-reset-posts' );
 		formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
@@ -359,10 +394,45 @@ const ImportSite = () => {
 			importStatus: __( 'Resetting posts.', 'astra-sites' ),
 		} );
 
-		await fetch( ajaxurl, {
+		fetch( ajaxurl, {
 			method: 'post',
 			body: formOption,
-		} );
+		} )
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const response = JSON.parse( text );
+					if ( response.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+							resetCustomizer: true,
+						} );
+					} else {
+						throw response.data;
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting customizer failed.', 'astra-sites' ),
+						'',
+						`${ error }`,
+						'',
+						'',
+						`${ text }`
+					);
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Resetting customizer failed.', 'astra-sites' ),
+					'',
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
+				);
+			} );
 	};
 
 	/**
