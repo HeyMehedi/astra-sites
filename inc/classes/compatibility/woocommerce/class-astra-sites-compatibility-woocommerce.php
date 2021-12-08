@@ -120,12 +120,14 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_WooCommerce' ) ) :
 					register_taxonomy(
 						$data['taxonomy'],
 						apply_filters( 'woocommerce_taxonomy_objects_' . $data['taxonomy'], array( 'product' ) ),
-						apply_filters( 'woocommerce_taxonomy_args_' . $data['taxonomy'], array(
-							'hierarchical' => true,
-							'show_ui'      => false,
-							'query_var'    => true,
-							'rewrite'      => false,
-						) )
+						apply_filters(
+							'woocommerce_taxonomy_args_' . $data['taxonomy'], array(
+								'hierarchical' => true,
+								'show_ui'      => false,
+								'query_var'    => true,
+								'rewrite'      => false,
+							)
+						)
 					);
 				}
 			}

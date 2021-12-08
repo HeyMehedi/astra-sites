@@ -76,6 +76,8 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 					'id'	=> $_POST['id'],
 					'not_installed'	=> ( ! empty( $plugins['required_plugins']['notinstalled'] ) ) ? json_encode( $plugins['required_plugins']['notinstalled'] ) : '',
 					'not_activated'	=> ( ! empty( $plugins['required_plugins']['inactive'] ) ) ? json_encode( $plugins['required_plugins']['inactive'] ) : '',
+					'version' => ASTRA_SITES_VER,
+					'role' => json_encode( wp_get_current_user()->roles ),
 				),
 			);
 

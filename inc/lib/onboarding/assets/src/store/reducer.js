@@ -40,7 +40,6 @@ export const initialState = {
 	confettiDone: false,
 
 	// Business Information.
-	businessSearchTerm: '',
 
 	// Template Information.
 	templateId: 0,
