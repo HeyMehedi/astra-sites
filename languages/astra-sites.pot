@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Starter Templates package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Starter Templates 3.0.0\n"
+"Project-Id-Version: Starter Templates 3.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2021-12-08 11:14:03+00:00\n"
+"POT-Creation-Date: 2021-12-08 13:46:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1793,7 +1793,7 @@ msgstr ""
 msgid "Enable Brizy Page Builder Templates in Starter Templates"
 msgstr ""
 
-#: inc/lib/onboarding/classes/class-astra-sites-ai-site-setup.php:115
+#: inc/lib/onboarding/classes/class-astra-sites-ai-site-setup.php:116
 msgid "You are not authorized to perform this action."
 msgstr ""
 
