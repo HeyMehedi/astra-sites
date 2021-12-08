@@ -323,6 +323,7 @@ const ImportSite = () => {
 			type: 'set',
 			importPercent: percentage,
 			resetContent: true,
+			resetDone: true,
 			importStatus: __( 'Reset for old website is done.', 'astra-sites' ),
 		} );
 	};
