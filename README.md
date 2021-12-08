@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.2  
+**Stable tag:** 3.0.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -132,6 +132,9 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.3 - 8-December-2021
+- Fix: Import failing when "Delete Previously imported sites" checkbox is checked.
 
 v3.0.2 - 8-December-2021
 - Fix: Improvised errors for the Site Reset step while importing.
