@@ -63,7 +63,8 @@ const ImportSite = () => {
 		secondary = '',
 		text = '',
 		code = '',
-		solution = ''
+		solution = '',
+		stack = ''
 	) => {
 		dispatch( {
 			type: 'set',
@@ -92,6 +93,7 @@ const ImportSite = () => {
 				errorText: text,
 				solutionText: solution,
 				tryAgain: true,
+				stack,
 			} )
 		);
 		reportErr.append( 'id', templateResponse.id );
@@ -181,7 +183,10 @@ const ImportSite = () => {
 								'astra-sites'
 							),
 							'',
-							err
+							`${ err.message }`,
+							'',
+							'',
+							`${ err.message }: ${ err.stack }`
 						);
 					},
 				},
@@ -255,9 +260,10 @@ const ImportSite = () => {
 						'astra-sites'
 					),
 					'',
-					error,
+					`${ error.message }`,
 					'',
-					astraSitesVars.importFailedRequiredPluginsMessage
+					astraSitesVars.importFailedRequiredPluginsMessage,
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -317,7 +323,10 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting website failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -359,7 +368,10 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting customizer failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -398,7 +410,10 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting site options Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -477,10 +492,25 @@ const ImportSite = () => {
 					}
 				} )
 				.catch( ( error ) => {
+					const action = allResetOptions[ $i ].get( 'action' );
+					let actionText =
+						action === 'astra-sites-delete-terms'
+							? 'terms'
+							: 'posts';
+					if ( action === 'astra-sites-delete-wp-forms' ) {
+						actionText = 'forms';
+					}
 					report(
-						__( 'Resetting Failed.', 'astra-sites' ),
+						sprintf(
+							/* Translators: %s is action. */
+							__( 'Resetting Failed for %s', 'astra-sites' ),
+							actionText
+						),
 						'',
-						error
+						`${ error.message }`,
+						'',
+						'',
+						`${ error.message }: ${ error.stack }`
 					);
 				} );
 		}
@@ -519,7 +549,10 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting widgets failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -567,7 +600,10 @@ const ImportSite = () => {
 				report(
 					__( 'Importing CartFlows flows Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -615,7 +651,10 @@ const ImportSite = () => {
 				report(
 					__( 'Importing forms Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -663,7 +702,10 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Customizer JSON Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -773,7 +815,10 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Site Content Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -812,7 +857,10 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Site Options Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -861,7 +909,10 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Widgets Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
@@ -930,7 +981,10 @@ const ImportSite = () => {
 				report(
 					__( 'Final finishings Failed.', 'astra-sites' ),
 					'',
-					error
+					`${ error.message }`,
+					'',
+					'',
+					`${ error.message }: ${ error.stack }`
 				);
 			} );
 	};
