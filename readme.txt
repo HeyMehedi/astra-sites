@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.8
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,9 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.0.5 - 9-December-2021
+- Fix: Import process stopping after the posts are deleted.
 
 v3.0.4 - 8-December-2021
 - Fix: Log the errors reported on the posts delete step during deleting old site.
