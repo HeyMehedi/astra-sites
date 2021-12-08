@@ -373,25 +373,25 @@ var AstraSitesAjaxQueue = (function () {
 								url: astraElementorSites.ajaxurl,
 								type: 'POST',
 								data: {
-									action: 'astra-sites-import-categories',
+									action: 'astra-sites-import-all-categories-and-tags',
 								},
 							})
 								.fail(function (jqXHR) {
 									console.log(jqXHR);
 								});
 
-							// Import Site Categories.
+
+							// Import categories.
 							$.ajax({
 								url: astraElementorSites.ajaxurl,
 								type: 'POST',
 								data: {
-									action: 'astra-sites-import-site-categories',
+									action: 'astra-sites-import-all-categories',
 								},
 							})
 								.fail(function (jqXHR) {
 									console.log(jqXHR);
 								});
-
 
 							// Import Blocks.
 							$.ajax({
@@ -822,30 +822,6 @@ var AstraSitesAjaxQueue = (function () {
 					}
 				}
 
-				// Check in site tags.
-				if (undefined != current_site['astra-sites-tag']) {
-
-					if (Object.keys(current_site['astra-sites-tag']).length) {
-						for (site_tag_id in current_site['astra-sites-tag']) {
-							var tag_title = current_site['astra-sites-tag'][site_tag_id];
-							tag_title = AstraElementorSitesAdmin._unescape_lower(tag_title.replace('-', ' '));
-
-							if (tag_title.toLowerCase().includes(search_term)) {
-
-								for (page_id in current_site['pages']) {
-
-									items[page_id] = current_site['pages'][page_id];
-									items[page_id]['type'] = 'page';
-									items[page_id]['site_id'] = site_id;
-									items[page_id]['astra-sites-type'] = current_site['astra-sites-type'] || '';
-									items[page_id]['parent-site-name'] = current_site['title'] || '';
-									items[page_id]['pages-count'] = 0;
-								}
-							}
-						}
-					}
-				}
-
 				// Check in page title.
 				if (Object.keys(current_site['pages']).length) {
 					var pages = current_site['pages'];
@@ -864,25 +840,6 @@ var AstraSitesAjaxQueue = (function () {
 								items[page_id]['astra-sites-type'] = current_site['astra-sites-type'] || '';
 								items[page_id]['parent-site-name'] = current_site['title'] || '';
 								items[page_id]['pages-count'] = 0;
-							}
-						}
-
-						// Check in site tags.
-						if (undefined != pages[page_id]['astra-sites-tag']) {
-
-							if (Object.keys(pages[page_id]['astra-sites-tag']).length) {
-								for (page_tag_id in pages[page_id]['astra-sites-tag']) {
-									var page_tag_title = pages[page_id]['astra-sites-tag'][page_tag_id];
-									page_tag_title = AstraElementorSitesAdmin._unescape_lower(page_tag_title.replace('-', ' '));
-									if (page_tag_title.toLowerCase().includes(search_term)) {
-										items[page_id] = pages[page_id];
-										items[page_id]['type'] = 'page';
-										items[page_id]['site_id'] = site_id;
-										items[page_id]['astra-sites-type'] = current_site['astra-sites-type'] || '';
-										items[page_id]['parent-site-name'] = current_site['title'] || '';
-										items[page_id]['pages-count'] = 0;
-									}
-								}
 							}
 						}
 
@@ -914,18 +871,6 @@ var AstraSitesAjaxQueue = (function () {
 						}
 					}
 
-					// Check in site tags.
-					if (Object.keys(current_site['tag']).length) {
-						for (site_tag_id in current_site['tag']) {
-							var tag_title = AstraElementorSitesAdmin._unescape_lower(current_site['tag'][site_tag_id]);
-
-							if (tag_title.toLowerCase().includes(search_term)) {
-								items[block_id] = current_site;
-								items[block_id]['type'] = 'site';
-								items[block_id]['site_id'] = block_id;
-							}
-						}
-					}
 				}
 			}
 

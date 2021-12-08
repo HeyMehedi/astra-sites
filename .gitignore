@@ -44,3 +44,12 @@ astra-sites/
 
 #ignore readme inside subproject
 inc/lib/bsf-quick-links/readme.md
+
+#ignore readme inside subproject
+inc/lib/onboarding/assets/dist
+
+#ignore readme inside subproject
+inc/lib/bsf-quick-links/readme.md
+
+#ignore readme inside subproject
+inc/lib/onboarding/packages/starter-templates-components/build
