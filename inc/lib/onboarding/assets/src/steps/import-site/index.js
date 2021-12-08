@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import Lottie from 'react-lottie-player';
 import PreviousStepLink from '../../components/util/previous-step-link/index';
@@ -47,8 +47,6 @@ const ImportSite = () => {
 		},
 		dispatch,
 	] = storedState;
-
-	const [ resetFailedCount, setResetFailedCount ] = useState( 0 );
 
 	let percentage = importPercent;
 
@@ -269,8 +267,16 @@ const ImportSite = () => {
 	/**
 	 * 1. Reset.
 	 */
-	const resetOldSite = () => {
+	const resetOldSite = async () => {
 		if ( ! reset ) {
+			dispatch( {
+				type: 'set',
+				resetDone: true,
+				resetCustomizer: true,
+				resetSiteOptions: true,
+				resetContent: true,
+				resetWidgets: true,
+			} );
 			installRequiredPlugins();
 			return;
 		}
@@ -281,70 +287,88 @@ const ImportSite = () => {
 			importPercent: percentage,
 		} );
 
-		const content = new FormData();
-		content.append( 'action', 'astra-sites-set-reset-data' );
-		content.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+		/**
+		 * Reset Customizer.
+		 */
+		await performResetCustomizer();
 
-		// Get reset data.
-		fetch( ajaxurl, {
+		/**
+		 * Reset Site Options.
+		 */
+		await performResetSiteOptions();
+
+		/**
+		 * Reset Widgets.
+		 */
+		await performResetWidget();
+
+		/**
+		 * Reset Terms, Forms.
+		 */
+		await performResetTermsAndForms();
+
+		/**
+		 * Reset Posts.
+		 */
+		await performResetPosts();
+
+		dispatch( {
+			type: 'set',
+			resetContent: true,
+			importStatus: 'Reset done',
+		} );
+
+		percentage += 10;
+		dispatch( {
+			type: 'set',
+			importPercent: percentage,
+			resetContent: true,
+			importStatus: __( 'Reset for old website is done.', 'astra-sites' ),
+		} );
+	};
+
+	/**
+	 * Reset Terms and Forms.
+	 */
+	const performResetTermsAndForms = async () => {
+		const formOption = new FormData();
+		formOption.append( 'action', 'astra-sites-reset-terms-and-forms' );
+		formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		dispatch( {
+			type: 'set',
+			importStatus: __( 'Resetting terms and forms.', 'astra-sites' ),
+		} );
+
+		await fetch( ajaxurl, {
 			method: 'post',
-			body: content,
-		} )
-			.then( ( response ) => response.text() )
-			.then( ( text ) => {
-				try {
-					const data = JSON.parse( text );
-					dispatch( {
-						type: 'set',
-						resetData: data.data,
-					} );
+			body: formOption,
+		} );
+	};
 
-					/**
-					 * Reset Customizer.
-					 */
-					performResetCustomizer();
+	/**
+	 * Reset Posts.
+	 */
+	const performResetPosts = async () => {
+		const formOption = new FormData();
+		formOption.append( 'action', 'astra-sites-reset-posts' );
+		formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-					/**
-					 * Reset Site Options.
-					 */
-					performResetSiteOptions();
+		dispatch( {
+			type: 'set',
+			importStatus: __( 'Resetting posts.', 'astra-sites' ),
+		} );
 
-					/**
-					 * Reset Terms, Posts and Forms in Queue.
-					 */
-					performResetContent( data.data );
-
-					/**
-					 * Reset Widgets.
-					 */
-					performResetWidget();
-				} catch ( error ) {
-					report(
-						__( 'Resetting website failed.', 'astra-sites' ),
-						'',
-						`${ error.message }`,
-						'',
-						'',
-						`${ text }`
-					);
-				}
-			} )
-			.catch( ( error ) => {
-				report(
-					__( 'Resetting website failed.', 'astra-sites' ),
-					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
-				);
-			} );
+		await fetch( ajaxurl, {
+			method: 'post',
+			body: formOption,
+		} );
 	};
 
 	/**
 	 * Perfoem Reset for Customizer.
 	 */
-	const performResetCustomizer = () => {
+	const performResetCustomizer = async () => {
 		dispatch( {
 			type: 'set',
 			importStatus: __( 'Resetting customizer.', 'astra-sites' ),
@@ -357,7 +381,7 @@ const ImportSite = () => {
 		);
 		customizerContent.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: customizerContent,
 		} )
@@ -401,7 +425,7 @@ const ImportSite = () => {
 	/**
 	 * Perform reset
 	 */
-	const performResetSiteOptions = () => {
+	const performResetSiteOptions = async () => {
 		dispatch( {
 			type: 'set',
 			importStatus: __( 'Resetting site options.', 'astra-sites' ),
@@ -411,7 +435,7 @@ const ImportSite = () => {
 		siteOptions.append( 'action', 'astra-sites-reset-site-options' );
 		siteOptions.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: siteOptions,
 		} )
@@ -453,127 +477,9 @@ const ImportSite = () => {
 	};
 
 	/**
-	 * Perform Reset for Content
-	 */
-	const performResetContent = ( resetData ) => {
-		const allResetOptions = [];
-		let index = 0;
-
-		// Reset Terms.
-		resetData.reset_terms.forEach( ( term ) => {
-			const termOption = new FormData();
-			termOption.append( 'action', 'astra-sites-delete-terms' );
-			termOption.append( 'term_id', term );
-			termOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-			allResetOptions[ index ] = termOption;
-			index++;
-		} );
-
-		// Reset Forms.
-		resetData.reset_wp_forms.forEach( ( formId ) => {
-			const formOption = new FormData();
-			formOption.append( 'action', 'astra-sites-delete-wp-forms' );
-			formOption.append( 'post_id', formId );
-			formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-			allResetOptions[ index ] = formOption;
-			index++;
-		} );
-
-		// Reset Posts.
-		resetData.reset_posts.forEach( ( postId ) => {
-			const postsOption = new FormData();
-			postsOption.append( 'action', 'astra-sites-delete-posts' );
-			postsOption.append( 'post_id', postId );
-			postsOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-			allResetOptions[ index ] = postsOption;
-			index++;
-		} );
-
-		if ( allResetOptions.length === 0 ) {
-			dispatch( {
-				type: 'set',
-				resetContent: true,
-			} );
-		}
-
-		for ( let $i = 0; $i < allResetOptions.length; $i++ ) {
-			const action = allResetOptions[ $i ].get( 'action' );
-			let actionText =
-				action === 'astra-sites-delete-terms' ? 'terms' : 'posts';
-			if ( action === 'astra-sites-delete-wp-forms' ) {
-				actionText = 'forms';
-			}
-			fetch( ajaxurl, {
-				method: 'post',
-				body: allResetOptions[ $i ],
-			} )
-				.then( ( response ) => response.text() )
-				.then( ( text ) => {
-					try {
-						const data = JSON.parse( text );
-						if ( data.success ) {
-							dispatch( {
-								type: 'set',
-								importStatus: data.data,
-							} );
-							if ( $i === allResetOptions.length - 1 ) {
-								dispatch( {
-									type: 'set',
-									resetContent: true,
-								} );
-							}
-							if ( 0 === $i % 10 ) {
-								percentage += 1;
-								dispatch( {
-									type: 'set',
-									importPercent: percentage,
-								} );
-							}
-						} else {
-							throw data.data;
-						}
-					} catch ( error ) {
-						if ( resetFailedCount < 1 ) {
-							report(
-								sprintf(
-									/* Translators: %s is action. */
-									__(
-										'Resetting Failed for %s',
-										'astra-sites'
-									),
-									actionText
-								),
-								'',
-								`${ error.message }`,
-								'',
-								'',
-								`${ text }`
-							);
-							setResetFailedCount( 1 );
-						}
-					}
-				} )
-				.catch( ( error ) => {
-					if ( resetFailedCount < 1 ) {
-						report(
-							sprintf(
-								/* Translators: %s is action. */
-								__( 'Resetting Failed for %s', 'astra-sites' ),
-								actionText
-							),
-							'',
-							error
-						);
-						setResetFailedCount( 1 );
-					}
-				} );
-		}
-	};
-
-	/**
 	 * Perform Reset for Widgets
 	 */
-	const performResetWidget = () => {
+	const performResetWidget = async () => {
 		const widgets = new FormData();
 		widgets.append( 'action', 'astra-sites-reset-widgets-data' );
 		widgets.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
@@ -582,7 +488,7 @@ const ImportSite = () => {
 			type: 'set',
 			importStatus: __( 'Resetting widgets.', 'astra-sites' ),
 		} );
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: widgets,
 		} )
@@ -604,7 +510,7 @@ const ImportSite = () => {
 					report(
 						__( 'Resetting widgets failed.', 'astra-sites' ),
 						'',
-						`${ error.message }`,
+						error,
 						'',
 						'',
 						`${ text }`
@@ -615,7 +521,7 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting widgets failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
+					error,
 					'',
 					'',
 					`${ error.message }: ${ error.stack }`
@@ -1067,7 +973,8 @@ const ImportSite = () => {
 				resetCustomizer &&
 				resetSiteOptions &&
 				resetContent &&
-				resetWidgets
+				resetWidgets &&
+				resetDone
 			)
 		) {
 			return;
@@ -1091,6 +998,7 @@ const ImportSite = () => {
 		resetSiteOptions,
 		resetContent,
 		resetWidgets,
+		resetDone,
 		templateResponse,
 	] );
 

@@ -59,7 +59,7 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 			if ( ! astra_sites_is_valid_url( $api_url ) ) {
 				wp_send_json_error(
 					array(
-						'message' => __( 'Invalid Request URL.', 'astra-sites' ),
+						'message' => sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $api_url ),
 						'code'    => 'Error',
 					)
 				);

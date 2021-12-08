@@ -52,6 +52,7 @@ export const initialState = {
 	reset: true,
 	themeStatus: false,
 	importStatusLog: '',
+	importStatus: '',
 	resetCustomizer: false,
 	resetSiteOptions: false,
 	resetContent: false,
