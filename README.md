@@ -124,15 +124,16 @@ We are open to suggestions and would love to work on topics that our users are l
 
 1. Select the page builder of your choice.
 2. Browse through available Starter Templtes and select the site that you like.
-3. Filter using available Starter Temapltes categories.
-4. View all the pages for the starter site.
-5. Click the import button to start the import process.
-6. Blocks import in Elementor editor.
-7. Free Images by Pixabay right inside the WordPress media popup.
+3. Add a logo and preview how it will look in the template, Skip if you do not have a logo right away.
+4. Customize the color palette for the site, you can skip and customize this later on as well.
+5. Customize the typography of the website, you can skip and customize this later on as well.
+6. Start the website building process.
+7. Blocks import in Elementor editor.
+8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
 
-v3.0.0 - 7-December-2021
+v3.0.0 - 8-December-2021
 - New: All new user interface to make it easier to select and customize the templates when you are building your website.
 - New: Amazing search to find the template suitable for your needs.
 - New: Ability to try the logo, colors and typography before importing.
