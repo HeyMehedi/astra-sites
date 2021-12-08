@@ -10,6 +10,21 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v2.3.0
+      with:
+        node-version: 12.x
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build && npm run build-package
+
+    - name: Build Package
+      run: npm run package
+
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@stable
       env:

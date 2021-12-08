@@ -154,7 +154,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			add_action( 'delete_attachment', array( $this, 'delete_astra_images' ) );
 			add_filter( 'heartbeat_received', array( $this, 'search_push' ), 10, 2 );
-			add_action( 'admin_footer', array( $this, 'add_quick_links' ) );
 			add_filter( 'status_header', array( $this, 'status_header' ), 10, 4 );
 			add_filter( 'wp_php_error_message', array( $this, 'php_error_message' ), 10, 2 );
 		}
@@ -224,54 +223,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$message = isset( $error['message'] ) ? $error['message'] : $description;
 
 			return "$protocol $code $message";
-		}
-
-		/**
-		 * Add BSF Quick Links.
-		 */
-		public function add_quick_links() {
-			$current_screen = get_current_screen();
-
-			if ( 'appearance_page_starter-templates' !== $current_screen->id ) {
-				return;
-			}
-
-			if ( Astra_Sites_White_Label::get_instance()->is_white_labeled() ) {
-				return;
-			}
-
-			$data = apply_filters(
-				'astra_sites_quick_links', array(
-					'default_logo' => array(
-						'title' => __( 'See Quick Links', 'astra-sites' ),
-						'url'   => ASTRA_SITES_URI . 'inc/assets/images/quick-link-logo.svg',
-					),
-					'links'        => array(
-						'upgrade' => array(
-							'label'   => __( 'Upgrade to Premium', 'astra-sites' ),
-							'icon'    => 'dashicons-star-filled',
-							'url'     => 'https://wpastra.com/starter-templates-plans/?utm_source=StarterTemplatesPlugin&utm_campaign=WPAdmin',
-							'bgcolor' => '#ffa500',
-						),
-						'support' => array(
-							'label' => __( 'Support & Docs', 'astra-sites' ),
-							'icon'  => 'dashicons-book',
-							'url'   => 'https://wpastra.com/docs-category/starter-templates/',
-						),
-						'join-facebook' => array(
-							'label' => __( 'Join Facebook Group', 'astra-sites' ),
-							'icon'  => 'dashicons-groups',
-							'url'   => 'https://www.facebook.com/groups/wpastra/',
-						),
-					),
-				)
-			);
-
-			if ( defined( 'ASTRA_PRO_SITES_VER' ) ) {
-				unset( $data['links']['upgrade'] );
-			}
-
-			bsf_quick_links( $data );
 		}
 
 		/**
@@ -1230,10 +1181,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'page' => 'starter-templates',
 			);
 
-			$current_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
-			if ( empty( $current_page_builder ) ) {
-				$arguments['change-page-builder'] = 'yes';
-			}
 			$url = add_query_arg( $arguments, admin_url( 'themes.php' ) );
 
 			$action_links = array(
@@ -1424,11 +1371,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_enqueue_style( 'astra-sites-admin', ASTRA_SITES_URI . 'inc/assets/css/admin.css', ASTRA_SITES_VER, true );
 			wp_style_add_data( 'astra-sites-admin', 'rtl', 'replace' );
 
-			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates', 'jquery-ui-autocomplete', 'astra-sites-history' ), ASTRA_SITES_VER, true );
-
 			$data = $this->get_local_vars();
-
-			wp_localize_script( 'astra-sites-admin-page', 'astraSitesVars', $data );
 		}
 
 		/**
@@ -1496,7 +1439,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		public function get_local_vars() {
 
 			$stored_data = array(
-				'astra-site-category'        => array(),
+				'astra-sites-site-category'        => array(),
 				'astra-site-page-builder'    => array(),
 				'astra-sites'                => array(),
 				'site-pages-category'        => array(),
@@ -1523,6 +1466,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'isPro'                              => defined( 'ASTRA_PRO_SITES_NAME' ) ? true : false,
 					'isWhiteLabeled'                     => Astra_Sites_White_Label::get_instance()->is_white_labeled(),
 					'whiteLabelName'                     => Astra_Sites_White_Label::get_instance()->get_white_label_name(),
+					'whiteLabelUrl'                      => Astra_Sites_White_Label::get_instance()->get_white_label_link( 'https://wpastra.com/docs/not-valid-license/' ),
 					'ajaxurl'                            => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'siteURL'                            => site_url(),
 					'getProText'                         => __( 'Get Access!', 'astra-sites' ),
@@ -1537,7 +1481,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					/* translators: %s is a documentation link. */
 					'importFailedMessage'                => sprintf( __( '<p>We are facing a temporary issue in importing this template.</p><p>Read <a href="%s" target="_blank">article</a> to resolve the issue and continue importing template.</p>', 'astra-sites' ), esc_url( 'https://wpastra.com/docs/fix-starter-template-importing-issues/' ) ),
 					/* translators: %s is a documentation link. */
-					'importFailedRequiredPluginsMessage' => sprintf( __( '<p>We are facing a temporary issue in installing the required plugins for this template.</p><p>Read <a href="%s" target="_blank">article</a> to resolve the issue and continue importing template.</p>', 'astra-sites' ), esc_url( 'https://wpastra.com/docs/plugin-installation-failed-multisite/' ) ),
+					'importFailedRequiredPluginsMessage' => sprintf( __( '<p>We are facing a temporary issue in installing the required plugins for this template.</p><p>Read&nbsp;<a href="%s" target="_blank">article</a>&nbsp;to resolve the issue and continue importing template.</p>', 'astra-sites' ), esc_url( 'https://wpastra.com/docs/plugin-installation-failed-multisite/' ) ),
 
 					'strings'                            => array(
 						/* translators: %s are white label strings. */
@@ -1556,17 +1500,21 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'default_page_builder_data'          => Astra_Sites_Page::get_instance()->get_default_page_builder(),
 					'default_page_builder_sites'         => Astra_Sites_Page::get_instance()->get_sites_by_page_builder( $default_page_builder ),
 					'sites'                              => astra_sites_get_api_params(),
+					'allSites'                           => (array) self::get_instance()->get_all_sites(),
+					'allCategories'                      => (array) self::get_instance()->get_api_option( 'astra-sites-all-site-categories' ),
+					'allCategoriesAndTags'               => (array) self::get_instance()->get_api_option( 'astra-sites-all-site-categories-and-tags' ),
 					'categories'                         => array(),
 					'page-builders'                      => array(),
-					'api_sites_and_pages_tags'           => $this->get_api_option( 'astra-sites-tags' ),
+					'all_sites'                          => $this->get_all_sites(),
+					'all_site_categories'                => get_option( 'astra-sites-all-site-categories', array() ),
+					'all_site_categories_and_tags'       => get_option( 'astra-sites-all-site-categories-and-tags', array() ),
 					'license_status'                     => $license_status,
 					'license_page_builder'               => get_option( 'astra-sites-license-page-builder', '' ),
-
 					'ApiDomain'                          => $this->api_domain,
 					'ApiURL'                             => $this->api_url,
 					'stored_data'                        => $stored_data,
 					'favorite_data'                      => $favorite_data,
-					'category_slug'                      => 'astra-site-category',
+					'category_slug'                      => 'astra-sites-site-category',
 					'page_builder'                       => 'astra-site-page-builder',
 					'cpt_slug'                           => 'astra-sites',
 					'parent_category'                    => '',
@@ -1589,7 +1537,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					/* translators: %s HTML tags */
 					'ajax_request_failed_primary'        => sprintf( __( '%1$sWe could not start the import process due to failed AJAX request and this is the message from WordPress:%2$s', 'astra-sites' ), '<p>', '</p>' ),
 					/* translators: %s URL to document. */
-					'ajax_request_failed_secondary'      => sprintf( __( '%1$sRead <a href="%2$s" target="_blank">article</a> to resolve the issue and continue importing template.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/docs/internal-server-error-starter-templates/' ), '</p>' ),
+					'ajax_request_failed_secondary'      => sprintf( __( '%1$sRead&nbsp;<a href="%2$s" target="_blank">article</a>&nbsp;to resolve the issue and continue importing template.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/docs/internal-server-error-starter-templates/' ), '</p>' ),
 					'cta_links' => $this->get_cta_links(),
 					'cta_quick_corner_links' => $this->get_cta_links( 'quick-links-corner' ),
 					'cta_premium_popup_links' => $this->get_cta_links( 'get-premium-access-popup' ),
@@ -1601,6 +1549,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'process_failed_primary'        => sprintf( __( '%1$sWe could not complete the import process due to failed AJAX request and this is the message:%2$s', 'astra-sites' ), '<p>', '</p>' ),
 					/* translators: %s URL to document. */
 					'process_failed_secondary'      => sprintf( __( '%1$sPlease report this <a href="%2$s" target="_blank">here</a>.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/starter-templates-support/?url=#DEMO_URL#&subject=#SUBJECT#' ), '</p>' ),
+					'st_page_url' => admin_url( 'themes.php?page=starter-templates' ),
 				)
 			);
 
@@ -1776,7 +1725,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'astra_blocks'               => $this->get_all_blocks(),
 					'license_status'             => $license_status,
 					'ajaxurl'                    => esc_url( admin_url( 'admin-ajax.php' ) ),
-					'api_sites_and_pages_tags'   => $this->get_api_option( 'astra-sites-tags' ),
 					'default_page_builder_sites' => Astra_Sites_Page::get_instance()->get_sites_by_page_builder( 'elementor' ),
 					'ApiURL'                     => $this->api_url,
 					'_ajax_nonce'                => wp_create_nonce( 'astra-sites' ),
@@ -1889,6 +1837,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-importer.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-wp-cli.php';
 			require_once ASTRA_SITES_DIR . 'inc/lib/class-astra-sites-ast-block-templates.php';
+			require_once ASTRA_SITES_DIR . 'inc/lib/onboarding/class-onboarding.php';
 
 			// Batch Import.
 			require_once ASTRA_SITES_DIR . 'inc/classes/batch-import/class-astra-sites-batch-import.php';
