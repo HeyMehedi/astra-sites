@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import Lottie from 'react-lottie-player';
 import PreviousStepLink from '../../components/util/previous-step-link/index';
@@ -47,6 +47,8 @@ const ImportSite = () => {
 		},
 		dispatch,
 	] = storedState;
+
+	const [ resetFailedCount, setResetFailedCount ] = useState( 0 );
 
 	let percentage = importPercent;
 
@@ -183,10 +185,7 @@ const ImportSite = () => {
 								'astra-sites'
 							),
 							'',
-							`${ err.message }`,
-							'',
-							'',
-							`${ err.message }: ${ err.stack }`
+							err
 						);
 					},
 				},
@@ -260,10 +259,9 @@ const ImportSite = () => {
 						'astra-sites'
 					),
 					'',
-					`${ error.message }`,
+					error,
 					'',
-					astraSitesVars.importFailedRequiredPluginsMessage,
-					`${ error.message }: ${ error.stack }`
+					astraSitesVars.importFailedRequiredPluginsMessage
 				);
 			} );
 	};
@@ -292,32 +290,44 @@ const ImportSite = () => {
 			method: 'post',
 			body: content,
 		} )
-			.then( ( response ) => response.json() )
-			.then( ( data ) => {
-				dispatch( {
-					type: 'set',
-					resetData: data.data,
-				} );
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const data = JSON.parse( text );
+					dispatch( {
+						type: 'set',
+						resetData: data.data,
+					} );
 
-				/**
-				 * Reset Customizer.
-				 */
-				performResetCustomizer();
+					/**
+					 * Reset Customizer.
+					 */
+					performResetCustomizer();
 
-				/**
-				 * Reset Site Options.
-				 */
-				performResetSiteOptions();
+					/**
+					 * Reset Site Options.
+					 */
+					performResetSiteOptions();
 
-				/**
-				 * Reset Terms, Posts and Forms in Queue.
-				 */
-				performResetContent( data.data );
+					/**
+					 * Reset Terms, Posts and Forms in Queue.
+					 */
+					performResetContent( data.data );
 
-				/**
-				 * Reset Widgets.
-				 */
-				performResetWidget();
+					/**
+					 * Reset Widgets.
+					 */
+					performResetWidget();
+				} catch ( error ) {
+					report(
+						__( 'Resetting website failed.', 'astra-sites' ),
+						'',
+						`${ error.message }`,
+						'',
+						'',
+						`${ text }`
+					);
+				}
 			} )
 			.catch( ( error ) => {
 				report(
@@ -351,17 +361,29 @@ const ImportSite = () => {
 			method: 'post',
 			body: customizerContent,
 		} )
-			.then( ( response ) => response.json() )
-			.then( ( response ) => {
-				if ( response.success ) {
-					percentage += 2;
-					dispatch( {
-						type: 'set',
-						importPercent: percentage,
-						resetCustomizer: true,
-					} );
-				} else {
-					throw response.data;
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const response = JSON.parse( text );
+					if ( response.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+							resetCustomizer: true,
+						} );
+					} else {
+						throw response.data;
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting customizer failed.', 'astra-sites' ),
+						'',
+						`${ error.message }`,
+						'',
+						'',
+						`${ text }`
+					);
 				}
 			} )
 			.catch( ( error ) => {
@@ -393,17 +415,29 @@ const ImportSite = () => {
 			method: 'post',
 			body: siteOptions,
 		} )
-			.then( ( response ) => response.json() )
-			.then( ( data ) => {
-				if ( data.success ) {
-					percentage += 2;
-					dispatch( {
-						type: 'set',
-						importPercent: percentage,
-						resetSiteOptions: true,
-					} );
-				} else {
-					throw data.data;
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const data = JSON.parse( text );
+					if ( data.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+							resetSiteOptions: true,
+						} );
+					} else {
+						throw data.data;
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting site options Failed.', 'astra-sites' ),
+						'',
+						`${ error.message }`,
+						'',
+						'',
+						`${ text }`
+					);
 				}
 			} )
 			.catch( ( error ) => {
@@ -463,55 +497,75 @@ const ImportSite = () => {
 		}
 
 		for ( let $i = 0; $i < allResetOptions.length; $i++ ) {
+			const action = allResetOptions[ $i ].get( 'action' );
+			let actionText =
+				action === 'astra-sites-delete-terms' ? 'terms' : 'posts';
+			if ( action === 'astra-sites-delete-wp-forms' ) {
+				actionText = 'forms';
+			}
 			fetch( ajaxurl, {
 				method: 'post',
 				body: allResetOptions[ $i ],
 			} )
-				.then( ( response ) => response.json() )
-				.then( ( data ) => {
-					if ( data.success ) {
-						dispatch( {
-							type: 'set',
-							importStatus: data.data,
-						} );
-						if ( $i === allResetOptions.length - 1 ) {
+				.then( ( response ) => response.text() )
+				.then( ( text ) => {
+					try {
+						const data = JSON.parse( text );
+						if ( data.success ) {
 							dispatch( {
 								type: 'set',
-								resetContent: true,
+								importStatus: data.data,
 							} );
+							if ( $i === allResetOptions.length - 1 ) {
+								dispatch( {
+									type: 'set',
+									resetContent: true,
+								} );
+							}
+							if ( 0 === $i % 10 ) {
+								percentage += 1;
+								dispatch( {
+									type: 'set',
+									importPercent: percentage,
+								} );
+							}
+						} else {
+							throw data.data;
 						}
-						if ( 0 === $i % 10 ) {
-							percentage += 1;
-							dispatch( {
-								type: 'set',
-								importPercent: percentage,
-							} );
+					} catch ( error ) {
+						if ( resetFailedCount < 1 ) {
+							report(
+								sprintf(
+									/* Translators: %s is action. */
+									__(
+										'Resetting Failed for %s',
+										'astra-sites'
+									),
+									actionText
+								),
+								'',
+								`${ error.message }`,
+								'',
+								'',
+								`${ text }`
+							);
+							setResetFailedCount( 1 );
 						}
-					} else {
-						throw data.data;
 					}
 				} )
 				.catch( ( error ) => {
-					const action = allResetOptions[ $i ].get( 'action' );
-					let actionText =
-						action === 'astra-sites-delete-terms'
-							? 'terms'
-							: 'posts';
-					if ( action === 'astra-sites-delete-wp-forms' ) {
-						actionText = 'forms';
+					if ( resetFailedCount < 1 ) {
+						report(
+							sprintf(
+								/* Translators: %s is action. */
+								__( 'Resetting Failed for %s', 'astra-sites' ),
+								actionText
+							),
+							'',
+							error
+						);
+						setResetFailedCount( 1 );
 					}
-					report(
-						sprintf(
-							/* Translators: %s is action. */
-							__( 'Resetting Failed for %s', 'astra-sites' ),
-							actionText
-						),
-						'',
-						`${ error.message }`,
-						'',
-						'',
-						`${ error.message }: ${ error.stack }`
-					);
 				} );
 		}
 	};
@@ -532,17 +586,29 @@ const ImportSite = () => {
 			method: 'post',
 			body: widgets,
 		} )
-			.then( ( response ) => response.json() )
-			.then( ( response ) => {
-				if ( response.success ) {
-					percentage += 2;
-					dispatch( {
-						type: 'set',
-						importPercent: percentage,
-						resetWidgets: true,
-					} );
-				} else {
-					throw response.data;
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const response = JSON.parse( text );
+					if ( response.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+							resetWidgets: true,
+						} );
+					} else {
+						throw response.data;
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting widgets failed.', 'astra-sites' ),
+						'',
+						`${ error.message }`,
+						'',
+						'',
+						`${ text }`
+					);
 				}
 			} )
 			.catch( ( error ) => {
@@ -600,10 +666,7 @@ const ImportSite = () => {
 				report(
 					__( 'Importing CartFlows flows Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -651,10 +714,7 @@ const ImportSite = () => {
 				report(
 					__( 'Importing forms Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -702,10 +762,7 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Customizer JSON Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -815,10 +872,7 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Site Content Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -857,10 +911,7 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Site Options Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -909,10 +960,7 @@ const ImportSite = () => {
 				report(
 					__( 'Importing Widgets Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -981,10 +1029,7 @@ const ImportSite = () => {
 				report(
 					__( 'Final finishings Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
-					'',
-					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
