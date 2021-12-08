@@ -182,7 +182,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			$ids_mapping = array();
 
 			if ( ! astra_sites_is_valid_url( $wpforms_url ) ) {
-				wp_send_json_error( __( 'Invalid Request URL.', 'astra-sites' ) );
+				/* Translators: %s is WP Forms URL. */
+				wp_send_json_error( sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $wpforms_url ) );
 			}
 
 			if ( ! empty( $wpforms_url ) && function_exists( 'wpforms_encode' ) ) {
@@ -380,7 +381,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			$wxr_url = ( isset( $_REQUEST['wxr_url'] ) ) ? urldecode( $_REQUEST['wxr_url'] ) : '';
 
 			if ( ! astra_sites_is_valid_url( $wxr_url ) ) {
-				wp_send_json_error( __( 'Invalid Request URL.', 'astra-sites' ) );
+				/* Translators: %s is XML URL. */
+				wp_send_json_error( sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $wxr_url ) );
 			}
 
 			Astra_Sites_Importer_Log::add( 'Importing from XML ' . $wxr_url );

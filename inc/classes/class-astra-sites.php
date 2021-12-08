@@ -134,6 +134,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-required-plugin-activate' => 'required_plugin_activate',
 				'astra-sites-backup-settings' => 'backup_settings',
 				'astra-sites-set-reset-data' => 'get_reset_data',
+				'astra-sites-reset-terms-and-forms' => 'reset_terms_and_forms',
+				'astra-sites-reset-posts' => 'reset_posts',
 				'astra-sites-activate-theme' => 'activate_theme',
 				'astra-sites-create-page' => 'create_page',
 				'astra-sites-import-media' => 'import_media',
@@ -465,7 +467,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( ! astra_sites_is_valid_url( $api_url ) ) {
 				wp_send_json_error(
 					array(
-						'message' => __( 'Invalid Request URL.', 'astra-sites' ),
+						/* Translators: %s is API URL. */
+						'message' => sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $api_url ),
 						'code'    => 'Error',
 					)
 				);
@@ -1071,6 +1074,112 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
+		 * Reset terms and forms.
+		 *
+		 * @since 3.0.3
+		 */
+		public function reset_terms_and_forms() {
+			if ( wp_doing_ajax() ) {
+				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+				if ( ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+				}
+			}
+
+			$terms = astra_sites_get_reset_term_data();
+
+			if ( ! empty( $terms ) ) {
+				foreach ( $terms as $key => $term_id ) {
+					$term_id = absint( $term_id );
+					if ( $term_id ) {
+						$term = get_term( $term_id );
+						if ( ! is_wp_error( $term ) && ! empty( $term ) && is_object( $term ) ) {
+
+							do_action( 'astra_sites_before_delete_imported_terms', $term_id, $term );
+
+							$message = 'Deleted - Term ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
+							Astra_Sites_Importer_Log::add( $message );
+							wp_delete_term( $term_id, $term->taxonomy );
+						}
+					}
+				}
+			}
+
+			$forms = astra_sites_get_reset_form_data();
+
+			if ( ! empty( $forms ) ) {
+				foreach ( $forms as $key => $post_id ) {
+					$post_id = absint( $post_id );
+					if ( $post_id ) {
+
+						do_action( 'astra_sites_before_delete_imported_wp_forms', $post_id );
+
+						$message = 'Deleted - Form ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+						Astra_Sites_Importer_Log::add( $message );
+						wp_delete_post( $post_id, true );
+					}
+				}
+			}
+
+			if ( wp_doing_ajax() ) {
+				wp_send_json_success();
+			}
+		}
+
+		/**
+		 * Reset posts.
+		 *
+		 * @since 3.0.3
+		 */
+		public function reset_posts() {
+			if ( wp_doing_ajax() ) {
+				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+				if ( ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+				}
+			}
+
+			// Suspend bunches of stuff in WP core.
+			wp_defer_term_counting( true );
+			wp_defer_comment_counting( true );
+			wp_suspend_cache_invalidation( true );
+
+			$posts = astra_sites_get_reset_post_data();
+
+			if ( ! empty( $posts ) ) {
+				foreach ( $posts as $key => $post_id ) {
+					$post_id = absint( $post_id );
+					if ( $post_id ) {
+						$post_type = get_post_type( $post_id );
+						$message   = 'Deleted - Post ID ' . $post_id . ' - ' . $post_type . ' - ' . get_the_title( $post_id );
+
+						do_action( 'astra_sites_before_delete_imported_posts', $post_id, $post_type );
+
+						Astra_Sites_Importer_Log::add( $message );
+						wp_delete_post( $post_id, true );
+					}
+				}
+			}
+
+			// Re-enable stuff in core.
+			wp_suspend_cache_invalidation( false );
+			wp_cache_flush();
+			foreach ( get_taxonomies() as $tax ) {
+				delete_option( "{$tax}_children" );
+				_get_term_hierarchy( $tax );
+			}
+
+			wp_defer_term_counting( false );
+			wp_defer_comment_counting( false );
+
+			if ( wp_doing_ajax() ) {
+				wp_send_json_success();
+			}
+		}
+
+		/**
 		 * Set reset data
 		 */
 		public function get_reset_data() {
@@ -1079,20 +1188,14 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
 				if ( ! current_user_can( 'manage_options' ) ) {
-					return;
+					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 				}
 			}
 
-			global $wpdb;
-
-			$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
-			$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
-			$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
-
 			$data = array(
-				'reset_posts'    => $post_ids,
-				'reset_wp_forms' => $form_ids,
-				'reset_terms'    => $term_ids,
+				'reset_posts'    => astra_sites_get_reset_post_data(),
+				'reset_wp_forms' => astra_sites_get_reset_form_data(),
+				'reset_terms'    => astra_sites_get_reset_term_data(),
 			);
 
 			if ( wp_doing_ajax() ) {

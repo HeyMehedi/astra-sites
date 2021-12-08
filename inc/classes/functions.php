@@ -118,6 +118,48 @@ function astra_sites_is_valid_url( $url = '' ) {
 }
 
 /**
+ * Get all the posts to be reset.
+ *
+ * @since 3.0.3
+ * @return array
+ */
+function astra_sites_get_reset_post_data() {
+	global $wpdb;
+
+	$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
+
+	return $post_ids;
+}
+
+/**
+ * Get all the forms to be reset.
+ *
+ * @since 3.0.3
+ * @return array
+ */
+function astra_sites_get_reset_form_data() {
+	global $wpdb;
+
+	$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
+
+	return $form_ids;
+}
+
+/**
+ * Get all the terms to be reset.
+ *
+ * @since 3.0.3
+ * @return array
+ */
+function astra_sites_get_reset_term_data() {
+	global $wpdb;
+
+	$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
+
+	return $term_ids;
+}
+
+/**
  * Get API params
  *
  * @since 2.7.3
