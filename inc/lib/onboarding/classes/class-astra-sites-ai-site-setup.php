@@ -74,8 +74,8 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 					'url'    => esc_url( site_url() ),
 					'err'   => stripslashes( $_POST['error'] ),
 					'id'	=> $_POST['id'],
-					'not_installed'	=> $plugins['required_plugins']['notinstalled'],
-					'not_activated'	=> $plugins['required_plugins']['inactive'],
+					'not_installed'	=> ( ! empty( $plugins['required_plugins']['notinstalled'] ) ) ? json_encode( $plugins['required_plugins']['notinstalled'] ) : '',
+					'not_activated'	=> ( ! empty( $plugins['required_plugins']['inactive'] ) ) ? json_encode( $plugins['required_plugins']['inactive'] ) : '',
 				),
 			);
 
