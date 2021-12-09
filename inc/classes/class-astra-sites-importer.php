@@ -375,7 +375,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			}
 
 			if ( ! class_exists( 'XMLReader' ) ) {
-				wp_send_json_error( __( 'If XMLReader is not available, it imports all other settings and only skips XML import. This creates an incomplete website. We should bail early and not import anything if this is not present.', 'astra-sites' ) );
+				wp_send_json_error( __( 'The XMLReader library is not available. This library is required to import the content for the website.', 'astra-sites' ) );
 			}
 
 			$wxr_url = ( isset( $_REQUEST['wxr_url'] ) ) ? urldecode( $_REQUEST['wxr_url'] ) : '';

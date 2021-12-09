@@ -130,11 +130,7 @@ export const getDemo = async ( id, storedState ) => {
 };
 
 export const checkRequiredPlugins = ( storedState ) => {
-	const [ { templateResponse }, dispatch ] = storedState;
-
-	if ( null !== templateResponse ) {
-		return;
-	}
+	const [ {}, dispatch ] = storedState;
 
 	const reqPlugins = new FormData();
 	reqPlugins.append( 'action', 'astra-required-plugins' );

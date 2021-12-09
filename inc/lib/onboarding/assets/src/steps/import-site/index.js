@@ -13,6 +13,7 @@ import {
 	saveTypography,
 	setSiteLogo,
 	setColorPalettes,
+	checkRequiredPlugins,
 } from './import-utils';
 
 import './style.scss';
@@ -44,6 +45,7 @@ const ImportSite = () => {
 			requiredPlugins,
 			notInstalledList,
 			notActivatedList,
+			tryAgainCount,
 		},
 		dispatch,
 	] = storedState;
@@ -312,12 +314,6 @@ const ImportSite = () => {
 		 */
 		await performResetPosts();
 
-		dispatch( {
-			type: 'set',
-			resetContent: true,
-			importStatus: 'Reset done',
-		} );
-
 		percentage += 10;
 		dispatch( {
 			type: 'set',
@@ -361,23 +357,23 @@ const ImportSite = () => {
 					}
 				} catch ( error ) {
 					report(
-						__( 'Resetting customizer failed.', 'astra-sites' ),
+						__( 'Reseting terms and forms failed.', 'astra-sites' ),
 						'',
 						`${ error }`,
 						'',
 						'',
-						`${ text }`
+						text
 					);
 				}
 			} )
 			.catch( ( error ) => {
 				report(
-					__( 'Resetting customizer failed.', 'astra-sites' ),
+					__( 'Reseting terms and forms failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
+					error?.message,
 					'',
 					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -415,23 +411,23 @@ const ImportSite = () => {
 					}
 				} catch ( error ) {
 					report(
-						__( 'Resetting customizer failed.', 'astra-sites' ),
+						__( 'Resetting posts failed.', 'astra-sites' ),
 						'',
 						`${ error }`,
 						'',
 						'',
-						`${ text }`
+						text
 					);
 				}
 			} )
 			.catch( ( error ) => {
 				report(
-					__( 'Resetting customizer failed.', 'astra-sites' ),
+					__( 'Resetting posts failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
+					error?.message,
 					'',
 					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -474,10 +470,10 @@ const ImportSite = () => {
 					report(
 						__( 'Resetting customizer failed.', 'astra-sites' ),
 						'',
-						`${ error.message }`,
+						error?.message,
 						'',
 						'',
-						`${ text }`
+						text
 					);
 				}
 			} )
@@ -485,10 +481,10 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting customizer failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
+					error?.message,
 					'',
 					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -528,10 +524,10 @@ const ImportSite = () => {
 					report(
 						__( 'Resetting site options Failed.', 'astra-sites' ),
 						'',
-						`${ error.message }`,
+						error?.message,
 						'',
 						'',
-						`${ text }`
+						text
 					);
 				}
 			} )
@@ -539,10 +535,10 @@ const ImportSite = () => {
 				report(
 					__( 'Resetting site options Failed.', 'astra-sites' ),
 					'',
-					`${ error.message }`,
+					error?.message,
 					'',
 					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -584,7 +580,7 @@ const ImportSite = () => {
 						error,
 						'',
 						'',
-						`${ text }`
+						text
 					);
 				}
 			} )
@@ -595,7 +591,7 @@ const ImportSite = () => {
 					error,
 					'',
 					'',
-					`${ error.message }: ${ error.stack }`
+					error
 				);
 			} );
 	};
@@ -979,7 +975,6 @@ const ImportSite = () => {
 					} );
 
 					localStorage.setItem( 'st-import-end', +new Date() );
-
 					setInterval( function () {
 						counter--;
 						const counterEl = document.getElementById(
@@ -1010,6 +1005,12 @@ const ImportSite = () => {
 				);
 			} );
 	};
+
+	useEffect( () => {
+		if ( tryAgainCount > 0 ) {
+			checkRequiredPlugins( storedState );
+		}
+	}, [ tryAgainCount ] );
 
 	// Start the pre import process.
 	useEffect( () => {
