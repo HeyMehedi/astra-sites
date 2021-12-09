@@ -84,6 +84,25 @@ const ImportSite = () => {
 		localStorage.removeItem( 'st-import-start' );
 		localStorage.removeItem( 'st-import-end' );
 
+		sendErrorReport(
+			primary,
+			secondary,
+			text,
+			code,
+			solution,
+			stack,
+			tryAgainCount
+		);
+	};
+
+	const sendErrorReport = (
+		primary = '',
+		secondary = '',
+		text = '',
+		code = '',
+		solution = '',
+		stack = ''
+	) => {
 		const reportErr = new FormData();
 		reportErr.append( 'action', 'report_error' );
 		reportErr.append(
@@ -96,6 +115,7 @@ const ImportSite = () => {
 				solutionText: solution,
 				tryAgain: true,
 				stack,
+				tryAgainCount,
 			} )
 		);
 		reportErr.append( 'id', templateResponse.id );
@@ -225,31 +245,52 @@ const ImportSite = () => {
 			method: 'post',
 			body: activatePluginOptions,
 		} )
-			.then( ( response ) => response.json() )
-			.then( ( response ) => {
-				if ( response.success ) {
-					const notActivatedPluginList = notActivatedList;
-					notActivatedPluginList.forEach( ( singlePlugin, index ) => {
-						if ( singlePlugin.slug === plugin.slug ) {
-							notActivatedPluginList.splice( index, 1 );
-						}
-					} );
-					dispatch( {
-						type: 'set',
-						notActivatedList: notActivatedPluginList,
-					} );
-					percentage += 2;
-					dispatch( {
-						type: 'set',
-						importStatus: sprintf(
-							// translators: Plugin Name.
-							__( '%1$s activated.', 'astra-sites' ),
-							plugin.name
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				let cloneResponse = [];
+				try {
+					const response = JSON.parse( text );
+					cloneResponse = response;
+					if ( response.success ) {
+						const notActivatedPluginList = notActivatedList;
+						notActivatedPluginList.forEach(
+							( singlePlugin, index ) => {
+								if ( singlePlugin.slug === plugin.slug ) {
+									notActivatedPluginList.splice( index, 1 );
+								}
+							}
+						);
+						dispatch( {
+							type: 'set',
+							notActivatedList: notActivatedPluginList,
+						} );
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importStatus: sprintf(
+								// translators: Plugin Name.
+								__( '%1$s activated.', 'astra-sites' ),
+								plugin.name
+							),
+							importPercent: percentage,
+						} );
+					}
+				} catch ( error ) {
+					report(
+						__(
+							'JSON_Error: Could not activate the required plugin list.',
+							'astra-sites'
 						),
-						importPercent: percentage,
-					} );
-				} else {
-					throw response.data.message;
+						'',
+						error,
+						'',
+						astraSitesVars.importFailedRequiredPluginsMessage,
+						text
+					);
+				}
+
+				if ( ! cloneResponse.success ) {
+					throw cloneResponse.data.message;
 				}
 			} )
 			.catch( ( error ) => {
@@ -603,7 +644,7 @@ const ImportSite = () => {
 		const cartflowsUrl =
 			encodeURI( templateResponse[ 'astra-site-cartflows-path' ] ) || '';
 
-		if ( '' === cartflowsUrl ) {
+		if ( '' === cartflowsUrl || 'null' === cartflowsUrl ) {
 			importForms();
 			return;
 		}
@@ -651,7 +692,7 @@ const ImportSite = () => {
 		const wpformsUrl =
 			encodeURI( templateResponse[ 'astra-site-wpforms-path' ] ) || '';
 
-		if ( '' === wpformsUrl ) {
+		if ( '' === wpformsUrl || 'null' === wpformsUrl ) {
 			importCustomizerJson();
 			return;
 		}
@@ -753,13 +794,29 @@ const ImportSite = () => {
 			importSiteOptions();
 			return;
 		}
+
+		const wxrUrl =
+			encodeURI( templateResponse[ 'astra-site-wxr-path' ] ) || '';
+		if ( 'null' === wxrUrl || '' === wxrUrl ) {
+			const errorTxt = __(
+				'The XML URL for the site content is empty.',
+				'astra-sites'
+			);
+			report(
+				__( 'Importing Site Content Failed', 'astra-sites' ),
+				'',
+				errorTxt,
+				'',
+				astraSitesVars.support_text,
+				wxrUrl
+			);
+			return;
+		}
+
 		dispatch( {
 			type: 'set',
 			importStatus: __( 'Importing Site Content.', 'astra-sites' ),
 		} );
-
-		const wxrUrl =
-			encodeURI( templateResponse[ 'astra-site-wxr-path' ] ) || '';
 
 		const content = new FormData();
 		content.append( 'action', 'astra-sites-import-prepare-xml' );
@@ -942,7 +999,6 @@ const ImportSite = () => {
 		await setSiteLogo( siteLogo );
 		await setColorPalettes( JSON.stringify( activePalette ) );
 		const selectedTypo = typography;
-		delete selectedTypo.preview;
 		await saveTypography( selectedTypo );
 		importDone();
 	};
@@ -965,9 +1021,49 @@ const ImportSite = () => {
 			method: 'post',
 			body: finalSteps,
 		} )
-			.then( ( response ) => response.json() )
-			.then( ( data ) => {
-				if ( data.success ) {
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				let cloneData = [];
+				try {
+					const data = JSON.parse( text );
+					cloneData = data;
+					if ( data.success ) {
+						dispatch( {
+							type: 'set',
+							importPercent: 100,
+							importEnd: true,
+						} );
+
+						localStorage.setItem( 'st-import-end', +new Date() );
+						setInterval( function () {
+							counter--;
+							const counterEl = document.getElementById(
+								'redirect-counter'
+							);
+							if ( counterEl ) {
+								if ( counter < 0 ) {
+									dispatch( {
+										type: 'set',
+										currentIndex: currentIndex + 1,
+									} );
+								} else {
+									const timeType =
+										counter <= 1 ? ' second…' : ' seconds…';
+									counterEl.innerHTML = counter + timeType;
+								}
+							}
+						}, 1000 );
+					}
+				} catch ( error ) {
+					report(
+						__( 'Final finishings JSON Failed.', 'astra-sites' ),
+						'',
+						error,
+						'',
+						'',
+						text
+					);
+
 					dispatch( {
 						type: 'set',
 						importPercent: 100,
@@ -987,14 +1083,16 @@ const ImportSite = () => {
 									currentIndex: currentIndex + 1,
 								} );
 							} else {
-								const text =
+								const counterText =
 									counter <= 1 ? ' second…' : ' seconds…';
-								counterEl.innerHTML = counter + text;
+								counterEl.innerHTML = counter + counterText;
 							}
 						}
 					}, 1000 );
-				} else {
-					throw data.data;
+				}
+
+				if ( false === cloneData.success ) {
+					throw cloneData.data;
 				}
 			} )
 			.catch( ( error ) => {

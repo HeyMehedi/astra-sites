@@ -1,11 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 export const getDemo = async ( id, storedState ) => {
-	const [ { templateResponse, currentIndex }, dispatch ] = storedState;
-
-	if ( null !== templateResponse ) {
-		return;
-	}
+	const [ { currentIndex }, dispatch ] = storedState;
 
 	const generateData = new FormData();
 	generateData.append( 'action', 'astra-sites-api-request' );
