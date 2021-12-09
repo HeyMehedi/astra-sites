@@ -39,8 +39,6 @@ export const initialState = {
 	tryAgainCount: 0,
 	confettiDone: false,
 
-	// Business Information.
-
 	// Template Information.
 	templateId: 0,
 	templateResponse: null,
