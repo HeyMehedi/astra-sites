@@ -74,11 +74,7 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 					'url'    => esc_url( site_url() ),
 					'err'   => stripslashes( $_POST['error'] ),
 					'id'	=> $_POST['id'],
-					'not_installed'	=> ( ! empty( $plugins['required_plugins']['notinstalled'] ) ) ? json_encode( $plugins['required_plugins']['notinstalled'] ) : '',
-					'not_activated'	=> ( ! empty( $plugins['required_plugins']['inactive'] ) ) ? json_encode( $plugins['required_plugins']['inactive'] ) : '',
 					'version' => ASTRA_SITES_VER,
-					'role' => json_encode( wp_get_current_user()->roles ),
-					'active_plugins' => json_encode( get_option( 'active_plugins' ) ),
 				),
 			);
 
