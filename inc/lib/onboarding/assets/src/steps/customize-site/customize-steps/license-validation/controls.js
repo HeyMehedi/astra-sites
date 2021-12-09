@@ -6,11 +6,14 @@ import Button from '../../../../components/button/button';
 import { useStateValue } from '../../../../store/store';
 import PreviousStepLink from '../../../../components/util/previous-step-link/index';
 import ICONS from '../../../../../icons';
+import { getDemo } from '../../../import-site/import-utils';
 const { restNonce } = starterTemplates;
 
 const LicenseValidationControls = () => {
+	const storedState = useStateValue();
 	const [
 		{
+			templateId,
 			templateResponse,
 			currentCustomizeIndex,
 			importError,
@@ -18,7 +21,7 @@ const LicenseValidationControls = () => {
 			validateLicenseStatus,
 		},
 		dispatch,
-	] = useStateValue();
+	] = storedState;
 	const [ error, setError ] = useState( '' );
 	const [ processing, setProcessing ] = useState( false );
 	const [ licenseKey, setLicenseKey ] = useState( '' );
@@ -50,8 +53,9 @@ const LicenseValidationControls = () => {
 				'license-key': licenseKey,
 				'product-id': 'astra-pro-sites',
 			},
-		} ).then( ( response ) => {
+		} ).then( async ( response ) => {
 			if ( response.success ) {
+				await getDemo( templateId, storedState );
 				dispatch( {
 					type: 'set',
 					licenseStatus: true,

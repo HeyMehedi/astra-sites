@@ -185,7 +185,7 @@ class Intelligent_Starter_Templates_Loader {
 			'siteUrl' => get_site_url(),
 			'searchData' => Astra_Sites::get_instance()->get_api_domain() . 'wp-json/starter-templates/v1/ist-data',
 			'firstImportStatus' => get_option( 'astra_sites_import_complete', false ),
-			'clientIP' => Astra_Sites_Helper::get_client_ip(),
+			'supportLink' => 'https://wpastra.com/starter-templates-support/?ip=' . Astra_Sites_Helper::get_client_ip(),
 			'isBrizyEnabled'=> get_option( 'st-brizy-builder-flag'),
 		);
 

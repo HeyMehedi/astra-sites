@@ -133,3 +133,7 @@ export const getColorScheme = ( demo ) => {
 export const getAllSites = () => {
 	return astraSitesVars.all_sites;
 };
+
+export const getSupportLink = ( templateId, subject ) => {
+	return `${ starterTemplates.supportLink }&template-id=${ templateId }&subject=${ subject }`;
+};
