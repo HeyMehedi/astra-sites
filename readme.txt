@@ -135,6 +135,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 v3.0.6 - 9-December-2021
 - Fix: Plugin installation failed error fixed after retry action.
+- Fix: Removed unused SVG images.
 
 v3.0.5 - 9-December-2021
 - Fix: Import process stopping after the posts are deleted.
