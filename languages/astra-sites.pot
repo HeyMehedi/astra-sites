@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Starter Templates package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Starter Templates 3.0.5\n"
+"Project-Id-Version: Starter Templates 3.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2021-12-09 11:33:18+00:00\n"
+"POT-Creation-Date: 2021-12-09 11:42:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -272,9 +272,8 @@ msgstr ""
 
 #: inc/classes/class-astra-sites-importer.php:378
 msgid ""
-"If XMLReader is not available, it imports all other settings and only skips "
-"XML import. This creates an incomplete website. We should bail early and "
-"not import anything if this is not present."
+"The XMLReader library is not available. This library is required to import "
+"the content for the website."
 msgstr ""
 
 #: inc/classes/class-astra-sites-importer.php:414
@@ -1799,7 +1798,7 @@ msgstr ""
 msgid "Enable Brizy Page Builder Templates in Starter Templates"
 msgstr ""
 
-#: inc/lib/onboarding/classes/class-astra-sites-ai-site-setup.php:116
+#: inc/lib/onboarding/classes/class-astra-sites-ai-site-setup.php:112
 msgid "You are not authorized to perform this action."
 msgstr ""
 
