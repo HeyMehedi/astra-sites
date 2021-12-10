@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { DefaultStep } from '../../components/index';
+import { DefaultStep, PreviousStepLink } from '../../components/index';
 import { useStateValue } from '../../store/store';
 import './style.scss';
 
@@ -146,7 +146,13 @@ const PageBuilder = () => {
 					</div>
 				</div>
 			}
-			actions={ null }
+			actions={
+				<>
+					<PreviousStepLink before>
+						{ __( 'Back', 'astra-sites' ) }
+					</PreviousStepLink>
+				</>
+			}
 		/>
 	);
 };

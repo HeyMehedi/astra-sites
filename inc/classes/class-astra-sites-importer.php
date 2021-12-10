@@ -659,7 +659,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			// Flush permalinks.
 			flush_rewrite_rules();
 
-			delete_option( 'astra_sites_import_data' );
+			/**
+			 * Not deleting the Demo data after import, in order to avoid customizer data empty issue.
+			 * delete_option( 'astra_sites_import_data' );
+			 */
 
 			Astra_Sites_Importer_Log::add( 'Complete ' );
 		}
@@ -805,6 +808,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 *
 		 * @since 1.3.0
 		 * @since 1.4.0 The `$post_id` was added.
+		 * Note: This function can be deleted after a few releases since we are performing the delete operation in chunks.
 		 *
 		 * @param  integer $post_id Post ID.
 		 * @return void
@@ -848,6 +852,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 *
 		 * @since 1.3.0
 		 * @since 1.4.0 The `$post_id` was added.
+		 * Note: This function can be deleted after a few releases since we are performing the delete operation in chunks.
 		 *
 		 * @param  integer $post_id Post ID.
 		 * @return void
@@ -887,6 +892,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 *
 		 * @since 1.3.0
 		 * @since 1.4.0 The `$post_id` was added.
+		 * Note: This function can be deleted after a few releases since we are performing the delete operation in chunks.
 		 *
 		 * @param  integer $term_id Term ID.
 		 * @return void

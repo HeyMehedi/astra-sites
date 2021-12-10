@@ -105,4 +105,17 @@
 	}
 }
 
-
+.ist-import-done-inner,
+.import-done-counter {
+	display: none;
+}
+.import-done {
+	.import-status-string,
+	.ist-import-text-inner {
+		display: none;
+	}
+	.import-done-counter,
+	.ist-import-done-inner {
+		display: block;
+	}
+}

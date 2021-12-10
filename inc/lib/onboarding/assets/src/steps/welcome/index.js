@@ -5,6 +5,7 @@ import { useStateValue } from '../../store/store';
 import './style.scss';
 import ICONS from '../../../icons';
 import { Button } from '../../ui/style';
+import { PreviousStepLink } from '../../components';
 
 const Welcome = () => {
 	const [ { currentIndex }, dispatch ] = useStateValue();
@@ -70,7 +71,19 @@ const Welcome = () => {
 					</div>
 				</div>
 			}
-			actions={ null }
+			actions={
+				<>
+					<PreviousStepLink
+						before
+						customizeStep={ true }
+						onClick={ () => {
+							window.location.href = starterTemplates.adminUrl;
+						} }
+					>
+						{ __( 'Back', 'astra-sites' ) }
+					</PreviousStepLink>
+				</>
+			}
 		/>
 	);
 };
