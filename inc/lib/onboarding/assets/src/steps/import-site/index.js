@@ -18,6 +18,7 @@ import {
 } from './import-utils';
 
 import './style.scss';
+
 const ImportSite = () => {
 	const storedState = useStateValue();
 	const [
@@ -291,7 +292,7 @@ const ImportSite = () => {
 				}
 
 				if ( ! cloneResponse.success ) {
-					throw cloneResponse.data.message;
+					throw cloneResponse?.data;
 				}
 			} )
 			.catch( ( error ) => {
@@ -445,13 +446,17 @@ const ImportSite = () => {
 			body: data,
 		} )
 			.then( ( response ) => response.json() )
-			.then( ( response ) => {
+			.then( async ( response ) => {
 				if ( response.success ) {
 					const chunkArray = divideIntoChunks( 10, response.data );
 					if ( chunkArray.length > 0 ) {
-						chunkArray.forEach( async ( chunk, index ) => {
-							await performPostsReset( chunk, index );
-						} );
+						for (
+							let index = 0;
+							index < chunkArray.length;
+							index++
+						) {
+							await performPostsReset( chunkArray[ index ] );
+						}
 					}
 				}
 			} );
@@ -465,14 +470,14 @@ const ImportSite = () => {
 	/**
 	 * Reset a chunk of posts.
 	 */
-	const performPostsReset = async ( chunk, index ) => {
+	const performPostsReset = async ( chunk ) => {
 		const data = new FormData();
 		data.append( 'action', 'astra-sites-get-deleted-post-ids' );
 		data.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		dispatch( {
 			type: 'set',
-			importStatus: `Restting posts - ${ index }.`,
+			importStatus: __( `Resetting posts.`, 'astra-sites' ),
 		} );
 
 		const formOption = new FormData();
