@@ -799,7 +799,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			if ( defined( 'WP_CLI' ) ) {
 				WP_CLI::line( 'Deleted Widgets!' );
 			} elseif ( wp_doing_ajax() ) {
-				wp_send_json_success(  __( 'Deleted Widgets!', 'astra-sites' ) );
+				wp_send_json_success( __( 'Deleted Widgets!', 'astra-sites' ) );
 			}
 		}
 
