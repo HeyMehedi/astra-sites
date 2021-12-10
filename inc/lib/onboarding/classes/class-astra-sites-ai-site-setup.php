@@ -186,17 +186,43 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 				case 'site-typography' === $param && function_exists( 'astra_get_option' ):
 						$typography = isset( $_POST['typography'] ) ? (array) json_decode( stripslashes( $_POST['typography'] ) ) : '';
 
-						$font_size_body = (array) $typography['font-size-body'];
+						$font_size_body = isset( $typography['font-size-body'] ) ? (array) $typography['font-size-body'] : '';
+						if( ! empty( $font_size_body ) && is_array( $font_size_body ) ) {
+							astra_update_option( 'font-size-body', $font_size_body );
+						}
 
-						astra_update_option( 'body-font-family', $typography['body-font-family'] );
-						astra_update_option( 'body-font-variant', $typography['body-font-variant'] );
-						astra_update_option( 'body-font-weight', $typography['body-font-weight'] );
-						astra_update_option( 'font-size-body', $font_size_body );
-						astra_update_option( 'body-line-height', $typography['body-line-height'] );
-						astra_update_option( 'headings-font-family', $typography['headings-font-family'] );
-						astra_update_option( 'headings-font-weight', $typography['headings-font-weight'] );
-						astra_update_option( 'headings-line-height', $typography['headings-line-height'] );
-						astra_update_option( 'headings-font-variant', $typography['headings-font-variant'] );
+						if ( ! empty( $typography['body-font-family'] ) ) {
+							astra_update_option( 'body-font-family', $typography['body-font-family'] );
+						}
+
+						if ( ! empty( $typography['body-font-variant'] ) ) {
+							astra_update_option( 'body-font-variant', $typography['body-font-variant'] );
+						}
+
+						if ( ! empty( $typography['body-font-weight'] ) ) {
+							astra_update_option( 'body-font-weight', $typography['body-font-weight'] );
+						}
+
+						if ( ! empty( $typography['body-line-height'] ) ) {
+							astra_update_option( 'body-line-height', $typography['body-line-height'] );
+						}
+
+						if ( ! empty( $typography['headings-font-family'] ) ) {
+							astra_update_option( 'headings-font-family', $typography['headings-font-family'] );
+						}
+
+						if ( ! empty( $typography['headings-font-weight'] ) ) {
+							astra_update_option( 'headings-font-weight', $typography['headings-font-weight'] );
+						}
+
+						if ( ! empty( $typography['headings-line-height'] ) ) {
+							astra_update_option( 'headings-line-height', $typography['headings-line-height'] );
+						}
+
+						if ( ! empty( $typography['headings-font-variant'] ) ) {
+							astra_update_option( 'headings-font-variant', $typography['headings-font-variant'] );
+						}
+
 					break;
 			}
 

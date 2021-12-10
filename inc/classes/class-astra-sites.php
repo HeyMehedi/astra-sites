@@ -141,6 +141,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-sites-import-media' => 'import_media',
 				'astra-sites-create-template' => 'create_template',
 				'astra-sites-create-image' => 'create_image',
+				'astra-sites-get-deleted-post-ids' => 'get_deleted_post_ids',
 				'astra-sites-search-images' => 'search_images',
 				'astra-sites-getting-started-notice' => 'getting_started_notice',
 				'astra-sites-favorite' => 'add_to_favorite',
@@ -1128,9 +1129,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
-		 * Reset posts.
+		 * Reset posts in chunks.
 		 *
-		 * @since 3.0.3
+		 * @since 3.0.8
 		 */
 		public function reset_posts() {
 			if ( wp_doing_ajax() ) {
@@ -1146,7 +1147,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_defer_comment_counting( true );
 			wp_suspend_cache_invalidation( true );
 
-			$posts = astra_sites_get_reset_post_data();
+			$all_ids = ( isset( $_POST['ids'] ) ) ? $_POST['ids'] : '';
+
+			$posts = json_decode( stripslashes( $_POST['ids'] ), true );
 
 			if ( ! empty( $posts ) ) {
 				foreach ( $posts as $key => $post_id ) {
@@ -1180,7 +1183,22 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
+		 * Get post IDs to be deleted.
+		 */
+		public function get_deleted_post_ids() {
+			if ( wp_doing_ajax() ) {
+				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+				if ( ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+				}
+			}
+			wp_send_json_success( astra_sites_get_reset_post_data() );
+		}
+
+		/**
 		 * Set reset data
+		 * Note: This function can be deleted after a few releases since we are performing the delete operation in chunks.
 		 */
 		public function get_reset_data() {
 

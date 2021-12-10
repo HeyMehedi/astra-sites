@@ -36,14 +36,14 @@ const ImportLoader = () => {
 	return (
 		<div className="ist-import-progress">
 			<div className="ist-import-progress-info">
-				<div className="ist-import-progress-info-text">
-					{ 100 !== importPercent && stepText }
-					{ 100 === importPercent && (
-						<>
-							{ __( 'Done ', 'astra-sites' ) }
-							{ ICONS.tada }
-						</>
-					) }
+				<div
+					className={ `ist-import-progress-info-text ${ doneClass }` }
+				>
+					<span className="ist-import-text-inner">{ stepText }</span>
+					<span className="ist-import-done-inner">
+						{ __( 'Done ', 'astra-sites' ) }
+						{ ICONS.tada }
+					</span>
 				</div>
 				<div className="ist-import-progress-info-precent">
 					{ importPercent }%
@@ -62,18 +62,20 @@ const ImportLoader = () => {
 				</div>
 			</div>
 			<div className="ist-import-progress-info">
-				<div className="ist-import-progress-info-text">
-					{ 100 !== importPercent && (
+				<div
+					className={ `ist-import-progress-info-text ${ doneClass }` }
+				>
+					<span className="import-status-string">
 						<p>{ importStatus + decodeEntities( '&nbsp;' ) }</p>
-					) }
-					{ 100 === importPercent && (
+					</span>
+					<span className="import-done-counter">
 						<p>
 							{ __( 'Redirecting you in ', 'astra-sites' ) }
 							<span id="redirect-counter">
 								{ __( '3 seconds…', 'astra-sites' ) }
 							</span>
 						</p>
-					) }
+					</span>
 				</div>
 			</div>
 		</div>

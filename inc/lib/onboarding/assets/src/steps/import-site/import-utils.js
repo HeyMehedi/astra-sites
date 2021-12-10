@@ -290,3 +290,22 @@ export const saveTypography = async ( selectedValue ) => {
 		body: data,
 	} );
 };
+
+export const divideIntoChunks = ( chunkSize, inputArray ) => {
+	const values = Object.keys( inputArray );
+	const final = [];
+	let counter = 0;
+	let portion = {};
+
+	for ( const key in inputArray ) {
+		if ( counter !== 0 && counter % chunkSize === 0 ) {
+			final.push( portion );
+			portion = {};
+		}
+		portion[ key ] = inputArray[ values[ counter ] ];
+		counter++;
+	}
+	final.push( portion );
+
+	return final;
+};
