@@ -673,7 +673,10 @@ const ImportSite = () => {
 					}
 				} catch ( error ) {
 					report(
-						__( 'Resetting widgets failed.', 'astra-sites' ),
+						__(
+							'Resetting widgets JSON parse failed.',
+							'astra-sites'
+						),
 						'',
 						error,
 						'',
