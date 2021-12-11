@@ -85,6 +85,24 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			}
 
 			add_action( 'init', array( $this, 'disable_default_woo_pages_creation' ), 2 );
+			add_filter( 'upgrader_package_options', array( $this, 'plugin_install_clear_directory' ) );
+		}
+
+		/**
+		 * Delete directory when installing plugin.
+		 *
+		 * Set by enabling `clear_destination` option in the upgrader.
+		 *
+		 * @since 3.0.10
+		 * @param array $options Options for the upgrader.
+		 * @return array $options The options.
+		 */
+		public function plugin_install_clear_directory( $options ) {
+			if ( isset( $_REQUEST['clear_destination'] ) && 'true' === $_REQUEST['clear_destination'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$options['clear_destination'] = true;
+			}
+
+			return $options;
 		}
 
 		/**

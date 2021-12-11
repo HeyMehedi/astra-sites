@@ -1991,6 +1991,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				}
 			}
 
+			// Raise time limit when activating the plugin.
+			set_time_limit( 300 );
+
 			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : $init;
 
 			wp_clean_plugins_cache();
