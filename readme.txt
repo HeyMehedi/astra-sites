@@ -133,6 +133,10 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
+v3.0.10 - 11-December-2021
+- Fix: Timeout errors when activating required plugins.
+- Fix: `folder_exists` error when installing required plugins.
+
 v3.0.9 - 10-December-2021
 - Fix: Fixed an issue with resetting posts requests.
 - Fix: Fixed an undefined variable console error with plugin activation request.
