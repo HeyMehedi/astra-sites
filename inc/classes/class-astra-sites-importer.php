@@ -98,7 +98,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 * @return array $options The options.
 		 */
 		public function plugin_install_clear_directory( $options ) {
-			if ( isset( $_REQUEST['clear_destination'] ) && 'true' === $_REQUEST['clear_destination'] ) {
+			if ( isset( $_REQUEST['clear_destination'] ) && 'true' === $_REQUEST['clear_destination'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$options['clear_destination'] = true;
 			}
 
