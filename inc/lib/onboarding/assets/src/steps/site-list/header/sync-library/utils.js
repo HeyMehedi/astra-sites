@@ -36,7 +36,7 @@ export const SyncStart = async () => {
 		if ( data === 'updated' ) {
 			syncStatus.push( true );
 			syncEnded = true;
-		} else if ( data === 'batch' ) {
+		} else {
 			allSitesData = await SyncImportAllSites();
 			syncStatus.push( await SyncAllCategoriesAndTags() );
 			syncStatus.push( await SyncAllCategories() );

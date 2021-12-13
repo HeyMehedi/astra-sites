@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Starter Templates plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Starter Templates 3.0.9\n"
+"Project-Id-Version: Starter Templates 3.0.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-12-11T07:32:27+00:00\n"
+"POT-Creation-Date: 2021-12-13T11:38:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.1-alpha\n"
 "X-Domain: astra-sites\n"
@@ -18,7 +18,7 @@ msgstr ""
 #: astra-sites.php:18
 #: astra-sites.php:77
 #: inc/lib/onboarding/class-onboarding-loader.php:62
-#: inc/lib/onboarding/assets/dist/main.js:1746
+#: inc/lib/onboarding/assets/dist/main.js:5
 #: inc/lib/onboarding/assets/src/components/logo/index.js:16
 msgid "Starter Templates"
 msgstr ""
@@ -83,7 +83,7 @@ msgid "Get unlimited access to all premium Starter Templates and more, at a sing
 msgstr ""
 
 #: classes/class-astra-sites-admin.php:111
-#: inc/lib/onboarding/assets/dist/main.js:7051
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/site-list/index.js:231
 msgid "Get Essential Bundle"
 msgstr ""
@@ -352,8 +352,7 @@ msgstr ""
 #: inc/classes/class-astra-sites.php:1370
 #: inc/includes/templates.php:28
 #: inc/includes/templates.php:35
-#: inc/lib/onboarding/assets/dist/main.js:7519
-#: inc/lib/onboarding/assets/dist/main.js:7814
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:30
 #: inc/lib/onboarding/assets/src/steps/site-list/site-type-filter/index.js:16
 msgid "All"
@@ -376,9 +375,8 @@ msgstr ""
 #: inc/includes/templates.php:181
 #: inc/includes/templates.php:308
 #: inc/includes/templates.php:394
-#: inc/lib/onboarding/assets/dist/main.js:6993
-#: inc/lib/onboarding/assets/dist/main.js:7817
-#: inc/lib/onboarding/assets/dist/main.js:7896
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/site-list/index.js:82
 #: inc/lib/onboarding/assets/src/steps/site-list/site-type-filter/index.js:20
 #: inc/lib/onboarding/assets/src/steps/site-list/sites-grid/index.js:22
@@ -399,9 +397,8 @@ msgid "The default WordPress editor"
 msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:484
-#: inc/lib/onboarding/assets/dist/main.js:6039
-#: inc/lib/onboarding/assets/dist/main.js:6040
-#: inc/lib/onboarding/assets/dist/main.js:7189
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:5
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:100
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:103
 #: inc/lib/onboarding/assets/src/steps/site-list/page-builder-filter/index.js:18
@@ -409,9 +406,8 @@ msgid "Elementor"
 msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:489
-#: inc/lib/onboarding/assets/dist/main.js:6053
-#: inc/lib/onboarding/assets/dist/main.js:6054
-#: inc/lib/onboarding/assets/dist/main.js:7193
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:5
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:118
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:124
 #: inc/lib/onboarding/assets/src/steps/site-list/page-builder-filter/index.js:23
@@ -419,9 +415,8 @@ msgid "Beaver Builder"
 msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:494
-#: inc/lib/onboarding/assets/dist/main.js:6067
-#: inc/lib/onboarding/assets/dist/main.js:6068
-#: inc/lib/onboarding/assets/dist/main.js:7200
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:5
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:140
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:143
 #: inc/lib/onboarding/assets/src/steps/site-list/page-builder-filter/index.js:31
@@ -765,13 +760,13 @@ msgid "Travel/Vacation"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:1393
-#: inc/lib/onboarding/assets/dist/main.js:7758
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/site-list/site-order-filter/index.js:16
 msgid "Popular"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:1394
-#: inc/lib/onboarding/assets/dist/main.js:7761
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/site-list/site-order-filter/index.js:20
 msgid "Latest"
 msgstr ""
@@ -1020,7 +1015,7 @@ msgstr ""
 
 #: inc/classes/class-astra-sites.php:1745
 #: inc/includes/admin-page.php:661
-#: inc/lib/onboarding/assets/dist/main.js:8328
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/survey/index.js:114
 msgid "This starter template requires premium plugins. As these are third party premium plugins, you'll need to purchase, install and activate them first."
 msgstr ""
@@ -1069,7 +1064,7 @@ msgstr ""
 
 #: inc/classes/class-astra-sites.php:1864
 #: inc/includes/admin-page.php:1027
-#: inc/lib/onboarding/assets/dist/main.js:8167
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:197
 msgid "Install Required Plugins"
 msgstr ""
@@ -1200,7 +1195,7 @@ msgstr ""
 #: inc/includes/templates.php:328
 #: inc/includes/templates.php:414
 #: inc/includes/templates.php:475
-#: inc/lib/onboarding/assets/dist/main.js:5907
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/index.js:155
 msgid "Back to Templates"
 msgstr ""
@@ -1288,7 +1283,6 @@ msgid "Learn how you can <a href=\"%1$s\" target=\"_blank\">activate the license
 msgstr ""
 
 #: inc/includes/admin-page.php:735
-#: inc/lib/onboarding/assets/dist/main.js:3050
 #: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:79
 msgid "Not Valid License"
 msgstr ""
@@ -1370,7 +1364,7 @@ msgid "Heads Up!"
 msgstr ""
 
 #: inc/includes/admin-page.php:896
-#: inc/lib/onboarding/assets/dist/main.js:8440
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/survey.js:57
 msgid "Beginner"
 msgstr ""
@@ -1380,7 +1374,7 @@ msgid "Intermediate"
 msgstr ""
 
 #: inc/includes/admin-page.php:898
-#: inc/lib/onboarding/assets/dist/main.js:8444
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/survey.js:62
 msgid "Expert"
 msgstr ""
@@ -1411,7 +1405,7 @@ msgid "First name is required"
 msgstr ""
 
 #: inc/includes/admin-page.php:920
-#: inc/lib/onboarding/assets/dist/main.js:8410
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/survey.js:20
 msgid "Your First Name"
 msgstr ""
@@ -1421,7 +1415,7 @@ msgid "Email address is required"
 msgstr ""
 
 #: inc/includes/admin-page.php:925
-#: inc/lib/onboarding/assets/dist/main.js:8418
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/survey.js:29
 msgid "Your Work Email"
 msgstr ""
@@ -1440,7 +1434,6 @@ msgid "By submitting, you agree to our %1$sTerms%2$s and %3$sPrivacy Policy%4$s.
 msgstr ""
 
 #: inc/includes/admin-page.php:957
-#: inc/lib/onboarding/assets/dist/main.js:1055
 #: inc/lib/onboarding/assets/src/components/customizer-step/index.js:30
 msgid "Skip"
 msgstr ""
@@ -1450,25 +1443,25 @@ msgid "To serve more beautiful starter templates, we would like to know more abo
 msgstr ""
 
 #: inc/includes/admin-page.php:982
-#: inc/lib/onboarding/assets/dist/main.js:8115
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:78
 msgid "Advanced Options"
 msgstr ""
 
 #: inc/includes/admin-page.php:996
-#: inc/lib/onboarding/assets/dist/main.js:8137
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:132
 msgid "Install & Activate Astra Theme"
 msgstr ""
 
 #: inc/includes/admin-page.php:997
-#: inc/lib/onboarding/assets/dist/main.js:8138
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:138
 msgid "To import the site in the original format, you would need the Astra theme activated. You can import it with any other theme, but the site might lose some of the design settings and look a bit different."
 msgstr ""
 
 #: inc/includes/admin-page.php:1005
-#: inc/lib/onboarding/assets/dist/main.js:8149
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:158
 msgid "Import Customizer Settings"
 msgstr ""
@@ -1479,25 +1472,25 @@ msgid "%1$s customizer serves global settings that give uniform design to the we
 msgstr ""
 
 #: inc/includes/admin-page.php:1020
-#: inc/lib/onboarding/assets/dist/main.js:8159
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:183
 msgid "Import Widgets"
 msgstr ""
 
 #: inc/includes/admin-page.php:1030
-#: inc/lib/onboarding/assets/dist/main.js:8168
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:206
 msgid "Plugins needed to import this template are missing. Required plugins will be installed and activated automatically."
 msgstr ""
 
 #: inc/includes/admin-page.php:1039
-#: inc/lib/onboarding/assets/dist/main.js:8181
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:241
 msgid "Import Content"
 msgstr ""
 
 #: inc/includes/admin-page.php:1042
-#: inc/lib/onboarding/assets/dist/main.js:8182
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:244
 msgid "Selecting this option will import dummy pages, posts, images, and menus. If you do not want to import dummy content, please uncheck this option."
 msgstr ""
@@ -1525,7 +1518,7 @@ msgid "Delete Previously Imported Site"
 msgstr ""
 
 #: inc/includes/admin-page.php:1101
-#: inc/lib/onboarding/assets/dist/main.js:8128
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:104
 msgid "WARNING: Selecting this option will delete all data from the previous import. Choose this option only if this is intended."
 msgstr ""
@@ -1588,8 +1581,8 @@ msgid "Close"
 msgstr ""
 
 #: inc/includes/templates.php:130
-#: inc/lib/onboarding/assets/dist/main.js:6276
-#: inc/lib/onboarding/assets/src/steps/site-list/header/sync-library/index.js:30
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/site-list/header/sync-library/index.js:42
 msgid "Sync Library"
 msgstr ""
 
@@ -1638,21 +1631,32 @@ msgstr ""
 msgid "You are not authorized to perform this action."
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:876
-#: inc/lib/onboarding/assets/src/components/change-template/index.js:26
-msgid "Selected Template:"
+#: inc/lib/onboarding/assets/dist/main.js:1
+#: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:199
+msgid "Default Fonts:"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:1053
-#: inc/lib/onboarding/assets/dist/main.js:1557
-#: inc/lib/onboarding/assets/dist/main.js:1967
-#: inc/lib/onboarding/assets/dist/main.js:3098
-#: inc/lib/onboarding/assets/dist/main.js:3345
-#: inc/lib/onboarding/assets/dist/main.js:5652
-#: inc/lib/onboarding/assets/dist/main.js:6071
-#: inc/lib/onboarding/assets/dist/main.js:7044
-#: inc/lib/onboarding/assets/dist/main.js:8353
-#: inc/lib/onboarding/assets/dist/main.js:8624
+#: inc/lib/onboarding/assets/dist/main.js:1
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:208
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:266
+msgid "You can also try:"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:1
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:218
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:226
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:279
+msgid "Continue"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:1
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/components/customizer-step/index.js:25
 #: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:221
 #: inc/lib/onboarding/assets/src/components/media-uploader/index.js:231
@@ -1666,801 +1670,769 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:1260
-#: inc/lib/onboarding/assets/src/components/error/index.js:75
-msgid "Error Occured!"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1289
-#: inc/lib/onboarding/assets/src/components/error/index.js:141
-msgid "Please report this error&nbsp;"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1293
-#: inc/lib/onboarding/assets/src/components/error/index.js:154
-msgid "&nbsp;so we can fix it."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1297
-#: inc/lib/onboarding/assets/src/components/error/index.js:161
-msgid "Try Importing Again"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1337
-#: inc/lib/onboarding/assets/dist/main.js:5913
-#: inc/lib/onboarding/assets/src/components/exist-to-dashboard/index.js:13
-#: inc/lib/onboarding/assets/src/steps/index.js:167
-msgid "Exit to Dashboard"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1538
-#: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:199
-msgid "Default Fonts:"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1545
-#: inc/lib/onboarding/assets/dist/main.js:3331
-#: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:208
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:266
-msgid "You can also try:"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1554
-#: inc/lib/onboarding/assets/dist/main.js:1965
-#: inc/lib/onboarding/assets/dist/main.js:3342
-#: inc/lib/onboarding/assets/src/components/font-selector/font-selector.js:218
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:226
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:279
-msgid "Continue"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1606
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:15
-msgid "1. Installing required theme, plugins, forms, etc"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1611
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:22
-msgid "2. Importing pages, menus, posts, etc"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1616
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:26
-msgid "3. Setting up customizer settings and ther site settings"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1621
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:33
-msgid "4. Finalizing last few settings"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1634
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:44
-msgid "Done "
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1652
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:73
-msgid "Redirecting you in "
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1654
-#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:75
-msgid "3 seconds…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1915
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:120
-msgid "Remove Logo"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1932
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:144
-msgid "Site Logo"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1937
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:151
-msgid "Change Logo"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1940
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:167
-msgid "Upload File Here"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1940
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:170
-msgid "Suggested Dimensions: 180x60 pixels"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1942
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:183
-msgid "Don't have Logo? No Problem!"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1942
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:189
-msgid "You can upload it later"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:1965
-#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:227
-msgid "Skip & Continue"
-msgstr ""
-
 #. translators: %1$s Time taken %2$s Time Type %3$s Website Url.
-#: inc/lib/onboarding/assets/dist/main.js:2710
+#: inc/lib/onboarding/assets/dist/main.js:2
 #: inc/lib/onboarding/assets/src/steps/congrats/index.js:97
 msgid "Your Website is ready and it took just %1$s %2$s to build. %3$s"
 msgstr ""
 
 #. translators: Website URL.
-#: inc/lib/onboarding/assets/dist/main.js:2714
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/congrats/index.js:109
 msgid "Your Website is up and ready!. %1$s"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:2731
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/congrats/index.js:132
 msgid "Congratulations!"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:2765
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/congrats/index.js:170
 msgid "CLICK TO TWEET"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:2846
-#: inc/lib/onboarding/assets/dist/main.js:3398
-#: inc/lib/onboarding/assets/dist/main.js:3752
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/business-logo/index.js:25
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/index.js:25
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-typography/index.js:25
-msgid "This is a Premium Template"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:2848
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/business-logo/index.js:32
-msgid "Logo"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:2850
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/business-logo/index.js:35
-msgid "Choose logo for your site. You can update it anytime later."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:2993
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:42
-msgid "Please Enter License Key"
-msgstr ""
-
-#. translators: %1$s Support page URL.
-#: inc/lib/onboarding/assets/dist/main.js:3055
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:86
-msgid "<b> Questions? </b> Get in touch with our %1$ssupport team%2$s."
-msgstr ""
-
-#. translators: %1$s Store page URL.
-#: inc/lib/onboarding/assets/dist/main.js:3065
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:103
-msgid "If you have purchased our Essential or Growth Bundle, please install the premium version of the plugin that you can %1$sdownload.%2$s from our store."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3066
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:113
-msgid "Already a customer?"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3068
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:117
-msgid "If you have purchased our Essential or Growth Bundle, just enter your license key below to import this template."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3075
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:131
-msgid "Currently the free version is installed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3086
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:148
-msgid "License key"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3150
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/index.js:16
-msgid "This is a premium template and comes with our Essentials and Growth Bundle. <br/><br/> Get access to this premium template and 100+ more."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3162
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/index.js:31
-msgid "Liked this Starter Template?"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3170
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/index.js:38
-msgid "Unlock Access"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3216
-#: inc/lib/onboarding/assets/dist/main.js:3241
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:16
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:109
-msgid "Style 1"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3220
-#: inc/lib/onboarding/assets/dist/main.js:3245
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:31
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:124
-msgid "Style 2"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3224
-#: inc/lib/onboarding/assets/dist/main.js:3249
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:46
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:139
-msgid "Style 3"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3228
-#: inc/lib/onboarding/assets/dist/main.js:3253
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:61
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:154
-msgid "Style 4"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3232
-#: inc/lib/onboarding/assets/dist/main.js:3257
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:76
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:169
-msgid "Style 5"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3236
-#: inc/lib/onboarding/assets/dist/main.js:3261
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:91
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:184
-msgid "Style 6"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3400
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/index.js:32
-msgid "Colors"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3402
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/index.js:35
-msgid "Choose colors for your site. You can update them anytime later."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3754
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-typography/index.js:32
-msgid "Fonts"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3756
-#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-typography/index.js:35
-msgid "Choose fonts for your site. You can update them anytime later."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:3988
-#: inc/lib/onboarding/assets/dist/main.js:4013
-#: inc/lib/onboarding/assets/dist/main.js:5605
-#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:85
-#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:114
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1411
-msgid "Fetching related demo failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4080
-#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:172
-msgid "Installing Astra Theme…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4090
-#: inc/lib/onboarding/assets/dist/main.js:4111
-#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:186
-#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:209
-msgid "Astra Theme Installed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4118
-#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:219
-msgid "Astra theme installation failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4423
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:141
-msgid "Starting Import."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4441
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:159
-msgid "Installing Required Plugins."
-msgstr ""
-
-#. translators: Plugin Name.
-#: inc/lib/onboarding/assets/dist/main.js:4457
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:176
-msgid "%1$s plugin installed successfully."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4477
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:206
-msgid "Could not install the plugin list."
-msgstr ""
-
-#. translators: Plugin Name.
-#: inc/lib/onboarding/assets/dist/main.js:4495
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:231
-msgid "Activating %1$s plugin."
-msgstr ""
-
-#. translators: Plugin Name.
-#: inc/lib/onboarding/assets/dist/main.js:4529
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:275
-msgid "%1$s activated."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4534
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:283
-msgid "JSON_Error: Could not activate the required plugin list."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4543
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:301
-msgid "Could not activate the required plugin list."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4577
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:333
-msgid "Reseting site."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4610
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:368
-msgid "Reset for old website is done."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4642
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:382
-msgid "Resetting terms and forms."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4666
-#: inc/lib/onboarding/assets/dist/main.js:4673
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:405
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:422
-msgid "Resetting terms and forms failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4705
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:442
-msgid "Gathering posts for deletions."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4764
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:467
-msgid "Resetting posts done."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4796
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:481
-msgid "Resetting posts."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4823
-#: inc/lib/onboarding/assets/dist/main.js:4830
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:508
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:522
-msgid "Resetting posts failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4859
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:538
-msgid "Resetting customizer."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4886
-#: inc/lib/onboarding/assets/dist/main.js:4893
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:568
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:582
-msgid "Resetting customizer failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4922
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:598
-msgid "Resetting site options."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4949
-#: inc/lib/onboarding/assets/dist/main.js:4956
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:625
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:640
-msgid "Resetting site options Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:4988
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:660
-msgid "Resetting widgets."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5012
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:682
-msgid "Resetting widgets JSON parse failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5019
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:699
-msgid "Resetting widgets failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5049
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:723
-msgid "Importing CartFlows flows."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5076
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:751
-msgid "Importing CartFlows flows failed due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5083
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:769
-msgid "Importing CartFlows flows Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5101
-#: inc/lib/onboarding/assets/dist/main.js:5156
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:790
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:858
-msgid "Importing forms."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5128
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:818
-msgid "Importing forms failed due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5135
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:836
-msgid "Importing forms Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5182
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:885
-msgid "Importing Customizer failed due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5189
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:903
-msgid "Importing Customizer Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5211
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:927
-msgid "The XML URL for the site content is empty."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5213
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:932
-msgid "Importing Site Content Failed"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5219
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:944
-msgid "Importing Site Content."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5270
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1003
-msgid "Importing Site Content Failed. - Import Process Interrupted"
-msgstr ""
-
-#. translators: Response importMessage
-#: inc/lib/onboarding/assets/dist/main.js:5286
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1030
-msgid "Importing - %1$s"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5291
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1039
-msgid "Importing Site Content failed due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5294
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1053
-msgid "Importing Site Content Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5305
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1066
-msgid "Importing Site Options."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5331
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1093
-msgid "Importing Site Options failed due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5338
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1111
-msgid "Importing Site Options Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5358
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1132
-msgid "Importing Widgets."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5385
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1161
-msgid "Importing Widgets due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5392
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1179
-msgid "Importing Widgets Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5438
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1200
-msgid "Final finishings."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5481
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1247
-msgid "Final finishings failed due to parse JSON error."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5510
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1291
-msgid "Final finishings Failed."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5539
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1324
-msgid "Invalid demo selected. Please contact us."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5590
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1393
-msgid "Import is already done."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5597
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1402
-msgid "Import is already in progress."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5635
-#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1447
-msgid "We are building your website…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:5704
-#: inc/lib/onboarding/assets/src/steps/import-site/sse-import.js:36
-msgid "Importing Content…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:6008
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:61
 msgid "Select Page Builder"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:6010
+#: inc/lib/onboarding/assets/dist/main.js:3
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:63
 msgid "Please choose your preferred page builder from the list below."
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:6025
-#: inc/lib/onboarding/assets/dist/main.js:6026
-#: inc/lib/onboarding/assets/dist/main.js:7185
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:5
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:82
 #: inc/lib/onboarding/assets/src/steps/page-builder/index.js:85
 #: inc/lib/onboarding/assets/src/steps/site-list/page-builder-filter/index.js:13
 msgid "Block Editor"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:6183
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/packages/starter-templates-components/src/grid/index.js:70
+msgid "Add to favorites"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/packages/starter-templates-components/src/search/index.js:12
+msgid "Search.."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/packages/starter-templates-components/src/category-list/index.js:82
+msgid "More"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/packages/starter-templates-components/src/category-list/index.js:93
+msgid "No Categories"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:85
+#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:114
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1411
+msgid "Fetching related demo failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/search-filter/index.js:151
+msgid "Search for Starter Templates"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:35
+msgid "Blog"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:40
+msgid "eCommerce"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:45
+msgid "eLearning"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:50
+msgid "Restaurant"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:55
+msgid "Agency"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:60
+msgid "Local"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:65
+msgid "Business"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:3
+#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:70
+msgid "Professional"
+msgstr ""
+
+#. translators: %1$s - search term.
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/site-list/no-result-found/index.js:22
+msgid "Your search - %1$s - did not match any Starter Templates."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/site-list/no-favorite-sites/index.js:12
+msgid "No favorites added. Press the heart icon to add templates as favorites."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/site-list/related-sites/index.js:12
+msgid "Other suggested Starter Templates"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/dist/main.js:13
+#: inc/lib/onboarding/assets/src/components/exist-to-dashboard/index.js:13
+#: inc/lib/onboarding/assets/src/steps/index.js:167
+msgid "Exit to Dashboard"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
 #: inc/lib/onboarding/assets/src/steps/site-list/header/my-favorite/index.js:33
 msgid "My Favorite"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:6279
-#: inc/lib/onboarding/assets/src/steps/site-list/header/sync-library/index.js:37
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/site-list/header/sync-library/index.js:49
 msgid "Library refreshed successfully"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:6284
-#: inc/lib/onboarding/assets/src/steps/site-list/header/sync-library/index.js:48
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/site-list/header/sync-library/index.js:60
 msgid "Library refreshed failed!"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:7015
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/change-template/index.js:26
+msgid "Selected Template:"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:120
+msgid "Remove Logo"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:144
+msgid "Site Logo"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:151
+msgid "Change Logo"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:167
+msgid "Upload File Here"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:170
+msgid "Suggested Dimensions: 180x60 pixels"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:183
+msgid "Don't have Logo? No Problem!"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:189
+msgid "You can upload it later"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/components/media-uploader/index.js:227
+msgid "Skip & Continue"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:16
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:109
+msgid "Style 1"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:31
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:124
+msgid "Style 2"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:46
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:139
+msgid "Style 3"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:61
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:154
+msgid "Style 4"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:76
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:169
+msgid "Style 5"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:91
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/controls.js:184
+msgid "Style 6"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/business-logo/index.js:25
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/index.js:25
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-typography/index.js:25
+msgid "This is a Premium Template"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/business-logo/index.js:32
+msgid "Logo"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/business-logo/index.js:35
+msgid "Choose logo for your site. You can update it anytime later."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/index.js:32
+msgid "Colors"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-colors/index.js:35
+msgid "Choose colors for your site. You can update them anytime later."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/utils/functions.js:80
+msgid "Default"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-typography/index.js:32
+msgid "Fonts"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/site-typography/index.js:35
+msgid "Choose fonts for your site. You can update them anytime later."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/index.js:16
+msgid "This is a premium template and comes with our Essentials and Growth Bundle. <br/><br/> Get access to this premium template and 100+ more."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/index.js:31
+msgid "Liked this Starter Template?"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:5
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/index.js:38
+msgid "Unlock Access"
+msgstr ""
+
+#. translators: %1$s Support page URL.
+#: inc/lib/onboarding/assets/dist/main.js:6
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:86
+msgid "<b> Questions? </b> Get in touch with our %1$ssupport team%2$s."
+msgstr ""
+
+#. translators: %1$s Store page URL.
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:103
+msgid "If you have purchased our Essential or Growth Bundle, please install the premium version of the plugin that you can %1$sdownload.%2$s from our store."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:113
+msgid "Already a customer?"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:117
+msgid "If you have purchased our Essential or Growth Bundle, just enter your license key below to import this template."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:131
+msgid "Currently the free version is installed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:148
+msgid "License key"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/customize-site/customize-steps/license-validation/controls.js:42
+msgid "Please Enter License Key"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:15
+msgid "1. Installing required theme, plugins, forms, etc"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:22
+msgid "2. Importing pages, menus, posts, etc"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:26
+msgid "3. Setting up customizer settings and ther site settings"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:33
+msgid "4. Finalizing last few settings"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:44
+msgid "Done "
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:73
+msgid "Redirecting you in "
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/import-steps/import-loader.js:75
+msgid "3 seconds…"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/error/index.js:75
+msgid "Error Occured!"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/error/index.js:141
+msgid "Please report this error&nbsp;"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/error/index.js:154
+msgid "&nbsp;so we can fix it."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/components/error/index.js:161
+msgid "Try Importing Again"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/import-site/sse-import.js:36
+msgid "Importing Content…"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:7
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:159
+msgid "Installing Required Plugins."
+msgstr ""
+
+#. translators: Plugin Name.
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:176
+msgid "%1$s plugin installed successfully."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:206
+msgid "Could not install the plugin list."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:333
+msgid "Reseting site."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:368
+msgid "Reset for old website is done."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:382
+msgid "Resetting terms and forms."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:405
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:422
+msgid "Resetting terms and forms failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:442
+msgid "Gathering posts for deletions."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:467
+msgid "Resetting posts done."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:481
+msgid "Resetting posts."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:508
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:522
+msgid "Resetting posts failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:538
+msgid "Resetting customizer."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:568
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:582
+msgid "Resetting customizer failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:598
+msgid "Resetting site options."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:625
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:640
+msgid "Resetting site options Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:660
+msgid "Resetting widgets."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:682
+msgid "Resetting widgets JSON parse failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:699
+msgid "Resetting widgets failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:790
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:858
+msgid "Importing forms."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:818
+msgid "Importing forms failed due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:836
+msgid "Importing forms Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:885
+msgid "Importing Customizer failed due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:903
+msgid "Importing Customizer Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:944
+msgid "Importing Site Content."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:8
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1003
+msgid "Importing Site Content Failed. - Import Process Interrupted"
+msgstr ""
+
+#. translators: Response importMessage
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1030
+msgid "Importing - %1$s"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1039
+msgid "Importing Site Content failed due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1053
+msgid "Importing Site Content Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:927
+msgid "The XML URL for the site content is empty."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:932
+msgid "Importing Site Content Failed"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1066
+msgid "Importing Site Options."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1093
+msgid "Importing Site Options failed due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1111
+msgid "Importing Site Options Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1132
+msgid "Importing Widgets."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1161
+msgid "Importing Widgets due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1179
+msgid "Importing Widgets Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1200
+msgid "Final finishings."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1247
+msgid "Final finishings failed due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1291
+msgid "Final finishings Failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:172
+msgid "Installing Astra Theme…"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:186
+#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:209
+msgid "Astra Theme Installed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/import-utils.js:219
+msgid "Astra theme installation failed."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1324
+msgid "Invalid demo selected. Please contact us."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:141
+msgid "Starting Import."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1393
+msgid "Import is already done."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1402
+msgid "Import is already in progress."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:723
+msgid "Importing CartFlows flows."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:751
+msgid "Importing CartFlows flows failed due to parse JSON error."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:9
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:769
+msgid "Importing CartFlows flows Failed."
+msgstr ""
+
+#. translators: Plugin Name.
+#: inc/lib/onboarding/assets/dist/main.js:10
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:231
+msgid "Activating %1$s plugin."
+msgstr ""
+
+#. translators: Plugin Name.
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:275
+msgid "%1$s activated."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:283
+msgid "JSON_Error: Could not activate the required plugin list."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:301
+msgid "Could not activate the required plugin list."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/import-site/index.js:1447
+msgid "We are building your website…"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/survey.js:13
+msgid "Tell us a little bit about yourself"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/survey.js:54
+msgid "I am…"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/survey.js:60
+msgid "Intermidiate"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/survey.js:83
+msgid "I am building website for…"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/survey.js:86
+msgid "Myself/My Company"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/survey.js:89
+msgid "My Client"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:96
+msgid "Delete Previously imported sites"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:109
+msgid "Choose this option only if this is intended.You can find the backup to the current customizer settings at /wp-content/uploads astra-sites"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:164
+msgid "Starter Templates customizer serves global settings that give uniform design to the website. Choosing this option will override your current customizer settings."
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/welcome/index.js:36
+msgid "Getting Started with Starter Templates"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/welcome/index.js:42
+msgid "This is the very beginning of the fastest and easiest website building experience you`ve ever had!"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
+#: inc/lib/onboarding/assets/src/steps/welcome/index.js:69
+msgid "Build Your Website Now"
+msgstr ""
+
+#: inc/lib/onboarding/assets/dist/main.js:11
 #: inc/lib/onboarding/assets/src/steps/site-list/index.js:125
 msgid "What type of website are you building?"
 msgstr ""
 
 #. translators: %1$s: search term.
-#: inc/lib/onboarding/assets/dist/main.js:7037
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/site-list/index.js:177
 msgid "Starter Templates for %1$s:"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:7046
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/site-list/index.js:218
 msgid "Get unlimited access to all Premium Starter Templates and more, at a single low cost!"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:7088
-#: inc/lib/onboarding/assets/src/steps/site-list/no-favorite-sites/index.js:12
-msgid "No favorites added. Press the heart icon to add templates as favorites."
-msgstr ""
-
-#. translators: %1$s - search term.
-#: inc/lib/onboarding/assets/dist/main.js:7142
-#: inc/lib/onboarding/assets/src/steps/site-list/no-result-found/index.js:22
-msgid "Your search - %1$s - did not match any Starter Templates."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7265
-#: inc/lib/onboarding/assets/src/steps/site-list/related-sites/index.js:12
-msgid "Other suggested Starter Templates"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7448
-#: inc/lib/onboarding/assets/src/steps/site-list/search-filter/index.js:151
-msgid "Search for Starter Templates"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7523
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:35
-msgid "Blog"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7527
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:40
-msgid "eCommerce"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7531
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:45
-msgid "eLearning"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7535
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:50
-msgid "Restaurant"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7539
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:55
-msgid "Agency"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7543
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:60
-msgid "Local"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7547
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:65
-msgid "Business"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:7551
-#: inc/lib/onboarding/assets/src/steps/site-list/site-category-filter/index.js:70
-msgid "Professional"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8127
-#: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:96
-msgid "Delete Previously imported sites"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8128
-#: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:109
-msgid "Choose this option only if this is intended.You can find the backup to the current customizer settings at /wp-content/uploads astra-sites"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8150
-#: inc/lib/onboarding/assets/src/steps/survey/advanced-settings.js:164
-msgid "Starter Templates customizer serves global settings that give uniform design to the website. Choosing this option will override your current customizer settings."
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8316
-#: inc/lib/onboarding/assets/src/steps/survey/index.js:90
-msgid "Okay, just one last step…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8321
-#: inc/lib/onboarding/assets/src/steps/survey/index.js:99
-msgid "Submit & Build My Website"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8328
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/survey/index.js:112
 msgid "Required plugins missing"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:8328
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/survey/index.js:119
 msgid "Required plugins -"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:8344
+#: inc/lib/onboarding/assets/dist/main.js:13
 #: inc/lib/onboarding/assets/src/steps/survey/index.js:144
 msgid "Skip & Start Importing"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:8404
-#: inc/lib/onboarding/assets/src/steps/survey/survey.js:13
-msgid "Tell us a little bit about yourself"
+#: inc/lib/onboarding/assets/dist/main.js:13
+#: inc/lib/onboarding/assets/src/steps/survey/index.js:90
+msgid "Okay, just one last step…"
 msgstr ""
 
-#: inc/lib/onboarding/assets/dist/main.js:8438
-#: inc/lib/onboarding/assets/src/steps/survey/survey.js:54
-msgid "I am…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8442
-#: inc/lib/onboarding/assets/src/steps/survey/survey.js:60
-msgid "Intermidiate"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8459
-#: inc/lib/onboarding/assets/src/steps/survey/survey.js:83
-msgid "I am building website for…"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8461
-#: inc/lib/onboarding/assets/src/steps/survey/survey.js:86
-msgid "Myself/My Company"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8463
-#: inc/lib/onboarding/assets/src/steps/survey/survey.js:89
-msgid "My Client"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8595
-#: inc/lib/onboarding/assets/src/steps/welcome/index.js:36
-msgid "Getting Started with Starter Templates"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8597
-#: inc/lib/onboarding/assets/src/steps/welcome/index.js:42
-msgid "This is the very beginning of the fastest and easiest website building experience you`ve ever had!"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8617
-#: inc/lib/onboarding/assets/src/steps/welcome/index.js:69
-msgid "Build Your Website Now"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:8951
-#: inc/lib/onboarding/assets/src/utils/functions.js:80
-msgid "Default"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:9452
-#: inc/lib/onboarding/packages/starter-templates-components/src/category-list/index.js:82
-msgid "More"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:9459
-#: inc/lib/onboarding/packages/starter-templates-components/src/category-list/index.js:93
-msgid "No Categories"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:9537
-#: inc/lib/onboarding/packages/starter-templates-components/src/grid/index.js:70
-msgid "Add to favorites"
-msgstr ""
-
-#: inc/lib/onboarding/assets/dist/main.js:9772
-#: inc/lib/onboarding/packages/starter-templates-components/src/search/index.js:12
-msgid "Search.."
+#: inc/lib/onboarding/assets/dist/main.js:13
+#: inc/lib/onboarding/assets/src/steps/survey/index.js:99
+msgid "Submit & Build My Website"
 msgstr ""

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Toaster, Tooltip } from '@brainstormforce/starter-templates';
 import ICONS from '../../../../../icons';
@@ -20,6 +20,18 @@ const SyncLibrary = () => {
 		await SyncStart();
 		setIsLoading( false );
 	};
+
+	useEffect( () => {
+		if ( isLoading ) {
+			window.onbeforeunload = () => {
+				return true;
+			};
+
+			return () => {
+				window.onbeforeunload = null;
+			};
+		}
+	}, [ isLoading ] );
 
 	return (
 		<>

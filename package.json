@@ -1,6 +1,6 @@
 {
   "name": "astra-sites",
-  "version": "3.0.9",
+  "version": "3.0.11",
   "main": "Gruntfile.js",
   "author": "Brainstorm Force",
   "description": "Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.",
@@ -21,7 +21,7 @@
     "start": "wp-scripts start --entry=./inc/assets/js/src/ --output-path=./inc/assets/js/dist",
     "start:onboarding": "wp-scripts start --entry=./inc/lib/onboarding/assets/src --output-path=./inc/lib/onboarding/assets/dist",
     "build:onboarding": "wp-scripts build --entry=./inc/lib/onboarding/assets/src --output-path=./inc/lib/onboarding/assets/dist",
-    "build-package": "npm run build:onboarding"
+    "build-package": "npm run build && npm run build:onboarding"
   },
   "keywords": [
     "reactjs",
