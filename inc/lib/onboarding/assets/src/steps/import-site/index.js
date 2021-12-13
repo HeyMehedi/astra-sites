@@ -167,6 +167,7 @@ const ImportSite = () => {
 					slug: plugin.slug,
 					init: plugin.init,
 					name: plugin.name,
+					clear_destination: true,
 					success() {
 						dispatch( {
 							type: 'set',

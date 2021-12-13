@@ -343,17 +343,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			if ( 'no' === $this->get_last_export_checksums() ) {
 				wp_send_json_success( 'updated' );
 			}
-
-			$status = Astra_Sites_Page::get_instance()->test_cron();
-			if ( is_wp_error( $status ) ) {
-				$import_with = 'ajax';
-			} else {
-				$import_with = 'batch';
-				// Process import.
-				$this->process_batch();
-			}
-
-			wp_send_json_success( $import_with );
+			wp_send_json_success();
 		}
 
 		/**
