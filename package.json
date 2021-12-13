@@ -21,7 +21,7 @@
     "start": "wp-scripts start --entry=./inc/assets/js/src/ --output-path=./inc/assets/js/dist",
     "start:onboarding": "wp-scripts start --entry=./inc/lib/onboarding/assets/src --output-path=./inc/lib/onboarding/assets/dist",
     "build:onboarding": "wp-scripts build --entry=./inc/lib/onboarding/assets/src --output-path=./inc/lib/onboarding/assets/dist",
-    "build-package": "npm run build:onboarding"
+    "build-package": "npm run build && npm run build:onboarding"
   },
   "keywords": [
     "reactjs",
