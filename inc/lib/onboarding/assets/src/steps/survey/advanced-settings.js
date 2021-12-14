@@ -15,11 +15,19 @@ const AdvancedSettings = () => {
 			widgetImportFlag,
 			contentImportFlag,
 			requiredPlugins,
+			analyticsFlag,
 		},
 		dispatch,
 	] = useStateValue();
 	const toggleSection = () => {
 		setShowSection( ! showSection );
+	};
+
+	const updateAnalyticsFlag = () => {
+		dispatch( {
+			type: 'set',
+			analyticsFlag: ! analyticsFlag,
+		} );
 	};
 
 	const updateCustomizerImportFlag = () => {
@@ -249,6 +257,46 @@ const AdvancedSettings = () => {
 							{ ICONS.questionMark }
 						</Tooltip>
 					</li>
+					{ starterTemplates.analytics !== 'yes' && (
+						<li>
+							<input
+								type="checkbox"
+								id="analytics-content"
+								name="analytics-content"
+								defaultChecked={ analyticsFlag }
+								onChange={ updateAnalyticsFlag }
+							/>
+							<label htmlFor="analytics-content">
+								{ ' ' }
+								{ __(
+									'Share Non-Sensitive Data',
+									'astra-sites'
+								) }
+							</label>
+							<Tooltip
+								content={
+									<div>
+										{ __(
+											'Help our developers build better templates and products for you by sharing anonymous and non-sensitive data about your website.',
+											'astra-sites'
+										) }{ ' ' }
+										<a
+											href="https://store.brainstormforce.com/usage-tracking/?utm_source=wp_dashboard&utm_medium=general_settings&utm_campaign=usage_tracking"
+											target="_blank"
+											rel="noreferrer noopener"
+										>
+											{ __(
+												'Learn More',
+												'astra-sites'
+											) }
+										</a>
+									</div>
+								}
+							>
+								{ ICONS.questionMark }
+							</Tooltip>
+						</li>
+					) }
 				</ul>
 			</div>
 		</div>

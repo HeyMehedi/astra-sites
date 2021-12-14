@@ -187,6 +187,7 @@ class Intelligent_Starter_Templates_Loader {
 			'firstImportStatus' => get_option( 'astra_sites_import_complete', false ),
 			'supportLink' => 'https://wpastra.com/starter-templates-support/?ip=' . Astra_Sites_Helper::get_client_ip(),
 			'isBrizyEnabled'=> get_option( 'st-brizy-builder-flag'),
+			'analytics' => get_site_option( 'bsf_analytics_optin', false ),
 		);
 
 		return apply_filters( 'starter_templates_onboarding_localize_vars', $data );

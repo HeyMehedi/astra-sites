@@ -9,7 +9,7 @@ import './style.scss';
 
 const Survey = () => {
 	const [
-		{ currentIndex, builder, requiredPlugins },
+		{ currentIndex, builder, requiredPlugins, analyticsFlag },
 		dispatch,
 	] = useStateValue();
 
@@ -44,6 +44,26 @@ const Survey = () => {
 				currentIndex: currentIndex + 1,
 			} );
 		}, 500 );
+
+		if ( starterTemplates.analytics !== 'yes' ) {
+			// Send data to analytics.
+			const answer = analyticsFlag ? 'yes' : 'no';
+			const optinAnswer = new FormData();
+			optinAnswer.append( 'action', 'astra-sites-update-analytics' );
+			optinAnswer.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+			optinAnswer.append( 'data', answer );
+
+			fetch( ajaxurl, {
+				method: 'post',
+				body: optinAnswer,
+			} )
+				.then( ( response ) => response.json() )
+				.then( ( response ) => {
+					if ( response.success ) {
+						starterTemplates.analytics = answer;
+					}
+				} );
+		}
 
 		if ( astraSitesVars.subscribed === 'yes' ) {
 			dispatch( {

@@ -149,6 +149,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-sites-remote-request' => 'remote_request',
 				'astra-page-elementor-batch-process' => 'elementor_batch_process',
 				'astra-sites-update-subscription' => 'update_subscription',
+				'astra-sites-update-analytics' => 'update_analytics',
 			);
 
 			foreach ( $this->ajax as $ajax_hook => $ajax_callback ) {
@@ -229,6 +230,25 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
+		 * Update Analytics Optin/Optout
+		 */
+		public function update_analytics() {
+
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
+
+			$optin_answer = isset( $_POST['data'] ) ? sanitize_text_field( $_POST['data'] ) : 'no';
+			$optin_answer = 'yes' === $optin_answer ? 'yes' : 'no';
+
+			update_site_option( 'bsf_analytics_optin', $optin_answer );
+
+			wp_send_json_success();
+		}
+
+		/**
 		 * Update Subscription
 		 */
 		public function update_subscription() {
@@ -236,7 +256,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( 'You can\'t access this action.' );
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
 			}
 
 			$arguments = isset( $_POST['data'] ) ? array_map( 'sanitize_text_field', json_decode( stripslashes( $_POST['data'] ), true ) ) : array();
@@ -594,7 +614,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		public function add_to_favorite() {
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( 'You can\'t access this action.' );
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
 			}
 
 			$new_favorites = array();
@@ -1671,6 +1691,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					/* translators: %s URL to document. */
 					'process_failed_secondary'      => sprintf( __( '%1$sPlease report this <a href="%2$s" target="_blank">here</a>.%3$s', 'astra-sites' ), '<p>', esc_url( 'https://wpastra.com/starter-templates-support/?url=#DEMO_URL#&subject=#SUBJECT#' ), '</p>' ),
 					'st_page_url' => admin_url( 'themes.php?page=starter-templates' ),
+					'isRTLEnabled' => is_rtl(),
 					/* translators: %s Anchor link to support URL. */
 					'support_text' => sprintf( __( 'Please report this error %1$shere%2$s, so we can fix it.', 'astra-sites' ), '<a href="https://wpastra.com/support/open-a-ticket/" target="_blank">', '</a>' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				)

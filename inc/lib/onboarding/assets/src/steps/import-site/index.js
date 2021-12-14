@@ -1363,6 +1363,20 @@ const ImportSite = () => {
 		templateResponse,
 	] );
 
+	const preventRefresh = ( event ) => {
+		event.returnValue = __(
+			'Are you sure you want to cancel the site import process?',
+			'astra-sites'
+		);
+		return event;
+	};
+
+	useEffect( () => {
+		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line @wordpress/no-global-event-listener
+		return () =>
+			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line @wordpress/no-global-event-listener
+	} );
+
 	// Start the import process.
 	useEffect( () => {
 		/**

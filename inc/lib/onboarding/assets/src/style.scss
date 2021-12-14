@@ -763,6 +763,42 @@ body.step-import-site:not( .st-error ) .step-header a {
     animation: ist-fadeinUp 500ms ease-in-out;
 }
 
+.st-rtl {
+	.ist-button {
+		svg {
+			margin: 0 0 0 12px;
+		}
+	}
+	.ist-link {
+		svg {
+			margin-right: 10px;
+		}
+	}
+	.control-reset {
+		transform: rotateY(180deg);
+	}
+	.st-sync-library.loading svg {
+		animation: rotate-alternate 2s infinite linear;
+	}
+	.ist-link,
+	.ist-button,
+	.submit-survey-btn,
+	.toggle-sidebar-wrap {
+		svg {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+@keyframes rotate-alternate {
+	from {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
 @keyframes ist-fadeinUp {
     0% {
         opacity: 0;

@@ -1,4 +1,5 @@
 import { STEPS } from '../steps/util';
+import { getURLParmsValue } from '../utils/url-params';
 
 let currentIndexKey = 0;
 let builderKey = 'gutenberg';
@@ -33,7 +34,7 @@ export const initialState = {
 		id: '',
 		slug: '',
 	},
-	siteSearchTerm: '',
+	siteSearchTerm: getURLParmsValue( window.location.search, 's' ) || '',
 	userSubscribed: false,
 	showSidebar: true,
 	tryAgainCount: 0,
@@ -47,7 +48,7 @@ export const initialState = {
 	selectedTemplateType: '',
 
 	// Import statuses.
-	reset: true,
+	reset: 'yes' === starterTemplates.firstImportStatus ? true : false,
 	themeStatus: false,
 	importStatusLog: '',
 	importStatus: '',
@@ -78,6 +79,7 @@ export const initialState = {
 	themeActivateFlag: true,
 	widgetImportFlag: true,
 	contentImportFlag: true,
+	analyticsFlag: starterTemplates.analytics !== 'yes' ? true : false,
 
 	// Filter Favorites.
 	onMyFavorite: false,

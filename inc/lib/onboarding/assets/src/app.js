@@ -6,7 +6,11 @@ import './style.scss';
 const App = () => {
 	return (
 		<Router>
-			<div className="starter-templates-ai-steps">
+			<div
+				className={ `starter-templates-ai-steps ${
+					!! astraSitesVars.isRTLEnabled ? 'st-rtl' : ''
+				}` }
+			>
 				<Steps />
 			</div>
 		</Router>
