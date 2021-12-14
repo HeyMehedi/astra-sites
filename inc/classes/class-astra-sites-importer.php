@@ -288,6 +288,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 * @return void
 		 */
 		public function import_cartflows( $url = '' ) {
+			// Disable CartFlows import logging.
+			add_filter( 'cartflows_enable_log', '__return_false' );
 
 			// Make the flow publish.
 			add_action( 'cartflows_flow_importer_args', array( $this, 'change_flow_status' ) );

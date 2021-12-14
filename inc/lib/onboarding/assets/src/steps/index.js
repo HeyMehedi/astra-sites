@@ -49,15 +49,15 @@ const Steps = () => {
 		const storedStateValue = JSON.parse(
 			localStorage.getItem( 'starter-templates-onboarding' )
 		);
-		const urlIndex =
-			parseInt( currentUrlParams.get( 'currentIndex' ) ) || 0;
+		const urlIndex = parseInt( currentUrlParams.get( 'ci' ) ) || 0;
 		const designIndex =
 			parseInt( currentUrlParams.get( 'designStep' ) ) || 0;
+		const searchTerm = currentUrlParams.get( 's' ) || '';
 
 		if ( urlIndex !== 0 ) {
 			const stateValueUpdates = {};
 			for ( const key in storedStateValue ) {
-				if ( key === 'currentIndex' ) {
+				if ( key === 'currentIndex' || key === 'siteSearchTerm' ) {
 					continue;
 				}
 
@@ -68,6 +68,7 @@ const Steps = () => {
 				type: 'set',
 				currentIndex: urlIndex,
 				designStep: designIndex,
+				siteSearchTerm: searchTerm,
 				...stateValueUpdates,
 			} );
 		} else {
@@ -79,11 +80,10 @@ const Steps = () => {
 
 	useEffect( () => {
 		const currentUrlParams = new URLSearchParams( window.location.search );
-		const urlIndex =
-			parseInt( currentUrlParams.get( 'currentIndex' ) ) || 0;
+		const urlIndex = parseInt( currentUrlParams.get( 'ci' ) ) || 0;
 
 		if ( currentIndex === 0 ) {
-			currentUrlParams.delete( 'currentIndex' );
+			currentUrlParams.delete( 'ci' );
 			history.push(
 				window.location.pathname + '?' + currentUrlParams.toString()
 			);
@@ -94,7 +94,7 @@ const Steps = () => {
 			templateResponse !== null
 		) {
 			storeCurrentState( stateValue );
-			currentUrlParams.set( 'currentIndex', currentIndex );
+			currentUrlParams.set( 'ci', currentIndex );
 			history.push(
 				window.location.pathname + '?' + currentUrlParams.toString()
 			);

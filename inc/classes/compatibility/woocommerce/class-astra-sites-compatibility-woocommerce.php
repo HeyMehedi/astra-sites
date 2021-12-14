@@ -46,6 +46,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_WooCommerce' ) ) :
 		 */
 		public function __construct() {
 			add_action( 'astra_sites_import_start', array( $this, 'add_attributes' ), 10, 2 );
+			add_action( 'astra_sites_after_plugin_activation', array( $this, 'install_wc' ), 10, 2 );
 
 			// WooCommerce product attributes registration.
 			if ( class_exists( 'WooCommerce' ) ) {
@@ -78,6 +79,28 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_WooCommerce' ) ) :
 
 					$id = wc_create_attribute( $args );
 				}
+			}
+		}
+
+		/**
+		 * Create default WooCommerce tables
+		 *
+		 * @param string $plugin_init Plugin file which is activated.
+		 * @return void
+		 */
+		public function install_wc( $plugin_init ) {
+			if ( 'woocommerce/woocommerce.php' !== $plugin_init ) {
+				return;
+			}
+
+			// Create WooCommerce database tables.
+			if ( is_callable( '\Automattic\WooCommerce\Admin\Install::create_tables' ) ) {
+				\Automattic\WooCommerce\Admin\Install::create_tables();
+				\Automattic\WooCommerce\Admin\Install::create_events();
+			}
+
+			if ( is_callable( 'WC_Install::install' ) ) {
+				WC_Install::install();
 			}
 		}
 
