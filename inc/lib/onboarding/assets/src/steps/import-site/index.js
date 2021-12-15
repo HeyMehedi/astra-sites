@@ -300,7 +300,7 @@ const ImportSite = () => {
 				}
 
 				if ( ! cloneResponse.success ) {
-					throw cloneResponse?.data;
+					throw cloneResponse;
 				}
 			} )
 			.catch( ( error ) => {
@@ -310,7 +310,7 @@ const ImportSite = () => {
 						'astra-sites'
 					),
 					'',
-					error?.message,
+					error?.data?.message,
 					'',
 					sprintf(
 						// translators: Support article URL.

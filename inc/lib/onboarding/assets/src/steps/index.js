@@ -12,6 +12,7 @@ const Steps = () => {
 	const [ stateValue, dispatch ] = useStateValue();
 	const {
 		currentIndex,
+		currentCustomizeIndex,
 		templateResponse,
 		designStep,
 		importError,
@@ -132,6 +133,38 @@ const Steps = () => {
 			currentIndex: currentIndex - 2,
 			currentCustomizeIndex: 0,
 		} );
+	};
+
+	window.onpopstate = () => {
+		const gridIndex = STEPS.findIndex(
+			( step ) => step.class === 'step-site-list'
+		);
+
+		if ( !! designStep && designStep !== 1 && currentIndex !== gridIndex ) {
+			const surveyIndex = STEPS.findIndex(
+				( step ) => step.class === 'step-survey'
+			);
+
+			if ( currentIndex >= surveyIndex ) {
+				dispatch( {
+					type: 'set',
+					currentIndex: currentIndex - 1,
+				} );
+			} else {
+				dispatch( {
+					type: 'set',
+					designStep: designStep - 1,
+					currentCustomizeIndex: currentCustomizeIndex - 1,
+					currentIndex,
+				} );
+			}
+		}
+		if ( currentIndex > gridIndex && designStep === 1 ) {
+			dispatch( {
+				type: 'set',
+				currentIndex: currentIndex - 1,
+			} );
+		}
 	};
 
 	return (

@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.13  
+**Stable tag:** 3.0.14  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -132,6 +132,10 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.14 - 15-December-2021
+- Show complete error message on screen if plugin installation fails.
+- Fix browser back button does not work in Starter Templates UI.
 
 v3.0.13 - 15-December-2021
 - Improvement: Better error handling for Fatal errors when activating plugins.
