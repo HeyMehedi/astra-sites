@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.13  
+**Stable tag:** 3.0.14  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -133,6 +133,10 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.0.14 - 15-December-2021
+- Improvement: Show complete error message on screen if plugin installation fails.
+- Fix: browser back button does not work in Starter Templates UI.
+
 v3.0.13 - 15-December-2021
 - Improvement: Better error handling for Fatal errors when activating plugins.
 - Improvement: Check for system requirements when before starting to import the website.
@@ -140,7 +144,6 @@ v3.0.13 - 15-December-2021
 
 v3.0.12 - 14-December-2021
 - Improvement: Added shareable URLs with the added search text.
-- Fix: Fixed an issue with the browser back button.
 - Fix: Fixed an issue while importing CartFlows content.
 - Fix: Fixed an issue with WooCommerce dependency during the plugin activation step.
 - Fix: Removed the unwanted reset functionality when a user with a new website tries to import any demo.
