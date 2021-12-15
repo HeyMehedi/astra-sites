@@ -287,7 +287,14 @@ const ImportSite = () => {
 						'',
 						error,
 						'',
-						astraSitesVars.importFailedRequiredPluginsMessage,
+						sprintf(
+							// translators: Support article URL.
+							__(
+								'<a href="%1$s">Read article</a> to resolve the issue and continue importing template.',
+								'astra-sites'
+							),
+							'https://wpastra.com/docs/enable-debugging-in-wordpress/#how-to-use-debugging'
+						),
 						text
 					);
 				}
@@ -303,10 +310,17 @@ const ImportSite = () => {
 						'astra-sites'
 					),
 					'',
-					error,
+					error?.message,
 					'',
-					astraSitesVars.importFailedRequiredPluginsMessage,
-					error?.message
+					sprintf(
+						// translators: Support article URL.
+						__(
+							'<a href="%1$s">Read article</a> to resolve the issue and continue importing template.',
+							'astra-sites'
+						),
+						'https://wpastra.com/docs/enable-debugging-in-wordpress/#how-to-use-debugging'
+					),
+					error
 				);
 			} );
 	};
@@ -1159,7 +1173,7 @@ const ImportSite = () => {
 				} catch ( error ) {
 					report(
 						__(
-							'Importing Widgets due to parse JSON error.',
+							'Importing Widgets failed due to parse JSON error.',
 							'astra-sites'
 						),
 						'',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { RangeControl } from '@wordpress/components';
@@ -104,6 +104,24 @@ const MediaUploader = () => {
 		event.stopPropagation();
 		onWidthChange( initialState.siteLogo.width );
 	};
+
+	useEffect( () => {
+		if ( !! astraSitesVars.isRTLEnabled ) {
+			const rangeControl = document.querySelector(
+				'.components-range-control__wrapper'
+			);
+
+			// Range control slider styling for RTL.
+			const currentValue = rangeControl.children[ 3 ].style.left;
+			rangeControl.children[ 3 ].style.marginRight = '-10px';
+			rangeControl.children[ 3 ].style.removeProperty( 'margin-left' );
+			rangeControl.children[ 3 ].style.right = currentValue;
+			rangeControl.children[ 4 ].style.removeProperty( 'transform' );
+			rangeControl.children[ 4 ].style.removeProperty( 'left' );
+			rangeControl.children[ 4 ].style.right = currentValue;
+			rangeControl.children[ 4 ].style.transform = 'translateX(50%)';
+		}
+	} );
 
 	return (
 		<MediaUpload

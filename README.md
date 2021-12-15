@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.12  
+**Stable tag:** 3.0.13  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -132,6 +132,11 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.13 - 15-December-2021
+- Improvement: Better error handling for Fatal errors.
+- Improvement: Added a pre-requisite screen before the import process.
+- Fix: Fixed a few RTL support issues for the entire import process.
 
 v3.0.12 - 14-December-2021
 - Improvement: Added shareable URLs with the added search text.

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use Elementor\Core\Schemes;
+define( 'ST_ERROR_FATALS', E_ERROR | E_PARSE | E_COMPILE_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR );
 
 if ( ! class_exists( 'Astra_Sites' ) ) :
 
@@ -2012,14 +2012,20 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				}
 			}
 
-			// Raise time limit when activating the plugin.
-			set_time_limit( 300 );
+			if ( ! interface_exists( 'Throwable' ) ) {
+				// Fatal error handler for PHP < 7.
+				register_shutdown_function( array( $this, 'shutdown_handler' ) );
+			}
+
+			// Fatal error handler for PHP >= 7, and uncaught exception handler for all PHP versions.
+			set_exception_handler( array( $this, 'exception_handler' ) );
 
 			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : $init;
+			$activate = activate_plugin( $plugin_init, '', false, false );
 
-			wp_clean_plugins_cache();
-
-			$activate = activate_plugin( $plugin_init, '', false, true );
+			// Restore the error handlers.
+			restore_error_handler();
+			restore_exception_handler();
 
 			if ( is_wp_error( $activate ) ) {
 				if ( defined( 'WP_CLI' ) ) {
@@ -2046,6 +2052,71 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					array(
 						'success' => true,
 						'message' => __( 'Plugin Activated', 'astra-sites' ),
+					)
+				);
+			}
+		}
+
+		/**
+		 * Uncaught exception handler.
+		 *
+		 * In PHP >= 7 this will receive a Throwable object.
+		 * In PHP < 7 it will receive an Exception object.
+		 *
+		 * @throws Exception Exception that is catched.
+		 * @param Throwable|Exception $e The error or exception.
+		 */
+		public function exception_handler( $e ) {
+			if ( is_a( $e, 'Exception' ) ) {
+				$error = 'Uncaught Exception';
+			} else {
+				$error = 'Uncaught Error';
+			}
+
+			if ( wp_doing_ajax() ) {
+				wp_send_json_error( array(
+					'message' => __( 'There was an error activating plugin on your website.', 'astra-sites' ),
+					'stack' => array(
+						'error-message' => sprintf(
+							'%s: %s',
+							$error,
+							$e->getMessage()
+						),
+						'file' => $e->getFile(),
+						'line' => $e->getLine(),
+						'trace' => $e->getTrace(),
+					),
+				) );
+			}
+
+			throw $e;
+			exit( 1 );
+		}
+
+		/**
+		 * Displays fatal error output for sites running PHP < 7.
+		 */
+		public function shutdown_handler() {
+			$e = error_get_last();
+
+			if ( empty( $e ) || ! ( $e['type'] & ST_ERROR_FATALS ) ) {
+				return;
+			}
+
+			if ( $e['type'] & E_RECOVERABLE_ERROR ) {
+				$error = 'Catchable fatal error';
+			} else {
+				$error = 'Fatal error';
+			}
+
+			if ( wp_doing_ajax() ) {
+				wp_send_json_error(
+					array(
+						'message' => __( 'There was an error activating plugin on your website.', 'astra-sites' ),
+						'stack' => array(
+							'error-message' => $error,
+							'error' => $e,
+						),
 					)
 				);
 			}

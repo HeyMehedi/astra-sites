@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
+import { Tooltip } from '@brainstormforce/starter-templates';
 import { PreviousStepLink, DefaultStep } from '../../components/index';
 import ICONS from '../../../icons';
 import { useStateValue } from '../../store/store';
@@ -20,6 +21,43 @@ const Survey = () => {
 	const isThirtPartyPlugins = thirtPartyPlugins.length > 0;
 
 	const [ skipPlugins, setSkipPlugins ] = useState( isThirtPartyPlugins );
+
+	const compatibilities = astraSitesVars.compatibilities;
+	const requirementsErrors = compatibilities.errors;
+	let requirementWarning = compatibilities.warnings;
+
+	if (
+		requiredPlugins &&
+		requiredPlugins.update_avilable_plugins.length > 0
+	) {
+		const updatePluginsList = [];
+		requiredPlugins.update_avilable_plugins.map( ( plugin ) => {
+			return updatePluginsList.push( plugin.name );
+		} );
+
+		const output = [ '<ul>' ];
+		updatePluginsList.forEach( function ( item ) {
+			output.push( '<li>' + item + '</li>' );
+		} );
+		output.push( '</ul>' );
+
+		const tooltipString =
+			astraSitesVars.compatibilities_data[ 'update-available' ];
+		tooltipString.tooltip = tooltipString.tooltip.replace(
+			'##LIST##',
+			output.join( '' )
+		);
+
+		requirementWarning = {
+			...requirementWarning,
+			'update-available': tooltipString,
+		};
+	}
+
+	const [ showRequirementCheck, setShowRequirementCheck ] = useState(
+		Object.keys( requirementsErrors ).length > 0 ||
+			Object.keys( requirementWarning ).length > 0
+	);
 
 	const [ formDetails, setFormDetails ] = useState( {
 		first_name: '',
@@ -168,13 +206,96 @@ const Survey = () => {
 		);
 	};
 
+	const requirementCheck = () => {
+		return (
+			<div className="requirement-check-wrap">
+				<h1>{ __( "We're Almost There!", 'astra-sites' ) }</h1>
+
+				<p>
+					{ __(
+						"You're close to importing the template. To complete the process, please clear the following conditions.",
+						'astra-sites'
+					) }
+				</p>
+
+				<ul className="requirement-check-list">
+					{ Object.keys( requirementsErrors ).length > 0 &&
+						Object.values( requirementsErrors ).map(
+							( value, index ) => {
+								return (
+									<li key={ index }>
+										<div className="requirement-list-item">
+											{ value.title }
+											<Tooltip
+												content={
+													<span
+														dangerouslySetInnerHTML={ {
+															__html:
+																value.tooltip,
+														} }
+													/>
+												}
+											>
+												{ ICONS.questionMark }
+											</Tooltip>
+										</div>
+									</li>
+								);
+							}
+						) }
+					{ Object.keys( requirementWarning ).length > 0 &&
+						Object.values( requirementWarning ).map(
+							( value, index ) => {
+								return (
+									<li key={ index }>
+										<div className="requirement-list-item">
+											{ value.title }
+											<Tooltip
+												content={
+													<span
+														dangerouslySetInnerHTML={ {
+															__html:
+																value.tooltip,
+														} }
+													/>
+												}
+											>
+												{ ICONS.questionMark }
+											</Tooltip>
+										</div>
+									</li>
+								);
+							}
+						) }
+				</ul>
+				<button
+					className="submit-survey-btn button-text d-flex-center-align"
+					onClick={ () => setShowRequirementCheck( false ) }
+					disabled={
+						Object.keys( requirementsErrors ).length > 0
+							? true
+							: false
+					}
+				>
+					{ __( 'Skip & Continue', 'astra-sites' ) }
+					{ ICONS.arrowRight }
+				</button>
+			</div>
+		);
+	};
+
 	return (
 		<DefaultStep
 			content={
 				<>
 					<div className="survey-container">
-						{ skipPlugins && thirdPartyPluginList() }
-						{ ! skipPlugins && surveyForm() }
+						{ showRequirementCheck && requirementCheck() }
+						{ ! showRequirementCheck && (
+							<>
+								{ skipPlugins && thirdPartyPluginList() }
+								{ ! skipPlugins && surveyForm() }
+							</>
+						) }
 					</div>
 				</>
 			}

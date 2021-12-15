@@ -150,4 +150,45 @@
         text-align: left;
         line-height:1.4;
     }
+    .requirement-check-wrap {
+        button.submit-survey-btn:disabled {
+            background: var(--st-color-light-gray);
+            color: var(--st-color-placeholder);
+            cursor: not-allowed;
+            svg path {
+                fill: var(--st-color-placeholder);
+            }
+        }
+        .requirement-check-list {
+            list-style: auto;
+            margin: 10px 20px;
+            li {
+                font-size: var(--st-font-size-xs);
+                line-height: var(--st-font-line-height-l);
+
+                p {
+                    color: var(--st-color-white);
+                }
+            }
+            .requirement-list-item {
+                display: flex;
+                align-content: center;
+                align-items: center;
+                grid-gap: 10px;
+            }
+            .stc-tooltip {
+                display: flex;
+                .stc-tooltip-content {
+                    min-width: 400px;
+                    ul {
+                        list-style: auto;
+                        margin: 6px 17px;
+                    }
+                    li {
+                        line-height: var(--st-font-line-height-s);
+                    }
+                }
+            }
+        }
+    }
 }
