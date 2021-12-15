@@ -75,6 +75,7 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 					'err'   => stripslashes( $_POST['error'] ),
 					'id'	=> $_POST['id'],
 					'version' => ASTRA_SITES_VER,
+					'abspath' => ABSPATH,
 				),
 			);
 

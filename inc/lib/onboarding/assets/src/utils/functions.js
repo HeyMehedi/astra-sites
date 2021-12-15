@@ -117,6 +117,31 @@ export const getDefaultTypography = ( demo ) => {
 	return defaultTypography;
 };
 
+export const getHeadingFonts = ( demo ) => {
+	const headingFonts = {};
+
+	const headingsTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ];
+
+	if ( demo && 'astra-site-customizer-data' in demo ) {
+		const customizerData = demo[ 'astra-site-customizer-data' ] || '';
+		if ( customizerData ) {
+			const customizerSettings = customizerData[ 'astra-settings' ] || [];
+
+			headingsTags.forEach( ( tag ) => {
+				headingFonts[ 'font-family-' + tag ] =
+					customizerSettings[ `font-family-${ tag }` ];
+				headingFonts[ 'font-weight-' + tag ] =
+					customizerSettings[ `font-weight-${ tag }` ];
+				headingFonts[ 'text-transform-' + tag ] =
+					customizerSettings[ `text-transform-${ tag }` ];
+				headingFonts[ 'line-height-' + tag ] =
+					customizerSettings[ `line-height-${ tag }` ];
+			} );
+		}
+	}
+	return headingFonts;
+};
+
 export const getColorScheme = ( demo ) => {
 	let colorScheme = 'light';
 
