@@ -134,9 +134,9 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 
 v3.0.13 - 15-December-2021
-- Improvement: Better error handling for Fatal errors.
-- Improvement: Added a pre-requisite screen before the import process.
-- Fix: Fixed a few RTL support issues for the entire import process.
+- Improvement: Better error handling for Fatal errors when activating plugins.
+- Improvement: Check for system requirements when before starting to import the website.
+- Fix: Logo width slider not working correctly in case of RTL languages.
 
 v3.0.12 - 14-December-2021
 - Improvement: Added shareable URLs with the added search text.
