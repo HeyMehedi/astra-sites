@@ -134,8 +134,8 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 
 v3.0.14 - 15-December-2021
-- Show complete error message on screen if plugin installation fails.
-- Fix browser back button does not work in Starter Templates UI.
+- Improvement: Show complete error message on screen if plugin installation fails.
+- Fix: browser back button does not work in Starter Templates UI.
 
 v3.0.13 - 15-December-2021
 - Improvement: Better error handling for Fatal errors when activating plugins.
