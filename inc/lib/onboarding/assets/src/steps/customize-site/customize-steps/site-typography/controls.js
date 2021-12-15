@@ -4,6 +4,7 @@ import { FontSelector } from '../../../../components/index';
 import {
 	sendPostMessage,
 	getDefaultTypography,
+	getHeadingFonts,
 } from '../../../../utils/functions';
 
 const getFontName = ( fontName, inheritFont ) => {
@@ -145,6 +146,7 @@ const SiteTypographyControls = () => {
 		dispatch,
 	] = useStateValue();
 	let [ fonts, setFonts ] = useState( FONTS );
+	const [ headingFonts, setHeadingFonts ] = useState( [] );
 
 	/**
 	 * Add selected demo typograply as default typography
@@ -153,6 +155,8 @@ const SiteTypographyControls = () => {
 		if ( templateResponse !== null ) {
 			const defaultFonts = [];
 			const defaultTypography = getDefaultTypography( templateResponse );
+			const head = getHeadingFonts( templateResponse );
+			setHeadingFonts( head );
 
 			defaultFonts.push( defaultTypography );
 
@@ -252,9 +256,11 @@ const SiteTypographyControls = () => {
 	 * Display selected typography
 	 */
 	useEffect( () => {
+		const newTypography = { ...typography, ...headingFonts };
+
 		sendPostMessage( {
 			param: 'siteTypography',
-			data: JSON.parse( JSON.stringify( typography ) ),
+			data: JSON.parse( JSON.stringify( newTypography ) ),
 		} );
 	}, [ typography ] );
 
