@@ -788,6 +788,12 @@ body.step-import-site:not( .st-error ) .step-header a {
 			transform: rotate(180deg);
 		}
 	}
+	.astra-sites-ai-rangecontrol-wrap  {
+		.components-range-control__number {
+			margin-left: 16px !important;
+			margin-right: 0 !important;
+		}
+	}
 }
 
 @keyframes rotate-alternate {
