@@ -2074,25 +2074,22 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			if ( wp_doing_ajax() ) {
-				wp_send_json_error(
-					array(
-						'message' => __( 'There was an error activating plugin on your website.', 'astra-sites' ),
-						'stack' => array(
-							'error-message' => sprintf(
-								'%s: %s',
-								$error,
-								$e->getMessage()
-							),
-							'file' => $e->getFile(),
-							'line' => $e->getLine(),
-							'trace' => $e->getTrace(),
+				wp_send_json_error( array(
+					'message' => __( 'There was an error activating plugin on your website.', 'astra-sites' ),
+					'stack' => array(
+						'error-message' => sprintf(
+							'%s: %s',
+							$error,
+							$e->getMessage()
 						),
-					)
-				);
+						'file' => $e->getFile(),
+						'line' => $e->getLine(),
+						'trace' => $e->getTrace(),
+					),
+				) );
 			}
 
 			throw $e;
-			exit( 1 );
 		}
 
 		/**
