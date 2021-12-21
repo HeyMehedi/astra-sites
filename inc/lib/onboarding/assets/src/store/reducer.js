@@ -52,11 +52,7 @@ export const initialState = {
 	themeStatus: false,
 	importStatusLog: '',
 	importStatus: '',
-	resetCustomizer: false,
-	resetSiteOptions: false,
-	resetContent: false,
-	resetWidgets: false,
-	resetDone: false,
+	xmlImportDone: false,
 	requiredPluginsDone: false,
 	notInstalledList: [],
 	notActivatedList: [],
@@ -80,6 +76,7 @@ export const initialState = {
 	widgetImportFlag: true,
 	contentImportFlag: true,
 	analyticsFlag: starterTemplates.analytics !== 'yes' ? true : false,
+	shownRequirementOnce: false,
 
 	// Filter Favorites.
 	onMyFavorite: false,

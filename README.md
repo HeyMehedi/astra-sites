@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.15  
+**Stable tag:** 3.0.16  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -132,6 +132,13 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.16 - 21-December-2021
+- Improvement: Optimised the CartFlows flows import process.
+- Improvement: Added a Required screen prior to import if any system requirements are not met on the user's website.
+- Fix: Fixed an issue with colors not applying to a few Gutenberg-based blocks in WooCommerce demos.
+- Fix: Fixed an issue with White Labeling the import process.
+- Fix: Better import process to avoid errors in import.
 
 v3.0.15 - 15-December-2021
 - Fix: plugin activation errors for starter template using Ultimate Addons for Gutenberg by disabling default redirect from UAG on activation

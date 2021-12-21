@@ -23,7 +23,6 @@ const ImportSite = () => {
 	const storedState = useStateValue();
 	const [
 		{
-			resetDone,
 			importStart,
 			importEnd,
 			importPercent,
@@ -32,10 +31,6 @@ const ImportSite = () => {
 			themeStatus,
 			currentIndex,
 			importError,
-			resetCustomizer,
-			resetSiteOptions,
-			resetContent,
-			resetWidgets,
 			siteLogo,
 			activePalette,
 			typography,
@@ -48,6 +43,7 @@ const ImportSite = () => {
 			notInstalledList,
 			notActivatedList,
 			tryAgainCount,
+			xmlImportDone,
 		},
 		dispatch,
 	] = storedState;
@@ -129,19 +125,31 @@ const ImportSite = () => {
 	};
 
 	/**
-	 * Start Import.
+	 * Start Import Part 1.
 	 */
-	const startImport = () => {
-		percentage += 5;
+	const importPart1 = async () => {
+		await resetOldSite();
 
-		dispatch( {
-			type: 'set',
-			importStart: true,
-			importPercent: percentage,
-			importStatus: __( 'Starting Import.', 'astra-sites' ),
-		} );
+		await importCartflowsFlows();
 
-		installRequiredPlugins();
+		await importForms();
+
+		await importCustomizerJson();
+
+		await importSiteContent();
+	};
+
+	/**
+	 * Start Import Part 2.
+	 */
+	const importPart2 = async () => {
+		await importSiteOptions();
+
+		await importWidgets();
+
+		await customizeWebsite();
+
+		importDone();
 	};
 
 	/**
@@ -251,6 +259,7 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneResponse = [];
+				let errorReported = false;
 				try {
 					const response = JSON.parse( text );
 					cloneResponse = response;
@@ -280,9 +289,13 @@ const ImportSite = () => {
 					}
 				} catch ( error ) {
 					report(
-						__(
-							'JSON_Error: Could not activate the required plugin list.',
-							'astra-sites'
+						sprintf(
+							// translators: Plugin name.
+							__(
+								`JSON_Error: Could not activate the required plugin - %1$s.`,
+								'astra-sites'
+							),
+							plugin.name
 						),
 						'',
 						error,
@@ -297,17 +310,23 @@ const ImportSite = () => {
 						),
 						text
 					);
+
+					errorReported = true;
 				}
 
-				if ( ! cloneResponse.success ) {
+				if ( ! cloneResponse.success && errorReported === false ) {
 					throw cloneResponse;
 				}
 			} )
 			.catch( ( error ) => {
 				report(
-					__(
-						'Could not activate the required plugin list.',
-						'astra-sites'
+					sprintf(
+						// translators: Plugin name.
+						__(
+							`Could not activate the required plugin - %1$s.`,
+							'astra-sites'
+						),
+						plugin.name
 					),
 					'',
 					error?.data?.message,
@@ -327,18 +346,15 @@ const ImportSite = () => {
 
 	/**
 	 * 1. Reset.
+	 * The following steps are covered here.
+	 * 		1. Reset Customizer
+	 * 		2. Reset Site Options
+	 * 		3. Reset Widgets
+	 * 		4. Reset Forms and Terms
+	 * 		5. Reset all posts
 	 */
 	const resetOldSite = async () => {
 		if ( ! reset ) {
-			dispatch( {
-				type: 'set',
-				resetDone: true,
-				resetCustomizer: true,
-				resetSiteOptions: true,
-				resetContent: true,
-				resetWidgets: true,
-			} );
-			installRequiredPlugins();
 			return;
 		}
 		percentage += 2;
@@ -377,14 +393,262 @@ const ImportSite = () => {
 		dispatch( {
 			type: 'set',
 			importPercent: percentage,
-			resetContent: true,
-			resetDone: true,
 			importStatus: __( 'Reset for old website is done.', 'astra-sites' ),
 		} );
 	};
 
 	/**
-	 * Reset Terms and Forms.
+	 * Reset a chunk of posts.
+	 */
+	const performPostsReset = async ( chunk ) => {
+		const data = new FormData();
+		data.append( 'action', 'astra-sites-get-deleted-post-ids' );
+		data.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		dispatch( {
+			type: 'set',
+			importStatus: __( `Resetting posts.`, 'astra-sites' ),
+		} );
+
+		const formOption = new FormData();
+		formOption.append( 'action', 'astra-sites-reset-posts' );
+		formOption.append( 'ids', JSON.stringify( chunk ) );
+		formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		await fetch( ajaxurl, {
+			method: 'post',
+			body: formOption,
+		} )
+			.then( ( resp ) => resp.text() )
+			.then( ( text ) => {
+				let cloneData = [];
+				let errorReported = false;
+				try {
+					const result = JSON.parse( text );
+					cloneData = result;
+					if ( result.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage <= 70 ? percentage : 70,
+						} );
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting posts failed.', 'astra-sites' ),
+						'',
+						error,
+						'',
+						'',
+						text
+					);
+
+					errorReported = true;
+				}
+
+				if ( ! cloneData.success && errorReported === false ) {
+					throw cloneData.data;
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Resetting posts failed.', 'astra-sites' ),
+					'',
+					error?.message,
+					'',
+					'',
+					error
+				);
+			} );
+	};
+
+	/**
+	 * 1.1 Perform Reset for Customizer.
+	 */
+	const performResetCustomizer = async () => {
+		dispatch( {
+			type: 'set',
+			importStatus: __( 'Resetting customizer.', 'astra-sites' ),
+		} );
+
+		const customizerContent = new FormData();
+		customizerContent.append(
+			'action',
+			'astra-sites-reset-customizer-data'
+		);
+		customizerContent.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		await fetch( ajaxurl, {
+			method: 'post',
+			body: customizerContent,
+		} )
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				let cloneData = [];
+				let errorReported = false;
+				try {
+					const response = JSON.parse( text );
+					cloneData = response;
+					if ( response.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+						} );
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting customizer failed.', 'astra-sites' ),
+						'',
+						error?.message,
+						'',
+						'',
+						text
+					);
+
+					errorReported = true;
+				}
+
+				if ( ! cloneData.success && errorReported === false ) {
+					throw cloneData.data;
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Resetting customizer failed.', 'astra-sites' ),
+					'',
+					error?.message,
+					'',
+					'',
+					error
+				);
+			} );
+	};
+
+	/**
+	 * 1.2 Perform reset Site options
+	 */
+	const performResetSiteOptions = async () => {
+		dispatch( {
+			type: 'set',
+			importStatus: __( 'Resetting site options.', 'astra-sites' ),
+		} );
+
+		const siteOptions = new FormData();
+		siteOptions.append( 'action', 'astra-sites-reset-site-options' );
+		siteOptions.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		await fetch( ajaxurl, {
+			method: 'post',
+			body: siteOptions,
+		} )
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				let cloneData = [];
+				let errorReported = false;
+				try {
+					const data = JSON.parse( text );
+					cloneData = data;
+					if ( data.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+						} );
+					}
+				} catch ( error ) {
+					report(
+						__( 'Resetting site options Failed.', 'astra-sites' ),
+						'',
+						error?.message,
+						'',
+						'',
+						text
+					);
+
+					errorReported = true;
+				}
+
+				if ( false === cloneData.success && errorReported === false ) {
+					throw cloneData.data;
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Resetting site options Failed.', 'astra-sites' ),
+					'',
+					error?.message,
+					'',
+					'',
+					error
+				);
+			} );
+	};
+
+	/**
+	 * 1.3 Perform Reset for Widgets
+	 */
+	const performResetWidget = async () => {
+		const widgets = new FormData();
+		widgets.append( 'action', 'astra-sites-reset-widgets-data' );
+		widgets.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		dispatch( {
+			type: 'set',
+			importStatus: __( 'Resetting widgets.', 'astra-sites' ),
+		} );
+		await fetch( ajaxurl, {
+			method: 'post',
+			body: widgets,
+		} )
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				let cloneData = [];
+				let errorReported = false;
+				try {
+					const response = JSON.parse( text );
+					cloneData = response;
+					if ( response.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage,
+						} );
+					}
+				} catch ( error ) {
+					report(
+						__(
+							'Resetting widgets JSON parse failed.',
+							'astra-sites'
+						),
+						'',
+						error,
+						'',
+						'',
+						text
+					);
+
+					errorReported = true;
+				}
+
+				if ( ! cloneData.success && errorReported === false ) {
+					throw cloneData.data;
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Resetting widgets failed.', 'astra-sites' ),
+					'',
+					error,
+					'',
+					'',
+					error
+				);
+			} );
+	};
+
+	/**
+	 * 1.4 Reset Terms and Forms.
 	 */
 	const performResetTermsAndForms = async () => {
 		const formOption = new FormData();
@@ -403,6 +667,7 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const response = JSON.parse( text );
 					cloneData = response;
@@ -411,7 +676,6 @@ const ImportSite = () => {
 						dispatch( {
 							type: 'set',
 							importPercent: percentage,
-							resetCustomizer: true,
 						} );
 					}
 				} catch ( error ) {
@@ -426,8 +690,11 @@ const ImportSite = () => {
 						'',
 						text
 					);
+
+					errorReported = true;
 				}
-				if ( ! cloneData.success ) {
+
+				if ( ! cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -444,7 +711,7 @@ const ImportSite = () => {
 	};
 
 	/**
-	 * Reset Posts.
+	 * 1.5 Reset Posts.
 	 */
 	const performResetPosts = async () => {
 		const data = new FormData();
@@ -483,252 +750,16 @@ const ImportSite = () => {
 	};
 
 	/**
-	 * Reset a chunk of posts.
-	 */
-	const performPostsReset = async ( chunk ) => {
-		const data = new FormData();
-		data.append( 'action', 'astra-sites-get-deleted-post-ids' );
-		data.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-
-		dispatch( {
-			type: 'set',
-			importStatus: __( `Resetting posts.`, 'astra-sites' ),
-		} );
-
-		const formOption = new FormData();
-		formOption.append( 'action', 'astra-sites-reset-posts' );
-		formOption.append( 'ids', JSON.stringify( chunk ) );
-		formOption.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-
-		await fetch( ajaxurl, {
-			method: 'post',
-			body: formOption,
-		} )
-			.then( ( resp ) => resp.text() )
-			.then( ( text ) => {
-				let cloneData = [];
-				try {
-					const result = JSON.parse( text );
-					cloneData = result;
-					if ( result.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-						} );
-					}
-				} catch ( error ) {
-					report(
-						__( 'Resetting posts failed.', 'astra-sites' ),
-						'',
-						error,
-						'',
-						'',
-						text
-					);
-				}
-				if ( ! cloneData.success ) {
-					throw cloneData.data;
-				}
-			} )
-			.catch( ( error ) => {
-				report(
-					__( 'Resetting posts failed.', 'astra-sites' ),
-					'',
-					error?.message,
-					'',
-					'',
-					error
-				);
-			} );
-	};
-
-	/**
-	 * Perfoem Reset for Customizer.
-	 */
-	const performResetCustomizer = async () => {
-		dispatch( {
-			type: 'set',
-			importStatus: __( 'Resetting customizer.', 'astra-sites' ),
-		} );
-
-		const customizerContent = new FormData();
-		customizerContent.append(
-			'action',
-			'astra-sites-reset-customizer-data'
-		);
-		customizerContent.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-
-		await fetch( ajaxurl, {
-			method: 'post',
-			body: customizerContent,
-		} )
-			.then( ( response ) => response.text() )
-			.then( ( text ) => {
-				let cloneData = [];
-				try {
-					const response = JSON.parse( text );
-					cloneData = response;
-					if ( response.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-							resetCustomizer: true,
-						} );
-					}
-				} catch ( error ) {
-					report(
-						__( 'Resetting customizer failed.', 'astra-sites' ),
-						'',
-						error?.message,
-						'',
-						'',
-						text
-					);
-				}
-				if ( ! cloneData.success ) {
-					throw cloneData.data;
-				}
-			} )
-			.catch( ( error ) => {
-				report(
-					__( 'Resetting customizer failed.', 'astra-sites' ),
-					'',
-					error?.message,
-					'',
-					'',
-					error
-				);
-			} );
-	};
-
-	/**
-	 * Perform reset
-	 */
-	const performResetSiteOptions = async () => {
-		dispatch( {
-			type: 'set',
-			importStatus: __( 'Resetting site options.', 'astra-sites' ),
-		} );
-
-		const siteOptions = new FormData();
-		siteOptions.append( 'action', 'astra-sites-reset-site-options' );
-		siteOptions.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-
-		await fetch( ajaxurl, {
-			method: 'post',
-			body: siteOptions,
-		} )
-			.then( ( response ) => response.text() )
-			.then( ( text ) => {
-				let cloneData = [];
-				try {
-					const data = JSON.parse( text );
-					cloneData = data;
-					if ( data.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-							resetSiteOptions: true,
-						} );
-					}
-				} catch ( error ) {
-					report(
-						__( 'Resetting site options Failed.', 'astra-sites' ),
-						'',
-						error?.message,
-						'',
-						'',
-						text
-					);
-				}
-
-				if ( false === cloneData.success ) {
-					throw cloneData.data;
-				}
-			} )
-			.catch( ( error ) => {
-				report(
-					__( 'Resetting site options Failed.', 'astra-sites' ),
-					'',
-					error?.message,
-					'',
-					'',
-					error
-				);
-			} );
-	};
-
-	/**
-	 * Perform Reset for Widgets
-	 */
-	const performResetWidget = async () => {
-		const widgets = new FormData();
-		widgets.append( 'action', 'astra-sites-reset-widgets-data' );
-		widgets.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-
-		dispatch( {
-			type: 'set',
-			importStatus: __( 'Resetting widgets.', 'astra-sites' ),
-		} );
-		await fetch( ajaxurl, {
-			method: 'post',
-			body: widgets,
-		} )
-			.then( ( response ) => response.text() )
-			.then( ( text ) => {
-				let cloneData = [];
-				try {
-					const response = JSON.parse( text );
-					cloneData = response;
-					if ( response.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-							resetWidgets: true,
-						} );
-					}
-				} catch ( error ) {
-					report(
-						__(
-							'Resetting widgets JSON parse failed.',
-							'astra-sites'
-						),
-						'',
-						error,
-						'',
-						'',
-						text
-					);
-				}
-				if ( ! cloneData.success ) {
-					throw cloneData.data;
-				}
-			} )
-			.catch( ( error ) => {
-				report(
-					__( 'Resetting widgets failed.', 'astra-sites' ),
-					'',
-					error,
-					'',
-					'',
-					error
-				);
-			} );
-	};
-
-	/**
 	 * 2. Import CartFlows Flows.
 	 */
-	const importCartflowsFlows = () => {
+	const importCartflowsFlows = async () => {
+		if ( importError ) {
+			return;
+		}
 		const cartflowsUrl =
 			encodeURI( templateResponse[ 'astra-site-cartflows-path' ] ) || '';
 
 		if ( '' === cartflowsUrl || 'null' === cartflowsUrl ) {
-			importForms();
 			return;
 		}
 
@@ -742,13 +773,14 @@ const ImportSite = () => {
 		flows.append( 'cartflows_url', cartflowsUrl );
 		flows.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: flows,
 		} )
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const data = JSON.parse( text );
 					cloneData = data;
@@ -758,7 +790,6 @@ const ImportSite = () => {
 							type: 'set',
 							importPercent: percentage,
 						} );
-						importForms();
 					}
 				} catch ( error ) {
 					report(
@@ -772,9 +803,11 @@ const ImportSite = () => {
 						'',
 						text
 					);
+
+					errorReported = true;
 				}
 
-				if ( false === cloneData.success ) {
+				if ( false === cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -790,12 +823,14 @@ const ImportSite = () => {
 	/**
 	 * 3. Import WPForms.
 	 */
-	const importForms = () => {
+	const importForms = async () => {
+		if ( importError ) {
+			return;
+		}
 		const wpformsUrl =
 			encodeURI( templateResponse[ 'astra-site-wpforms-path' ] ) || '';
 
 		if ( '' === wpformsUrl || 'null' === wpformsUrl ) {
-			importCustomizerJson();
 			return;
 		}
 
@@ -809,13 +844,14 @@ const ImportSite = () => {
 		flows.append( 'wpforms_url', wpformsUrl );
 		flows.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: flows,
 		} )
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const data = JSON.parse( text );
 					cloneData = data;
@@ -825,7 +861,6 @@ const ImportSite = () => {
 							type: 'set',
 							importPercent: percentage,
 						} );
-						importCustomizerJson();
 					}
 				} catch ( error ) {
 					report(
@@ -839,9 +874,11 @@ const ImportSite = () => {
 						'',
 						text
 					);
+
+					errorReported = true;
 				}
 
-				if ( false === cloneData.success ) {
+				if ( false === cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -857,14 +894,16 @@ const ImportSite = () => {
 	/**
 	 * 4. Import Customizer JSON.
 	 */
-	const importCustomizerJson = () => {
+	const importCustomizerJson = async () => {
+		if ( importError ) {
+			return;
+		}
 		if ( ! customizerImportFlag ) {
 			percentage += 5;
 			dispatch( {
 				type: 'set',
 				importPercent: percentage,
 			} );
-			importSiteContent();
 			return;
 		}
 		dispatch( {
@@ -876,13 +915,14 @@ const ImportSite = () => {
 		forms.append( 'action', 'astra-sites-import-customizer-settings' );
 		forms.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: forms,
 		} )
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const data = JSON.parse( text );
 					cloneData = data;
@@ -892,7 +932,6 @@ const ImportSite = () => {
 							type: 'set',
 							importPercent: percentage,
 						} );
-						importSiteContent();
 					}
 				} catch ( error ) {
 					report(
@@ -906,9 +945,11 @@ const ImportSite = () => {
 						'',
 						text
 					);
+
+					errorReported = true;
 				}
 
-				if ( false === cloneData.success ) {
+				if ( false === cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -924,14 +965,17 @@ const ImportSite = () => {
 	/**
 	 * 5. Import Site Comtent XML.
 	 */
-	const importSiteContent = () => {
+	const importSiteContent = async () => {
+		if ( importError ) {
+			return;
+		}
 		if ( ! contentImportFlag ) {
 			percentage += 20;
 			dispatch( {
 				type: 'set',
 				importPercent: percentage,
+				xmlImportDone: true,
 			} );
-			importSiteOptions();
 			return;
 		}
 
@@ -963,7 +1007,7 @@ const ImportSite = () => {
 		content.append( 'wxr_url', wxrUrl );
 		content.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: content,
 		} )
@@ -974,79 +1018,13 @@ const ImportSite = () => {
 					percentage += 2;
 					dispatch( {
 						type: 'set',
-						importPercent: percentage,
+						importPercent: percentage <= 80 ? percentage : 80,
 					} );
 					if ( false === data.success ) {
 						const errorMsg = data.data.error || data.data;
 						throw errorMsg;
 					} else {
-						// Import XML though Event Source.
-						sseImport.data = data.data;
-						sseImport.render( dispatch, percentage );
-
-						const evtSource = new EventSource( sseImport.data.url );
-						evtSource.onmessage = function ( message ) {
-							const eventData = JSON.parse( message.data );
-							switch ( eventData.action ) {
-								case 'updateDelta':
-									sseImport.updateDelta(
-										eventData.type,
-										eventData.delta
-									);
-									break;
-
-								case 'complete':
-									if ( false === eventData.error ) {
-										evtSource.close();
-										importSiteOptions();
-									} else {
-										report(
-											astraSitesVars.xml_import_interrupted_primary,
-											'',
-											astraSitesVars.xml_import_interrupted_error,
-											'',
-											astraSitesVars.xml_import_interrupted_secondary
-										);
-									}
-									break;
-							}
-						};
-
-						evtSource.onerror = function () {
-							evtSource.close();
-							throw __(
-								'Importing Site Content Failed. - Import Process Interrupted',
-								'astra-sites'
-							);
-						};
-
-						evtSource.addEventListener(
-							'log',
-							function ( message ) {
-								const eventLogData = JSON.parse( message.data );
-								let importMessage = eventLogData.message || '';
-								if (
-									importMessage &&
-									'info' === eventLogData.level
-								) {
-									importMessage = importMessage.replace(
-										/"/g,
-										function () {
-											return '';
-										}
-									);
-								}
-
-								dispatch( {
-									type: 'set',
-									importStatus: sprintf(
-										// translators: Response importMessage
-										__( 'Importing - %1$s', 'astra-sites' ),
-										importMessage
-									),
-								} );
-							}
-						);
+						importXML( data.data );
 					}
 				} catch ( error ) {
 					report(
@@ -1072,9 +1050,82 @@ const ImportSite = () => {
 	};
 
 	/**
+	 * Imports XML using EventSource.
+	 *
+	 * @param {JSON} data JSON object for all the content in XML
+	 */
+	const importXML = ( data ) => {
+		// Import XML though Event Source.
+		sseImport.data = data;
+		sseImport.render( dispatch, percentage );
+
+		const evtSource = new EventSource( sseImport.data.url );
+		evtSource.onmessage = ( message ) => {
+			const eventData = JSON.parse( message.data );
+			switch ( eventData.action ) {
+				case 'updateDelta':
+					sseImport.updateDelta( eventData.type, eventData.delta );
+					break;
+
+				case 'complete':
+					if ( false === eventData.error ) {
+						evtSource.close();
+						dispatch( {
+							type: 'set',
+							xmlImportDone: true,
+						} );
+					} else {
+						report(
+							astraSitesVars.xml_import_interrupted_primary,
+							'',
+							astraSitesVars.xml_import_interrupted_error,
+							'',
+							astraSitesVars.xml_import_interrupted_secondary
+						);
+					}
+					break;
+			}
+		};
+
+		evtSource.onerror = ( error ) => {
+			evtSource.close();
+			report(
+				__(
+					'Importing Site Content Failed. - Import Process Interrupted',
+					'astra-sites'
+				),
+				'',
+				error
+			);
+		};
+
+		evtSource.addEventListener( 'log', function ( message ) {
+			const eventLogData = JSON.parse( message.data );
+			let importMessage = eventLogData.message || '';
+			if ( importMessage && 'info' === eventLogData.level ) {
+				importMessage = importMessage.replace( /"/g, function () {
+					return '';
+				} );
+			}
+
+			dispatch( {
+				type: 'set',
+				importStatus: sprintf(
+					// translators: Response importMessage
+					__( 'Importing - %1$s', 'astra-sites' ),
+					importMessage
+				),
+			} );
+		} );
+	};
+
+	/**
 	 * 6. Import Site Option table values.
 	 */
-	const importSiteOptions = () => {
+	const importSiteOptions = async () => {
+		if ( importError ) {
+			return;
+		}
 		dispatch( {
 			type: 'set',
 			importStatus: __( 'Importing Site Options.', 'astra-sites' ),
@@ -1084,13 +1135,14 @@ const ImportSite = () => {
 		siteOptions.append( 'action', 'astra-sites-import-options' );
 		siteOptions.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: siteOptions,
 		} )
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const data = JSON.parse( text );
 					cloneData = data;
@@ -1100,7 +1152,6 @@ const ImportSite = () => {
 							type: 'set',
 							importPercent: percentage,
 						} );
-						importWidgets();
 					}
 				} catch ( error ) {
 					report(
@@ -1114,9 +1165,11 @@ const ImportSite = () => {
 						'',
 						text
 					);
+
+					errorReported = true;
 				}
 
-				if ( false === cloneData.success ) {
+				if ( false === cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -1132,13 +1185,15 @@ const ImportSite = () => {
 	/**
 	 * 7. Import Site Widgets.
 	 */
-	const importWidgets = () => {
+	const importWidgets = async () => {
+		if ( importError ) {
+			return;
+		}
 		if ( ! widgetImportFlag ) {
 			dispatch( {
 				type: 'set',
 				importPercent: 90,
 			} );
-			customizeWebsite();
 			return;
 		}
 		dispatch( {
@@ -1153,13 +1208,14 @@ const ImportSite = () => {
 		widgets.append( 'widgets_data', widgetsData );
 		widgets.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-		fetch( ajaxurl, {
+		await fetch( ajaxurl, {
 			method: 'post',
 			body: widgets,
 		} )
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const data = JSON.parse( text );
 					cloneData = data;
@@ -1168,7 +1224,6 @@ const ImportSite = () => {
 							type: 'set',
 							importPercent: 90,
 						} );
-						customizeWebsite();
 					}
 				} catch ( error ) {
 					report(
@@ -1182,9 +1237,11 @@ const ImportSite = () => {
 						'',
 						text
 					);
+
+					errorReported = true;
 				}
 
-				if ( false === cloneData.success ) {
+				if ( false === cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -1197,18 +1254,29 @@ const ImportSite = () => {
 			} );
 	};
 
+	/**
+	 * 8. Update the website as per the customizations selected by the user.
+	 * The following steps are covered here.
+	 * 		a. Update Logo
+	 * 		b. Update Color Palette
+	 * 		c. Update Typography
+	 */
 	const customizeWebsite = async () => {
+		if ( importError ) {
+			return;
+		}
 		await setSiteLogo( siteLogo );
 		await setColorPalettes( JSON.stringify( activePalette ) );
-		const selectedTypo = typography;
-		await saveTypography( selectedTypo );
-		importDone();
+		await saveTypography( typography );
 	};
 
 	/**
 	 * 9. Final setup - Invoking Batch process.
 	 */
 	const importDone = () => {
+		if ( importError ) {
+			return;
+		}
 		dispatch( {
 			type: 'set',
 			importStatus: __( 'Final finishings.', 'astra-sites' ),
@@ -1226,6 +1294,7 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				let cloneData = [];
+				let errorReported = false;
 				try {
 					const data = JSON.parse( text );
 					cloneData = data;
@@ -1269,6 +1338,8 @@ const ImportSite = () => {
 						text
 					);
 
+					errorReported = true;
+
 					dispatch( {
 						type: 'set',
 						importPercent: 100,
@@ -1296,7 +1367,7 @@ const ImportSite = () => {
 					}, 1000 );
 				}
 
-				if ( false === cloneData.success ) {
+				if ( false === cloneData.success && errorReported === false ) {
 					throw cloneData.data;
 				}
 			} )
@@ -1308,74 +1379,6 @@ const ImportSite = () => {
 				);
 			} );
 	};
-
-	useEffect( () => {
-		if ( tryAgainCount > 0 ) {
-			checkRequiredPlugins( storedState );
-		}
-	}, [ tryAgainCount ] );
-
-	// Start the pre import process.
-	useEffect( () => {
-		if ( importStart || importEnd ) {
-			return;
-		}
-		if ( ! importError ) {
-			localStorage.setItem( 'st-import-start', +new Date() );
-			resetOldSite();
-		}
-	}, [ templateResponse ] );
-
-	// Start the pre import process.
-	useEffect( () => {
-		if ( importStart || importEnd ) {
-			return;
-		}
-
-		if ( templateResponse === null ) {
-			dispatch( {
-				type: 'set',
-				importStatus: __(
-					'Invalid demo selected. Please contact us.',
-					'astra-sites'
-				),
-			} );
-			return;
-		}
-
-		if (
-			! (
-				resetCustomizer &&
-				resetSiteOptions &&
-				resetContent &&
-				resetWidgets &&
-				resetDone
-			)
-		) {
-			return;
-		}
-
-		dispatch( {
-			type: 'set',
-			resetDone: true,
-		} );
-
-		if ( themeActivateFlag ) {
-			installAstra( storedState );
-		} else {
-			dispatch( {
-				type: 'set',
-				themeStatus: true,
-			} );
-		}
-	}, [
-		resetCustomizer,
-		resetSiteOptions,
-		resetContent,
-		resetWidgets,
-		resetDone,
-		templateResponse,
-	] );
 
 	const preventRefresh = ( event ) => {
 		event.returnValue = __(
@@ -1391,7 +1394,22 @@ const ImportSite = () => {
 			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line @wordpress/no-global-event-listener
 	} );
 
-	// Start the import process.
+	/**
+	 * When try again button is clicked:
+	 * There is a possibility that few/all the required plugins list is already installed.
+	 * We cre-check the status of the required plugins here.
+	 */
+	useEffect( () => {
+		if ( tryAgainCount > 0 ) {
+			checkRequiredPlugins( storedState );
+		}
+	}, [ tryAgainCount ] );
+
+	/**
+	 * Start the pre import process.
+	 * 		1. Install Astra Theme
+	 * 		2. Install Required Plugins.
+	 */
 	useEffect( () => {
 		/**
 		 * Do not process when Import is already going on.
@@ -1399,57 +1417,50 @@ const ImportSite = () => {
 		if ( importStart || importEnd ) {
 			return;
 		}
-
-		/**
-		 * Start the import process when following creteria to be fulfilled.
-		 *
-		 * 1. Theme should be installed
-		 * 2. Reset is done.
-		 * 3. Business Images are downloaded
-		 *
-		 */
-		if ( ! ( themeStatus && resetDone ) ) {
-			if ( importEnd ) {
-				setTimeout( () => {
-					dispatch( {
-						type: 'set',
-						currentIndex: currentIndex + 1,
-					} );
-				}, 5000 );
-				dispatch( {
-					type: 'set',
-					importStatus: __(
-						'Import is already done.',
-						'astra-sites'
-					),
-				} );
-			}
-			if ( importStart && ! importEnd ) {
-				dispatch( {
-					type: 'set',
-					importStatus: __(
-						'Import is already in progress.',
-						'astra-sites'
-					),
-				} );
-			}
-			return;
-		}
-		if ( null === templateResponse ) {
-			report( __( 'Fetching related demo failed.', 'astra-sites' ) );
-			return;
-		}
 		if ( ! importError ) {
-			startImport();
-		}
-	}, [ themeStatus, resetDone, templateResponse ] );
+			localStorage.setItem( 'st-import-start', +new Date() );
+			percentage += 5;
 
+			dispatch( {
+				type: 'set',
+				importStart: true,
+				importPercent: percentage,
+				importStatus: __( 'Starting Import.', 'astra-sites' ),
+			} );
+		}
+
+		if ( themeActivateFlag ) {
+			installAstra( storedState );
+		} else {
+			dispatch( {
+				type: 'set',
+				themeStatus: true,
+			} );
+		}
+		installRequiredPlugins();
+	}, [ templateResponse ] );
+
+	/**
+	 * Start the process only when:
+	 * 		1. Required plugins are installed and activated.
+	 * 		2. Astra Theme is installed
+	 */
 	useEffect( () => {
-		if ( requiredPluginsDone && resetDone && themeStatus ) {
-			importCartflowsFlows();
+		if ( requiredPluginsDone && themeStatus ) {
+			importPart1();
 		}
-	}, [ requiredPluginsDone, resetDone, themeStatus ] );
+	}, [ requiredPluginsDone, themeStatus ] );
 
+	/**
+	 * Start Part 2 of the import once the XML is imported sucessfully.
+	 */
+	useEffect( () => {
+		if ( xmlImportDone ) {
+			importPart2();
+		}
+	}, [ xmlImportDone ] );
+
+	// This checks if all the required plugins are installed and activated.
 	useEffect( () => {
 		if ( notActivatedList.length <= 0 && notInstalledList.length <= 0 ) {
 			dispatch( {
@@ -1459,6 +1470,7 @@ const ImportSite = () => {
 		}
 	}, [ notActivatedList.length, notInstalledList.length ] );
 
+	// Whenever a plugin is installed, this code sends an activation request.
 	useEffect( () => {
 		// Installed all required plugins.
 		if ( notActivatedList.length > 0 ) {

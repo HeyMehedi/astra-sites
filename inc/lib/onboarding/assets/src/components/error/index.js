@@ -35,11 +35,7 @@ const ErrorScreen = () => {
 			tryAgainCount: tryAgainCount + 1,
 
 			// Reset import flags.
-			resetCustomizer: false,
-			resetSiteOptions: false,
-			resetContent: false,
-			resetWidgets: false,
-			resetDone: false,
+			xmlImportDone: false,
 			resetData: [],
 			importStart: false,
 			importEnd: false,

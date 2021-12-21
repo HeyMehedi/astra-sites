@@ -4,6 +4,7 @@ import { decodeEntities } from '@wordpress/html-entities';
 import { Tooltip } from '@brainstormforce/starter-templates';
 import { useStateValue } from '../../store/store';
 import ICONS from '../../../icons';
+import { whiteLabelEnabled } from '../../utils/functions';
 
 const AdvancedSettings = () => {
 	const [ showSection, setShowSection ] = useState( true );
@@ -257,46 +258,47 @@ const AdvancedSettings = () => {
 							{ ICONS.questionMark }
 						</Tooltip>
 					</li>
-					{ starterTemplates.analytics !== 'yes' && (
-						<li>
-							<input
-								type="checkbox"
-								id="analytics-content"
-								name="analytics-content"
-								defaultChecked={ analyticsFlag }
-								onChange={ updateAnalyticsFlag }
-							/>
-							<label htmlFor="analytics-content">
-								{ ' ' }
-								{ __(
-									'Share Non-Sensitive Data',
-									'astra-sites'
-								) }
-							</label>
-							<Tooltip
-								content={
-									<div>
-										{ __(
-											'Help our developers build better templates and products for you by sharing anonymous and non-sensitive data about your website.',
-											'astra-sites'
-										) }{ ' ' }
-										<a
-											href="https://store.brainstormforce.com/usage-tracking/?utm_source=wp_dashboard&utm_medium=general_settings&utm_campaign=usage_tracking"
-											target="_blank"
-											rel="noreferrer noopener"
-										>
+					{ ! whiteLabelEnabled() &&
+						starterTemplates.analytics !== 'yes' && (
+							<li>
+								<input
+									type="checkbox"
+									id="analytics-content"
+									name="analytics-content"
+									defaultChecked={ analyticsFlag }
+									onChange={ updateAnalyticsFlag }
+								/>
+								<label htmlFor="analytics-content">
+									{ ' ' }
+									{ __(
+										'Share Non-Sensitive Data',
+										'astra-sites'
+									) }
+								</label>
+								<Tooltip
+									content={
+										<div>
 											{ __(
-												'Learn More',
+												'Help our developers build better templates and products for you by sharing anonymous and non-sensitive data about your website.',
 												'astra-sites'
-											) }
-										</a>
-									</div>
-								}
-							>
-								{ ICONS.questionMark }
-							</Tooltip>
-						</li>
-					) }
+											) }{ ' ' }
+											<a
+												href="https://store.brainstormforce.com/usage-tracking/?utm_source=wp_dashboard&utm_medium=general_settings&utm_campaign=usage_tracking"
+												target="_blank"
+												rel="noreferrer noopener"
+											>
+												{ __(
+													'Learn More',
+													'astra-sites'
+												) }
+											</a>
+										</div>
+									}
+								>
+									{ ICONS.questionMark }
+								</Tooltip>
+							</li>
+						) }
 				</ul>
 			</div>
 		</div>

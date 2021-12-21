@@ -160,6 +160,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_filter( 'heartbeat_received', array( $this, 'search_push' ), 10, 2 );
 			add_filter( 'status_header', array( $this, 'status_header' ), 10, 4 );
 			add_filter( 'wp_php_error_message', array( $this, 'php_error_message' ), 10, 2 );
+			add_filter( 'wp_import_post_data_processed', array( $this, 'wp_slash_after_xml_import' ), 99, 2 );
+		}
+
+		/**
+		 * Add slashes while importing the XML with WordPress Importer v2.
+		 *
+		 * @param array $postdata Processed Post data.
+		 * @param array $data Post data.
+		 */
+		public function wp_slash_after_xml_import( $postdata, $data ) {
+			return wp_slash( $postdata );
 		}
 
 		/**

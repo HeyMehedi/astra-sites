@@ -295,6 +295,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'cartflows_flow_importer_args', array( $this, 'change_flow_status' ) );
 			add_action( 'cartflows_flow_imported', array( $this, 'track_flows' ) );
 			add_action( 'cartflows_step_imported', array( $this, 'track_flows' ) );
+			add_filter( 'cartflows_enable_imported_content_processing', '__return_false' );
 
 			$url = ( isset( $_REQUEST['cartflows_url'] ) ) ? urldecode( $_REQUEST['cartflows_url'] ) : urldecode( $url ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( ! empty( $url ) && is_callable( 'CartFlows_Importer::get_instance' ) ) {
