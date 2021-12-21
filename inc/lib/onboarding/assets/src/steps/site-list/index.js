@@ -50,6 +50,7 @@ const SiteList = () => {
 			templateResponse: null,
 			selectedTemplateName: '',
 			selectedTemplateType: '',
+			shownRequirementOnce: false,
 		} );
 
 		const response = getSitesBySearchTerm(

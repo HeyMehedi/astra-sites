@@ -6,6 +6,7 @@ import './style.scss';
 import ICONS from '../../../icons';
 import { Button } from '../../ui/style';
 import { PreviousStepLink } from '../../components';
+import { whiteLabelEnabled } from '../../utils/functions';
 
 const Welcome = () => {
 	const [ { currentIndex }, dispatch ] = useStateValue();
@@ -44,26 +45,28 @@ const Welcome = () => {
 							'astra-sites'
 						) }
 					</p>
-					<div className="video-showcase" onClick={ handleClick }>
-						{ showClickToPlay && (
-							<div className="click-to-play-wrap">
-								<span className="click-btn-text">
-									{ ICONS.clickToPlay }
-								</span>
-								<span className="youtube-btn middle-content">
-									{ ICONS.youtube }
-								</span>
-							</div>
-						) }
-						<iframe
-							src="https://www.youtube-nocookie.com/embed/Ch6Yg-9eCyc?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&modestbranding=1&loop=1"
-							frameBorder="0"
-							allow="autoplay; encrypted-media"
-							allowFullScreen
-							title="st-welcome-video"
-							id="st-welcome-video"
-						/>
-					</div>
+					{ ! whiteLabelEnabled() && (
+						<div className="video-showcase" onClick={ handleClick }>
+							{ showClickToPlay && (
+								<div className="click-to-play-wrap">
+									<span className="click-btn-text">
+										{ ICONS.clickToPlay }
+									</span>
+									<span className="youtube-btn middle-content">
+										{ ICONS.youtube }
+									</span>
+								</div>
+							) }
+							<iframe
+								src="https://www.youtube-nocookie.com/embed/Ch6Yg-9eCyc?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&modestbranding=1&loop=1"
+								frameBorder="0"
+								allow="autoplay; encrypted-media"
+								allowFullScreen
+								title="st-welcome-video"
+								id="st-welcome-video"
+							/>
+						</div>
+					) }
 					<div className="get-started-wrap">
 						<Button onClick={ nextStep }>
 							{ __( 'Build Your Website Now', 'astra-sites' ) }

@@ -10,7 +10,13 @@ import './style.scss';
 
 const Survey = () => {
 	const [
-		{ currentIndex, builder, requiredPlugins, analyticsFlag },
+		{
+			currentIndex,
+			builder,
+			requiredPlugins,
+			analyticsFlag,
+			shownRequirementOnce,
+		},
 		dispatch,
 	] = useStateValue();
 
@@ -54,9 +60,17 @@ const Survey = () => {
 		};
 	}
 
+	let requirementsFlag;
+	if ( shownRequirementOnce === true ) {
+		requirementsFlag = false;
+	} else {
+		requirementsFlag =
+			Object.keys( requirementsErrors ).length > 0 ||
+			Object.keys( requirementWarning ).length > 0;
+	}
+
 	const [ showRequirementCheck, setShowRequirementCheck ] = useState(
-		Object.keys( requirementsErrors ).length > 0 ||
-			Object.keys( requirementWarning ).length > 0
+		requirementsFlag
 	);
 
 	const [ formDetails, setFormDetails ] = useState( {
@@ -206,6 +220,14 @@ const Survey = () => {
 		);
 	};
 
+	const handleRequirementCheck = () => {
+		setShowRequirementCheck( false );
+		dispatch( {
+			type: 'set',
+			shownRequirementOnce: true,
+		} );
+	};
+
 	const requirementCheck = () => {
 		return (
 			<div className="requirement-check-wrap">
@@ -270,7 +292,7 @@ const Survey = () => {
 				</ul>
 				<button
 					className="submit-survey-btn button-text d-flex-center-align"
-					onClick={ () => setShowRequirementCheck( false ) }
+					onClick={ handleRequirementCheck }
 					disabled={
 						Object.keys( requirementsErrors ).length > 0
 							? true

@@ -53,7 +53,6 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 		 * @return void
 		 */
 		public function report_error() {
-
 			$api_url = add_query_arg( [], trailingslashit( Astra_Sites::get_instance()->get_api_domain() ) . 'wp-json/starter-templates/v2/import-error/' );
 
 			if ( ! astra_sites_is_valid_url( $api_url ) ) {
@@ -65,8 +64,6 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 				);
 			}
 
-			$plugins = json_decode( stripslashes( $_POST['plugins'] ), true );
-
 			$api_args = array(
 				'timeout'   => 3,
 				'blocking'  => true,
@@ -76,17 +73,24 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 					'id'	=> $_POST['id'],
 					'version' => ASTRA_SITES_VER,
 					'abspath' => ABSPATH,
+					'server' => array(
+						'php_version' => $this->get_php_version(),
+						'php_post_max_size' => ini_get( 'post_max_size' ),
+						'php_max_execution_time' => ini_get( 'max_execution_time' ),
+						'max_input_time' => ini_get( 'max_input_time' ),
+						'php_memory_limit' => ini_get( 'memory_limit' ),
+						'php_max_input_vars' => ini_get( 'max_input_vars' ), // phpcs:ignore:PHPCompatibility.IniDirectives.NewIniDirectives.max_input_varsFound
+					),
 				),
 			);
 
 			$request = wp_remote_post( $api_url, $api_args );
 
 			if ( is_wp_error( $request ) ) {
-				$wp_error_code = $request->get_error_code();
 				wp_send_json_error( $request );
 			}
 
-			$code      = (int) wp_remote_retrieve_response_code( $request );
+			$code = (int) wp_remote_retrieve_response_code( $request );
 			$data = json_decode( wp_remote_retrieve_body( $request ), true );
 
 			if ( 200 === $code ) {
@@ -94,6 +98,20 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 			}
 
 			wp_send_json_error( $data );
+		}
+
+		/**
+		 * Get installed PHP version.
+		 *
+		 * @return float PHP version.
+		 * @since 3.0.16
+		 */
+		private function get_php_version() {
+			if ( defined( 'PHP_MAJOR_VERSION' ) && defined( 'PHP_MINOR_VERSION' ) && defined( 'PHP_RELEASE_VERSION' ) ) { // phpcs:ignore
+				return PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
+			}
+
+			return phpversion();
 		}
 
 		/**

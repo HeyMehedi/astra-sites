@@ -24,7 +24,7 @@ const ImportLoader = () => {
 	if ( importPercent > 50 && importPercent <= 75 ) {
 		percentClass = 'import-3';
 		stepText = __(
-			'3. Setting up customizer settings and ther site settings',
+			'3. Setting up customizer settings and the site settings',
 			'astra-sites'
 		);
 	}
