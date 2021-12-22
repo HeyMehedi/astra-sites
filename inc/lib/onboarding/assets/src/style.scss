@@ -533,6 +533,13 @@ body.step-import-site:not( .st-error ) .step-header a {
 	align-items: center;
 	justify-content: center;
 }
+.d-flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
 
 //Common Css.
 .starter-templates-ai-steps {
@@ -719,6 +726,25 @@ body.step-import-site:not( .st-error ) .step-header a {
 			font-size: var(--st-font-size-xs);
 			margin-bottom: 10px;
 		}
+		.step-content.customize-typography-colors {
+			.step-controls {
+				padding: 0;
+			}
+			.colors-section,
+			.typography-section {
+				padding: 8%;
+			}
+			.colors-section {
+				border-bottom: 1px solid var(--st-border-color);
+			}
+		}
+		.customize-reset-btn {
+			cursor: pointer;
+			&.disabled {
+				cursor: not-allowed;
+				opacity: 0.5;
+			}
+		}
 	}
 	.step-customizer & .step-content {
 		padding: 0;
@@ -825,7 +851,7 @@ body.step-import-site:not( .st-error ) .step-header a {
 	100% { opacity: 1; }
 }
 
-.step-content.customize-site-colors  .content-wrapper{
+.step-content.customize-typography-colors  .content-wrapper{
 	animation: colors-screen-fadeIn 500ms;
 }
 

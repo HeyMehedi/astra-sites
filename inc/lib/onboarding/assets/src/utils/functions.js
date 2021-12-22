@@ -77,7 +77,7 @@ export const getDefaultColorPalette = ( demo ) => {
 				defaultPaletteValues = [
 					{
 						slug: 'default',
-						title: __( 'Default', 'astra-sites' ),
+						title: __( 'DEFAULT COLORS', 'astra-sites' ),
 						colors: globalPalette,
 					},
 				];

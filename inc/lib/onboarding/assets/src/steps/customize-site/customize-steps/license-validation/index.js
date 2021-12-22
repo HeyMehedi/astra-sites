@@ -9,7 +9,7 @@ const LicenseValidation = () => {
 	useEffect( () => {
 		dispatch( {
 			type: 'set',
-			designStep: 1,
+			designStep: 2,
 		} );
 	}, [] );
 
