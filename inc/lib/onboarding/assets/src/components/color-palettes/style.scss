@@ -5,10 +5,10 @@
     border-radius: var(--st-border-radius-4);
     display: flex;
     align-items: center;
-    padding: 10px 12px;
+    padding: 8px;
     cursor: pointer;
-    margin-bottom: 15px;
     transition: all 0.2s ease-in-out;
+    justify-content: space-evenly;
 
     &:hover,
     &:focus,
@@ -31,10 +31,9 @@
 }
 
 .ist-palette-color {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    margin-left: 5px;
     border: 1px solid #eeeeee;
 
     &:first-child {
@@ -45,13 +44,12 @@
 .ist-colors-list {
     display: flex;
     flex: 1;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .ist-colors-title {
     display: flex;
     align-items: center;
-    margin-left: 10px;
     font-size: var(--st-font-size-xs);
     font-weight: var(--st-font-weight-bold);
     color: var(--st-color-heading);
@@ -71,4 +69,22 @@
 
 .ist-color-palette-active {
     border: 1px solid transparent;
+}
+
+.st-default-style-pallete {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    .ist-color-palette {
+        display: grid;
+        grid-template-columns: 53% 47%;
+    }
+
+    .ist-colors-list {
+        padding-left: 8px;
+    }
+}
+.st-others-style-pallete {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
 }

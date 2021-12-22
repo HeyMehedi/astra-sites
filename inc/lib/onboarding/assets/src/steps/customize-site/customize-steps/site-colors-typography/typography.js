@@ -6,6 +6,7 @@ import {
 	getDefaultTypography,
 	getHeadingFonts,
 } from '../../../../utils/functions';
+import { FONTS } from './other-fonts';
 
 const getFontName = ( fontName, inheritFont ) => {
 	if ( ! fontName ) {
@@ -29,124 +30,12 @@ const getFontName = ( fontName, inheritFont ) => {
 	}
 };
 
-export const FONTS = [
-	{
-		'body-font-family': "'Open Sans', sans-serif",
-		'body-font-variant': '400',
-		'body-font-weight': '400',
-		'font-size-body': {
-			desktop: 16,
-			tablet: '',
-			mobile: '',
-			'desktop-unit': 'px',
-			'tablet-unit': 'px',
-			'mobile-unit': 'px',
-		},
-		'body-line-height': '1.7',
-		'headings-font-family': "'Playfair Display', serif",
-		'headings-font-weight': '700',
-		'headings-line-height': '1.2',
-		'headings-font-variant': '700',
-	},
-	{
-		'body-font-family': "'Lora', serif",
-		'body-font-variant': '400',
-		'body-font-weight': '400',
-		'font-size-body': {
-			desktop: 16,
-			tablet: '',
-			mobile: '',
-			'desktop-unit': 'px',
-			'tablet-unit': 'px',
-			'mobile-unit': 'px',
-		},
-		'body-line-height': '',
-		'headings-font-family': "'Lato', sans-serif",
-		'headings-font-weight': '700',
-		'headings-line-height': '1.2',
-		'headings-font-variant': '700',
-	},
-	{
-		'body-font-family': "'Roboto', sans-serif",
-		'body-font-variant': '400',
-		'body-font-weight': '400',
-		'font-size-body': {
-			desktop: 17,
-			tablet: '',
-			mobile: '',
-			'desktop-unit': 'px',
-			'tablet-unit': 'px',
-			'mobile-unit': 'px',
-		},
-		'body-line-height': '',
-		'headings-font-family': "'Barlow Condensed', sans-serif",
-		'headings-font-weight': '600',
-		'headings-line-height': '1.2',
-		'headings-font-variant': '600',
-	},
-	{
-		'body-font-family': "'Source Sans Pro', sans-serif",
-		'body-font-variant': '400',
-		'body-font-weight': '400',
-		'font-size-body': {
-			desktop: 17,
-			tablet: '',
-			mobile: '',
-			'desktop-unit': 'px',
-			'tablet-unit': 'px',
-			'mobile-unit': 'px',
-		},
-		'body-line-height': 1.7,
-		'headings-font-family': "'Montserrat', sans-serif",
-		'headings-font-weight': '700',
-		'headings-line-height': '1.3',
-		'headings-font-variant': '700',
-	},
-	{
-		'body-font-family': "'Karla', sans-serif",
-		'body-font-variant': '400',
-		'body-font-weight': '400',
-		'font-size-body': {
-			desktop: 17,
-			tablet: '',
-			mobile: '',
-			'desktop-unit': 'px',
-			'tablet-unit': 'px',
-			'mobile-unit': 'px',
-		},
-		'body-line-height': '',
-		'headings-font-family': "'Rubik', sans-serif",
-		'headings-font-weight': '500',
-		'headings-line-height': '1.3',
-		'headings-font-variant': '500',
-	},
-	{
-		'body-font-family': "'Work Sans', sans-serif",
-		'body-font-variant': '400',
-		'body-font-weight': '400',
-		'font-size-body': {
-			desktop: 16,
-			tablet: '',
-			mobile: '',
-			'desktop-unit': 'px',
-			'tablet-unit': 'px',
-			'mobile-unit': 'px',
-		},
-		'body-line-height': '',
-		'headings-font-family': "'DM Serif Display', serif",
-		'headings-font-weight': '400',
-		'headings-line-height': '1.2',
-		'headings-font-variant': '400',
-	},
-];
-
-const SiteTypographyControls = () => {
-	const [
-		{ typographyIndex, typography, templateResponse },
-		dispatch,
-	] = useStateValue();
+const TypographyWrapper = () => {
+	const [ { typographyIndex, templateResponse }, dispatch ] = useStateValue();
 	let [ fonts, setFonts ] = useState( FONTS );
-	const [ headingFonts, setHeadingFonts ] = useState( [] );
+
+	const head = getHeadingFonts( templateResponse );
+	const [ headingFonts ] = useState( head );
 
 	/**
 	 * Add selected demo typograply as default typography
@@ -155,8 +44,6 @@ const SiteTypographyControls = () => {
 		if ( templateResponse !== null ) {
 			const defaultFonts = [];
 			const defaultTypography = getDefaultTypography( templateResponse );
-			const head = getHeadingFonts( templateResponse );
-			setHeadingFonts( head );
 
 			defaultFonts.push( defaultTypography );
 
@@ -237,8 +124,8 @@ const SiteTypographyControls = () => {
 					document.head.appendChild( node );
 				}
 			}
-
 			if ( 0 === typographyIndex ) {
+				sendPreview( defaultTypography );
 				dispatch( {
 					type: 'set',
 					typography: defaultTypography,
@@ -252,33 +139,34 @@ const SiteTypographyControls = () => {
 		}
 	}, [ templateResponse ] );
 
-	/**
-	 * Display selected typography
-	 */
-	useEffect( () => {
-		const newTypography = { ...typography, ...headingFonts };
+	const sendPreview = ( typography ) => {
+		const newTypography = headingFonts
+			? { ...typography, ...headingFonts }
+			: typography;
 
 		sendPostMessage( {
 			param: 'siteTypography',
 			data: JSON.parse( JSON.stringify( newTypography ) ),
 		} );
-	}, [ typography ] );
+	};
 
 	return (
-		<>
+		<div className="typography-section">
 			<FontSelector
 				selected={ typographyIndex }
 				options={ fonts }
 				onSelect={ ( event, selectedFont ) => {
+					const typography = fonts[ selectedFont ] || fonts[ 0 ];
+					sendPreview( typography );
 					dispatch( {
 						type: 'set',
 						typographyIndex: selectedFont,
-						typography: fonts[ selectedFont ] || fonts[ 0 ],
+						typography,
 					} );
 				} }
 			/>
-		</>
+		</div>
 	);
 };
 
-export default SiteTypographyControls;
+export default TypographyWrapper;

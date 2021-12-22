@@ -46,11 +46,17 @@
 
 .ist-other-fonts {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    font-size: var(--st-font-size-m);
 
     .ist-font {
         text-align: left;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: baseline;
+        color: var( --st-color-heading );
     }
 
     svg {
@@ -70,5 +76,27 @@
 .customize-site-typography {
     .ist-default-fonts-heading {
         margin: 0px 0px 17px 0;
+    }
+}
+
+.ist-default-fonts {
+    margin-top: 25px;
+    margin-bottom: 15px;
+
+    .heading-font-preview {
+        font-size: var(--st-font-size-m);
+        color: var( --st-color-heading );
+    }
+    .body-font-preview {
+        color: var( --st-color-body );
+        font-size: var( --st-font-size-m );
+    }
+}
+.ist-other-fonts {
+    .heading-font-preview {
+        font-size: var(--st-font-size-xl);
+    }
+    .body-font-preview {
+        font-size: var( --st-font-size-xl );
     }
 }
