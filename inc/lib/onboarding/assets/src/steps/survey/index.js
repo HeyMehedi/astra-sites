@@ -228,7 +228,42 @@ const Survey = () => {
 		} );
 	};
 
-	const requirementCheck = () => {
+	const hardRequirement = () => {
+		return (
+			<div className="requirement-check-wrap">
+				<h1>{ __( "We're Almost There!", 'astra-sites' ) }</h1>
+
+				<p>
+					{ __(
+						'The demo you are trying to import requires a few plugins to be installed and activated. Your current PHP version does not match the minimum requirement for these plugins.',
+						'astra-sites'
+					) }
+				</p>
+
+				<p className="current-php-version">
+					<strong>
+						{ `Current PHP version: ${ starterTemplates.php_version }` }
+					</strong>
+				</p>
+
+				<ul className="requirement-check-list">
+					{ Object.values( requiredPlugins.incompatible_plugins ).map(
+						( value, index ) => {
+							return (
+								<li key={ index }>
+									<div className="requirement-list-item">
+										{ `${ value.name } - PHP Version: ${ value.min_php_version } or higher` }
+									</div>
+								</li>
+							);
+						}
+					) }
+				</ul>
+			</div>
+		);
+	};
+
+	const optionalRequirement = () => {
 		return (
 			<div className="requirement-check-wrap">
 				<h1>{ __( "We're Almost There!", 'astra-sites' ) }</h1>
@@ -304,6 +339,13 @@ const Survey = () => {
 				</button>
 			</div>
 		);
+	};
+
+	const requirementCheck = () => {
+		if ( Object.keys( requiredPlugins.incompatible_plugins ).length > 0 ) {
+			return hardRequirement();
+		}
+		return optionalRequirement();
 	};
 
 	return (
