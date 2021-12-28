@@ -2189,11 +2189,22 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$plugin_updates          = get_plugin_updates();
 			$update_avilable_plugins = array();
+			$incompatible_plugins = array();
 
 			if ( ! empty( $required_plugins ) ) {
 				foreach ( $required_plugins as $key => $plugin ) {
 
 					$plugin = (array) $plugin;
+
+					if ( 'elementor' === $plugin['slug'] && version_compare( PHP_VERSION, '7.0', '<' ) ) {
+						$plugin['min_php_version'] = '7.0';
+						$incompatible_plugins[] = $plugin;
+					}
+
+					if ( 'presto-player' === $plugin['slug'] && version_compare( PHP_VERSION, '7.3', '<' ) ) {
+						$plugin['min_php_version'] = '7.3';
+						$incompatible_plugins[] = $plugin;
+					}
 
 					/**
 					 * Has Pro Version Support?
@@ -2268,6 +2279,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'required_plugins'             => $response,
 				'third_party_required_plugins' => $third_party_required_plugins,
 				'update_avilable_plugins'      => $update_avilable_plugins,
+				'incompatible_plugins'         => $incompatible_plugins,
 			);
 
 			if ( wp_doing_ajax() ) {

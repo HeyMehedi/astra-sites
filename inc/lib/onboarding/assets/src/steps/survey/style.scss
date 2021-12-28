@@ -151,6 +151,9 @@
         line-height:1.4;
     }
     .requirement-check-wrap {
+        .current-php-version {
+            margin-top: 10px;
+        }
         button.submit-survey-btn:disabled {
             background: var(--st-color-light-gray);
             color: var(--st-color-placeholder);
