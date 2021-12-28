@@ -135,8 +135,8 @@ We are open to suggestions and would love to work on topics that our users are l
 
 v3.0.18 - 28-December-2021
 - Improvement: Added a pre-import screen to notify about incompatible PHP versions for a few plugins.
+- Improvement: Better Color Palettes.
 - Fix: Reset for Color Palette and Typography not working in some cases.
-- Fix: Modified the condition when a user can tweet about the import process.
 
 v3.0.17 - 22-December-2021
 - Improvement: More and better color palettes and typography while customizing the demo.
