@@ -319,6 +319,8 @@ class Astra_WXR_Importer {
 			flush();
 		}
 
+		do_action( 'astra_sites_before_sse_import' );
+
 		// Enable default GD library.
 		add_filter( 'wp_image_editors', array( $this, 'enable_wp_image_editor_gd' ) );
 
