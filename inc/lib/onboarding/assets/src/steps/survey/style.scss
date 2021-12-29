@@ -195,3 +195,13 @@
         }
     }
 }
+
+.subscription-agreement-checkbox-label {
+    display: block;
+    font-size: var(--st-font-size-xs);
+    margin-bottom: 20px;
+}
+
+input.subscription-agreement-checkbox {
+    margin-right: 10px;
+}
