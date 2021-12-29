@@ -128,6 +128,8 @@ const ImportSite = () => {
 	 * Start Import Part 1.
 	 */
 	const importPart1 = async () => {
+		await setStartFlag();
+
 		await resetOldSite();
 
 		await importCartflowsFlows();
@@ -150,6 +152,17 @@ const ImportSite = () => {
 		await customizeWebsite();
 
 		importDone();
+	};
+
+	const setStartFlag = async () => {
+		const content = new FormData();
+		content.append( 'action', 'astra-sites-set-start-flag' );
+		content.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		await fetch( ajaxurl, {
+			method: 'post',
+			body: content,
+		} );
 	};
 
 	/**

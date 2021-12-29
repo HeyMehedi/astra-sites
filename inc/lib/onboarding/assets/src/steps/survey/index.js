@@ -78,6 +78,7 @@ const Survey = () => {
 		email: '',
 		wp_user_type: '',
 		build_website_for: '',
+		opt_in: false,
 	} );
 
 	const updateFormDetails = ( field, value ) => {
@@ -125,12 +126,17 @@ const Survey = () => {
 			return;
 		}
 
+		if ( ! formDetails.opt_in ) {
+			return;
+		}
+
 		const subscriptionFields = {
 			EMAIL: formDetails.email,
 			FIRSTNAME: formDetails.first_name,
 			PAGE_BUILDER: builder,
 			WP_USER_TYPE: formDetails.wp_user_type,
 			BUILD_WEBSITE_FOR: formDetails.build_website_for,
+			OPT_IN: formDetails.opt_in,
 		};
 
 		const content = new FormData();

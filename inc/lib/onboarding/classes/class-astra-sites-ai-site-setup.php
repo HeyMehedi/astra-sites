@@ -53,6 +53,7 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 		 * @return void
 		 */
 		public function report_error() {
+			delete_transient( 'astra_sites_import_started' );
 			$api_url = add_query_arg( [], trailingslashit( Astra_Sites::get_instance()->get_api_domain() ) . 'wp-json/starter-templates/v2/import-error/' );
 
 			if ( ! astra_sites_is_valid_url( $api_url ) ) {

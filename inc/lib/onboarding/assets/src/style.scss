@@ -827,6 +827,10 @@ body.step-import-site:not( .st-error ) .step-header a {
 	}
 }
 
+.stc-tooltip-content a {
+	color: var(--st-color-white);
+}
+
 @keyframes rotate-alternate {
 	from {
 		transform: rotate(360deg);
