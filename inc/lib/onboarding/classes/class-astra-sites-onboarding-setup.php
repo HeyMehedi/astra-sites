@@ -65,6 +65,17 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 				);
 			}
 
+			$post_id = ( isset( $_POST['id'] ) ) ? intval( $_POST['id'] ) : 0;
+
+			if ( 0 === $post_id ) {
+				wp_send_json_error(
+					array(
+						'message' => sprintf( __( 'Invalid Post ID - %d', 'astra-sites' ), $post_id ),
+						'code'    => 'Error',
+					)
+				);
+			}
+
 			if (
 				strpos( ABSPATH, 'unaux' ) !== false ||
 				strpos( ABSPATH, 'epizy' ) !== false
