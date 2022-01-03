@@ -2193,16 +2193,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$incompatible_plugins = array();
 
 			if ( ! empty( $required_plugins ) ) {
+				$php_version = Astra_Sites_Onboarding_Setup::get_instance()->get_php_version();
 				foreach ( $required_plugins as $key => $plugin ) {
 
 					$plugin = (array) $plugin;
 
-					if ( 'elementor' === $plugin['slug'] && version_compare( PHP_VERSION, '7.0', '<' ) ) {
+					if ( 'woocommerce' === $plugin['slug'] && version_compare( $php_version, '7.0', '<' ) ) {
 						$plugin['min_php_version'] = '7.0';
 						$incompatible_plugins[] = $plugin;
 					}
 
-					if ( 'presto-player' === $plugin['slug'] && version_compare( PHP_VERSION, '7.3', '<' ) ) {
+					if ( 'presto-player' === $plugin['slug'] && version_compare( $php_version, '7.3', '<' ) ) {
 						$plugin['min_php_version'] = '7.3';
 						$incompatible_plugins[] = $plugin;
 					}

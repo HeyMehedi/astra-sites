@@ -88,8 +88,21 @@ const Survey = () => {
 		} ) );
 	};
 
+	const setStartFlag = () => {
+		const content = new FormData();
+		content.append( 'action', 'astra-sites-set-start-flag' );
+		content.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		fetch( ajaxurl, {
+			method: 'post',
+			body: content,
+		} );
+	};
+
 	const handleSurveyFormSubmit = ( e ) => {
 		e.preventDefault();
+
+		setStartFlag();
 
 		setTimeout( () => {
 			dispatch( {
