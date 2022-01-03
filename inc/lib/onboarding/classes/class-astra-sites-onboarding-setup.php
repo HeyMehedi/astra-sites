@@ -10,12 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
+if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 
 	/**
 	 * AI Site Setup
 	 */
-	class Astra_Sites_AI_Site_Setup {
+	class Astra_Sites_Onboarding_Setup {
 
 		/**
 		 * Member Variable
@@ -65,11 +65,22 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 				);
 			}
 
+			$post_id = ( isset( $_POST['id'] ) ) ? intval( $_POST['id'] ) : 0;
+
+			if ( 0 === $post_id ) {
+				wp_send_json_error(
+					array(
+						'message' => sprintf( __( 'Invalid Post ID - %d', 'astra-sites' ), $post_id ),
+						'code'    => 'Error',
+					)
+				);
+			}
+
 			if (
 				strpos( ABSPATH, 'unaux' ) !== false ||
 				strpos( ABSPATH, 'epizy' ) !== false
 			) {
-				wp_send_json_success( __( 'Bypassing the this error.', 'astra-sites' ) );
+				wp_send_json_success( __( 'Bypassing this error.', 'astra-sites' ) );
 			}
 
 			$api_args = array(
@@ -114,7 +125,7 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 		 * @return float PHP version.
 		 * @since 3.0.16
 		 */
-		private function get_php_version() {
+		public function get_php_version() {
 			if ( defined( 'PHP_MAJOR_VERSION' ) && defined( 'PHP_MINOR_VERSION' ) && defined( 'PHP_RELEASE_VERSION' ) ) { // phpcs:ignore
 				return PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
 			}
@@ -257,6 +268,6 @@ if ( ! class_exists( 'Astra_Sites_AI_Site_Setup' ) ) :
 		}
 	}
 
-	Astra_Sites_AI_Site_Setup::get_instance();
+	Astra_Sites_Onboarding_Setup::get_instance();
 
 endif;

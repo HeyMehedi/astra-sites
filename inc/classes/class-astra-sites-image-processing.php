@@ -51,8 +51,7 @@ class Astra_Sites_Image_Processing {
 	 * Add filters to defer image subsizes processing while importing.
 	 */
 	public function defer_image_processing_while_import() {
-		$has_import_process_started = get_transient( 'astra_sites_import_started' );
-		if ( 'yes' === $has_import_process_started ) {
+		if ( astra_sites_has_import_started() ) {
 			$this->defer_image_subsizes();
 		}
 	}
