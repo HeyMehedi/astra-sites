@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
 import { ICONS } from '../icons';
 import './style.scss';
 import Tooltip from '../tooltip';
+import PremiumBadge from '../premium-badge';
 
 // Grid Component
 const Grid = ( {
@@ -41,9 +42,7 @@ const Grid = ( {
 					<div className="stc-grid-item" key={ index }>
 						<div className="stc-grid-item-inner">
 							{ item.badge ? (
-								<div className="stc-grid-item-badge">
-									{ item.badge }
-								</div>
+								<PremiumBadge badge={ item.badge } />
 							) : null }
 
 							<div

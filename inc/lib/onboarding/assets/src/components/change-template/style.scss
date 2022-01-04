@@ -9,6 +9,11 @@
 
     .template-name h5 {
         color: var(--st-color-body);
+        margin-bottom: 5px;
+    }
+
+    .stc-grid-item-badge {
+        position: unset;
     }
 
     .label {

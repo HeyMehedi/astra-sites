@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { DefaultStep, PreviousStepLink } from '../../components/index';
 import { useStateValue } from '../../store/store';
 import './style.scss';
+const { imageDir, isBrizyEnabled } = starterTemplates;
 
 const PageBuilder = () => {
 	const [ { currentIndex }, dispatch ] = useStateValue();
@@ -78,7 +79,7 @@ const PageBuilder = () => {
 						>
 							<div className="elementor-image-wrap image-wrap">
 								<img
-									src={ `${ starterTemplates.imageDir }block-editor.svg` }
+									src={ `${ imageDir }block-editor.svg` }
 									alt={ __( 'Block Editor', 'astra-sites' ) }
 								/>
 							</div>
@@ -96,7 +97,7 @@ const PageBuilder = () => {
 						>
 							<div className="elementor-image-wrap image-wrap">
 								<img
-									src={ `${ starterTemplates.imageDir }elementor.svg` }
+									src={ `${ imageDir }elementor.svg` }
 									alt={ __( 'Elementor', 'astra-sites' ) }
 								/>
 							</div>
@@ -114,7 +115,7 @@ const PageBuilder = () => {
 						>
 							<div className="beaver-builder-image-wrap image-wrap">
 								<img
-									src={ `${ starterTemplates.imageDir }beaver-builder.svg` }
+									src={ `${ imageDir }beaver-builder.svg` }
 									alt={ __(
 										'Beaver Builder',
 										'astra-sites'
@@ -123,7 +124,7 @@ const PageBuilder = () => {
 							</div>
 							<h6>{ __( 'Beaver Builder', 'astra-sites' ) }</h6>
 						</div>
-						{ starterTemplates.isBrizyEnabled === '1' && (
+						{ isBrizyEnabled === '1' && (
 							<div
 								className="page-builder-item d-flex-center-align"
 								onClick={ () => {
@@ -136,7 +137,7 @@ const PageBuilder = () => {
 							>
 								<div className="brizy-image-wrap image-wrap">
 									<img
-										src={ `${ starterTemplates.imageDir }brizy.svg` }
+										src={ `${ imageDir }brizy.svg` }
 										alt={ __( 'Brizy', 'astra-sites' ) }
 									/>
 								</div>

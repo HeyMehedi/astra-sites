@@ -69,6 +69,18 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 
 			add_action( 'astra_sites_before_delete_imported_posts', array( $this, 'force_delete_kit' ), 10, 2 );
 			add_action( 'astra_sites_before_sse_import', array( $this, 'disable_attachment_metadata' ) );
+
+			add_action( 'init', array( $this, 'init' ) );
+		}
+
+		/**
+		 * Remove the transient update check for plugins callback from Elementor.
+		 * This reduces the extra code execution for Elementor.
+		 */
+		public function init() {
+			if ( astra_sites_has_import_started() && null !== \Elementor\Plugin::$instance->admin ) {
+				remove_filter( 'pre_set_site_transient_update_plugins', array( \Elementor\Plugin::$instance->admin->get_component( 'canary-deployment' ), 'check_version' ) );
+			}
 		}
 
 		/**

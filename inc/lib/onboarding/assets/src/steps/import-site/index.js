@@ -16,6 +16,7 @@ import {
 	divideIntoChunks,
 	checkRequiredPlugins,
 } from './import-utils';
+const { reportError } = starterTemplates;
 
 import './style.scss';
 
@@ -101,6 +102,9 @@ const ImportSite = () => {
 		solution = '',
 		stack = ''
 	) => {
+		if ( ! reportError ) {
+			return;
+		}
 		const reportErr = new FormData();
 		reportErr.append( 'action', 'report_error' );
 		reportErr.append(

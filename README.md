@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.21  
+**Stable tag:** 3.0.22  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -132,6 +132,10 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.22 - 4-January-2022
+- Fix: Improved customizer import process.
+- Fix: Improved import process for Elementor based sites.
 
 v3.0.21 - 3-January-2022
 - Fix: Avoided redirection for Beaver Builder plugin when activated from import screen.

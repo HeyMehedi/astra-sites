@@ -76,13 +76,6 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 				);
 			}
 
-			if (
-				strpos( ABSPATH, 'unaux' ) !== false ||
-				strpos( ABSPATH, 'epizy' ) !== false
-			) {
-				wp_send_json_success( __( 'Bypassing this error.', 'astra-sites' ) );
-			}
-
 			$api_args = array(
 				'timeout'   => 3,
 				'blocking'  => true,

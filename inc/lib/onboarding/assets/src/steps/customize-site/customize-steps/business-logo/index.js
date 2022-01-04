@@ -4,10 +4,7 @@ import { useStateValue } from '../../../../store/store';
 import ChangeTemplate from '../../../../components/change-template';
 
 const BusinessLogo = () => {
-	const [
-		{ licenseStatus, selectedTemplateType },
-		dispatch,
-	] = useStateValue();
+	const [ {}, dispatch ] = useStateValue();
 	useEffect( () => {
 		dispatch( {
 			type: 'set',
@@ -20,14 +17,6 @@ const BusinessLogo = () => {
 			<ChangeTemplate />
 			<div className="customizer-header">
 				<div className="header-name">
-					{ ! licenseStatus && 'free' !== selectedTemplateType && (
-						<p className="premium-notice">
-							{ __(
-								'This is a Premium Template',
-								'astra-sites'
-							) }
-						</p>
-					) }
 					<h3 className="ist-customizer-heading">
 						{ __( 'Logo', 'astra-sites' ) }
 					</h3>

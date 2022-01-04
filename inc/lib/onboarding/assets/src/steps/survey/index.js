@@ -7,6 +7,7 @@ import { useStateValue } from '../../store/store';
 import SurveyForm from './survey';
 import AdvancedSettings from './advanced-settings';
 import './style.scss';
+const { phpVersion, analytics } = starterTemplates;
 
 const Survey = () => {
 	const [
@@ -111,7 +112,7 @@ const Survey = () => {
 			} );
 		}, 500 );
 
-		if ( starterTemplates.analytics !== 'yes' ) {
+		if ( analytics !== 'yes' ) {
 			// Send data to analytics.
 			const answer = analyticsFlag ? 'yes' : 'no';
 			const optinAnswer = new FormData();
@@ -260,9 +261,7 @@ const Survey = () => {
 				</p>
 
 				<p className="current-php-version">
-					<strong>
-						{ `Current PHP version: ${ starterTemplates.php_version }` }
-					</strong>
+					<strong>{ `Current PHP version: ${ phpVersion }` }</strong>
 				</p>
 
 				<ul className="requirement-check-list">

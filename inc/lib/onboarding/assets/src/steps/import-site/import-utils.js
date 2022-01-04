@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+const { themeStatus, nonce } = starterTemplates;
 
 export const getDemo = async ( id, storedState ) => {
 	const [ { currentIndex }, dispatch ] = storedState;
@@ -157,7 +158,7 @@ export const installAstra = ( storedState ) => {
 	const themeSlug = 'astra';
 	let percentage = importPercent;
 
-	if ( 'not-installed' === starterTemplates.themeStatus ) {
+	if ( 'not-installed' === themeStatus ) {
 		if (
 			wp.updates.shouldRequestFilesystemCredentials &&
 			! wp.updates.ajaxLocked
@@ -189,7 +190,7 @@ export const installAstra = ( storedState ) => {
 		);
 	}
 
-	if ( 'installed-but-inactive' === starterTemplates.themeStatus ) {
+	if ( 'installed-but-inactive' === themeStatus ) {
 		// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 		setTimeout( function () {
 			const data = new FormData();
@@ -236,7 +237,7 @@ export const installAstra = ( storedState ) => {
 		}, 3000 );
 	}
 
-	if ( 'installed-and-active' === starterTemplates.themeStatus ) {
+	if ( 'installed-and-active' === themeStatus ) {
 		dispatch( {
 			type: 'set',
 			themeStatus: true,
@@ -253,7 +254,7 @@ export const setSiteLogo = async ( logo ) => {
 	data.append( 'param', 'site-logo' );
 	data.append( 'logo', logo.id );
 	data.append( 'logo-width', logo.width );
-	data.append( 'security', starterTemplates.nonce );
+	data.append( 'security', nonce );
 
 	await fetch( ajaxurl, {
 		method: 'post',
@@ -270,7 +271,7 @@ export const setColorPalettes = async ( palette ) => {
 	data.append( 'action', 'astra_sites_set_site_data' );
 	data.append( 'param', 'site-colors' );
 	data.append( 'palette', palette );
-	data.append( 'security', starterTemplates.nonce );
+	data.append( 'security', nonce );
 
 	await fetch( ajaxurl, {
 		method: 'post',
@@ -283,7 +284,7 @@ export const saveTypography = async ( selectedValue ) => {
 	data.append( 'action', 'astra_sites_set_site_data' );
 	data.append( 'param', 'site-typography' );
 	data.append( 'typography', JSON.stringify( selectedValue ) );
-	data.append( 'security', starterTemplates.nonce );
+	data.append( 'security', nonce );
 
 	await fetch( ajaxurl, {
 		method: 'post',

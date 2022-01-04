@@ -5,6 +5,7 @@ import { Tooltip } from '@brainstormforce/starter-templates';
 import { useStateValue } from '../../store/store';
 import ICONS from '../../../icons';
 import { whiteLabelEnabled } from '../../utils/functions';
+const { themeStatus, firstImportStatus, analytics } = starterTemplates;
 
 const AdvancedSettings = () => {
 	const [ showSection, setShowSection ] = useState( true );
@@ -73,9 +74,7 @@ const AdvancedSettings = () => {
 			: [];
 
 	const themeStatusClass =
-		'installed-and-active' !== starterTemplates.themeStatus
-			? 'theme-check'
-			: '';
+		'installed-and-active' !== themeStatus ? 'theme-check' : '';
 
 	return (
 		<div
@@ -91,7 +90,7 @@ const AdvancedSettings = () => {
 			</p>
 			<div className="survey-advanced-section">
 				<ul>
-					{ 'yes' === starterTemplates.firstImportStatus && (
+					{ 'yes' === firstImportStatus && (
 						<li>
 							<input
 								type="checkbox"
@@ -126,8 +125,7 @@ const AdvancedSettings = () => {
 							</Tooltip>
 						</li>
 					) }
-					{ 'installed-and-active' !==
-						starterTemplates.themeStatus && (
+					{ 'installed-and-active' !== themeStatus && (
 						<li>
 							<input
 								type="checkbox"
@@ -258,47 +256,46 @@ const AdvancedSettings = () => {
 							{ ICONS.questionMark }
 						</Tooltip>
 					</li>
-					{ ! whiteLabelEnabled() &&
-						starterTemplates.analytics !== 'yes' && (
-							<li>
-								<input
-									type="checkbox"
-									id="analytics-content"
-									name="analytics-content"
-									defaultChecked={ analyticsFlag }
-									onChange={ updateAnalyticsFlag }
-								/>
-								<label htmlFor="analytics-content">
-									{ ' ' }
-									{ __(
-										'Share Non-Sensitive Data',
-										'astra-sites'
-									) }
-								</label>
-								<Tooltip
-									content={
-										<div>
+					{ ! whiteLabelEnabled() && analytics !== 'yes' && (
+						<li>
+							<input
+								type="checkbox"
+								id="analytics-content"
+								name="analytics-content"
+								defaultChecked={ analyticsFlag }
+								onChange={ updateAnalyticsFlag }
+							/>
+							<label htmlFor="analytics-content">
+								{ ' ' }
+								{ __(
+									'Share Non-Sensitive Data',
+									'astra-sites'
+								) }
+							</label>
+							<Tooltip
+								content={
+									<div>
+										{ __(
+											'Help our developers build better templates and products for you by sharing anonymous and non-sensitive data about your website.',
+											'astra-sites'
+										) }{ ' ' }
+										<a
+											href="https://store.brainstormforce.com/usage-tracking/?utm_source=wp_dashboard&utm_medium=general_settings&utm_campaign=usage_tracking"
+											target="_blank"
+											rel="noreferrer noopener"
+										>
 											{ __(
-												'Help our developers build better templates and products for you by sharing anonymous and non-sensitive data about your website.',
+												'Learn More',
 												'astra-sites'
-											) }{ ' ' }
-											<a
-												href="https://store.brainstormforce.com/usage-tracking/?utm_source=wp_dashboard&utm_medium=general_settings&utm_campaign=usage_tracking"
-												target="_blank"
-												rel="noreferrer noopener"
-											>
-												{ __(
-													'Learn More',
-													'astra-sites'
-												) }
-											</a>
-										</div>
-									}
-								>
-									{ ICONS.questionMark }
-								</Tooltip>
-							</li>
-						) }
+											) }
+										</a>
+									</div>
+								}
+							>
+								{ ICONS.questionMark }
+							</Tooltip>
+						</li>
+					) }
 				</ul>
 			</div>
 		</div>
