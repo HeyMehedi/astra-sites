@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useStateValue } from '../../../store/store';
 import Toggle from '../../../components/toggle';
 import { initialState } from '../../../store/reducer';
+const { imageDir, isBrizyEnabled } = starterTemplates;
 
 const PageBuilder = () => {
 	const [ { builder }, dispatch ] = useStateValue();
@@ -11,25 +12,25 @@ const PageBuilder = () => {
 		{
 			id: 'gutenberg',
 			title: __( 'Block Editor', 'astra-sites' ),
-			image: `${ starterTemplates.imageDir }block-editor.svg`,
+			image: `${ imageDir }block-editor.svg`,
 		},
 		{
 			id: 'elementor',
 			title: __( 'Elementor', 'astra-sites' ),
-			image: `${ starterTemplates.imageDir }elementor.svg`,
+			image: `${ imageDir }elementor.svg`,
 		},
 		{
 			id: 'beaver-builder',
 			title: __( 'Beaver Builder', 'astra-sites' ),
-			image: `${ starterTemplates.imageDir }beaver-builder.svg`,
+			image: `${ imageDir }beaver-builder.svg`,
 		},
 	];
 
-	if ( starterTemplates.isBrizyEnabled === '1' ) {
+	if ( isBrizyEnabled === '1' ) {
 		buildersList.push( {
 			id: 'brizy',
 			title: __( 'Brizy', 'astra-sites' ),
-			image: `${ starterTemplates.imageDir }brizy.svg`,
+			image: `${ imageDir }brizy.svg`,
 		} );
 	}
 

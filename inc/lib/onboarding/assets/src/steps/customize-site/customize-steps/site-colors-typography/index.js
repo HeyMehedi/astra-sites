@@ -4,10 +4,7 @@ import { useStateValue } from '../../../../store/store';
 import ChangeTemplate from '../../../../components/change-template';
 
 const SiteColors = () => {
-	const [
-		{ licenseStatus, selectedTemplateType, builder },
-		dispatch,
-	] = useStateValue();
+	const [ { builder }, dispatch ] = useStateValue();
 	useEffect( () => {
 		dispatch( {
 			type: 'set',
@@ -20,14 +17,6 @@ const SiteColors = () => {
 			<ChangeTemplate />
 			<div className="customizer-header">
 				<div className="header-name">
-					{ ! licenseStatus && 'free' !== selectedTemplateType && (
-						<p className="premium-notice">
-							{ __(
-								'This is a Premium Template',
-								'astra-sites'
-							) }
-						</p>
-					) }
 					<h3 className="ist-customizer-heading">
 						{ builder === 'beaver-builder' || builder === 'brizy'
 							? __( 'Fonts', 'astra-sites' )

@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useStateValue } from '../../../../store/store';
 import ChangeTemplate from '../../../../components/change-template';
 import Button from '../../../../components/button/button';
+const { imageDir } = starterTemplates;
 
 const LicenseValidation = () => {
 	const [ { builder }, dispatch ] = useStateValue();
@@ -39,7 +40,7 @@ const LicenseValidation = () => {
 						<img
 							className="st-get-access"
 							alt="Get Access"
-							src={ `${ starterTemplates.imageDir }get-access.svg` }
+							src={ `${ imageDir }get-access.svg` }
 						/>
 					</Button>
 				</div>

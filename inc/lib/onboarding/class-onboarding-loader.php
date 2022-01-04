@@ -35,6 +35,15 @@ class Intelligent_Starter_Templates_Loader {
 	}
 
 	/**
+	 * List of hosting providers.
+	 */
+	private $hosting_providers = array(
+		'unaux',
+		'epizy',
+		'ezyro',
+	);
+
+	/**
 	 * Constructor.
 	 *
 	 * @since  3.0.0-beta.1
@@ -188,10 +197,28 @@ class Intelligent_Starter_Templates_Loader {
 			'supportLink' => 'https://wpastra.com/starter-templates-support/?ip=' . Astra_Sites_Helper::get_client_ip(),
 			'isBrizyEnabled'=> get_option( 'st-brizy-builder-flag'),
 			'analytics' => get_site_option( 'bsf_analytics_optin', false ),
-			'php_version' => PHP_VERSION,
+			'phpVersion' => PHP_VERSION,
+			'reportError' => $this->should_report_error(),
 		);
 
 		return apply_filters( 'starter_templates_onboarding_localize_vars', $data );
+	}
+
+	/**
+	 * Check if we should report error or not.
+	 * Skipping error reporting for a few hosting providers.
+	 */
+	public function should_report_error() {
+
+		/**
+		 * Byassing error reporting for a few hosting providers.
+		 */
+		foreach( $this->hosting_providers as $provider ) {
+			if ( strpos( ABSPATH, $provider ) !== false ) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

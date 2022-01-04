@@ -6,6 +6,7 @@ import { useStateValue } from '../../store/store';
 import './style.scss';
 import ICONS from '../../../icons';
 import { whiteLabelEnabled } from '../../utils/functions';
+const { siteUrl } = starterTemplates;
 
 const getTotalTime = ( value ) => {
 	const hours = Math.floor( value / 60 / 60 );
@@ -74,7 +75,7 @@ const Congrats = () => {
 	const [ {} ] = useStateValue();
 	const [ showClickToPlay, setShowClickToPlay ] = useState( true );
 
-	const link = `<a href=${ starterTemplates.siteUrl } target="_blank">View Your Website</a>`;
+	const link = `<a href=${ siteUrl } target="_blank">View Your Website</a>`;
 
 	const start = localStorage.getItem( 'st-import-start' );
 	const end = localStorage.getItem( 'st-import-end' );

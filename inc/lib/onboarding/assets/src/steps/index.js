@@ -7,6 +7,7 @@ import ICONS from '../../icons';
 import Logo from '../components/logo';
 import { storeCurrentState } from '../utils/functions';
 import { STEPS } from './util';
+const { adminUrl } = starterTemplates;
 
 const Steps = () => {
 	const [ stateValue, dispatch ] = useStateValue();
@@ -195,7 +196,7 @@ const Steps = () => {
 									</div>
 								) }
 								<div className="col exit-link">
-									<a href={ starterTemplates.adminUrl }>
+									<a href={ adminUrl }>
 										<Tooltip
 											content={ __(
 												'Exit to Dashboard',

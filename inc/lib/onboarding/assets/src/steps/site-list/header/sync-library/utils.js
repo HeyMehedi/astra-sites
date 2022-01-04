@@ -1,4 +1,5 @@
 const { post } = wp.ajax;
+const { nonce } = starterTemplates;
 
 // Store current sync status.
 let syncStatus = [];
@@ -199,7 +200,7 @@ export const SyncImportAllSites = async () => {
 		// Get sites request count.
 		const totalRequest = await post( {
 			action: 'astra-sites-get-sites-request-count',
-			_ajax_nonce: starterTemplates.nonce,
+			_ajax_nonce: nonce,
 		} );
 
 		// Import all sites.
