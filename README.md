@@ -1,4 +1,4 @@
-# Starter Templates — Elementor, Gutenberg & Beaver Builder Templates #
+# Starter Templates — Elementor, WordPress & Beaver Builder Templates #
 **Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
 **Donate link:** https://wpastra.com/pro/  
 **Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites  
