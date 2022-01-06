@@ -359,27 +359,20 @@ const Survey = () => {
 		);
 	};
 
-	const requirementCheck = () => {
-		if ( Object.keys( requiredPlugins.incompatible_plugins ).length > 0 ) {
-			return hardRequirement();
-		}
-		return optionalRequirement();
-	};
+	let defaultStepContent = surveyForm();
+
+	if ( Object.keys( requiredPlugins.incompatible_plugins ).length > 0 ) {
+		defaultStepContent = hardRequirement();
+	} else if ( showRequirementCheck ) {
+		defaultStepContent = optionalRequirement();
+	} else if ( skipPlugins ) {
+		defaultStepContent = thirdPartyPluginList();
+	}
 
 	return (
 		<DefaultStep
 			content={
-				<>
-					<div className="survey-container">
-						{ showRequirementCheck && requirementCheck() }
-						{ ! showRequirementCheck && (
-							<>
-								{ skipPlugins && thirdPartyPluginList() }
-								{ ! skipPlugins && surveyForm() }
-							</>
-						) }
-					</div>
-				</>
+				<div className="survey-container"> { defaultStepContent } </div>
 			}
 			actions={
 				<>

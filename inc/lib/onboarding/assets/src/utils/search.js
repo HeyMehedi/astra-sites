@@ -21,7 +21,10 @@ export const getSitesBySearchTerm = function (
 	searchTerm,
 	type,
 	category,
-	pageBuilder
+	pageBuilder,
+	allSites,
+	allCategories,
+	allCategoriesAndTags
 ) {
 	searchTerm = searchTerm.toLowerCase().trim();
 
@@ -35,10 +38,7 @@ export const getSitesBySearchTerm = function (
 	/**
 	 * Get all page builder sites.
 	 */
-	const singlePageBuilderSites = Object.assign(
-		{},
-		astraSitesVars.all_sites
-	);
+	const singlePageBuilderSites = Object.assign( {}, allSites );
 	let sites = {};
 	if ( pageBuilder ) {
 		for ( const siteId in singlePageBuilderSites ) {
@@ -155,7 +155,7 @@ export const getSitesBySearchTerm = function (
 	/**
 	 * Filter original tags.
 	 */
-	for ( const cat of astraSitesVars.allCategoriesAndTags ) {
+	for ( const cat of allCategoriesAndTags ) {
 		if ( cat.name.toLowerCase().includes( searchTerm ) ) {
 			/**
 			 * Add tag in tags list.
@@ -165,13 +165,13 @@ export const getSitesBySearchTerm = function (
 			/**
 			 * Add parent tag sites into the related list.
 			 */
-			if ( astraSitesVars.allCategories.length ) {
+			if ( allCategories.length ) {
 				let parentCatId = cat.id.toString();
 				if ( parentCatId.includes( '-' ) ) {
 					parentCatId = parseInt( cat.id.split( '-' )[ 0 ] );
 				}
 
-				for ( const siteCat of astraSitesVars.allCategories ) {
+				for ( const siteCat of allCategories ) {
 					if ( parentCatId === siteCat.id ) {
 						if (
 							! result.related_categories.includes( siteCat.slug )

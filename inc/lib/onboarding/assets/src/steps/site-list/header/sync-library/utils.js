@@ -32,6 +32,8 @@ export const SyncStart = async () => {
 		const data = await jsonData.data;
 
 		let allSitesData = null;
+		let categories = null;
+		let categoriesAndTags = null;
 		syncStatus = [];
 
 		if ( data === 'updated' ) {
@@ -46,10 +48,16 @@ export const SyncStart = async () => {
 			syncStatus.push( await SyncBlockCategories() );
 			syncStatus.push( await SyncLibraryComplete() );
 			syncStatus.push( allSitesData );
+			categories = await SyncAndGetAllCategories();
+			categoriesAndTags = await SyncAndGetAllCategoriesAndTags();
 			syncEnded = true;
 		}
 
-		return allSitesData;
+		return {
+			sites: allSitesData,
+			categories,
+			categoriesAndTags,
+		};
 	} catch ( error ) {
 		syncStatus.push( false );
 		syncEnded = true;
@@ -212,7 +220,7 @@ export const SyncImportAllSites = async () => {
 				formData.append( 'action', 'astra-sites-import-sites' );
 				formData.append( 'page_no', i );
 				allSitesRequests.push(
-					fetch( ajaxurl, {
+					await fetch( ajaxurl, {
 						method: 'post',
 						body: formData,
 					} )
@@ -236,6 +244,37 @@ export const SyncImportAllSites = async () => {
 			return results;
 		}
 		return null;
+	} catch ( error ) {
+		return null;
+	}
+};
+
+export const SyncAndGetAllCategories = async () => {
+	try {
+		const response = await fetch( ajaxurl, {
+			method: 'post',
+			body: getFormData( 'action', 'astra-sites-get-all-categories' ),
+		} );
+		const data = await response.json();
+
+		return ! data.data.length ? null : data.data;
+	} catch ( error ) {
+		return null;
+	}
+};
+
+export const SyncAndGetAllCategoriesAndTags = async () => {
+	try {
+		const response = await fetch( ajaxurl, {
+			method: 'post',
+			body: getFormData(
+				'action',
+				'astra-sites-get-all-categories-and-tags'
+			),
+		} );
+		const data = await response.json();
+
+		return ! data.data.length ? null : data.data;
 	} catch ( error ) {
 		return null;
 	}

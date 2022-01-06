@@ -1,11 +1,11 @@
-# Starter Templates — Elementor, Gutenberg & Beaver Builder Templates #
+# Starter Templates — Elementor, WordPress & Beaver Builder Templates #
 **Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
 **Donate link:** https://wpastra.com/pro/  
 **Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.22  
+**Stable tag:** 3.0.23  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -132,6 +132,12 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.0.23 - 6-January-2022
+- Fix: Better error and exception handling while importing.
+- Fix: Fixed an issue with redirection while installing Ultimate Addons for Beaver Builder - Lite plugin.
+- Fix: Fixed an issue where the templates library won't refresh in real-time after the sync process.
+- Fix: Presto Player installation showing PHP incompatibility notice while importing a template.
 
 v3.0.22 - 4-January-2022
 - Fix: Improved customizer import process.

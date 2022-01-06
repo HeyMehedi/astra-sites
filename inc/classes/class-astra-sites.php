@@ -10,8 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ST_ERROR_FATALS', E_ERROR | E_PARSE | E_COMPILE_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR );
-
 if ( ! class_exists( 'Astra_Sites' ) ) :
 
 	/**
@@ -506,6 +504,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				);
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 			$api_args = apply_filters(
 				'astra_sites_api_args', array(
 					'timeout' => 30,
@@ -513,6 +513,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			);
 
 			$request = wp_remote_get( $api_url, $api_args );
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( is_wp_error( $request ) ) {
 				$wp_error_code = $request->get_error_code();
@@ -1095,7 +1097,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 			switch_theme( 'astra' );
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			wp_send_json_success(
 				array(
@@ -1118,6 +1124,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 				}
 			}
+
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
 
 			$terms = astra_sites_get_reset_term_data();
 
@@ -1154,6 +1162,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				}
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
+
 			if ( wp_doing_ajax() ) {
 				wp_send_json_success();
 			}
@@ -1172,6 +1182,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 				}
 			}
+
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
 
 			// Suspend bunches of stuff in WP core.
 			wp_defer_term_counting( true );
@@ -1208,6 +1220,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_defer_term_counting( false );
 			wp_defer_comment_counting( false );
 
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
+
 			if ( wp_doing_ajax() ) {
 				wp_send_json_success();
 			}
@@ -1241,11 +1255,15 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				}
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 			$data = array(
 				'reset_posts'    => astra_sites_get_reset_post_data(),
 				'reset_wp_forms' => astra_sites_get_reset_form_data(),
 				'reset_terms'    => astra_sites_get_reset_term_data(),
 			);
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( wp_doing_ajax() ) {
 				wp_send_json_success( $data );
@@ -1983,6 +2001,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		private function includes() {
 
+			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-error-handler.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/functions.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-white-label.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-page.php';
@@ -2024,20 +2043,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				}
 			}
 
-			if ( ! interface_exists( 'Throwable' ) ) {
-				// Fatal error handler for PHP < 7.
-				register_shutdown_function( array( $this, 'shutdown_handler' ) );
-			}
-
-			// Fatal error handler for PHP >= 7, and uncaught exception handler for all PHP versions.
-			set_exception_handler( array( $this, 'exception_handler' ) );
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
 
 			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : $init;
 			$activate = activate_plugin( $plugin_init, '', false, false );
 
-			// Restore the error handlers.
-			restore_error_handler();
-			restore_exception_handler();
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( is_wp_error( $activate ) ) {
 				if ( defined( 'WP_CLI' ) ) {
@@ -2064,72 +2075,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					array(
 						'success' => true,
 						'message' => __( 'Plugin Activated', 'astra-sites' ),
-					)
-				);
-			}
-		}
-
-		/**
-		 * Uncaught exception handler.
-		 *
-		 * In PHP >= 7 this will receive a Throwable object.
-		 * In PHP < 7 it will receive an Exception object.
-		 *
-		 * @throws Exception Exception that is catched.
-		 * @param Throwable|Exception $e The error or exception.
-		 */
-		public function exception_handler( $e ) {
-			if ( is_a( $e, 'Exception' ) ) {
-				$error = 'Uncaught Exception';
-			} else {
-				$error = 'Uncaught Error';
-			}
-
-			if ( wp_doing_ajax() ) {
-				wp_send_json_error(
-					array(
-						'message' => __( 'There was an error activating plugin on your website.', 'astra-sites' ),
-						'stack' => array(
-							'error-message' => sprintf(
-								'%s: %s',
-								$error,
-								$e->getMessage()
-							),
-							'file' => $e->getFile(),
-							'line' => $e->getLine(),
-							'trace' => $e->getTrace(),
-						),
-					)
-				);
-			}
-
-			throw $e;
-		}
-
-		/**
-		 * Displays fatal error output for sites running PHP < 7.
-		 */
-		public function shutdown_handler() {
-			$e = error_get_last();
-
-			if ( empty( $e ) || ! ( $e['type'] & ST_ERROR_FATALS ) ) {
-				return;
-			}
-
-			if ( $e['type'] & E_RECOVERABLE_ERROR ) {
-				$error = 'Catchable fatal error';
-			} else {
-				$error = 'Fatal error';
-			}
-
-			if ( wp_doing_ajax() ) {
-				wp_send_json_error(
-					array(
-						'message' => __( 'There was an error activating plugin on your website.', 'astra-sites' ),
-						'stack' => array(
-							'error-message' => $error,
-							'error' => $e,
-						),
 					)
 				);
 			}

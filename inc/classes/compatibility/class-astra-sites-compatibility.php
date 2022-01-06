@@ -64,6 +64,9 @@ if ( ! class_exists( 'Astra_Sites_Compatibility' ) ) :
 
 			// Plugin - UAG.
 			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/uag/class-astra-sites-compatibility-uag.php';
+
+			// Plugin - UABB.
+			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/uabb/class-astra-sites-compatibility-uabb.php';
 		}
 
 	}
