@@ -215,9 +215,13 @@ const ImportSite = () => {
 					},
 					error( err ) {
 						report(
-							__(
-								'Could not install the plugin list.',
-								'astra-sites'
+							sprintf(
+								// translators: Plugin Name.
+								__(
+									'Could not install the plugin - %s',
+									'astra-sites'
+								),
+								plugin.name
 							),
 							'',
 							err

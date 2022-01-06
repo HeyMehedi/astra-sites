@@ -1,13 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Toaster, Tooltip } from '@brainstormforce/starter-templates';
+import { useStateValue } from '../../../../store/store';
 import ICONS from '../../../../../icons';
 import { isSyncSuccess, SyncStart } from './utils';
 import './style.scss';
 
 const SyncLibrary = () => {
-	const [ isLoading, setIsLoading ] = useState( false );
-	const syncStatus = isSyncSuccess();
+	const [ , dispatch ] = useStateValue();
+	const [ syncState, setSyncState ] = useState( {
+		isLoading: false,
+		updatedData: null,
+		syncStatus: null,
+	} );
+	const { isLoading, updatedData, syncStatus } = syncState;
+
+	if ( syncStatus === true && !! updatedData ) {
+		const { sites, categories, categoriesAndTags } = updatedData;
+
+		if ( !! sites && !! categories && !! categoriesAndTags ) {
+			dispatch( {
+				type: 'set',
+				allSitesData: sites,
+				allCategories: categories,
+				allCategoriesAndTags: categoriesAndTags,
+			} );
+		}
+		setSyncState( {
+			...syncState,
+			updatedData: null,
+		} );
+	}
 
 	const handleClick = async ( event ) => {
 		event.stopPropagation();
@@ -16,9 +39,13 @@ const SyncLibrary = () => {
 			return;
 		}
 
-		setIsLoading( true );
-		await SyncStart();
-		setIsLoading( false );
+		setSyncState( { ...syncState, isLoading: true } );
+		const newData = await SyncStart();
+		setSyncState( {
+			isLoading: false,
+			updatedData: newData,
+			syncStatus: isSyncSuccess(),
+		} );
 	};
 
 	useEffect( () => {

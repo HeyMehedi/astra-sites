@@ -13,6 +13,9 @@ if ( astraSitesVars.default_page_builder ) {
 }
 
 export const initialState = {
+	allSitesData: astraSitesVars.all_sites || {},
+	allCategories: astraSitesVars.allCategories || [],
+	allCategoriesAndTags: astraSitesVars.allCategoriesAndTags || [],
 	currentIndex: currentIndexKey,
 	currentCustomizeIndex: 0,
 	siteLogo: {

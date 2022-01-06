@@ -216,6 +216,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 						$ext = strtolower( pathinfo( $file_path['data']['file'], PATHINFO_EXTENSION ) );
 
 						if ( 'json' === $ext ) {
+							Astra_Sites_Error_Handler::get_instance()->start_error_handler();
 							$forms = json_decode( Astra_Sites::get_instance()->get_filesystem()->get_contents( $file_path['data']['file'] ), true );
 
 							if ( ! empty( $forms ) ) {
@@ -260,6 +261,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 									}
 								}
 							}
+							Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 						} else {
 							wp_send_json_error( __( 'Invalid JSON file for WP Forms.', 'astra-sites' ) );
 						}
@@ -312,9 +314,13 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 						if ( 'json' === $ext ) {
 							$flows = json_decode( Astra_Sites::get_instance()->get_filesystem()->get_contents( $file_path['data']['file'] ), true );
 
+							Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 							if ( ! empty( $flows ) ) {
 								CartFlows_Importer::get_instance()->import_from_json_data( $flows );
 							}
+
+							Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 						} else {
 							wp_send_json_error( __( 'Invalid file for CartFlows flows', 'astra-sites' ) );
 						}
@@ -357,6 +363,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 			if ( ! empty( $customizer_data ) ) {
 
+				Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 				Astra_Sites_Importer_Log::add( 'Imported Customizer Settings ' . wp_json_encode( $customizer_data ) );
 
 				// Set meta for tracking the post.
@@ -365,6 +373,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				update_option( '_astra_sites_old_customizer_data', $customizer_data, 'no' );
 
 				Astra_Customizer_Import::instance()->import( $customizer_data );
+
+				Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 				if ( defined( 'WP_CLI' ) ) {
 					WP_CLI::line( 'Imported Customizer Settings!' );
@@ -477,8 +487,13 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 					update_option( '_astra_sites_old_site_options', $options_data, 'no' );
 				}
 
+				Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 				$options_importer = Astra_Site_Options_Import::instance();
 				$options_importer->import_options( $options_data );
+
+				Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
+
 				if ( defined( 'WP_CLI' ) ) {
 					WP_CLI::line( 'Imported Site Options!' );
 				} elseif ( wp_doing_ajax() ) {
@@ -518,11 +533,15 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 			if ( ! empty( $widgets_data ) ) {
 
+				Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 				Astra_Widget_Importer::instance()->import_widgets_data( $widgets_data );
 
 				$sidebars_widgets = get_option( 'sidebars_widgets', array() );
 				update_option( '_astra_sites_old_widgets_data', $sidebars_widgets, 'no' );
 				Astra_Sites_Importer_Log::add( 'Imported - Widgets ' . wp_json_encode( $sidebars_widgets ) );
+
+				Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 				if ( defined( 'WP_CLI' ) ) {
 					WP_CLI::line( 'Widget Imported!' );
@@ -556,12 +575,16 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				}
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 			$demo_data = get_option( 'astra_sites_import_data', array() );
 
 			do_action( 'astra_sites_import_complete', $demo_data );
 
 			update_option( 'astra_sites_import_complete', 'yes', 'no' );
 			delete_transient( 'astra_sites_import_started' );
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( wp_doing_ajax() ) {
 				wp_send_json_success();
@@ -736,9 +759,13 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				}
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 			Astra_Sites_Importer_Log::add( 'Deleted customizer Settings ' . wp_json_encode( get_option( 'astra-settings', array() ) ) );
 
 			delete_option( 'astra-settings' );
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( defined( 'WP_CLI' ) ) {
 				WP_CLI::line( 'Deleted Customizer Settings!' );
@@ -764,6 +791,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				}
 			}
 
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
 			$options = get_option( '_astra_sites_old_site_options', array() );
 
 			Astra_Sites_Importer_Log::add( 'Deleted - Site Options ' . wp_json_encode( $options ) );
@@ -773,6 +802,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 					delete_option( $option_key );
 				}
 			}
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( defined( 'WP_CLI' ) ) {
 				WP_CLI::line( 'Deleted Site Options!' );
@@ -797,6 +828,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 				}
 			}
+
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
 
 			// Get all old widget ids.
 			$old_widgets_data = (array) get_option( '_astra_sites_old_widgets_data', array() );
@@ -834,6 +867,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 				update_option( 'sidebars_widgets', $sidebars_widgets );
 			}
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
 
 			if ( defined( 'WP_CLI' ) ) {
 				WP_CLI::line( 'Deleted Widgets!' );
