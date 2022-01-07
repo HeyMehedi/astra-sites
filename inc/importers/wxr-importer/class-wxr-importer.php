@@ -23,7 +23,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 		/**
 		 * Maximum supported WXR version
 		 */
-		const MAX_WXR_VERSION = 1.2;
+		const MAX_WXR_VERSION = '1.2';
 
 		/**
 		 * Regular expression for checking if a post references an attachment
