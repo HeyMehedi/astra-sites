@@ -407,7 +407,7 @@ class Astra_WXR_Importer {
 			'_ajax_nonce' => wp_create_nonce( 'astra-sites' ),
 			'xml_id'      => $post_id,
 		);
-		$url  = add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php' ) );
+		$url  = add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php', 'relative' ) );
 
 		$data = $this->get_data( $path );
 

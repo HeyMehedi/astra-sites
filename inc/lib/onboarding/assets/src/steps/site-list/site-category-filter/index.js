@@ -1,6 +1,6 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CategoryList } from '@brainstormforce/starter-templates';
 import { setURLParmsValue } from '../../../utils/url-params';
 import { useStateValue } from '../../../store/store';
@@ -67,7 +67,7 @@ const SiteCategory = () => {
 			slug: 'Professional',
 		},
 	];
-	const history = useHistory();
+	const history = useNavigate();
 	return (
 		<div className="st-category-filter">
 			<CategoryList
@@ -86,7 +86,7 @@ const SiteCategory = () => {
 						's',
 						category.name !== 'All' ? category.name : ''
 					);
-					history.push( `?${ urlParam }` );
+					history( `?${ urlParam }` );
 				} }
 			/>
 		</div>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Search } from '@brainstormforce/starter-templates';
 import { decodeEntities } from '@wordpress/html-entities';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useStateValue } from '../../../store/store';
 import { initialState } from '../../../store/reducer';
 import './style.scss';
@@ -143,7 +143,7 @@ const SiteSearch = () => {
 			} );
 		}
 	};
-	const history = useHistory();
+	const history = useNavigate();
 	return (
 		<div className="st-search-box-wrap" ref={ parentRef }>
 			<div className="st-search-filter st-search-box" ref={ ref }>
@@ -164,7 +164,7 @@ const SiteSearch = () => {
 							siteOrder: initialState.siteOrder,
 						} );
 						const urlParam = setURLParmsValue( 's', newSearchTerm );
-						history.push( `?${ urlParam }` );
+						history( `?${ urlParam }` );
 					} }
 					onKeyUp={ onSearchKeyUp }
 				/>

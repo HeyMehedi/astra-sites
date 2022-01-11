@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import { Tooltip } from '@brainstormforce/starter-templates';
 import { useStateValue } from '../store/store';
@@ -21,7 +21,7 @@ const Steps = () => {
 	const [ settingHistory, setSettinghistory ] = useState( true );
 	const [ settingIndex, setSettingIndex ] = useState( true );
 	const current = STEPS[ currentIndex ];
-	const history = useHistory();
+	const history = useNavigate();
 
 	useEffect( () => {
 		const previousIndex = parseInt( currentIndex ) - 1;
@@ -86,7 +86,7 @@ const Steps = () => {
 
 		if ( currentIndex === 0 ) {
 			currentUrlParams.delete( 'ci' );
-			history.push(
+			history(
 				window.location.pathname + '?' + currentUrlParams.toString()
 			);
 		}
@@ -97,7 +97,7 @@ const Steps = () => {
 		) {
 			storeCurrentState( stateValue );
 			currentUrlParams.set( 'ci', currentIndex );
-			history.push(
+			history(
 				window.location.pathname + '?' + currentUrlParams.toString()
 			);
 		}
@@ -110,7 +110,7 @@ const Steps = () => {
 		) {
 			storeCurrentState( stateValue );
 			currentUrlParams.set( 'designStep', designStep );
-			history.push(
+			history(
 				window.location.pathname + '?' + currentUrlParams.toString()
 			);
 		}
