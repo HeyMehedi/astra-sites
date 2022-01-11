@@ -116,7 +116,9 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 * @since 3.0.0
 		 */
 		public function disable_default_woo_pages_creation() {
-			add_filter( 'woocommerce_create_pages', '__return_empty_array' );
+			if ( astra_sites_has_import_started() ) {
+				add_filter( 'woocommerce_create_pages', '__return_empty_array' );
+			}
 		}
 
 		/**
