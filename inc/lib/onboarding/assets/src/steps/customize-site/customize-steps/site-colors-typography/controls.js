@@ -39,10 +39,38 @@ const SiteColorsControls = () => {
 	useEffect( () => {
 		const defaultPaletteValues = getDefaultColorPalette( templateResponse );
 		setDefaultPalette( defaultPaletteValues );
-		const scheme =
+		let scheme =
 			'light' === getColorScheme( templateResponse )
 				? LIGHT_PALETTES
 				: DARK_PALETTES;
+
+		const customColors = templateResponse[ 'astra-custom-palettes' ] || [];
+		if ( customColors.length && customColors.length % 2 === 0 ) {
+			let colors = customColors;
+
+			const customColorsSet = [];
+			colors.map( ( value ) => {
+				const obj = {
+					slug: value.slug,
+					title: value.slug,
+				};
+				const sampleColors = [ ...scheme[ 0 ].colors ];
+				sampleColors[ 0 ] = value.colors[ 0 ];
+				sampleColors[ 1 ] = value.colors[ 1 ];
+				obj.colors = sampleColors;
+				customColorsSet.push( obj );
+				return customColorsSet;
+			} );
+			colors = [ ...customColorsSet, ...scheme ];
+			colors.map( ( value, i ) => {
+				colors[ i ].title = 'Style' + ( i + 1 );
+				colors[ i ].slug = 'style-' + ( i + 1 );
+				return colors;
+			} );
+
+			scheme = colors;
+		}
+
 		setColorScheme( scheme );
 	}, [ templateResponse ] );
 

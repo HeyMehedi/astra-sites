@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
-import { Toaster } from '@brainstormforce/starter-templates';
+import { Toaster } from '@brainstormforce/starter-templates-components';
 import Button from '../../../../components/button/button';
 import { useStateValue } from '../../../../store/store';
 import PreviousStepLink from '../../../../components/util/previous-step-link/index';
@@ -59,7 +59,7 @@ const LicenseValidationControls = () => {
 		} ).then( async ( response ) => {
 			if ( response.success ) {
 				await getDemo( templateId, storedState );
-				checkRequiredPlugins( storedState );
+				await checkRequiredPlugins( storedState );
 				dispatch( {
 					type: 'set',
 					licenseStatus: true,

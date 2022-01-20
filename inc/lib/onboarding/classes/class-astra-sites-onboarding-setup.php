@@ -66,6 +66,7 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 			}
 
 			$post_id = ( isset( $_POST['id'] ) ) ? intval( $_POST['id'] ) : 0;
+			$user_agent_string = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ) : '';
 
 			if ( 0 === $post_id ) {
 				wp_send_json_error(
@@ -83,8 +84,10 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 					'url'    => esc_url( site_url() ),
 					'err'   => stripslashes( $_POST['error'] ),
 					'id'	=> $_POST['id'],
+					'logfile' => $this->get_log_file_path(),
 					'version' => ASTRA_SITES_VER,
 					'abspath' => ABSPATH,
+					'user_agent' => $user_agent_string,
 					'server' => array(
 						'php_version' => $this->get_php_version(),
 						'php_post_max_size' => ini_get( 'post_max_size' ),
@@ -110,6 +113,21 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 			}
 
 			wp_send_json_error( $data );
+		}
+
+		/**
+		 * Get full path of the created log file.
+		 *
+		 * @return string File Path.
+		 * @since 3.0.25
+		 */
+		public function get_log_file_path() {
+			$log_file = get_option( 'astra_sites_recent_import_log_file', false );
+			if ( ! empty( $log_file ) && isset( $log_file ) ) {
+				return str_replace( ABSPATH , esc_url( site_url() ) . '/' , $log_file );
+			}
+			
+			return "";
 		}
 
 		/**

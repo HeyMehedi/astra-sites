@@ -1,28 +1,25 @@
 import React from 'react';
-import { __ } from '@wordpress/i18n';
-import { Grid } from '@brainstormforce/starter-templates';
-import { decodeEntities } from '@wordpress/html-entities';
-import { getDemo, checkRequiredPlugins } from '../../import-site/import-utils';
+import { Grid } from '@brainstormforce/starter-templates-components';
+import {
+	getDemo,
+	checkRequiredPlugins,
+	checkFileSystemPermissions,
+} from '../../import-site/import-utils';
 import { useStateValue } from '../../../store/store';
+import { getGridItem } from '../../../utils/functions';
 
 const SiteGrid = ( { sites } ) => {
+	const sitesData = sites ? sites : {};
 	const storedState = useStateValue();
 	const [ { favoriteSiteIDs, currentIndex }, dispatch ] = storedState;
 
 	const allSites = [];
 
-	if ( Object.keys( sites ).length ) {
-		for ( const siteId in sites ) {
-			allSites.push( {
-				id: sites[ siteId ].id,
-				image: sites[ siteId ][ 'thumbnail-image-url' ],
-				title: decodeEntities( sites[ siteId ].title ),
-				badge:
-					'agency-mini' === sites[ siteId ][ 'astra-sites-type' ]
-						? __( 'Premium', 'astra-sites' )
-						: '',
-				...sites[ siteId ],
-			} );
+	if ( Object.keys( sitesData ).length ) {
+		for ( const siteId in sitesData ) {
+			const gridItem = getGridItem( sitesData[ siteId ] );
+
+			allSites.push( gridItem );
 		}
 	}
 
@@ -88,7 +85,8 @@ const SiteGrid = ( { sites } ) => {
 					selectedTemplateType: item[ 'astra-sites-type' ],
 				} );
 				await getDemo( item.id, storedState );
-				checkRequiredPlugins( storedState );
+				await checkRequiredPlugins( storedState );
+				checkFileSystemPermissions( storedState );
 			} }
 		/>
 	);

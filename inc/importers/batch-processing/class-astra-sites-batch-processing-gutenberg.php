@@ -190,6 +190,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 				array(
 					'ID'           => $post_id,
 					'post_content' => $content,
+					'post_excerpt' => '',
 				)
 			);
 		}

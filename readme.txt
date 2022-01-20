@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.8
-Stable tag: 3.0.25
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,14 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.1.0 - 20-January-2022
+- New: Added new mega menu-based categories for better segregation of templates.
+- New: Improved search functionality for better results.
+- Improvement: Improved error handling when plugin installation/activation fails for slow hosting providers.
+- Improvement: Added a pre-import screen to notify about file permissions on the website to avoid errors.
+- Fix: Fixed an issue with redirection while installing the WP Forms plugin.
+- Fix: Fixed an issue with the sync functionality.
 
 v3.0.25 - 11-January-2022
 - Fix: Fixed an issue where WooCommerce pages won't get created when the Starter Templates plugin is active.

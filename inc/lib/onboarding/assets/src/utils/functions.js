@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { decodeEntities } from '@wordpress/html-entities';
 
 export const whiteLabelEnabled = () => {
 	return astraSitesVars.isWhiteLabeled ? true : false;
@@ -161,4 +162,22 @@ export const getAllSites = () => {
 
 export const getSupportLink = ( templateId, subject ) => {
 	return `${ starterTemplates.supportLink }&template-id=${ templateId }&subject=${ subject }`;
+};
+
+export const getGridItem = ( site ) => {
+	let imageUrl = site[ 'thumbnail-image-url' ] || '';
+	if ( '' === imageUrl && false === whiteLabelEnabled() ) {
+		imageUrl = `${ starterTemplates.imageDir }placeholder.png`;
+	}
+
+	return {
+		id: site.id,
+		image: imageUrl,
+		title: decodeEntities( site.title ),
+		badge:
+			'agency-mini' === site[ 'astra-sites-type' ]
+				? __( 'Premium', 'astra-sites' )
+				: '',
+		...site,
+	};
 };

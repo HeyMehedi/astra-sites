@@ -4,6 +4,7 @@
 }
 
 .st-other-filters {
+	position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,8 +54,8 @@
 	}
 }
 
-.site-order-filter,
-.site-type-filter {
+.stc-site-order-filter,
+.stc-site-type-filter {
     width: 110px;
 
 	.stc-toggle-dropdown-popup {
@@ -75,7 +76,7 @@
 	}
 }
 
-.site-type-filter {
+.stc-site-type-filter {
     margin-right: 15px;
 }
 
@@ -132,4 +133,11 @@
     align-items: center;
     align-content: center;
     grid-gap: 40px;
+}
+
+@media screen and (min-width: 768px) {
+	.st-other-filters {
+		padding-left: 22px;
+   		padding-right: 22px;
+	}
 }

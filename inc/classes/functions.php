@@ -189,3 +189,22 @@ function astra_sites_has_import_started() {
 	}
 	return false;
 }
+
+/**
+ * Remove the post excerpt
+ *
+ * @param int $post_id  The post ID.
+ * @since 3.1.0
+ */
+function astra_sites_empty_post_excerpt( $post_id = 0 ) {
+	if ( ! $post_id ) {
+		return;
+	}
+
+	wp_update_post(
+		array(
+			'ID'           => $post_id,
+			'post_excerpt' => '',
+		)
+	);
+}

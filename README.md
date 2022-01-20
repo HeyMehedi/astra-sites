@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 3.0.25  
+**Stable tag:** 3.1.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -13,9 +13,9 @@ The growing library of 300+ ready-to-use templates that work with all WordPress 
 
 ## Description ##
 
-### FREE TEMPLATES FOR ELEMENTOR, BEAVER BUILDER AND THE BLOCK EDITOR ###
+### FREE TEMPLATES FOR ELEMENTOR, BEAVER BUILDER AND BLOCK EDITOR ###
 
-Build professionally designed pixel perfect websites in minutes with the Starter Templates plugin.
+Create professional designed pixel perfect websites in minutes with the Starter Templates plugin.
 
 This plugin gives you access to 280+ pre-made full website templates and individual pages for your favorite page builder such as Elementor, Beaver Builder and the Block Editor.
 
@@ -27,22 +27,20 @@ All you need to do is select the demo that suits your needs, import, tweak and g
 
 ### INTRODUCING STARTER TEMPLATES 3.0! ###
 
-The Astra Starter Sites plugin allows you to import complete website demos, tweak them and build professional websites in minutes.
+The Astra Starter Sites plugin allowed you to import complete website demos, tweak them and build professional websites.
 
-With Starter Templates 3.0, you can now do that by importing specific pages, complete websites or Elementor widgets that give you lots of flexibility to import only what you need.
+With Starter Templates 3.0, you can now do that by importing specific pages, complete websites or even Elementor blocks that give you lots of flexibility to import only what you need.
 
 ### HIGHLIGHTS OF STARTER TEMPLATES 3.0 ###
 
-- All new user interface that make it easier to select and customize the templates when you are building your website.
-- Powerful and fast search feature to find the template suitable for your needs.
-- Ability to preview the logo, colors and typography before importing.
-- Greatly improved stability. Seamlessly import the templates on your WordPress website without errors.
+- All new user interface to make it easier to select and customize the templates when you are building your website.
+- Amazing search to find the template suitable for your needs.
+- Ability to try the logo, colors and typography before importing.
+- Improved stability. We have improved our importer, which already was very stable. Now after this release, imports will rarely fail.
 
-### FULL WEBSITE TEMPLATES ###
+### FULL WEBSITE TEMPLATES FOR ###
 
-Includes full templates for businesses such as restaurants, lawyers, agencies, interior designers, artist shops, brand stores, pet services, charities, plumbers, dental clinics, construction firms, fitness trainers, gardeners, makeup artists and many more.
-
-Take a look templates built with different page builders:
+Businesses like restaurants, lawyers, agencies, interior designers, artist shops, brandstore, pet services, charity, plumber, dental clinic, construction, fitness trainer, gardening, makeup artist and a lot more. You can take a look at all of them built with different page builders.
 
 - [Elementor Free Website Templates](https://wpastra.com/elementor-templates-free-downloads/)
 - [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
@@ -50,7 +48,7 @@ Take a look templates built with different page builders:
 
 You can extend this library with premium ready-to-use website demos by purchasing one of the Astra Bundles, i.e. either the Essential Bundle or the Growth Bundle.
 
-### WHY PEOPLE LOVE THE ASTRA THEME ###
+### WHY PEOPLE LOVE THE ASTRA THEME? ###
 
 Over 1+ million users are empowering their websites with Astra! From beginners to industry experts, everyone is loving Astra for its performance and ease of use.
 
@@ -62,17 +60,17 @@ Over 1+ million users are empowering their websites with Astra! From beginners t
 
 **Pixel Perfect Design** - Astra reduces your design time by giving you pixel-perfect FREE ready-to-use websites demos within a huge library of starter sites.
 
-**Deeper Integration** - Astra works seamlessly with all WooCommerce plugins, LifterLMS, LearnDash and many others. You can create eCommerce websites and online course websites in minutes.
+**Deeper Integrations** - Astra works seamlessly with all WooCommerce plugins, LifterLMS, LearnDash etc. This means that you can create and beautify eCommerce websites and those that offer online courses in minutes.
 
-Install the website, tweak images and content and go live!
+Fetch the website, tweak images and content and go live!
 
-Use the template as a base for your project and don’t waste time starting from scratch!
+Use this imported site as a base for your project and don’t waste time starting from scratch!
 
-_<a href="https://wpastra.com/ready-websites/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme">See a list of all available sites to import »</a>_
+_<a href="https://wpastra.com/ready-websites/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme">See list of all available sites to import »</a>_
 
 **Credits**
 
-- [History.js](https://github.com/browserstate/history.js) is distributed under the terms of the BSD License.
+- [History.js](https://github.com/browserstate/history.js) is distributed under the terms of the BSD  License.
 - [WP Background Process](https://github.com/A5hleyRich/wp-background-processing/) is distributed under the terms of the GNU General Public License v2.0.
 - [Widget Importer Exporter](https://github.com/churchthemes/widget-importer-exporter/) is distributed under the terms of the GNU General Public License v2.0.
 - [WordPress Importer](https://github.com/humanmade/WordPress-Importer/) is distributed under the terms of the GNU General Public License v2.0.
@@ -89,15 +87,15 @@ _<a href="https://wpastra.com/ready-websites/?utm_source=wp-repo&utm_medium=link
 
 ### Will the Starter Templates plugin work with my theme? ###
 
-Yes, this plugin works with most of the WordPress themes. However, we recommend using the [Astra Theme](https://wordpress.org/themes/astra/) with the Starter Templates as that will give you the best advantages in terms of performance and customization.
+We've certainly used Astra to build all our starter templates and recommend you to do so. However, in Starter Templates 2.0 onward all the starter sites or individual page templates you import are theme independent and blend well with the theme you have.
 
-### Are all the Starter Templates FREE? ###
+### Are all the starter templates FREE? ###
 
-Not all Starter Templates are free, but there are currently over 90+ FREE ready-to-use templates. The library of templates is constantly updated with new free templates and improvements to existing  templates. You can unlock access to premium templates by purchasing an [Essential Bundle](https://wpastra.com/pricing/) from WPAstra.
+You get over 90+ FREE ready-to-use websites as of now. There are many more premium website demos that can be accessed when you purchase one of our Agency Bundles - (i.e. either the Mini Agency or the Agency Bundles)
 
-### How can I install and import Starter Templates? ###
+### How can I install and import starter templates? ###
 
-You can install the Starter Templates plugin on your WordPress website just like any other plugin. In order to learn how to import the templates and take them live, please [refer to this article](https://wpastra.com/docs/starter-templates-complete-site/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
+Here is an article that will help you install and import [Starter Templates](https://wpastra.com/docs/installing-importing-astra-sites/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) on your website.
 
 ### Can I import a website / page demo on an existing website? ###
 
@@ -111,15 +109,15 @@ Yes! The Starter Templates plugin acts as a medium through which you can import 
 
 ### Do I need to install any other plugin before importing a website? ###
 
-No, you don’t need any other plugins before importing a website. All you need to do is install the Starter Templates plugin and select the website demo you wish to import. While the site is being imported, you will be asked to install any necessary plugins that are required for Starter Templates.
+All you need to do is install the Starter Templates plugin and select the website demo you wish to import. While the site is being imported, you will come across a step in which the plugin asks you to click on a button that says Install plugins. This step will install and activate the necessary plugins.
 
 ### Will you add more website demos? ###
 
 Yes! We are working on many more free website demos built using Elementor, Beaver Builder and the Block Editor.
 
-### What if I do not find a website for the niche I am looking for? ###
+### What if I do not find a website for the topic I am looking for? ###
 
-If you don’t find a template for the niche you’re looking for, no problem. You can either customize another template using your favorite page builder or request we build one for your niche. We are constantly creating new templates with up to date designs, so if you wish to request a template, please fill out [this form](https://wpastra.com/sites-suggestions/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
+We are open to suggestions and would love to work on topics that our users are looking out for. Please feel free to drop your suggestions through the [form here].(https://wpastra.com/sites-suggestions/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
 
 
 ## Screenshots ##
@@ -134,6 +132,14 @@ If you don’t find a template for the niche you’re looking for, no problem. Y
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.1.0 - 20-January-2022
+- New: Added new mega menu-based categories for better segregation of templates.
+- New: Improved search functionality for better results.
+- Improvement: Improved error handling when plugin installation/activation fails for slow hosting providers.
+- Improvement: Added a pre-import screen to notify about file permissions on the website to avoid errors.
+- Fix: Fixed an issue with redirection while installing the WP Forms plugin.
+- Fix: Fixed an issue with the sync functionality.
 
 v3.0.25 - 11-January-2022
 - Fix: Fixed an issue where WooCommerce pages won't get created when the Starter Templates plugin is active.

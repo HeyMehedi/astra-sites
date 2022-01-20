@@ -1,6 +1,6 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { Logo as SiteLogo } from '@brainstormforce/starter-templates';
+import { Logo as SiteLogo } from '@brainstormforce/starter-templates-components';
 import './style.scss';
 import { whiteLabelEnabled, getWhileLabelName } from '../../utils/functions';
 const { imageDir } = starterTemplates;
@@ -15,6 +15,7 @@ const Logo = () => {
 					className="ist-logo"
 					src={ `${ imageDir }logo.svg` }
 					alt={ __( 'Starter Templates', 'astra-sites' ) }
+					href={ astraSitesVars.st_page_url }
 				/>
 			) }
 		</div>

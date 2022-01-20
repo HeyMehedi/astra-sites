@@ -147,6 +147,9 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 				// !important, Clear the cache after images import.
 				Plugin::$instance->files_manager->clear_cache();
 			}
+
+			// Clean the post excerpt.
+			astra_sites_empty_post_excerpt( $post_id );
 		}
 	}
 }

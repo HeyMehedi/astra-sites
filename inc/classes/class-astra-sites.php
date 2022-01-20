@@ -125,6 +125,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'elementor/editor/footer', array( $this, 'register_widget_scripts' ), 99 );
 			add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'popup_styles' ) );
 			add_action( 'elementor/preview/enqueue_styles', array( $this, 'popup_styles' ) );
+			add_action( 'astra_sites_after_plugin_activation', array( $this, 'disable_wp_forms_redirect' ) );
 
 			// AJAX.
 			$this->ajax = array(
@@ -148,6 +149,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-page-elementor-batch-process' => 'elementor_batch_process',
 				'astra-sites-update-subscription' => 'update_subscription',
 				'astra-sites-update-analytics' => 'update_analytics',
+				'astra-sites-filesystem-permission' => 'filesystem_permission',
 			);
 
 			foreach ( $this->ajax as $ajax_hook => $ajax_callback ) {
@@ -1670,9 +1672,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'default_page_builder_data'          => Astra_Sites_Page::get_instance()->get_default_page_builder(),
 					'default_page_builder_sites'         => Astra_Sites_Page::get_instance()->get_sites_by_page_builder( $default_page_builder ),
 					'sites'                              => astra_sites_get_api_params(),
-					'allSites'                           => (array) self::get_instance()->get_all_sites(),
-					'allCategories'                      => (array) self::get_instance()->get_api_option( 'astra-sites-all-site-categories' ),
-					'allCategoriesAndTags'               => (array) self::get_instance()->get_api_option( 'astra-sites-all-site-categories-and-tags' ),
 					'categories'                         => array(),
 					'page-builders'                      => array(),
 					'all_sites'                          => $this->get_all_sites(),
@@ -2001,8 +2000,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		private function includes() {
 
-			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-error-handler.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/functions.php';
+			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-error-handler.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-white-label.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-page.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-elementor-pages.php';
@@ -2182,7 +2181,18 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 						// Lite - Installed but Inactive.
 						if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
-
+							$link = wp_nonce_url(
+								add_query_arg(
+									array(
+										'action' => 'activate',
+										'plugin' => $plugin['init'],
+									),
+									admin_url( 'plugins.php' )
+								),
+								'activate-plugin_' . $plugin['init']
+							);
+							$link = str_replace( '&amp;', '&', $link );
+							$plugin['action'] = $link;
 							$response['inactive'][] = $plugin;
 
 							// Lite - Not Installed.
@@ -2192,6 +2202,18 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 							if ( array_key_exists( $plugin['slug'], $third_party_plugins ) ) {
 								$third_party_required_plugins[] = $third_party_plugins[ $plugin['slug'] ];
 							} else {
+								$link = wp_nonce_url(
+									add_query_arg(
+										array(
+											'action' => 'install-plugin',
+											'plugin' => $plugin['slug'],
+										),
+										admin_url( 'update.php' )
+									),
+									'install-plugin_' . $plugin['slug']
+								);
+								$link = str_replace( '&amp;', '&', $link );
+								$plugin['action'] = $link;
 								$response['notinstalled'][] = $plugin;
 							}
 
@@ -2426,6 +2448,53 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			WP_Filesystem();
 
 			return $wp_filesystem;
+		}
+
+		/**
+		 * Disable WP-Forms redirect.
+		 *
+		 * @return void.
+		 */
+		public function disable_wp_forms_redirect() {
+			$wp_forms_redirect = get_transient( 'wpforms_activation_redirect' );
+
+			if ( ! empty( $wp_forms_redirect ) && '' !== $wp_forms_redirect ) {
+				delete_transient( 'wpforms_activation_redirect' );
+			}
+		}
+
+		/**
+		 * Get the status of file system permission of "/wp-content/uploads" directory.
+		 *
+		 * @return void
+		 */
+		public function filesystem_permission() {
+			if ( ! defined( 'WP_CLI' ) && wp_doing_ajax() ) {
+				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+				if ( ! current_user_can( 'customize' ) ) {
+					wp_send_json_error( __( 'You do not have permission to perform this action.', 'astra-sites' ) );
+				}
+
+				$wp_upload_path = wp_upload_dir();
+				$permissions = array(
+					'is_readable' => false,
+					'is_writable' => false,
+				);
+
+				foreach ( $permissions as $file_permission => $value ) {
+					$permissions[ $file_permission ] = $file_permission( $wp_upload_path['basedir'] );
+				}
+
+				wp_send_json_success(
+					array(
+						'permissions' => $permissions,
+						'directory' => $wp_upload_path['basedir'],
+					)
+				);
+			}
+
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'astra-sites' ) );
 		}
 	}
 

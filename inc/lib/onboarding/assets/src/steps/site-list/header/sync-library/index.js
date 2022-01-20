@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Toaster, Tooltip } from '@brainstormforce/starter-templates';
-import { useStateValue } from '../../../../store/store';
+import {
+	Toaster,
+	Tooltip,
+} from '@brainstormforce/starter-templates-components';
 import ICONS from '../../../../../icons';
+import { useStateValue } from '../../../../store/store';
 import { isSyncSuccess, SyncStart } from './utils';
 import './style.scss';
 
 const SyncLibrary = () => {
-	const [ , dispatch ] = useStateValue();
+	const [ {}, dispatch ] = useStateValue();
 	const [ syncState, setSyncState ] = useState( {
 		isLoading: false,
 		updatedData: null,

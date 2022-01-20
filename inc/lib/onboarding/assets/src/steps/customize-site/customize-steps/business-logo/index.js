@@ -22,7 +22,7 @@ const BusinessLogo = () => {
 					</h3>
 					<p className="screen-description">
 						{ __(
-							'Choose logo for your site. You can update it anytime later.',
+							`Choose a logo for your site. You can update it anytime later.`,
 							'astra-sites'
 						) }
 					</p>

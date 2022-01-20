@@ -86,7 +86,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			add_filter( 'astra_sites_image_importer_skip_image', array( $this, 'skip_image' ), 10, 2 );
 			add_action( 'astra_sites_import_complete', array( $this, 'start_process' ) );
 			add_action( 'astra_sites_process_single', array( $this, 'start_process_single' ) );
-			add_action( 'admin_head', array( $this, 'start_importer' ) );
+			add_action( 'admin_init', array( $this, 'start_importer' ) );
 			add_action( 'wp_ajax_astra-sites-update-library', array( $this, 'update_library' ) );
 			add_action( 'wp_ajax_astra-sites-update-library-complete', array( $this, 'update_library_complete' ) );
 			add_action( 'wp_ajax_astra-sites-import-all-categories-and-tags', array( $this, 'import_all_categories_and_tags' ) );
@@ -373,7 +373,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 				// Process import.
 				$this->process_batch();
 
-			} elseif ( empty( $is_fresh_site ) ) {
+			} elseif ( empty( $is_fresh_site ) && '' === $is_fresh_site ) {
 				$dir = ASTRA_SITES_DIR . 'inc/json';
 
 				// First time user save the data of sites, pages, categories etc from the JSON file.
@@ -389,9 +389,9 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 
 				// Also, Trigger the batch to get latest data.
 				// If batch failed then user have at least the data from the JSON file.
-				$this->process_batch();
+				update_site_option( 'astra-sites-fresh-site', 'no' );
 
-				update_site_option( 'astra-sites-fresh-site', 'yes', 'no' );
+				$this->process_batch();
 
 				// If not fresh user then trigger batch import on the transient and option
 				// Only on the Astra Sites page.
@@ -859,9 +859,9 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			$wxr_id = get_site_option( 'astra_sites_imported_wxr_id', 0 );
 			if ( $wxr_id ) {
 				wp_delete_attachment( $wxr_id, true );
-				astra_sites_error_log( 'Deleted Temporary WXR file ' . $wxr_id );
+				Astra_Sites_Importer_Log::add( 'Deleted Temporary WXR file ' . $wxr_id );
 				delete_option( 'astra_sites_imported_wxr_id' );
-				astra_sites_error_log( 'Option `astra_sites_imported_wxr_id` Deleted.' );
+				Astra_Sites_Importer_Log::add( 'Option `astra_sites_imported_wxr_id` Deleted.' );
 			}
 
 			$classes = array();

@@ -42,6 +42,30 @@ class Astra_Sites_Error_Handler {
 	}
 
 	/**
+	 * Constructor
+	 */
+	public function __construct() {
+
+		require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-importer-log.php';
+		if ( true === astra_sites_has_import_started() ) {
+			$this->start_error_handler();
+		}
+
+		add_action( 'shutdown', array( $this, 'stop_handler' ) );
+	}
+
+	/**
+	 * Stop the shutdown handlers.
+	 *
+	 * @return void
+	 */
+	public function stop_handler() {
+		if ( true === astra_sites_has_import_started() ) {
+			$this->stop_error_handler();
+		}
+	}
+
+	/**
 	 * Start the error handling.
 	 */
 	public function start_error_handler() {
@@ -78,6 +102,9 @@ class Astra_Sites_Error_Handler {
 		} else {
 			$error = 'Uncaught Error';
 		}
+
+		Astra_Sites_Importer_Log::add( 'There was an error on website: ' . $error );
+		Astra_Sites_Importer_Log::add( $e );
 
 		if ( wp_doing_ajax() ) {
 			wp_send_json_error(
@@ -116,6 +143,9 @@ class Astra_Sites_Error_Handler {
 			$error = 'Fatal error';
 		}
 
+		Astra_Sites_Importer_Log::add( 'There was an error on website: ' . $error );
+		Astra_Sites_Importer_Log::add( $e );
+
 		if ( wp_doing_ajax() ) {
 			wp_send_json_error(
 				array(
@@ -131,6 +161,6 @@ class Astra_Sites_Error_Handler {
 }
 
 /**
- * Kicking this off by calling 'get_instance()' method
- */
+* Kicking this off by calling 'get_instance()' method
+*/
 Astra_Sites_Error_Handler::get_instance();
