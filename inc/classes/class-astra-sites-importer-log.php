@@ -204,6 +204,9 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 				// Add an index file for security.
 				Astra_Sites::get_instance()->get_filesystem()->put_contents( $dir_info['path'] . 'index.html', '' );
+
+				// Add an .htaccess for security.
+				Astra_Sites::get_instance()->get_filesystem()->put_contents( $dir_info['path'] . '.htaccess', 'deny from all' );
 			}
 
 			return $dir_info;
@@ -220,8 +223,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 			$upload_path = trailingslashit( $upload_dir['path'] );
 
-			// File format e.g. 'import-31-Oct-2017-06-39-12.txt'.
-			self::$log_file = $upload_path . 'import-' . gmdate( 'd-M-Y-h-i-s' ) . '.txt';
+			// File format e.g. 'import-31-Oct-2017-06-39-12-hashcode.log'.
+			self::$log_file = $upload_path . 'import-' . gmdate( 'd-M-Y-h-i-s' ) . '-' . wp_hash( 'starter-templates-log' ) . '.log';
 
 			if ( ! get_option( 'astra_sites_recent_import_log_file', false ) ) {
 				update_option( 'astra_sites_recent_import_log_file', self::$log_file, 'no' );
@@ -250,12 +253,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			// Style separator.
 			$separator = PHP_EOL;
 
-			if ( apply_filters( 'astra_sites_debug_logs', false ) ) {
-				astra_sites_error_log( $content );
-
-				Astra_Sites::get_instance()->get_filesystem()->put_contents( $log_file, $existing_data . $separator . $content, FS_CHMOD_FILE );
-			}
-
+			Astra_Sites::get_instance()->get_filesystem()->put_contents( $log_file, $existing_data . $separator . $content, FS_CHMOD_FILE );
 		}
 
 		/**

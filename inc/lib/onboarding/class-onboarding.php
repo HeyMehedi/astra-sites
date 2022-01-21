@@ -2,15 +2,9 @@
 /**
  * Intelligent Starter Templates
  *
- * @since  3.0.0-beta.1
+ * @since  3.0.0
  * @package Astra Sites
  */
-
-define( 'IST_VER', '1.0.0-beta.1' );
-
-if ( ! defined( 'STARTER_TEMPLATES_REMOTE_URL' ) ) {
-	define( 'STARTER_TEMPLATES_REMOTE_URL', 'https://websitedemos.net/' );
-}
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

@@ -1,7 +1,7 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { useNavigate } from 'react-router-dom';
-import { CategoryList } from '@brainstormforce/starter-templates';
+import { CategoryList } from '@brainstormforce/starter-templates-components';
 import { setURLParmsValue } from '../../../utils/url-params';
 import { useStateValue } from '../../../store/store';
 
@@ -87,6 +87,7 @@ const SiteCategory = () => {
 						category.name !== 'All' ? category.name : ''
 					);
 					history( `?${ urlParam }` );
+					document.querySelector( '.stc-search-input' ).focus();
 				} }
 			/>
 		</div>

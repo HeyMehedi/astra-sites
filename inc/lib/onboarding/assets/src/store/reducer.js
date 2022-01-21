@@ -33,20 +33,20 @@ export const initialState = {
 	builder: builderKey,
 	siteType: '',
 	siteOrder: 'popular',
-	siteCategory: {
-		id: '',
-		slug: '',
-	},
+	siteBusinessType: '',
+	selectedMegaMenu: '',
 	siteSearchTerm: getURLParmsValue( window.location.search, 's' ) || '',
 	userSubscribed: false,
 	showSidebar: true,
 	tryAgainCount: 0,
+	pluginInstallationAttempts: 0,
 	confettiDone: false,
 
 	// Template Information.
 	templateId: 0,
 	templateResponse: null,
 	requiredPlugins: null,
+	fileSystemPermissions: null,
 	selectedTemplateName: '',
 	selectedTemplateType: '',
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { decodeEntities } from '@wordpress/html-entities';
-import { PremiumBadge } from '@brainstormforce/starter-templates';
+import { PremiumBadge } from '@brainstormforce/starter-templates-components';
 import { useStateValue } from '../../store/store';
 import './style.scss';
 import ICONS from '../../../icons';

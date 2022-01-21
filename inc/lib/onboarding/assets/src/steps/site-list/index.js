@@ -1,13 +1,17 @@
 // External Dependencies.
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { sprintf, __ } from '@wordpress/i18n';
 import { decodeEntities } from '@wordpress/html-entities';
 import { sortBy } from 'underscore';
+import {
+	SiteType,
+	SiteOrder,
+	NoResultFound,
+} from '@brainstormforce/starter-templates-components';
 
 // Internal Dependencies.
 import { DefaultStep, PreviousStepLink, Button } from '../../components/index';
 import './style.scss';
-import { getSitesBySearchTerm } from '../../utils/search';
 import { useStateValue } from '../../store/store';
 import {
 	isPro,
@@ -16,36 +20,67 @@ import {
 	getAllSites,
 } from '../../utils/functions';
 import SiteListSkeleton from './site-list-skeleton';
+import GridSkeleton from './grid-skeleton';
 import SiteGrid from './sites-grid/index';
 import SiteSearch from './search-filter';
-import SiteType from './site-type-filter';
-import SiteOrder from './site-order-filter';
-import SiteCategory from './site-category-filter';
-import NoResultFound from './no-result-found';
-import NoFavoriteSites from './no-favorite-sites';
+import SiteBusinessType from './site-business-type-filter';
+import FavoriteSites from './favorite-sites';
 import RelatedSites from './related-sites';
+
+export const useFilteredSites = () => {
+	const [ { builder, siteType, siteOrder } ] = useStateValue();
+	const allSites = getAllSites();
+	let sites = [];
+
+	if ( builder ) {
+		for ( const siteId in allSites ) {
+			if ( builder === allSites[ siteId ][ 'astra-site-page-builder' ] ) {
+				sites[ siteId ] = allSites[ siteId ];
+			}
+		}
+	}
+
+	if ( siteType ) {
+		for ( const siteId in sites ) {
+			if ( siteType === sites[ siteId ][ 'astra-sites-type' ] ) {
+				sites[ siteId ] = sites[ siteId ];
+			} else {
+				delete sites[ siteId ];
+			}
+		}
+	}
+
+	if ( 'latest' === siteOrder && Object.keys( sites ).length ) {
+		sites = sortBy( Object.values( sites ), 'publish-date' ).reverse();
+	}
+
+	return sites;
+};
 
 const SiteList = () => {
 	const [ loadingSkeleton, setLoadingSkeleton ] = useState( true );
-	const [ siteData, setSiteData ] = useState( {
-		sites: {},
-		tags: [],
-		defaultSites: {},
-		allFavorites: [],
-	} );
+	const allFilteredSites = useFilteredSites();
+	const [ siteData, setSiteData ] = useReducer(
+		( state, newState ) => ( { ...state, ...newState } ),
+		{
+			gridSkeleton: false,
+			sites: {},
+		}
+	);
 	const [ storedState, dispatch ] = useStateValue();
 	const {
-		favoriteSiteIDs,
 		onMyFavorite,
 		builder,
 		siteSearchTerm,
 		siteType,
 		siteOrder,
-		siteCategory,
-		allSitesData,
-		allCategories,
-		allCategoriesAndTags,
 	} = storedState;
+
+	useEffect( () => {
+		setTimeout( () => {
+			setLoadingSkeleton( false );
+		}, 300 );
+	}, [] );
 
 	useEffect( () => {
 		dispatch( {
@@ -56,72 +91,10 @@ const SiteList = () => {
 			shownRequirementOnce: false,
 		} );
 
-		const response = getSitesBySearchTerm(
-			siteSearchTerm,
-			siteType,
-			'',
-			builder,
-			allSitesData,
-			allCategories,
-			allCategoriesAndTags
-		);
-
-		let sites = { ...response.sites, ...response.related };
-		if ( 'latest' === siteOrder && Object.keys( sites ).length ) {
-			sites = sortBy( sites, 'publish-date' ).reverse();
-		}
-
-		const allFavorites = [];
-		const allSites = getAllSites();
-		if ( onMyFavorite && Object.keys( allSites ).length > 0 ) {
-			for ( const siteId in allSites ) {
-				if (
-					favoriteSiteIDs.length &&
-					favoriteSiteIDs.includes( siteId )
-				) {
-					allFavorites.push( {
-						id: siteId.replace( 'id-', '' ),
-						image: allSites[ siteId ][ 'thumbnail-image-url' ],
-						title: decodeEntities( allSites[ siteId ].title ),
-						badge:
-							'agency-mini' ===
-							allSites[ siteId ][ 'astra-sites-type' ]
-								? __( 'Premium', 'astra-sites' )
-								: '',
-						...allSites[ siteId ],
-					} );
-				}
-			}
-		}
-
 		setSiteData( {
-			...siteData,
-			...response,
-			defaultSites: getSitesBySearchTerm(
-				'',
-				'',
-				'',
-				builder,
-				allSitesData,
-				allCategories,
-				allCategoriesAndTags
-			).sites,
-			sites,
-			allFavorites,
+			sites: allFilteredSites,
 		} );
-		setTimeout( () => {
-			setLoadingSkeleton( false );
-		}, 300 );
-	}, [
-		favoriteSiteIDs,
-		onMyFavorite,
-		builder,
-		siteSearchTerm,
-		siteType,
-		siteOrder,
-		siteCategory,
-		allSitesData,
-	] );
+	}, [ builder, siteType, siteOrder ] );
 
 	storeCurrentState( storedState );
 
@@ -145,48 +118,47 @@ const SiteList = () => {
 						</h1>
 
 						<div className="site-list-content">
-							<SiteSearch />
+							<SiteSearch setSiteData={ setSiteData } />
 
 							<div className="st-templates-content">
 								<div className="st-other-filters">
 									<div className="st-category-filter">
-										<SiteCategory />
+										<SiteBusinessType />
 									</div>
 									<div className="st-type-and-order-filters">
 										{ builder !== 'gutenberg' && (
-											<SiteType />
+											<SiteType
+												value={ siteType }
+												onClick={ ( event, type ) => {
+													dispatch( {
+														type: 'set',
+														siteType: type.id,
+														onMyFavorite: false,
+													} );
+												} }
+											/>
 										) }
-										<SiteOrder />
+										<SiteOrder
+											value={ siteOrder }
+											onClick={ ( event, order ) => {
+												dispatch( {
+													type: 'set',
+													siteOrder: order.id,
+													onMyFavorite: false,
+												} );
+											} }
+										/>
 									</div>
 								</div>
 
 								{ onMyFavorite ? (
-									<>
-										{ siteData.allFavorites.length ? (
-											<div className="st-sites-grid">
-												<SiteGrid
-													sites={
-														siteData.allFavorites
-													}
-												/>
-											</div>
-										) : (
-											<>
-												<NoFavoriteSites />
-												<RelatedSites
-													sites={
-														siteData.defaultSites
-													}
-												/>
-											</>
-										) }
-									</>
+									<FavoriteSites />
 								) : (
 									<>
 										{ siteCount ? (
 											<>
 												<div className="st-sites-grid">
-													{ siteSearchTerm && (
+													{ siteSearchTerm ? (
 														<div className="st-sites-found-message">
 															{ sprintf(
 																/* translators: %1$s: search term. */
@@ -199,19 +171,28 @@ const SiteList = () => {
 																)
 															) }
 														</div>
+													) : null }
+
+													{ siteData.gridSkeleton ? (
+														<GridSkeleton />
+													) : (
+														<SiteGrid
+															sites={
+																siteData.sites
+															}
+														/>
 													) }
-													<SiteGrid
-														sites={ siteData.sites }
-													/>
 												</div>
 											</>
 										) : (
 											<>
-												<NoResultFound />
-												<RelatedSites
-													sites={
-														siteData.defaultSites
+												<NoResultFound
+													searchTerm={
+														siteSearchTerm
 													}
+												/>
+												<RelatedSites
+													sites={ allFilteredSites }
 												/>
 											</>
 										) }

@@ -138,6 +138,10 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Beaver_Builder' ) ) :
 					// Clear all cache.
 					FLBuilderModel::delete_asset_cache_for_all_posts();
 				}
+
+				// Clean the post excerpt.
+				astra_sites_empty_post_excerpt( $post_id );
+
 			}
 
 		}

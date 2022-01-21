@@ -17,6 +17,7 @@ import {
 	checkRequiredPlugins,
 } from './import-utils';
 const { reportError } = starterTemplates;
+let sendReportFlag = reportError;
 
 import './style.scss';
 
@@ -45,6 +46,7 @@ const ImportSite = () => {
 			notActivatedList,
 			tryAgainCount,
 			xmlImportDone,
+			pluginInstallationAttempts,
 		},
 		dispatch,
 	] = storedState;
@@ -102,7 +104,7 @@ const ImportSite = () => {
 		solution = '',
 		stack = ''
 	) => {
-		if ( ! reportError ) {
+		if ( ! sendReportFlag ) {
 			return;
 		}
 		const reportErr = new FormData();
@@ -214,6 +216,18 @@ const ImportSite = () => {
 						} );
 					},
 					error( err ) {
+						dispatch( {
+							type: 'set',
+							pluginInstallationAttempts:
+								pluginInstallationAttempts + 1,
+						} );
+						let errText = err;
+						if ( err && undefined !== err.errorMessage ) {
+							errText = err.errorMessage;
+							if ( undefined !== err.errorCode ) {
+								errText = err.errorCode + ': ' + errText;
+							}
+						}
 						report(
 							sprintf(
 								// translators: Plugin Name.
@@ -223,6 +237,9 @@ const ImportSite = () => {
 								),
 								plugin.name
 							),
+							'',
+							errText,
+							'',
 							'',
 							err
 						);
@@ -327,6 +344,10 @@ const ImportSite = () => {
 				}
 			} )
 			.catch( ( error ) => {
+				dispatch( {
+					type: 'set',
+					pluginInstallationAttempts: pluginInstallationAttempts + 1,
+				} );
 				report(
 					sprintf(
 						// translators: Plugin name.
@@ -1415,9 +1436,9 @@ const ImportSite = () => {
 	};
 
 	useEffect( () => {
-		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line @wordpress/no-global-event-listener
+		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		return () =>
-			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line @wordpress/no-global-event-listener
+			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 	} );
 
 	/**
@@ -1463,6 +1484,7 @@ const ImportSite = () => {
 				themeStatus: true,
 			} );
 		}
+		sendReportFlag = false;
 		installRequiredPlugins();
 	}, [ templateResponse ] );
 
@@ -1473,6 +1495,7 @@ const ImportSite = () => {
 	 */
 	useEffect( () => {
 		if ( requiredPluginsDone && themeStatus ) {
+			sendReportFlag = reportError;
 			importPart1();
 		}
 	}, [ requiredPluginsDone, themeStatus ] );

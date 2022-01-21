@@ -1,64 +1,29 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Search } from '@brainstormforce/starter-templates';
+import { Search } from '@brainstormforce/starter-templates-components';
 import { decodeEntities } from '@wordpress/html-entities';
 import { useNavigate } from 'react-router-dom';
 import { useStateValue } from '../../../store/store';
-import { initialState } from '../../../store/reducer';
 import './style.scss';
 import { setURLParmsValue } from '../../../utils/url-params';
-const $ = jQuery;
+import { useFilteredSites } from '..';
 
-const SiteSearch = () => {
+const SiteSearch = ( { setSiteData } ) => {
 	const [
-		{ siteSearchTerm, searchTerms, searchTermsWithCount, builder },
+		{
+			siteSearchTerm,
+			searchTerms,
+			searchTermsWithCount,
+			builder,
+			siteType,
+		},
 		dispatch,
 	] = useStateValue();
-	const [ searchTerm, setSearchTerm ] = useState( siteSearchTerm );
+	const allFilteredSites = useFilteredSites();
+	const history = useNavigate();
 
-	const useDebouncedEffect = ( effect, delay, deps ) => {
-		const callback = useCallback( effect, deps );
-
-		useEffect( () => {
-			const handler = setTimeout( () => {
-				callback();
-			}, delay );
-
-			return () => {
-				clearTimeout( handler );
-			};
-		}, [ callback, delay ] );
-	};
-
-	useEffect( () => {
-		$( document ).on( 'heartbeat-send', sendHeartbeat );
-		$( document ).on( 'heartbeat-tick', heartbeatDone );
-	}, [] );
-
-	useDebouncedEffect( () => collectTerms(), 1000, [ searchTerm ] );
-
-	const heartbeatDone = ( e, data ) => {
-		// Check for our data, and use it.
-		if ( ! data[ 'ast-sites-search-terms' ] ) {
-			return;
-		}
-		dispatch( {
-			type: 'set',
-			searchTerms: [],
-			searchTermsWithCount: [],
-		} );
-	};
-
-	const sendHeartbeat = ( e, data ) => {
-		// Add additional data to Heartbeat data.
-		if ( searchTerms.length > 0 ) {
-			data[ 'ast-sites-search-terms' ] = searchTermsWithCount;
-			data[ 'ast-sites-builder' ] = builder;
-		}
-	};
-
-	const collectTerms = () => {
-		const term = searchTerm.toLowerCase();
+	const collectTerms = ( count ) => {
+		const term = siteSearchTerm.toLowerCase();
 		const allTerms = searchTerms;
 		const allTermsWithCount = searchTermsWithCount;
 		// Skip blank words and words smaller than 3 characters.
@@ -67,9 +32,6 @@ const SiteSearch = () => {
 		}
 
 		if ( ! searchTerms.includes( term ) ) {
-			const count = document.getElementsByClassName(
-				'stc-grid-wrap'
-			)[ 0 ].childElementCount;
 			allTerms.push( term );
 			allTermsWithCount.push( {
 				term,
@@ -79,7 +41,6 @@ const SiteSearch = () => {
 				type: 'set',
 				searchTerms: allTerms,
 				searchTermsWithCount: allTermsWithCount,
-				onMyFavorite: false,
 			} );
 		}
 	};
@@ -143,25 +104,68 @@ const SiteSearch = () => {
 			} );
 		}
 	};
-	const history = useNavigate();
 	return (
 		<div className="st-search-box-wrap" ref={ parentRef }>
 			<div className="st-search-filter st-search-box" ref={ ref }>
 				<Search
+					apiUrl={ `${ astraSitesVars.ApiDomain }wp-json/starter-templates/v2/sites-search/?search=${ siteSearchTerm }&page-builder=${ builder }&type=${ siteType }` }
+					beforeSearchResult={ () => {
+						if ( ! siteSearchTerm ) {
+							return;
+						}
+						setSiteData( {
+							gridSkeleton: true,
+						} );
+					} }
+					onSearchResult={ ( response ) => {
+						if ( ! siteSearchTerm ) {
+							setSiteData( {
+								gridSkeleton: false,
+							} );
+							return;
+						}
+						const results = [];
+						if ( response.success ) {
+							if ( response.ids.length ) {
+								for ( const id of response.ids ) {
+									if ( allFilteredSites[ id ] ) {
+										results[ id ] = allFilteredSites[ id ];
+									}
+								}
+							}
+						}
+
+						collectTerms( Object.keys( results ).length );
+
+						setSiteData( {
+							sites: results,
+							gridSkeleton: false,
+						} );
+					} }
 					value={ decodeEntities( siteSearchTerm ) }
 					placeholder={ __(
 						'Search for Starter Templates',
 						'astra-sites'
 					) }
 					onSearch={ ( event, newSearchTerm ) => {
-						setSearchTerm( newSearchTerm );
+						const newSiteData = {
+							gridSkeleton: true,
+						};
+
+						if ( ! newSearchTerm ) {
+							newSiteData.sites = allFilteredSites;
+						}
+
+						setSiteData( newSiteData );
+
 						dispatch( {
 							type: 'set',
 							siteSearchTerm: newSearchTerm,
-							onMyFavorite: initialState.onMyFavorite,
-							siteCategory: initialState.siteCategory,
-							siteType: initialState.siteType,
-							siteOrder: initialState.siteOrder,
+							onMyFavorite: false,
+							siteBusinessType: '',
+							selectedMegaMenu: '',
+							siteType: '',
+							siteOrder: 'popular',
 						} );
 						const urlParam = setURLParmsValue( 's', newSearchTerm );
 						history( `?${ urlParam }` );

@@ -58,10 +58,10 @@ if ( class_exists( 'WP_Background_Process' ) ) :
 
 			Astra_Sites_Importer_Log::add( 'Batch Process Complete!' );
 
+			do_action( 'astra_sites_image_import_complete' );
+
 			// Delete Log file.
 			delete_option( 'astra_sites_recent_import_log_file' );
-
-			do_action( 'astra_sites_image_import_complete' );
 		}
 
 	}

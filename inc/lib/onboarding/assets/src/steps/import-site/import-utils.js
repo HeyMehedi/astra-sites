@@ -126,14 +126,14 @@ export const getDemo = async ( id, storedState ) => {
 		} );
 };
 
-export const checkRequiredPlugins = ( storedState ) => {
+export const checkRequiredPlugins = async ( storedState ) => {
 	const [ {}, dispatch ] = storedState;
 
 	const reqPlugins = new FormData();
 	reqPlugins.append( 'action', 'astra-required-plugins' );
 	reqPlugins.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
-	fetch( ajaxurl, {
+	await fetch( ajaxurl, {
 		method: 'post',
 		body: reqPlugins,
 	} )
@@ -309,4 +309,25 @@ export const divideIntoChunks = ( chunkSize, inputArray ) => {
 	final.push( portion );
 
 	return final;
+};
+
+export const checkFileSystemPermissions = async ( [ , dispatch ] ) => {
+	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-filesystem-permission' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+		const response = await fetch( astraSitesVars.ajaxurl, {
+			method: 'POST',
+			body: formData,
+		} );
+		const data = await response.json();
+
+		dispatch( {
+			type: 'set',
+			fileSystemPermissions: data.data,
+		} );
+	} catch ( error ) {
+		/* eslint-disable-next-line no-console -- We are displaying errors in the console. */
+		console.error( error );
+	}
 };

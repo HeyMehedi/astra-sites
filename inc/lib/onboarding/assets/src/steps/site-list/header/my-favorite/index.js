@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Internal dependencies.
-import { Tooltip } from '@brainstormforce/starter-templates';
+import { Tooltip } from '@brainstormforce/starter-templates-components';
 import { __ } from '@wordpress/i18n';
 import { useStateValue } from '../../../../store/store';
 import ICONS from '../../../../../icons';
@@ -20,7 +20,8 @@ const MyFavorite = () => {
 			onMyFavorite: ! onMyFavorite,
 			siteType: '',
 			siteOrder: initialState.siteOrder,
-			siteCategory: initialState.siteCategory,
+			siteBusinessType: initialState.siteBusinessType,
+			selectedMegaMenu: initialState.selectedMegaMenu,
 			siteSearchTerm: '',
 		} );
 	};

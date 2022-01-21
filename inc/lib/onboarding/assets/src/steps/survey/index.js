@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Tooltip } from '@brainstormforce/starter-templates';
+import { Tooltip } from '@brainstormforce/starter-templates-components';
 import { PreviousStepLink, DefaultStep } from '../../components/index';
 import ICONS from '../../../icons';
 import { useStateValue } from '../../store/store';
+import { checkRequiredPlugins } from '../../steps/import-site/import-utils';
 import SurveyForm from './survey';
 import AdvancedSettings from './advanced-settings';
 import './style.scss';
 const { phpVersion, analytics } = starterTemplates;
 
 const Survey = () => {
+	const storedState = useStateValue();
 	const [
 		{
 			currentIndex,
@@ -17,9 +19,77 @@ const Survey = () => {
 			requiredPlugins,
 			analyticsFlag,
 			shownRequirementOnce,
+			pluginInstallationAttempts,
+			fileSystemPermissions,
 		},
 		dispatch,
-	] = useStateValue();
+	] = storedState;
+
+	const notInstalled = requiredPlugins.required_plugins.notinstalled;
+	const notActivated = requiredPlugins.required_plugins.inactive;
+	const allPuginList = [];
+	if ( notInstalled.length > 0 ) {
+		notInstalled.map( ( plugin ) => {
+			return allPuginList.push( {
+				plugin,
+				action: __( 'Install & Activate', 'astra-sites' ),
+			} );
+		} );
+	}
+
+	if ( notActivated.length > 0 ) {
+		notActivated.map( ( plugin ) => {
+			return allPuginList.push( {
+				plugin,
+				action: __( 'Activate', 'astra-sites' ),
+			} );
+		} );
+	}
+
+	const manualPluginInstallation = () => {
+		return (
+			<form className="install-plugins-form" onSubmit={ recheckPlugins }>
+				<h1>{ __( 'Required plugins missing', 'astra-sites' ) }</h1>
+				<p>
+					{ __(
+						'Some required plugins could not be able to be installed/activated due to some limitations coming from this website’s hosting service provider.',
+						'astra-sites'
+					) }
+				</p>
+				<p>
+					{ __(
+						'We request you to please install/update the following plugins to proceed.',
+						'astra-sites'
+					) }
+				</p>
+				<h5>{ __( 'Required plugins -', 'astra-sites' ) }</h5>
+				<ul className="manual-required-plugins-list">
+					{ allPuginList.map( ( value, index ) => {
+						return (
+							<li key={ index }>
+								{ value.plugin.name }
+								&nbsp;-&nbsp;
+								<a
+									href={ value.plugin?.action }
+									target="_blank"
+									rel="noreferrer"
+								>
+									{ value.action }
+								</a>
+							</li>
+						);
+					} ) }
+				</ul>
+				<button
+					type="submit"
+					className="submit-survey-btn button-text d-flex-center-align"
+				>
+					{ __( 'Start Importing', 'astra-sites' ) }
+					{ ICONS.arrowRight }
+				</button>
+			</form>
+		);
+	};
 
 	const thirtPartyPlugins =
 		requiredPlugins !== null
@@ -176,6 +246,11 @@ const Survey = () => {
 		setSkipPlugins( false );
 	};
 
+	const recheckPlugins = ( e ) => {
+		e.preventDefault();
+		checkRequiredPlugins( storedState );
+	};
+
 	const surveyForm = () => {
 		return (
 			<form className="survey-form" onSubmit={ handleSurveyFormSubmit }>
@@ -255,7 +330,7 @@ const Survey = () => {
 
 				<p>
 					{ __(
-						'The demo you are trying to import requires a few plugins to be installed and activated. Your current PHP version does not match the minimum requirement for these plugins.',
+						'The Starter Template you are trying to import requires a few plugins to be installed and activated. Your current PHP version does not match the minimum requirement for these plugins.',
 						'astra-sites'
 					) }
 				</p>
@@ -359,9 +434,85 @@ const Survey = () => {
 		);
 	};
 
+	const fileSystemPermissionRequirement = () => {
+		const {
+			is_readable: isReadable,
+			is_writable: isWritable,
+		} = fileSystemPermissions.permissions;
+
+		return (
+			<div className="requirement-check-wrap">
+				<h1>{ __( "We're Almost There!", 'astra-sites' ) }</h1>
+
+				<p>
+					{ __(
+						'The import process was interrupted due to the lack of file-system permissions from your host. It is required to import images, XML files, and more required for the template to work.',
+						'astra-sites'
+					) }
+				</p>
+
+				<p className="current-file-system-permissions">
+					<strong>
+						{ __(
+							'Current file-system permissions:',
+							'astra-sites'
+						) }
+					</strong>
+				</p>
+
+				<ul className="requirement-check-list">
+					<li>
+						<div className="requirement-list-item">
+							{ __( 'Read Permissions:', 'astra-sites' ) }
+							<span
+								className={ `dashicons ${
+									isReadable
+										? 'dashicons-yes'
+										: 'dashicons-no'
+								}` }
+							/>
+						</div>
+					</li>
+					<li>
+						<div className="requirement-list-item">
+							{ __( 'Write Permissions:', 'astra-sites' ) }
+							<span
+								className={ `dashicons ${
+									isWritable
+										? 'dashicons-yes'
+										: 'dashicons-no'
+								}` }
+							/>
+						</div>
+					</li>
+				</ul>
+
+				<p>
+					{ __(
+						'Please contact the hosting service provider to help you update the permissions so that you can successfully import a complete template.',
+						'astra-sites'
+					) }
+				</p>
+			</div>
+		);
+	};
+
 	let defaultStepContent = surveyForm();
 
-	if ( Object.keys( requiredPlugins.incompatible_plugins ).length > 0 ) {
+	if ( pluginInstallationAttempts > 2 && allPuginList.length > 0 ) {
+		// If plugin installation fails more than 3 times.
+		defaultStepContent = manualPluginInstallation();
+	} else if (
+		fileSystemPermissions !== null &&
+		! Object.values( fileSystemPermissions.permissions ).every(
+			( value ) => value === true
+		)
+	) {
+		defaultStepContent = fileSystemPermissionRequirement();
+	} else if (
+		null !== requiredPlugins &&
+		Object.keys( requiredPlugins.incompatible_plugins ).length > 0
+	) {
 		defaultStepContent = hardRequirement();
 	} else if ( showRequirementCheck ) {
 		defaultStepContent = optionalRequirement();

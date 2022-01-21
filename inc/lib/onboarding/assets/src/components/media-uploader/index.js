@@ -198,7 +198,7 @@ const MediaUploader = () => {
 						<div className="logo-skip-info">
 							<h5>
 								{ __(
-									"Don't have Logo? No Problem!",
+									'Don’t have a logo? No problem!',
 									'astra-sites'
 								) }
 							</h5>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
+import { ToggleDropdown } from '@brainstormforce/starter-templates-components';
 import { useStateValue } from '../../../store/store';
-import Toggle from '../../../components/toggle';
 import { initialState } from '../../../store/reducer';
 const { imageDir, isBrizyEnabled } = starterTemplates;
 
@@ -36,7 +36,7 @@ const PageBuilder = () => {
 
 	return (
 		<div className="st-page-builder-filter">
-			<Toggle
+			<ToggleDropdown
 				value={ builder }
 				options={ buildersList }
 				className="st-page-builder-toggle"
@@ -44,7 +44,9 @@ const PageBuilder = () => {
 					dispatch( {
 						type: 'set',
 						builder: option.id,
-						siteCategory: initialState.siteCategory,
+						siteSearchTerm: '',
+						siteBusinessType: initialState.siteBusinessType,
+						selectedMegaMenu: initialState.selectedMegaMenu,
 						siteType: '',
 						siteOrder: 'popular',
 						onMyFavorite: false,

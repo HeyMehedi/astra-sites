@@ -14,14 +14,16 @@
     }
 
 
-    .required-plugins-form {
+    .required-plugins-form,
+    .install-plugins-form {
         h5 {
             margin-bottom: 22px;
         }
         p {
             margin-bottom: 26px;
         }
-        .third-party-required-plugins-list {
+        .third-party-required-plugins-list,
+        .manual-required-plugins-list {
             list-style: auto;
             margin: 10px 20px;
             li {
@@ -151,7 +153,8 @@
         line-height:1.4;
     }
     .requirement-check-wrap {
-        .current-php-version {
+        .current-php-version,
+        .current-file-system-permissions {
             margin-top: 10px;
         }
         button.submit-survey-btn:disabled {
@@ -178,6 +181,13 @@
                 align-content: center;
                 align-items: center;
                 grid-gap: 10px;
+
+                .dashicons-yes {
+                    color: var(--st-color-success, #39b54a);
+                }
+                .dashicons-no {
+                    color: var(--st-color-error, #d72b3f);
+                }
             }
             .stc-tooltip {
                 display: flex;
