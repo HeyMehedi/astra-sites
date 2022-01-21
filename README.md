@@ -133,7 +133,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
-v3.1.0 - 20-January-2022
+v3.1.0 - 21-January-2022
 - New: Added new mega menu-based categories for better segregation of templates.
 - New: Improved search functionality for better results.
 - Improvement: Improved error handling when plugin installation/activation fails for slow hosting providers.
