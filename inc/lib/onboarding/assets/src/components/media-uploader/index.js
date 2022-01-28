@@ -177,7 +177,7 @@ const MediaUploader = () => {
 					{ '' === siteLogo.url ? (
 						<div>
 							<Button
-								className="ist-button ist-button-outline"
+								className="ist-button ist-button-outline ist-logo-button"
 								onClick={ open }
 							>
 								<h5>
@@ -238,7 +238,11 @@ const MediaUploader = () => {
 							disabled={ '' !== siteLogo.url ? false : true }
 						/>
 					</div>
-					<Button className="ist-button" onClick={ nextStep } after>
+					<Button
+						className="ist-button ist-next-step"
+						onClick={ nextStep }
+						after
+					>
 						{ '' !== siteLogo.url
 							? __( 'Continue', 'astra-sites' )
 							: __( 'Skip & Continue', 'astra-sites' ) }
