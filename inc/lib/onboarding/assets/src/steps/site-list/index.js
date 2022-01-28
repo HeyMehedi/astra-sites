@@ -6,8 +6,10 @@ import { sortBy } from 'underscore';
 import {
 	SiteType,
 	SiteOrder,
+	SiteBusinessType,
 	NoResultFound,
 } from '@brainstormforce/starter-templates-components';
+import { useNavigate } from 'react-router-dom';
 
 // Internal Dependencies.
 import { DefaultStep, PreviousStepLink, Button } from '../../components/index';
@@ -19,11 +21,11 @@ import {
 	storeCurrentState,
 	getAllSites,
 } from '../../utils/functions';
+import { setURLParmsValue } from '../../utils/url-params';
 import SiteListSkeleton from './site-list-skeleton';
 import GridSkeleton from './grid-skeleton';
 import SiteGrid from './sites-grid/index';
 import SiteSearch from './search-filter';
-import SiteBusinessType from './site-business-type-filter';
 import FavoriteSites from './favorite-sites';
 import RelatedSites from './related-sites';
 
@@ -60,6 +62,7 @@ export const useFilteredSites = () => {
 const SiteList = () => {
 	const [ loadingSkeleton, setLoadingSkeleton ] = useState( true );
 	const allFilteredSites = useFilteredSites();
+	const history = useNavigate();
 	const [ siteData, setSiteData ] = useReducer(
 		( state, newState ) => ( { ...state, ...newState } ),
 		{
@@ -74,6 +77,8 @@ const SiteList = () => {
 		siteSearchTerm,
 		siteType,
 		siteOrder,
+		siteBusinessType,
+		selectedMegaMenu,
 	} = storedState;
 
 	useEffect( () => {
@@ -123,7 +128,30 @@ const SiteList = () => {
 							<div className="st-templates-content">
 								<div className="st-other-filters">
 									<div className="st-category-filter">
-										<SiteBusinessType />
+										<SiteBusinessType
+											parent={ siteBusinessType }
+											menu={ selectedMegaMenu }
+											onClick={ (
+												event,
+												option,
+												childItem
+											) => {
+												dispatch( {
+													type: 'set',
+													siteBusinessType: option.ID,
+													selectedMegaMenu:
+														childItem.ID,
+													siteSearchTerm:
+														childItem.title,
+													onMyFavorite: false,
+												} );
+												const urlParam = setURLParmsValue(
+													's',
+													childItem.title
+												);
+												history( `?${ urlParam }` );
+											} }
+										/>
 									</div>
 									<div className="st-type-and-order-filters">
 										{ builder !== 'gutenberg' && (

@@ -4,8 +4,8 @@ Donate link: https://wpastra.com/pro/
 Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
-Tested up to: 5.8
-Stable tag: 3.1.0
+Tested up to: 5.9
+Stable tag: 3.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,9 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.1.1 - 28-January-2022
+- Fix: Import error for Elementor Blocks with PHP 8.x.
 
 v3.1.0 - 21-January-2022
 - New: Added new mega menu-based categories for better segregation of templates.
