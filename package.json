@@ -33,7 +33,7 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@brainstormforce/starter-templates-components": "https://github.com/brainstormforce/starter-templates-components.git#01184bc",
+    "@brainstormforce/starter-templates-components": "https://github.com/brainstormforce/starter-templates-components.git#main-build",
     "@wordpress/scripts": "^14.1.0",
     "grunt": "^1.4.1",
     "grunt-bumpup": "^0.6.3",
