@@ -103,7 +103,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Widgets' ) ) :
 					if ( ! empty( $this->wpforms_ids_mapping ) ) {
 						// Replace ID's.
 						foreach ( $this->wpforms_ids_mapping as $old_id => $new_id ) {
-							if ( $old_id == $content ) {
+							if ( $old_id === $content ) {
 								$content = $new_id;
 							}
 						}
