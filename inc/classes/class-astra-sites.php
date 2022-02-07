@@ -146,7 +146,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-sites-favorite' => 'add_to_favorite',
 				'astra-sites-api-request' => 'api_request',
 				'astra-sites-remote-request' => 'remote_request',
-				'astra-page-elementor-batch-process' => 'elementor_batch_process',
+				'astra-page-elementor-insert-page' => 'elementor_process_import_for_page',
 				'astra-sites-update-subscription' => 'update_subscription',
 				'astra-sites-update-analytics' => 'update_analytics',
 				'astra-sites-filesystem-permission' => 'filesystem_permission',
@@ -393,7 +393,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 *
 		 * @since 2.0.0
 		 */
-		public function elementor_batch_process() {
+		public function elementor_process_import_for_page() {
 
 			// Verify Nonce.
 			check_ajax_referer( 'astra-sites', '_ajax_nonce' );

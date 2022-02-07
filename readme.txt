@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.9
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.1.3 - 7-February-2022
+- Fix: Fixed an issue with retina logo image download during import.
+- Fix: Fixed an issue with WP Forms not being imported when used in the footer of the website.
+- Fix: Fixed a console error in some cases where the template took longer to fetch its contents.
 
 v3.1.2 - 28-January-2022
 - Fix: Fixed a blank page error on the main Starter Template screen due to the last update (v3.1.2).

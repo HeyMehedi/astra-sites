@@ -94,6 +94,7 @@ const SiteList = () => {
 			selectedTemplateName: '',
 			selectedTemplateType: '',
 			shownRequirementOnce: false,
+			templateId: 0,
 		} );
 
 		setSiteData( {

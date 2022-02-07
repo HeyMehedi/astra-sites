@@ -9,15 +9,11 @@ import { sendPostMessage, getDataUri } from '../../utils/functions';
 import { initialState } from '../../store/reducer';
 
 import './style.scss';
-import PreviousStepLink from '../../components/util/previous-step-link/index';
 import ICONS from '../../../icons';
 
 const MediaUploader = () => {
 	const replaceMediaUpload = () => MediaUpload;
-	const [
-		{ siteLogo, currentCustomizeIndex, currentIndex },
-		dispatch,
-	] = useStateValue();
+	const [ { siteLogo }, dispatch ] = useStateValue();
 
 	addFilter(
 		'editor.MediaUpload',
@@ -73,27 +69,6 @@ const MediaUploader = () => {
 			param: 'siteLogo',
 			data: newLogoOptions,
 		} );
-	};
-
-	const nextStep = () => {
-		dispatch( {
-			type: 'set',
-			currentCustomizeIndex: currentCustomizeIndex + 1,
-		} );
-	};
-
-	const lastStep = () => {
-		sendPostMessage( {
-			param: 'clearPreviewAssets',
-			data: {},
-		} );
-		setTimeout( () => {
-			dispatch( {
-				type: 'set',
-				currentIndex: currentIndex - 1,
-				currentCustomizeIndex: 0,
-			} );
-		}, 300 );
 	};
 
 	const resetLogoWidth = ( event ) => {
@@ -238,19 +213,6 @@ const MediaUploader = () => {
 							disabled={ '' !== siteLogo.url ? false : true }
 						/>
 					</div>
-					<Button
-						className="ist-button ist-next-step"
-						onClick={ nextStep }
-						after
-					>
-						{ '' !== siteLogo.url
-							? __( 'Continue', 'astra-sites' )
-							: __( 'Skip & Continue', 'astra-sites' ) }
-					</Button>
-
-					<PreviousStepLink onClick={ lastStep }>
-						{ __( 'Back', 'astra-sites' ) }
-					</PreviousStepLink>
 				</>
 			) }
 		/>
