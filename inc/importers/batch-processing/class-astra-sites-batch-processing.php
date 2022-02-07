@@ -134,7 +134,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			// Prepare Misc.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-misc.php';
 
-			// Prepare Misc.
+			// Prepare Customizer.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-customizer.php';
 
 			// Process Importer.
@@ -849,6 +849,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function start_process() {
+			set_transient( 'astra_sites_batch_process_started', 'yes', HOUR_IN_SECONDS );
 
 			/** WordPress Plugin Administration API */
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
