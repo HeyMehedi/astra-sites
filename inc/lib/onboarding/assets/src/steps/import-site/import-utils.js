@@ -331,3 +331,20 @@ export const checkFileSystemPermissions = async ( [ , dispatch ] ) => {
 		console.error( error );
 	}
 };
+
+export const generateAnalyticsLead = async ( [
+	{ tryAgainCount, importError, templateId, builder },
+] ) => {
+	const importContent = new FormData();
+	importContent.append( 'action', 'astra-sites-generate-analytics-lead' );
+	importContent.append( 'status', ! importError );
+	importContent.append( 'id', templateId );
+	importContent.append( 'try-again-count', tryAgainCount );
+	importContent.append( 'type', 'astra-sites' );
+	importContent.append( 'page-builder', builder );
+	importContent.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+	await fetch( ajaxurl, {
+		method: 'post',
+		body: importContent,
+	} );
+};
