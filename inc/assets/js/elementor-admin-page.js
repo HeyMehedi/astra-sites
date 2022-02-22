@@ -1454,13 +1454,15 @@ var AstraSitesAjaxQueue = (function () {
 
 		_pluginCheck: function (e, data) {
 
+			var args = encodeURI( '?site_url=' + astraElementorSites.siteURL + '&version=' + astraElementorSites.version );
+
 			var api_post = {
-				slug: 'site-pages' + '/' + data['id']
+				slug: 'site-pages' + '/' + data['id'] + args
 			};
 
 			if ('blocks' == AstraElementorSitesAdmin.type) {
 				api_post = {
-					slug: 'astra-blocks' + '/' + data['id']
+					slug: 'astra-blocks' + '/' + data['id'] + args
 				};
 			}
 

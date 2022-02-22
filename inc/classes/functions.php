@@ -172,6 +172,7 @@ function astra_sites_get_api_params() {
 			'site_url'     => get_site_url(),
 			'per-page'     => 15,
 			'template_status' => '',
+			'version' => ASTRA_SITES_VER,
 		)
 	);
 }

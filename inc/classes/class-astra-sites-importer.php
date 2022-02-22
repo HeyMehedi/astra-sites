@@ -686,6 +686,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 					wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 				}
 			}
+			do_action( 'st_before_start_import_process' );
 			set_transient( 'astra_sites_import_started', 'yes', HOUR_IN_SECONDS );
 			wp_send_json_success();
 		}
