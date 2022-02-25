@@ -47,6 +47,8 @@ const ImportSite = () => {
 			notActivatedList,
 			tryAgainCount,
 			xmlImportDone,
+			templateId,
+			builder,
 			pluginInstallationAttempts,
 		},
 		dispatch,
@@ -105,8 +107,8 @@ const ImportSite = () => {
 		solution = '',
 		stack = ''
 	) => {
-		if ( tryAgainCount >= 3 ) {
-			generateAnalyticsLead( storedState );
+		if ( tryAgainCount >= 2 ) {
+			generateAnalyticsLead( tryAgainCount, false, templateId, builder );
 		}
 		if ( ! sendReportFlag ) {
 			return;
@@ -161,7 +163,7 @@ const ImportSite = () => {
 
 		importDone();
 
-		generateAnalyticsLead( storedState );
+		generateAnalyticsLead( tryAgainCount, true, templateId, builder );
 	};
 
 	/**
