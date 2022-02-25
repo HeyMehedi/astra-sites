@@ -332,12 +332,15 @@ export const checkFileSystemPermissions = async ( [ , dispatch ] ) => {
 	}
 };
 
-export const generateAnalyticsLead = async ( [
-	{ tryAgainCount, importError, templateId, builder },
-] ) => {
+export const generateAnalyticsLead = async (
+	tryAgainCount,
+	status,
+	templateId,
+	builder
+) => {
 	const importContent = new FormData();
 	importContent.append( 'action', 'astra-sites-generate-analytics-lead' );
-	importContent.append( 'status', ! importError );
+	importContent.append( 'status', status );
 	importContent.append( 'id', templateId );
 	importContent.append( 'try-again-count', tryAgainCount );
 	importContent.append( 'type', 'astra-sites' );
