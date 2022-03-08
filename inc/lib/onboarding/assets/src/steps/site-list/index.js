@@ -30,8 +30,10 @@ import FavoriteSites from './favorite-sites';
 import RelatedSites from './related-sites';
 
 export const useFilteredSites = () => {
-	const [ { builder, siteType, siteOrder } ] = useStateValue();
-	const allSites = getAllSites();
+	const [ { builder, siteType, siteOrder, allSitesData } ] = useStateValue();
+	const allSites = !! Object.keys( allSitesData ).length
+		? allSitesData
+		: getAllSites();
 	let sites = [];
 
 	if ( builder ) {
@@ -79,6 +81,7 @@ const SiteList = () => {
 		siteOrder,
 		siteBusinessType,
 		selectedMegaMenu,
+		allSitesData,
 	} = storedState;
 
 	useEffect( () => {
@@ -100,7 +103,7 @@ const SiteList = () => {
 		setSiteData( {
 			sites: allFilteredSites,
 		} );
-	}, [ builder, siteType, siteOrder ] );
+	}, [ builder, siteType, siteOrder, allSitesData ] );
 
 	storeCurrentState( storedState );
 
