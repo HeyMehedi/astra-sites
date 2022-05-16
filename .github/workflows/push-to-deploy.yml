@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+      with:
+        token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
 
     - name: Use Node.js 14.x
       uses: actions/setup-node@v3
