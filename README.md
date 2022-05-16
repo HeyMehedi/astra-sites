@@ -1,13 +1,13 @@
 # Starter Templates — Elementor, WordPress & Beaver Builder Templates #
-**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
-**Donate link:** https://wpastra.com/pro/  
-**Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites  
-**Requires at least:** 4.4  
-**Requires PHP:** 5.3  
-**Tested up to:** 5.9  
-**Stable tag:** 3.1.1
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce/)
+**Donate link:** https://wpastra.com/pro/
+**Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites
+**Requires at least:** 4.4
+**Requires PHP:** 5.3
+**Tested up to:** 5.9
+**Stable tag:** 3.1.8
+**License:** GPLv2 or later
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 The growing library of 300+ ready-to-use templates that work with all WordPress themes including Astra, Hello, OceanWP, GeneratePress and more
 
@@ -133,6 +133,36 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.1.8 - 13-April-2022
+- Fix: Fixed an issue with the click action for category mega menu titles.
+- Fix: Fixed an issue with the Popular and Latest filters.
+- Fix: Improved import error messages.
+- Fix: UI improvement on the last screen for Starter Template import.
+
+v3.1.7 - 17-March-2022
+- Fix: Fixed an issue with multiple import processes being invoked when the theme is not activated.
+
+v3.1.6 - 8-March-2022
+- Improvement: Better error reporting for the import process.
+- Fix: Fixed an issue where the Starter Templates library won't refresh after the sync process.
+
+v3.1.5 - 25-February-2022
+- Improvement: Better logging for import process.
+
+v3.1.4 - 22-February-2022
+- Improvement: Added compatibility to Starter Templates with Easy Digital Downloads plugin.
+
+v3.1.3 - 7-February-2022
+- Fix: Fixed an issue with retina logo image download during import.
+- Fix: Fixed an issue with WP Forms not being imported when used in the footer of the website.
+- Fix: Fixed a console error in some cases where the template took longer to fetch its contents.
+
+v3.1.2 - 28-January-2022
+- Fix: Fixed a blank page error on the main Starter Template screen due to the last update (v3.1.2).
+
+v3.1.1 - 28-January-2022
+- Fix: Import error for Elementor Blocks with PHP 8.x.
+
 v3.1.0 - 21-January-2022
 - New: Added new mega menu-based categories for better segregation of templates.
 - New: Improved search functionality for better results.
@@ -242,7 +272,7 @@ v3.0.2 - 8-December-2021
 
 v3.0.1 - 8-December-2021
 - Improvement: Better handling of errors.
-- Fix: Removed extra sub directory from v3.0.0 update. 
+- Fix: Removed extra sub directory from v3.0.0 update.
 
 v3.0.0 - 8-December-2021
 - New: All new user interface to make it easier to select and customize the templates when you are building your website.
