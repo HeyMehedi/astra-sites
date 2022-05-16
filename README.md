@@ -136,6 +136,7 @@ We are open to suggestions and would love to work on topics that our users are l
 v3.1.9 - 16-May-2022
 - Improvement: Enhanced test environments.
 - Fix: Fixed redirection of few required plugins during import.
+- Fix: Added support for wp_block post type.
 
 v3.1.8 - 13-April-2022
 - Fix: Fixed an issue with the click action for category mega menu titles.
