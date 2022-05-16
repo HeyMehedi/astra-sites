@@ -33,7 +33,6 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@brainstormforce/starter-templates-components": "https://git@github.com/brainstormforce/starter-templates-components.git#9135bcd",
     "@wordpress/scripts": "^14.1.0",
     "grunt": "^1.4.1",
     "grunt-bumpup": "^0.6.3",
@@ -64,6 +63,7 @@
     "react-dom": "^17.0.2",
     "react-lottie-player": "^1.4.1",
     "react-router-dom": "^6.2.1",
+    "@brainstormforce/starter-templates-components": "git+https://git@github.com/brainstormforce/starter-templates-components.git#9135bcd",
     "styled-components": "^5.3.0",
     "underscore": "^1.13.2"
   }
