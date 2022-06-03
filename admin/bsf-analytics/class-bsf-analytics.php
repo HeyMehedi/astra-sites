@@ -241,21 +241,25 @@ if ( ! class_exists( 'BSF_Analytics' ) ) {
 								</div>',
 							/* translators: %s usage doc link */
 							sprintf( $notice_string . '<span dir="%2s"><a href="%3s" target="_blank" rel="noreferrer noopener">%4s</a><span>', esc_html( $data['product_name'] ), $language_dir, esc_url( $usage_doc_link ), __( ' Know More.' ) ),
-							esc_url( add_query_arg(
-								array(
-									$key . '_analytics_optin' => 'yes',
-									$key . '_analytics_nonce' => wp_create_nonce( $key . '_analytics_optin' ),
-									'bsf_analytics_source' => $key,
+							esc_url(
+								add_query_arg(
+									array(
+										$key . '_analytics_optin' => 'yes',
+										$key . '_analytics_nonce' => wp_create_nonce( $key . '_analytics_optin' ),
+										'bsf_analytics_source' => $key,
+									)
 								)
-							) ),
+							),
 							__( 'Yes! Allow it' ),
-							esc_url( add_query_arg(
-								array(
-									$key . '_analytics_optin' => 'no',
-									$key . '_analytics_nonce' => wp_create_nonce( $key . '_analytics_optin' ),
-									'bsf_analytics_source' => $key,
+							esc_url(
+								add_query_arg(
+									array(
+										$key . '_analytics_optin' => 'no',
+										$key . '_analytics_nonce' => wp_create_nonce( $key . '_analytics_optin' ),
+										'bsf_analytics_source' => $key,
+									)
 								)
-							) ),
+							),
 							MONTH_IN_SECONDS,
 							__( 'No Thanks' )
 						),
@@ -298,7 +302,7 @@ if ( ! class_exists( 'BSF_Analytics' ) ) {
 			}
 
 			wp_safe_redirect(
-				esc_url_raw( 
+				esc_url_raw(
 					remove_query_arg(
 						array(
 							$source . '_analytics_optin',
