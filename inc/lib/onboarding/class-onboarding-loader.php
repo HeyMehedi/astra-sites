@@ -58,7 +58,7 @@ class Intelligent_Starter_Templates_Loader {
 		add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		// Assets loading.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ), 99 );
 
 		add_filter( 'admin_init' , array( $this, 'st_brizy_flag_field' )  );
 	}
