@@ -58,7 +58,7 @@ class Intelligent_Starter_Templates_Loader {
 		add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		// Assets loading.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ), 999, 1 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		add_filter( 'admin_init' , array( $this, 'st_brizy_flag_field' )  );
 	}
@@ -117,6 +117,14 @@ class Intelligent_Starter_Templates_Loader {
 	 * @return void
 	 */
 	public function enqueue_scripts( $hook = '' ) {
+
+		if( isset( $_GET['ast-disable-activation-notice'] ) ){
+			$current_url = home_url( $_SERVER['REQUEST_URI'] );
+			$current_url = str_replace( '&ast-disable-activation-notice', '', $current_url );
+			wp_safe_redirect( $current_url );
+			exit;
+		}
+
 		if ( 'appearance_page_starter-templates' !== $hook ) {
 			return;
 		}
