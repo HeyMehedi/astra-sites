@@ -118,7 +118,7 @@ class Intelligent_Starter_Templates_Loader {
 	 */
 	public function enqueue_scripts( $hook = '' ) {
 
-		if( isset( $_GET['ast-disable-activation-notice'] ) ){
+		if( isset( $_GET['ast-disable-activation-notice'] ) ){ // After activating the starter template from Astra noticed for the first time, the templates was not displayed because of template import process not fully done.
 			$current_url = home_url( $_SERVER['REQUEST_URI'] );
 			$current_url = str_replace( '&ast-disable-activation-notice', '', $current_url );
 			wp_safe_redirect( $current_url );
