@@ -134,9 +134,9 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v3.1.12 - 12-July-2022
-- Improvement:  Disable promotes Essential & Growth bundle when white label is enabled.
+- Improvement: Disable promotes Essential & Growth bundle when white label is enabled.
 - Fix: Templates are not displayed when we install plugin from Astra notice.
-- Fix: Display "Install Required Plugins" checkbox option if required plugins are remaining to install. 
+- Fix: Display "Install Required Plugins" checkbox option if required plugins are not installed. 
 
 v3.1.11 - 03-June-2022
 - Improvement: Activate plugins using WP-CLI when importing demo using cli command.
