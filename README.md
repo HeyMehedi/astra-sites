@@ -132,6 +132,8 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+v3.1.13 - 18-July-2022
+Fix: Prevent invalid redirection after template import.
 
 v3.1.12 - 12-July-2022
 - Improvement: Disable promotes Essential & Growth bundle when white label is enabled.
