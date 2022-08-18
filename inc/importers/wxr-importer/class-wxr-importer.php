@@ -864,7 +864,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 			}
 
 			// If post status as 'dp-rewrite-republish' OR trash OR draft then skip.
-			if ( 'dp-rewrite-republish' === $data['post_status'] || 'draft' === $data['post_status'] || 'trash' === $data['post_status']) {
+			if ( 'dp-rewrite-republish' === $data['post_status'] || 'draft' === $data['post_status'] || 'trash' === $data['post_status'] ) {
 				return;
 			}
 
