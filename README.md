@@ -132,6 +132,16 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+v3.1.14 - 18-Aug-2022
+Fix: Spectra templates are not exported properly.
+
+v3.1.13 - 18-July-2022
+Fix: Prevent invalid redirection after template import.
+
+v3.1.12 - 12-July-2022
+- Improvement: Disable promotes Essential & Growth bundle when white label is enabled.
+- Fix: Templates are not displayed when we install plugin from Astra notice.
+- Fix: Display "Install Required Plugins" checkbox option if required plugins are not installed. 
 
 v3.1.11 - 03-June-2022
 - Improvement: Activate plugins using WP-CLI when importing demo using cli command.
