@@ -134,7 +134,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v3.1.14 - 18-Aug-2022
-- Fix: Block editor templates are not imported properly.
+- Fix: Block editor templates are not imported correctly.
 
 v3.1.13 - 18-July-2022
 - Fix: Prevent invalid redirection after template import.
