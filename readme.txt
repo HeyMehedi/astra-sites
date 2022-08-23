@@ -133,7 +133,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
-v3.1.15 - 22-Aug-2022
+v3.1.15 - 23-Aug-2022
 - Improvement: Install Spectra while importing Block Patterns and Wireframe Patterns.
 
 v3.1.14 - 18-Aug-2022
