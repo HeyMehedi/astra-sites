@@ -391,7 +391,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				wp_send_json_success( $url );
 			}
 		}
-		
+
 		/**
 		 * Import Customizer Settings.
 		 *
