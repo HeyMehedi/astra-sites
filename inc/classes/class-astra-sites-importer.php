@@ -56,6 +56,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			// Import AJAX.
 			add_action( 'wp_ajax_astra-sites-import-wpforms', array( $this, 'import_wpforms' ) );
 			add_action( 'wp_ajax_astra-sites-import-cartflows', array( $this, 'import_cartflows' ) );
+			add_action( 'wp_ajax_astra-sites-import-spectra-settings', array( $this, 'import_spectra_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-prepare-xml', array( $this, 'prepare_xml_data' ) );
 			add_action( 'wp_ajax_astra-sites-import-options', array( $this, 'import_options' ) );
@@ -346,6 +347,51 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			}
 		}
 
+		/**
+		 * Import Spectra Settings
+		 *
+		 * @since x.x.x
+		 *
+		 * @param  string $url Spectra Settings JSON file URL.
+		 * @return void
+		 */
+		public function import_spectra_settings( $url = '' ) {
+
+			$url = ( isset( $_REQUEST['spectra_settings'] ) ) ? urldecode( $_REQUEST['spectra_settings'] ) : urldecode( $url ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! empty( $url ) && is_callable( 'UAGB_Admin_Helper::get_instance' ) ) {
+
+				// Download JSON file.
+				$file_path = Astra_Sites_Helper::download_file( $url );
+
+				if ( $file_path['success'] ) {
+					if ( isset( $file_path['data']['file'] ) ) {
+
+						$ext = strtolower( pathinfo( $file_path['data']['file'], PATHINFO_EXTENSION ) );
+
+						if ( 'json' === $ext ) {
+							$settings = json_decode( Astra_Sites::get_instance()->get_filesystem()->get_contents( $file_path['data']['file'] ), true );
+
+							if ( ! empty( $settings ) ) {
+								UAGB_Admin_Helper::get_instance()->update_admin_settings_shareable_data( $settings );
+							}
+						} else {
+							wp_send_json_error( __( 'Invalid file for Spectra Settings', 'astra-sites' ) );
+						}
+					} else {
+						wp_send_json_error( __( 'There was an error downloading the Spectra Settings file.', 'astra-sites' ) );
+					}
+				} else {
+					wp_send_json_error( __( 'There was an error downloading the Spectra Settings file.', 'astra-sites' ) );
+				}
+			}
+
+			if ( defined( 'WP_CLI' ) ) {
+				WP_CLI::line( 'Imported from ' . $url );
+			} elseif ( wp_doing_ajax() ) {
+				wp_send_json_success( $url );
+			}
+		}
+		
 		/**
 		 * Import Customizer Settings.
 		 *
