@@ -362,7 +362,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				/* Translators: %s is XML URL. */
 				wp_send_json_error( sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $url ) );
 			}
-			
+
 			if ( ! empty( $url ) && is_callable( 'UAGB_Admin_Helper::get_instance' ) ) {
 
 				// Download JSON file.
