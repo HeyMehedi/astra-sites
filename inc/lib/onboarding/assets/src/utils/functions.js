@@ -59,8 +59,7 @@ export const storeCurrentState = ( currentState ) => {
 			'starter-templates-onboarding',
 			JSON.stringify( currentState )
 		);
-	}catch( err ) {
-		console.log( '5-' , currentState );
+	} catch( err ) {
 		return false;
 	}
 };

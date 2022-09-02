@@ -358,6 +358,11 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		public function import_spectra_settings( $url = '' ) {
 
 			$url = ( isset( $_REQUEST['spectra_settings'] ) ) ? urldecode( $_REQUEST['spectra_settings'] ) : urldecode( $url ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! astra_sites_is_valid_url( $url ) ) {
+				/* Translators: %s is XML URL. */
+				wp_send_json_error( sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $url ) );
+			}
+			
 			if ( ! empty( $url ) && is_callable( 'UAGB_Admin_Helper::get_instance' ) ) {
 
 				// Download JSON file.
