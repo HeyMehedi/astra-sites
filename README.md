@@ -132,6 +132,11 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+v3.1.16 - 12-September-2022
+- Improvement: Added compatibility for Spectra.
+- Fix: Latest Safari browser white screen appearing when select any template.
+- Fix: Install Spectra only when light category Patterns importing.
+
 v3.1.15 - 23-Aug-2022
 - Improvement: Install Spectra while importing Block Patterns and Wireframe Patterns.
 
