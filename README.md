@@ -134,7 +134,7 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 v3.1.16 - 12-September-2022
 - Improvement: Added compatibility for Spectra.
-- Fix: Latest Safari browser white screen appearing when select any template.
+- Fix: White screen is appearing on latest safari 15+ browser when select any template.
 - Fix: Install Spectra only when light category Patterns importing.
 
 v3.1.15 - 23-Aug-2022
