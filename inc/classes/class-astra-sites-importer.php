@@ -350,7 +350,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		/**
 		 * Import Spectra Settings
 		 *
-		 * @since x.x.x
+		 * @since 3.1.16
 		 *
 		 * @param  string $url Spectra Settings JSON file URL.
 		 * @return void
