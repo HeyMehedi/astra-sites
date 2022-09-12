@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 6.0
-Stable tag: 3.1.15
+Stable tag: 3.1.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.1.16 - 12-September-2022
+- Improvement: Added compatibility for Spectra.
+- Fix: White screen is appearing on latest safari 15+ browser when select any template.
+- Fix: Install Spectra only when light category Patterns importing.
 
 v3.1.15 - 23-Aug-2022
 - Improvement: Install Spectra while importing Block Patterns and Wireframe Patterns.
