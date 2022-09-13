@@ -47,6 +47,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		 */
 		private function __construct() {
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+			add_action( 'load-index.php', array( $this, 'admin_dashboard_notices' ) );
 			add_action( 'astra_notice_before_markup', array( $this, 'notice_assets' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
 			add_action( 'astra_sites_after_site_grid', array( $this, 'custom_upgrade_cta' ) );
@@ -176,6 +177,81 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 			);
 		}
 
+		/**
+		 * Admin Dashboard Notices.
+		 *
+		 * @since x.x.x
+		 * @return void
+		 */
+		public function admin_dashboard_notices() {
+			add_action( 'admin_notices', array( $this, 'admin_welcome_notices' ) );
+		}
+		
+		/**
+		 * Admin Welcome Notice.
+		 *
+		 * @since x.x.x
+		 * @return void
+		 */
+		public function admin_welcome_notices() {
+			update_user_meta( get_current_user_id(), 'astra-sites-welcome-notice', '' );
+			Astra_Notices::add_notice(
+				array(
+					'id'      => 'astra-sites-welcome-notice',
+					'type'    => 'info',
+					'class'   => 'astra-sites-welcome',
+					'show_if' => ( false === Astra_Sites_White_Label::get_instance()->is_white_labeled() ),
+					/* translators: %1$s white label plugin name and %2$s deactivation link */
+					'message' => sprintf(
+						'<div class="notice-welcome-container">	
+							<div class="text-section">
+								<h1 class="text-heading">Welcome to Starter Templates!</h1>
+								<a href="/wp-admin/themes.php?page=starter-templates" class="text-button">Get Started</a>
+							</div>													
+						</div>
+						<div class="notice-content-container">
+							<div class="content-section">
+								<div class="icon-section">
+								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/ecommerce.svg' ).'" /></div>
+								<div class="link-section">
+									<h4>Ecommerce</h4>
+									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=E-Commerce">View Ecommerce Templates →</a>
+								</div>
+							</div>
+							<div class="content-section">
+								<div class="icon-section">
+								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/business.svg' ).'" /></div>
+								<div class="link-section">
+									<h4>Local Business</h4>
+									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Business">View Local Business Templates →</a>
+								</div>
+							</div>
+							<div class="content-section">
+								<div class="icon-section">
+								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/agency.svg' ).'" /></div>
+								<div class="link-section">
+									<h4>Agency</h4>
+									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Agency">View Agency Templates →</a>
+								</div>
+							</div>
+							<div class="content-section">
+								<div class="icon-section">
+								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/blog.svg' ).'" /></div>
+								<div class="link-section">
+									<h4>Blog</h4>
+									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Blog">View Blog Templates →</a>
+								</div>
+							</div>
+						</div>'
+					),
+				)
+			);
+		}
+		
 		/**
 		 * Enqueue Astra Notices CSS.
 		 *
