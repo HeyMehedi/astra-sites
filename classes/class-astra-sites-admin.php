@@ -186,7 +186,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		public function admin_dashboard_notices() {
 			add_action( 'admin_notices', array( $this, 'admin_welcome_notices' ) );
 		}
-		
+
 		/**
 		 * Admin Welcome Notice.
 		 *
