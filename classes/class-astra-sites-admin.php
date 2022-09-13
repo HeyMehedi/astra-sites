@@ -207,12 +207,12 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							<div class="text-section">
 								<h1 class="text-heading">Welcome to Starter Templates!</h1>
 								<a href="/wp-admin/themes.php?page=starter-templates" class="text-button">Get Started</a>
-							</div>													
+							</div>
 						</div>
 						<div class="notice-content-container">
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/ecommerce.svg' ).'" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/ecommerce.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Ecommerce</h4>
 									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
@@ -221,7 +221,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/business.svg' ).'" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/business.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Local Business</h4>
 									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
@@ -230,7 +230,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/agency.svg' ).'" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/agency.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Agency</h4>
 									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
@@ -239,7 +239,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="'.esc_url( ASTRA_SITES_URI . 'inc/assets/images/blog.svg' ).'" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/blog.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Blog</h4>
 									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
@@ -251,7 +251,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 				)
 			);
 		}
-		
+
 		/**
 		 * Enqueue Astra Notices CSS.
 		 *
