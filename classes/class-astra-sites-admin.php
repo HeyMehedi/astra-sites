@@ -215,7 +215,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/ecommerce.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Ecommerce</h4>
-									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<p>Looking for a fully operational eCommerce template to launch a store or level up an existing one?</p>
 									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=E-Commerce">View Ecommerce Templates →</a>
 								</div>
 							</div>
@@ -224,7 +224,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/business.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Local Business</h4>
-									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<p>Fully customizable local business templates that can deliver a fully functioning website in minutes</p>
 									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Business">View Local Business Templates →</a>
 								</div>
 							</div>
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/agency.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Agency</h4>
-									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<p>Do more in less time with Starter Templates. Pro-quality designs that can be fully customized to suit your clients.</p>
 									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Agency">View Agency Templates →</a>
 								</div>
 							</div>
@@ -242,7 +242,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/blog.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Blog</h4>
-									<p>Ornare libero tortor euismod aliquet faucibus ante tellus eget turpis</p>
+									<p>Customizable blog templates covering every niche. Page builder compatible, easy to use and fast!</p>
 									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Blog">View Blog Templates →</a>
 								</div>
 							</div>
