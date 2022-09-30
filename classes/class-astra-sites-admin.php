@@ -194,11 +194,10 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		 * @return void
 		 */
 		public function admin_welcome_notices() {
-			update_user_meta( get_current_user_id(), 'astra-sites-welcome-notice', '' );
 			Astra_Notices::add_notice(
 				array(
 					'id'      => 'astra-sites-welcome-notice',
-					'type'    => 'info',
+					'type'    => 'notice',
 					'class'   => 'astra-sites-welcome',
 					'show_if' => ( false === Astra_Sites_White_Label::get_instance()->is_white_labeled() ),
 					/* translators: %1$s white label plugin name and %2$s deactivation link */
@@ -206,7 +205,11 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 						'<div class="notice-welcome-container">	
 							<div class="text-section">
 								<h1 class="text-heading">Welcome to Starter Templates!</h1>
+								<p>Create professional designed pixel perfect websites in minutes.</p>
 								<a href="/wp-admin/themes.php?page=starter-templates" class="text-button">Get Started</a>
+							</div>
+							<div class="showcase-section">
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/templates-showcase.png' ) . '" />
 							</div>
 						</div>
 						<div class="notice-content-container">
