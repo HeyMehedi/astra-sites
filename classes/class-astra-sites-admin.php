@@ -194,7 +194,6 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		 * @return void
 		 */
 		public function admin_welcome_notices() {
-			update_user_meta( get_current_user_id(), 'astra-sites-welcome-notice', '' );
 			Astra_Notices::add_notice(
 				array(
 					'id'      => 'astra-sites-welcome-notice',
