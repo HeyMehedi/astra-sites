@@ -217,36 +217,36 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 								<div class="icon-section">
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-cart.svg' ) . '" /></div>
 								<div class="link-section">
-									<h4>Ecommerce</h4>
-									<p>Looking for a fully operational eCommerce template to launch a store or level up an existing one?</p>
-									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=E-Commerce">View Ecommerce Templates →</a>
+									<h4>' . __( "Ecommerce", "astra-sites" ) .'</h4>
+									<p>' . __( "Looking for a fully operational eCommerce template to launch a store or level up an existing one?", "astra-sites" ) .'</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=E-Commerce">' . __( "View Ecommerce Templates", "astra-sites" ) .' →</a>
 								</div>
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-building.svg' ) . '" /></div>
 								<div class="link-section">
-									<h4>Local Business</h4>
-									<p>Fully customizable local business templates that can deliver a fully functioning website in minutes</p>
-									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Business">View Local Business Templates →</a>
+									<h4>' . __( "Local Business", "astra-sites" ) .'</h4>
+									<p>' . __( "Fully customizable local business templates that can deliver a fully functioning website in minutes", "astra-sites" ) .'</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Business">' . __( "View Local Business Templates", "astra-sites" ) .' →</a>
 								</div>
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-megaphone.svg' ) . '" /></div>
 								<div class="link-section">
-									<h4>Agency</h4>
-									<p>Do more in less time with Starter Templates. Pro-quality designs that can be fully customized to suit your clients.</p>
-									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Agency">View Agency Templates →</a>
+									<h4>' . __( "Agency", "astra-sites" ) .'</h4>
+									<p>' . __( "Do more in less time with Starter Templates. Pro-quality designs that can be fully customized to suit your clients.", "astra-sites" ) .'</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Agency">' . __( "View Agency Templates", "astra-sites" ) .' →</a>
 								</div>
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
 								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-welcome-write-blog.svg' ) . '" /></div>
 								<div class="link-section">
-									<h4>Blog</h4>
-									<p>Customizable blog templates covering every niche. Page builder compatible, easy to use and fast!</p>
-									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Blog">View Blog Templates →</a>
+									<h4>' . __( "Blog", "astra-sites" ) .'</h4>
+									<p>' . __( "Customizable blog templates covering every niche. Page builder compatible, easy to use and fast!", "astra-sites" ) .'</p>
+									<a href="/wp-admin/themes.php?page=starter-templates&ci=2&s=Blog">' . __( "View Blog Templates", "astra-sites" ) .' →</a>
 								</div>
 							</div>
 						</div>'
