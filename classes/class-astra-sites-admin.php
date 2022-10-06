@@ -194,6 +194,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		 * @return void
 		 */
 		public function admin_welcome_notices() {
+			update_user_meta( get_current_user_id(), 'astra-sites-welcome-notice', '' );
 			Astra_Notices::add_notice(
 				array(
 					'id'      => 'astra-sites-welcome-notice',
@@ -205,7 +206,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 						'<div class="notice-welcome-container">	
 							<div class="text-section">
 								<h1 class="text-heading">Welcome to Starter Templates!</h1>
-								<p>Create professional designed pixel perfect websites in minutes.</p>
+								<p>Create professionally designed pixel-perfect websites in minutes.</p>
 								<a href="/wp-admin/themes.php?page=starter-templates" class="text-button">Get Started</a>
 							</div>
 							<div class="showcase-section">
@@ -215,7 +216,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 						<div class="notice-content-container">
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/ecommerce.svg' ) . '" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-cart.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Ecommerce</h4>
 									<p>Looking for a fully operational eCommerce template to launch a store or level up an existing one?</p>
@@ -224,7 +225,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/business.svg' ) . '" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-building.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Local Business</h4>
 									<p>Fully customizable local business templates that can deliver a fully functioning website in minutes</p>
@@ -233,7 +234,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/agency.svg' ) . '" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-megaphone.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Agency</h4>
 									<p>Do more in less time with Starter Templates. Pro-quality designs that can be fully customized to suit your clients.</p>
@@ -242,7 +243,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 							</div>
 							<div class="content-section">
 								<div class="icon-section">
-								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/blog.svg' ) . '" /></div>
+								<img src="' . esc_url( ASTRA_SITES_URI . 'inc/assets/images/dashicons-welcome-write-blog.svg' ) . '" /></div>
 								<div class="link-section">
 									<h4>Blog</h4>
 									<p>Customizable blog templates covering every niche. Page builder compatible, easy to use and fast!</p>
