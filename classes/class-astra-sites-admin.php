@@ -180,7 +180,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		/**
 		 * Admin Dashboard Notices.
 		 *
-		 * @since x.x.x
+		 * @since 3.1.17
 		 * @return void
 		 */
 		public function admin_dashboard_notices() {
@@ -190,7 +190,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		/**
 		 * Admin Welcome Notice.
 		 *
-		 * @since x.x.x
+		 * @since 3.1.17
 		 * @return void
 		 */
 		public function admin_welcome_notices() {

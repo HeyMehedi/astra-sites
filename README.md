@@ -132,6 +132,9 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+v3.1.17 - 10-October-2022
+Improvement: Welcome banner on dashboard.
+
 v3.1.16 - 12-September-2022
 - Improvement: Added compatibility for Spectra.
 - Fix: White screen is appearing on latest safari 15+ browser when select any template.
