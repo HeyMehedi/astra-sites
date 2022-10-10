@@ -134,7 +134,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v3.1.17 - 10-October-2022
-New: Welcome banner notice on dashboard for fresh installation.
+New: Added welcome banner notice on WP dashboard for fresh installation.
 
 v3.1.16 - 12-September-2022
 - Improvement: Added compatibility for Spectra.
