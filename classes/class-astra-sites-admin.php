@@ -180,7 +180,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		/**
 		 * Admin Dashboard Notices.
 		 *
-		 * @since x.x.x
+		 * @since 3.1.17
 		 * @return void
 		 */
 		public function admin_dashboard_notices() {
@@ -190,16 +190,17 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 		/**
 		 * Admin Welcome Notice.
 		 *
-		 * @since x.x.x
+		 * @since 3.1.17
 		 * @return void
 		 */
 		public function admin_welcome_notices() {
+			$first_import_status = get_option( 'astra_sites_import_complete', false );
 			Astra_Notices::add_notice(
 				array(
 					'id'      => 'astra-sites-welcome-notice',
 					'type'    => 'notice',
 					'class'   => 'astra-sites-welcome',
-					'show_if' => ( false === Astra_Sites_White_Label::get_instance()->is_white_labeled() ),
+					'show_if' => ( false === Astra_Sites_White_Label::get_instance()->is_white_labeled() && empty( $first_import_status ) ),
 					/* translators: %1$s white label plugin name and %2$s deactivation link */
 					'message' => sprintf(
 						'<div class="notice-welcome-container">	
