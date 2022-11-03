@@ -167,11 +167,108 @@
     margin: 0;
 }
 
-.link-section a {
+.astra-sites-welcome .link-section a {
     font-size: 12px;
     line-height: 12px;
     color: #1D4ED8;
     text-decoration: none;
     font-style: normal;
     font-weight: 500;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+    .astra-sites-welcome .astra-notice-container .notice-welcome-container {
+        grid-template-columns: repeat(2,1fr);       
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-size: auto
+    }
+
+    .astra-sites-welcome .text-section {
+        flex: none;
+        margin-top: 30px;
+    }
+    .astra-sites-welcome h1.text-heading {
+        font-size: 22px;
+        margin-left: 30px;
+    }
+    .astra-sites-welcome .text-section p {
+        font-size: 12px;
+        margin-left: 32px;
+        margin-bottom: 15px;
+    }
+    .astra-sites-welcome a.text-button{
+        margin-left: 32px;
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    .astra-sites-welcome .showcase-section {
+        flex: 25%;
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .astra-sites-welcome .notice-content-container {
+        grid-template-columns: repeat(2,1fr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 30px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .astra-sites-welcome .notice-content-container .content-section {
+        margin-left: 30px
+    }
+}
+
+
+@media only screen and (max-width: 767px) {
+    
+    .astra-sites-welcome .astra-notice-container .notice-welcome-container {
+        grid-template-columns: repeat(2,1fr);       
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-size: auto
+    }
+
+    .astra-sites-welcome .text-section {
+        flex: none;
+        margin-top: 30px;
+    }
+    .astra-sites-welcome h1.text-heading {
+        font-size: 22px;
+        margin-left: 30px;
+    }
+    .astra-sites-welcome .text-section p {
+        font-size: 12px;
+        margin-left: 32px;
+    }
+    .astra-sites-welcome a.text-button{
+        margin-left: 32px;
+    }
+    .astra-sites-welcome .showcase-section {
+        flex: 25%;
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .astra-sites-welcome .notice-content-container {
+        grid-template-columns: repeat(2,1fr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 50px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .astra-sites-welcome .notice-content-container .content-section {
+        margin-left: 32px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .astra-sites-welcome .text-section p {
+        font-size: 11px;
+        margin-left: 30px;
+    }
 }
