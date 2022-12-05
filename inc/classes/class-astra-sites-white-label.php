@@ -90,7 +90,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 * @since x.x.x
 		 */
 		public function update_admin_menu_position( $menu_priority ) {
-			return 2;
+			return 2.1;
 		}
 
 		/**
