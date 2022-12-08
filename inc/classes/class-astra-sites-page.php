@@ -141,7 +141,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				exit;
 			}
 		}
-	
+
 		/**
 		 * Save Page Builder
 		 *
