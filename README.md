@@ -133,12 +133,15 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.1.19 - 09-December-2022
+- Fix: Page builder not set using WP-cli command.
+
 v3.1.18 - 04-November-2022
-Fix: Compatibility to WordPress 6.1.
-Improvement: Responsive welcome banner notice on WP dashboard for fresh installation.
+- Fix: Compatibility to WordPress 6.1.
+- Improvement: Responsive welcome banner notice on WP dashboard for fresh installation.
 
 v3.1.17 - 10-October-2022
-New: Added welcome banner notice on WP dashboard for fresh installation.
+- New: Added welcome banner notice on WP dashboard for fresh installation.
 
 v3.1.16 - 12-September-2022
 - Improvement: Added compatibility for Spectra.
