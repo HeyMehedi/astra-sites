@@ -102,6 +102,49 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		/**
 		 * Save Page Builder
 		 *
+		 * @since 1.4.0 The `$page_builder_slug` was added.
+		 *
+		 * @param  string $page_builder_slug Page Builder Slug.
+		 * @return mixed
+		 */
+		public function save_page_builder_on_submit( $page_builder_slug = '' ) {
+
+			// Only admins can save settings.
+			if ( ! defined( 'WP_CLI' ) && ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			if ( ! defined( 'WP_CLI' ) && ( ! isset( $_REQUEST['astra-sites-page-builder'] ) || ! wp_verify_nonce( $_REQUEST['astra-sites-page-builder'], 'astra-sites-welcome-screen' ) ) ) {
+				return;
+			}
+
+			// Stored Settings.
+			$stored_data = $this->get_settings();
+
+			$page_builder = isset( $_REQUEST['page_builder'] ) ? sanitize_key( $_REQUEST['page_builder'] ) : sanitize_key( $page_builder_slug );
+
+			if ( ! empty( $page_builder ) ) {
+				// New settings.
+				$new_data = array(
+					'page_builder' => $page_builder,
+				);
+
+				// Merge settings.
+				$data = wp_parse_args( $new_data, $stored_data );
+
+				// Update settings.
+				update_option( 'astra_sites_settings', $data );
+			}
+
+			if ( ! defined( 'WP_CLI' ) ) {
+				wp_safe_redirect( admin_url( '/themes.php?page=astra-sites' ) );
+				exit;
+			}
+		}
+
+		/**
+		 * Save Page Builder
+		 *
 		 * @return void
 		 */
 		public function save_page_builder_on_ajax() {
