@@ -107,7 +107,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @param  string $page_builder_slug Page Builder Slug.
 		 * @return mixed
 		 */
-		function save_page_builder_on_submit( $page_builder_slug = '' ) {
+		public function save_page_builder_on_submit( $page_builder_slug = '' ) {
 
 			// Only admins can save settings.
 			if ( ! defined( 'WP_CLI' ) && ! current_user_can( 'manage_options' ) ) {
@@ -137,10 +137,11 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			}
 
 			if ( ! defined( 'WP_CLI' ) ) {
-				wp_redirect( admin_url( '/themes.php?page=astra-sites' ) );
+				wp_safe_redirect( admin_url( '/themes.php?page=astra-sites' ) );
+				exit;
 			}
 		}
-		
+	
 		/**
 		 * Save Page Builder
 		 *
