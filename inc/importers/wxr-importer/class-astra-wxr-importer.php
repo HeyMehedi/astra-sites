@@ -227,7 +227,7 @@ class Astra_WXR_Importer {
 		}
 
 		// Set EXT and real MIME type only for the file name `wpforms.json` or `wpforms-{page-id}.json`.
-		if ( ( strpos( $filename, 'wpforms' ) !== false ) || ( strpos( $filename, 'cartflows' ) !== false ) ) {
+		if ( ( strpos( $filename, 'wpforms' ) !== false ) || ( strpos( $filename, 'cartflows' ) !== false ) || ( strpos( $filename, 'spectra' ) !== false ) ) {
 			$defaults['ext']  = 'json';
 			$defaults['type'] = 'text/plain';
 		}
