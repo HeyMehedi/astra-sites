@@ -701,7 +701,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$new_favorites = $favorite_settings;
 			}
 
-			if ( 'false' === $_POST['is_favorite'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( 'false' === $_POST['is_favorite'] ) {
 				if ( in_array( $site_id, $new_favorites, true ) ) {
 					$key = array_search( $site_id, $new_favorites, true );
 					unset( $new_favorites[ $key ] );
