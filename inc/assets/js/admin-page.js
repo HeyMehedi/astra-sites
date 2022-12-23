@@ -1660,7 +1660,8 @@ var AstraSitesAjaxQueue = (function () {
 				data: {
 					action: 'astra-sites-favorite',
 					is_favorite: !is_favorite,
-					site_id: site_id
+					site_id: site_id,
+					_ajax_nonce: astraSitesVars._ajax_nonce
 				},
 				beforeSend: function () {
 					console.groupCollapsed('Toggle Favorite');
