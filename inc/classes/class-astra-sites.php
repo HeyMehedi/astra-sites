@@ -685,6 +685,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
 			}
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
 			$new_favorites = array();
 			$site_id       = isset( $_POST['site_id'] ) ? sanitize_key( $_POST['site_id'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
