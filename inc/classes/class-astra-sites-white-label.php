@@ -87,7 +87,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 * Update Astra's menu priority to show after Dashboard menu.
 		 *
 		 * @param int $menu_priority top level menu priority.
-		 * @since x.x.x
+		 * @since 3.1.22
 		 */
 		public function update_admin_menu_position( $menu_priority ) {
 			return 2.1;

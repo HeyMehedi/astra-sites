@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 6.1
-Stable tag: 3.1.21
+Stable tag: 3.1.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,9 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.1.22 - 02-January-2023
+- Improvement: Added Astra menu position as top.
 
 v3.1.21 - 23-December-2022
 - Improvement: Added extra checks while marking a Starter Template as favorite.
