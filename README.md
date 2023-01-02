@@ -133,6 +133,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.1.22 - 02-January-2023
+- Improvement: Added support for Astra theme menu position to top.
+
 v3.1.21 - 23-December-2022
 - Improvement: Added extra checks while marking a Starter Template as favorite.
 
