@@ -133,6 +133,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.1.24 - 26-January-2023
+- Improvement: Hardened the security.
+
 v3.1.23 - 19-January-2023
 - Improvement: Added extra checks while block templates import.
 
