@@ -299,8 +299,8 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 		 */
 		public function activate_plugin() {
 
-			if ( ! current_user_can( 'edit_posts' ) ) {
-				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+			if ( ! current_user_can( 'activate_plugins' ) ) {
+				wp_send_json_error( __( 'You are not allowed to perform this action.', 'astra-sites' ) );
 			}
 			// Verify Nonce.
 			check_ajax_referer( 'ast-block-templates-ajax-nonce', 'security' );
@@ -312,12 +312,7 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 			$activate = activate_plugin( $plugin_init, '', false, true );
 
 			if ( is_wp_error( $activate ) ) {
-				wp_send_json_error(
-					array(
-						'success' => false,
-						'message' => $activate->get_error_message(),
-					)
-				);
+				wp_send_json_error( $activate->get_error_message() );
 			}
 
 			wp_send_json_success(

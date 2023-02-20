@@ -206,7 +206,7 @@ class Astra_Site_Options_Import {
 			'post_type'   => 'elementor_library',
 			'post_status' => 'publish',
 			'numberposts' => 1,
-			'meta_query'  => array(
+			'meta_query'  => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Setting elementor kit. WP Query would have been expensive.
 				array(
 					'key'   => '_astra_sites_imported_post',
 					'value' => '1',

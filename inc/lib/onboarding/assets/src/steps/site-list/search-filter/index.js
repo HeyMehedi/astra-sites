@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { __ } from '@wordpress/i18n';
 import { Search } from '@brainstormforce/starter-templates-components';
-import { decodeEntities } from '@wordpress/html-entities';
 import { useNavigate } from 'react-router-dom';
+import { __ } from '@wordpress/i18n';
+import { decodeEntities } from '@wordpress/html-entities';
 import { useStateValue } from '../../../store/store';
 import './style.scss';
 import { setURLParmsValue } from '../../../utils/url-params';
