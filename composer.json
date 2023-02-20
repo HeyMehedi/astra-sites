@@ -6,9 +6,14 @@
         "brainstormforce/gutenberg-templates": "^1"
       },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
-        "wp-coding-standards/wpcs": "dev-master",
-        "phpcompatibility/phpcompatibility-wp": "*"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "phpcompatibility/phpcompatibility-wp": "^2.1.4",
+        "wp-coding-standards/wpcs": "^2.3",
+        "phpunit/phpunit": "^9",
+        "yoast/phpunit-polyfills": "^1.0",
+        "roots/wordpress": "^5.9",
+        "wp-phpunit/wp-phpunit": "^5.0",
+        "automattic/vipwpcs": "^2.3"
     },
     "extra": {
         "installer-paths": {
