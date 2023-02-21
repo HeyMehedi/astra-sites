@@ -45,7 +45,7 @@ jobs:
       run: yarn install
 
     - name: Run phpcs
-      run: ./vendor/bin/phpcs --standard=phpcs.xml
+      run: ./vendor/bin/phpcs --standard=phpcs.xml.dist
 
     - name: PHP Syntax Errors
       if: always()
