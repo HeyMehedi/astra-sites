@@ -1,67 +1,23 @@
-name: CI
+name: PHP_CodeSniffer
 
-# Run the deployment only when code is committed to the branch.
 on: pull_request
 
-# Cancels all previous workflow runs for pull requests that have not completed.
-concurrency:
-    # The concurrency group contains the workflow name and the branch name for pull requests
-    # or the commit hash for any other events.
-    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
-    cancel-in-progress: true
-
 jobs:
-  lint-and-audit:
-    if: github.actor != 'dependabot[bot]'
-    runs-on:
-      - self-hosted
+  phpcs:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        submodules: recursive
-        token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
-        ref: ${{ github.event.pull_request.head.ref }}
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Use Node.js 14.17
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14.17
-        cache: 'npm'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        tools: composer, phpcs, cs2pr
+      - name: Install dependencies
+        run: composer config github-oauth.github.com ${{ secrets.PRIVATE_ACCESS_TOKEN }} && composer install --prefer-dist --no-suggest --no-progress
 
-    - name: Set composer token
-      run: composer config github-oauth.github.com ${{ secrets.PRIVATE_ACCESS_TOKEN }}
-
-    - name: Composer Install
-      uses: ramsey/composer-install@v1
-
-    - name: NPM Dependencies
-      if: always()
-      run: yarn install
-
-    - name: Run phpcs
-      run: ./vendor/bin/phpcs --standard=phpcs.xml
-
-    - name: PHP Syntax Errors
-      if: always()
-      run: if find . -name "*.php" ! -path "./vendor/*" ! -path "./admin/bsf-core/*" -exec php -l {} \; | grep "Errors parsing"; then exit 1; fi
-
-    - name: Fix ESLint autofixable errors
-      if: always()
-      run: yarn run lint:js:fix
-
-    - name: Commit ESLint fixes
-      if: always()
-      uses: EndBug/add-and-commit@v8.0.2
-      with:
-          add: 'inc/lib/onboarding/*.js'
-          default_author: github_actor
-          message: 'Commit ESLint auto fixes'
-          pathspec_error_handling: exitAtEnd
-          push: true
+      - name: Detect coding standard violations
+        run: vendor/bin/phpcs
