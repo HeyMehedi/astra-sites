@@ -22,10 +22,10 @@ jobs:
         token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
         ref: ${{ github.event.pull_request.head.ref }}
 
-    - name: Use Node.js 14.17
+    - name: Use Node.js 16.15.1
       uses: actions/setup-node@v2
       with:
-        node-version: 14.17
+        node-version: 16.15.1
         cache: 'npm'
 
     - name: Setup PHP
