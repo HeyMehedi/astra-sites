@@ -18,6 +18,7 @@ node_modules/
 
 # XML files
 *.xml
+!phpcs.xml
 
 # Skip package file from versoning
 *.zip

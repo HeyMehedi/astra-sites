@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { __, sprintf } from '@wordpress/i18n';
 import Lottie from 'react-lottie-player';
+import { __, sprintf } from '@wordpress/i18n';
 import PreviousStepLink from '../../components/util/previous-step-link/index';
 import DefaultStep from '../../components/default-step/index';
 import ImportLoader from '../../components/import-steps/import-loader';
@@ -161,7 +161,7 @@ const ImportSite = () => {
 		}
 
 		if ( customizerStatus ) {
-			spectraStatus =await importSiteContent();
+			spectraStatus = await importSiteContent();
 		}
 
 		if ( spectraStatus ) {
@@ -221,6 +221,7 @@ const ImportSite = () => {
 					init: plugin.init,
 					name: plugin.name,
 					clear_destination: true,
+					ajax_nonce: astraSitesVars._ajax_nonce,
 					success() {
 						dispatch( {
 							type: 'set',
@@ -1130,11 +1131,12 @@ const ImportSite = () => {
 	/**
 	 * 6. Import Spectra Settings.
 	 */
-	 const ImportSpectraSettings = async () => {
-		const spectra_settings =
-			encodeURI( templateResponse[ 'astra-site-spectra-settings' ] ) || '';
+	const ImportSpectraSettings = async () => {
+		const spectraSettings =
+			encodeURI( templateResponse[ 'astra-site-spectra-settings' ] ) ||
+			'';
 
-		if ( '' === spectra_settings || 'null' === spectra_settings ) {
+		if ( '' === spectraSettings || 'null' === spectraSettings ) {
 			return true;
 		}
 
@@ -1145,7 +1147,7 @@ const ImportSite = () => {
 
 		const spectra = new FormData();
 		spectra.append( 'action', 'astra-sites-import-spectra-settings' );
-		spectra.append( 'spectra_settings', spectra_settings );
+		spectra.append( 'spectra_settings', spectraSettings );
 		spectra.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {
@@ -1190,7 +1192,7 @@ const ImportSite = () => {
 			} );
 		return status;
 	};
-		
+
 	/**
 	 * Imports XML using EventSource.
 	 *
@@ -1429,9 +1431,8 @@ const ImportSite = () => {
 						localStorage.setItem( 'st-import-end', +new Date() );
 						setInterval( function () {
 							counter--;
-							const counterEl = document.getElementById(
-								'redirect-counter'
-							);
+							const counterEl =
+								document.getElementById( 'redirect-counter' );
 							if ( counterEl ) {
 								if ( counter < 0 ) {
 									dispatch( {
@@ -1470,9 +1471,8 @@ const ImportSite = () => {
 					localStorage.setItem( 'st-import-end', +new Date() );
 					setInterval( function () {
 						counter--;
-						const counterEl = document.getElementById(
-							'redirect-counter'
-						);
+						const counterEl =
+							document.getElementById( 'redirect-counter' );
 						if ( counterEl ) {
 							if ( counter < 0 ) {
 								dispatch( {
