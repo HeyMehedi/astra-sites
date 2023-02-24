@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 6.1
-Stable tag: 3.1.26
+Stable tag: 3.1.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,9 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.1.27 - 24-February-2023
+- Fix: Templates library won't refresh after the sync process.
 
 v3.1.26 - 22-February-2023
 - Fix: Plugin installation from WordPress plugins dashboard fails when Starter Template is activated.

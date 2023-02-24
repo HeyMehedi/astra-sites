@@ -133,6 +133,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.1.27 - 24-February-2023
+- Fix: Templates library won't refresh after the sync process.
+
 v3.1.26 - 22-February-2023
 - Fix: Plugin installation from WordPress plugins dashboard fails when Starter Template is activated.
 
