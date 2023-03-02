@@ -6,9 +6,10 @@
         "brainstormforce/gutenberg-templates": "^1"
       },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
-        "wp-coding-standards/wpcs": "dev-master",
-        "phpcompatibility/phpcompatibility-wp": "*"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "phpcompatibility/phpcompatibility-wp": "^2.1.4",
+        "wp-coding-standards/wpcs": "^2.3",
+        "automattic/vipwpcs": "^2.3"
     },
     "extra": {
         "installer-paths": {

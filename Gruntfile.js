@@ -108,9 +108,11 @@ module.exports = function( grunt ) {
                         '!composer.json',
                         '!composer.lock',
                         '!package-lock.json',
+                        '!phpcs.xml',
                         '!phpcs.xml.dist',
                         '!inc/assets/js/src/**',
                         '!inc/lib/bsf-quick-links/readme.md',
+                        '!yarn.lock',
                     ],
                     dest: 'astra-sites/'
                 }
