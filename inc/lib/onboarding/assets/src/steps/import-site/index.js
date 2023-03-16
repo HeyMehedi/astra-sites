@@ -595,29 +595,16 @@ const ImportSite = () => {
 		} )
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
-				try {
-					const response = JSON.parse( text );
-					if ( response.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-						} );
-						return true;
-					}
-					throw response.data;
-				} catch ( error ) {
-					report(
-						__( 'Taking settings backup failed.', 'astra-sites' ),
-						'',
-						error?.message,
-						'',
-						'',
-						text
-					);
-
-					return false;
+				const response = JSON.parse( text );
+				if ( response.success ) {
+					percentage += 2;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage,
+					} );
+					return true;
 				}
+				throw response.data;
 			} )
 			.catch( ( error ) => {
 				report(
