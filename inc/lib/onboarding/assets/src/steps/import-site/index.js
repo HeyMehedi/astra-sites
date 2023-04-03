@@ -434,7 +434,7 @@ const ImportSite = () => {
 			importPercent: percentage,
 		} );
 
-		let backFileStatus = false;
+		let backupFileStatus = false;
 		let resetCustomizerStatus = false;
 		let resetWidgetStatus = false;
 		let resetOptionsStatus = false;
@@ -444,12 +444,12 @@ const ImportSite = () => {
 		/**
 		 * Settings backup file store.
 		 */
-		backFileStatus = await performSettingsBackup();
+		backupFileStatus = await performSettingsBackup();
 
 		/**
 		 * Reset Customizer.
 		 */
-		if ( backFileStatus ) {
+		if ( backupFileStatus ) {
 			resetCustomizerStatus = await performResetCustomizer();
 		}
 
