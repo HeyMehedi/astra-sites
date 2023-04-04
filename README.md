@@ -133,7 +133,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
-v3.2.0 - 03-April-2023
+v3.2.0 - 04-April-2023
 - Fix: Backup file not created for existing customizer settings.
 - Fix: Icon for Starter Templates plugin isn’t appropriately distributed within the Elementor Editor.
 
