@@ -4,7 +4,7 @@ Donate link: https://wpastra.com/pro/
 Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -133,7 +133,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
-v3.2.0 - 03-April-2023
+v3.2.0 - 04-April-2023
 - Fix: Backup file not created for existing customizer settings.
 - Fix: Icon for Starter Templates plugin isn’t appropriately distributed within the Elementor Editor.
 
