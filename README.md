@@ -134,7 +134,7 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 
 v3.2.1 - 13-April-2023
-- Fix: Template is not importing using CLI command.
+- Fix: Template is not importing using the WP-CLI command.
 
 v3.2.0 - 04-April-2023
 - Fix: Backup file not created for existing customizer settings.
