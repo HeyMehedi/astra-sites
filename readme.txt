@@ -134,7 +134,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v3.2.2 - 15-May-2023
-- Fix: Improved Premium badge display and enhanced filter functionality for Gutenberg/Spectra premium templates.
+- Improvement: Premium badge and enhanced filter added for Gutenberg/Spectra premium templates.
 
 v3.2.1 - 13-April-2023
 - Fix: Template is not importing using the WP-CLI command.
