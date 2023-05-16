@@ -170,6 +170,7 @@ const SiteList = () => {
 												} );
 											} }
 										/>
+
 										<SiteOrder
 											value={ siteOrder }
 											onClick={ ( event, order ) => {

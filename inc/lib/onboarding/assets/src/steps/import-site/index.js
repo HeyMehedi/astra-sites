@@ -416,7 +416,7 @@ const ImportSite = () => {
 	/**
 	 * 1. Reset.
 	 * The following steps are covered here.
-	 * 		1. Settings backup file store. 
+	 * 		1. Settings backup file store.
 	 * 		2. Reset Customizer
 	 * 		3. Reset Site Options
 	 * 		4. Reset Widgets
@@ -583,10 +583,7 @@ const ImportSite = () => {
 		} );
 
 		const customizerContent = new FormData();
-		customizerContent.append(
-			'action',
-			'astra-sites-backup-settings'
-		);
+		customizerContent.append( 'action', 'astra-sites-backup-settings' );
 		customizerContent.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {
