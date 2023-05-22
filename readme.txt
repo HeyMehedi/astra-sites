@@ -133,6 +133,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
+v3.2.3 - 22-May-2023
+- Improvement: Updated the Block Editor Template Library
+
 v3.2.2 - 15-May-2023
 - Improvement: Added Premium Templates for Block Editor.
 
