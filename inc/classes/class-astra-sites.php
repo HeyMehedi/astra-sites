@@ -151,6 +151,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-sites-getting-started-notice' => 'getting_started_notice',
 				'astra-sites-favorite' => 'add_to_favorite',
 				'astra-sites-api-request' => 'api_request',
+				'astra-sites-elementor-api-request' => 'elementor_api_request',
+				'astra-sites-elementor-flush-request' => 'elementor_flush_request',
 				'astra-sites-remote-request' => 'remote_request',
 				'astra-page-elementor-insert-page' => 'elementor_process_import_for_page',
 				'astra-sites-update-subscription' => 'update_subscription',
@@ -451,7 +453,16 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
-			$api_url = isset( $_POST['url'] ) ? sanitize_url( $_POST['url'] ) : ''; // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+
+			$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+
+			if ( 'astra-blocks' == $type ) {
+				$api_url = trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id;
+			} else {
+				$api_url = $demo_data['astra-page-api-url'];
+			}
 
 			if ( ! astra_sites_is_valid_url( $api_url ) ) {
 				wp_send_json_error( __( 'Invalid API URL.', 'astra-sites' ) );
@@ -483,6 +494,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$import      = new \Elementor\TemplateLibrary\Astra_Sites_Elementor_Pages();
 			$import_data = $import->import( $post_id, $meta );
 
+			delete_option( 'astra_sites_import_elementor_data_' . $id );
 			wp_send_json_success( $import_data );
 		}
 
@@ -631,6 +643,142 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
+		 * API Request
+		 *
+		 * @since 3.2.4
+		 */
+		public function elementor_api_request() {
+
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
+
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+
+			if ( empty( $id ) || empty( $type ) ) {
+				wp_send_json_error(
+					array(
+						'message' => __( 'Provided API details are empty! Please try again!', 'astra-sites' ),
+						'code'    => 'Error',
+					)
+				);
+			}
+
+			$api_args = apply_filters(
+				'astra_sites_api_params', array(
+					'url' => site_url(),
+					'version' => ASTRA_SITES_VER,
+				)
+			);
+
+			$api_url = add_query_arg( $api_args, trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id );
+
+			if ( ! astra_sites_is_valid_url( $api_url ) ) {
+				wp_send_json_error(
+					array(
+						/* Translators: %s is API URL. */
+						'message' => sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $api_url ),
+						'code'    => 'Error',
+					)
+				);
+			}
+
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
+			$api_args = apply_filters(
+				'astra_sites_api_args', array(
+					'timeout' => 15,
+				)
+			);
+
+			$request = wp_remote_get( $api_url, $api_args );
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
+
+			if ( is_wp_error( $request ) ) {
+				$wp_error_code = $request->get_error_code();
+				switch ( $wp_error_code ) {
+					case 'http_request_not_executed':
+						/* translators: %s Error Message */
+						$message = sprintf( __( 'API Request could not be performed - %s', 'astra-sites' ), $request->get_error_message() );
+						break;
+					case 'http_request_failed':
+					default:
+						/* translators: %s Error Message */
+						$message = sprintf( __( 'API Request has failed - %s', 'astra-sites' ), $request->get_error_message() );
+						break;
+				}
+
+				wp_send_json_error(
+					array(
+						'message'       => $request->get_error_message(),
+						'code'          => 'WP_Error',
+						'response_code' => $wp_error_code,
+					)
+				);
+			}
+
+			$code      = (int) wp_remote_retrieve_response_code( $request );
+			$demo_data = json_decode( wp_remote_retrieve_body( $request ), true );
+
+			if ( 200 === $code ) {
+				update_option( 'astra_sites_import_elementor_data_' . $id, $demo_data, 'no' );
+				wp_send_json_success( $demo_data );
+			}
+
+			$message       = wp_remote_retrieve_body( $request );
+			$response_code = $code;
+
+			if ( 200 !== $code && is_array( $demo_data ) && isset( $demo_data['code'] ) ) {
+				$message = $demo_data['message'];
+			}
+
+			if ( 500 === $code ) {
+				$message = __( 'Internal Server Error.', 'astra-sites' );
+			}
+
+			if ( 200 !== $code && false !== strpos( $message, 'Cloudflare' ) ) {
+				$ip = Astra_Sites_Helper::get_client_ip();
+				/* translators: %s IP address. */
+				$message = sprintf( __( 'Client IP: %1$s </br> Error code: %2$s', 'astra-sites' ), $ip, $code );
+				$code    = 'Cloudflare';
+			}
+
+			wp_send_json_error(
+				array(
+					'message'       => $message,
+					'code'          => $code,
+					'response_code' => $response_code,
+				)
+			);
+		}
+
+		/**
+		 * API Flush Request
+		 *
+		 * @since 3.2.4
+		 */
+		public function elementor_flush_request() {
+
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
+
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+
+			delete_option( 'astra_sites_import_elementor_data_' . $id );
+
+			wp_send_json_success();
+		}
+
+		/**
 		 * Insert Template
 		 *
 		 * @return void
@@ -737,9 +885,15 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
-			$id = isset( $_POST['id'] ) ? sanitize_key( $_POST['id'] ) : '';
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
 			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
-			$url = isset( $_POST['url'] ) ? sanitize_url( $_POST['url'] ) : ''; // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
+			$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+			
+			if ( 'astra-blocks' == $type ) {
+				$url = trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id;
+			} else {
+				$url = $demo_data['astra-page-api-url'];
+			}
 
 			$api_url = add_query_arg(
 				array(
@@ -800,6 +954,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			update_post_meta( $new_page_id, '_wp_page_template', 'elementor_header_footer' );
 
 			do_action( 'astra_sites_process_single', $new_page_id );
+
+			// Flush the object when import is successful.
+			delete_option( 'astra_sites_import_elementor_data_' . $id );
 
 			wp_send_json_success(
 				array(
