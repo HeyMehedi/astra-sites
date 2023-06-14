@@ -134,7 +134,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v3.2.4 - 14-June-2023
-- Fix: Tighten the security of the plugin
+- Fix: Tightened the security of the plugin
 
 v3.2.3 - 22-May-2023
 - Improvement: Updated the Block Editor Template Library
