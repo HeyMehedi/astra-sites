@@ -324,7 +324,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'cartflows_step_imported', array( $this, 'track_flows' ) );
 			add_filter( 'cartflows_enable_imported_content_processing', '__return_false' );
 
-			$url = ( isset( $_REQUEST['cartflows_url'] ) ) ? sanitize_url( urldecode( $_REQUEST['cartflows_url'] ) ) : sanitize_url( urldecode( $url ) ); // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
+			$url = astra_get_site_data( 'astra-site-cartflows-path' );
 			if ( ! empty( $url ) && is_callable( 'CartFlows_Importer::get_instance' ) ) {
 
 				// Download JSON file.
@@ -350,6 +350,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				} else {
 					wp_send_json_error( __( 'There was an error downloading the CartFlows flows file.', 'astra-sites' ) );
 				}
+			} else {
+				wp_send_json_error( __( 'Empty file for CartFlows flows', 'astra-sites' ) );
 			}
 
 			if ( defined( 'WP_CLI' ) ) {
