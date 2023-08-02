@@ -418,7 +418,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		/**
 		 * Import Surecart Settings
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return void
 		 */
 		public function import_surecart_settings() {

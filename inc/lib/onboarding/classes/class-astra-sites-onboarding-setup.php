@@ -27,7 +27,7 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 		/**
 		 * FSE logo attributes
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @var (array) fse_logo_attributes
 		 */
 		public static $fse_logo_attributes = [];
@@ -318,7 +318,7 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 		/**
 		 * Set FSE site related data.
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return void
 		 */
 		public function set_fse_site_data() {
@@ -455,7 +455,7 @@ if ( ! class_exists( 'Astra_Sites_Onboarding_Setup' ) ) :
 		/**
 		 * Set FSE site related data.
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return void
 		 */
 		public function update_fse_site_logo( $post_name ) {

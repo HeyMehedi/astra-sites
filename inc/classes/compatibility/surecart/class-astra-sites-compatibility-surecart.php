@@ -5,7 +5,7 @@
  * @see  https://wordpress.org/plugins/surecart/
  *
  * @package Astra Sites
- * @since 3.2.7
+ * @since 3.3.0
  */
 
 if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
@@ -13,7 +13,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
 	/**
 	 * SureCart Compatibility
 	 *
-	 * @since 3.2.7
+	 * @since 3.3.0
 	 */
 	class Astra_Sites_Compatibility_SureCart {
 
@@ -22,14 +22,14 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
 		 *
 		 * @access private
 		 * @var object Class object.
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 */
 		private static $instance;
 
 		/**
 		 * Initiator
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return object initialized object of class.
 		 */
 		public static function instance() {
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
 		/**
 		 * Constructor
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 */
 		public function __construct() {
 			add_action( 'init', array( $this, 'disable_default_surecart_pages_creation' ), 2 );
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
 		/**
 		 * Retrieve all pages
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return void
 		 */
 		public function get_all_pages() {
@@ -74,7 +74,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
 		 *
 		 * @param string $page_id    The page ID.
 		 * @param string $page_content   The page content.
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return void
 		 */
 		public function check_page_types_and_update_options( $page_id, $page_content ) {
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_SureCart' ) ) :
 		 * These pages are re created via our XML import step.
 		 * In order to avoid the duplicacy we restrict these page creation process.
 		 *
-		 * @since 3.2.7
+		 * @since 3.3.0
 		 * @return void
 		 */
 		public function disable_default_surecart_pages_creation() {
