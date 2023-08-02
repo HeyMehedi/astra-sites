@@ -133,6 +133,13 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
+v3.3.0 - 02-August-2023
+- New: Added compatibility to FSE based Spectra One theme.
+- Improvement: Added Plugin Name in a few admin notices in order to make it better readable and understandable.
+- Improvement: Improved code to match the WordPress coding standards.
+- Improvement: Optimised the onboarding screens for streamlined experience.
+- Fix: Fixed an issue with the import process sequence to avoid overflow in the progress percent.
+
 v3.2.6 - 16-June-2023
 - Fix: An issue that occurred as a regression from v3.2.4, where CartFlows flows were not being imported.
 
