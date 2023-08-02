@@ -81,3 +81,23 @@ $bsf_analytics->set_entity(
 		),
 	)
 );
+
+if ( ! function_exists( 'astra_pro_sites_activation_redirect' ) ) :
+
+	/**
+	 * Astra pro sites activation redirect.
+	 *
+	 * @param mixed $plugin details of plugin.
+	 * @since 3.2.7
+	 * @return void
+	 */
+	function astra_pro_sites_activation_redirect( $plugin ) {
+		if ( plugin_basename( __FILE__ ) == $plugin ) {
+			wp_safe_redirect( admin_url( 'themes.php?page=starter-templates' ) );
+			exit();
+		}
+	}
+
+	add_action( 'activated_plugin', 'astra_pro_sites_activation_redirect' );
+
+endif;
