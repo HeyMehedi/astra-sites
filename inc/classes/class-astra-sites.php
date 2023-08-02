@@ -1721,7 +1721,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$license_status = BSF_License_Manager::bsf_is_active_license( 'astra-pro-sites' );
 			}
 
-			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+			$spectra_theme = 'not-installed';
+			// Theme installed and activate.
+			if ( 'spectra-one' === get_option( 'stylesheet', 'astra' ) ) {
+				$spectra_theme = 'installed-and-active';
+			}
+			$default_page_builder = ( 'installed-and-active' === $spectra_theme ) ? 'fse' : Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 
 			$data = apply_filters(
 				'astra_sites_localize_vars',

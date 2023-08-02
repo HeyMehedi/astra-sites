@@ -57,6 +57,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'wp_ajax_astra-sites-import-wpforms', array( $this, 'import_wpforms' ) );
 			add_action( 'wp_ajax_astra-sites-import-cartflows', array( $this, 'import_cartflows' ) );
 			add_action( 'wp_ajax_astra-sites-import-spectra-settings', array( $this, 'import_spectra_settings' ) );
+			add_action( 'wp_ajax_astra-sites-import-surecart-settings', array( $this, 'import_surecart_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-prepare-xml', array( $this, 'prepare_xml_data' ) );
 			add_action( 'wp_ajax_astra-sites-import-options', array( $this, 'import_options' ) );
@@ -413,6 +414,35 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			} elseif ( wp_doing_ajax() ) {
 				wp_send_json_success( $url );
 			}
+		}
+		/**
+		 * Import Surecart Settings
+		 *
+		 * @since 3.3.0
+		 * @return void
+		 */
+		public function import_surecart_settings() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+			}
+			$id = isset( $_POST['source_id'] ) ? base64_decode( sanitize_text_field( $_POST['source_id'] ) ) : '';
+			if ( is_callable( 'SureCart\Models\ProvisionalAccount::create' ) && '' !== $id ) {
+				$currency = isset( $_POST['source_currency'] ) ? sanitize_text_field( $_POST['source_currency'] ) : 'usd';
+				$result = SureCart\Models\ProvisionalAccount::create(
+					array(
+						'account_currency'  => $currency, // It will default to USD.
+						'account_name'      => '', // if you do not pass this it will default to the site name.
+						'account_url'       => '', // if you do not pass this it will default to the site url.
+						'email'             => '', // optional.
+						'source_account_id' => $id,
+					)
+				);
+				if ( ! is_wp_error( $result ) ) {
+					wp_send_json_success( 'success' );
+				}           
+			}
+			wp_send_json_error( __( 'There was an error cloning the surecart store.', 'astra-sites' ) );
 		}
 
 		/**
@@ -797,7 +827,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 */
 		public function update_latest_checksums() {
 			$latest_checksums = get_site_option( 'astra-sites-last-export-checksums-latest', '' );
-			update_site_option( 'astra-sites-last-export-checksums', $latest_checksums, 'no' );
+			update_site_option( 'astra-sites-last-export-checksums', $latest_checksums );
 		}
 
 		/**

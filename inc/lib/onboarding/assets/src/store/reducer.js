@@ -5,7 +5,7 @@ let currentIndexKey = 0;
 let builderKey = 'gutenberg';
 
 if ( astraSitesVars.default_page_builder ) {
-	currentIndexKey = 2;
+	currentIndexKey = 1;
 	builderKey =
 		astraSitesVars.default_page_builder === 'brizy'
 			? 'gutenberg'
@@ -74,8 +74,10 @@ export const initialState = {
 	},
 	importErrorResponse: [],
 
-	customizerImportFlag: true,
-	themeActivateFlag: true,
+	customizerImportFlag:
+		astraSitesVars.default_page_builder === 'fse' ? false : true,
+	themeActivateFlag:
+		astraSitesVars.default_page_builder === 'fse' ? false : true,
 	widgetImportFlag: true,
 	contentImportFlag: true,
 	analyticsFlag: starterTemplates.analytics !== 'yes' ? true : false,
