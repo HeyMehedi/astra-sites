@@ -429,6 +429,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			$id = isset( $_POST['source_id'] ) ? base64_decode( sanitize_text_field( $_POST['source_id'] ) ) : '';
 			if ( is_callable( 'SureCart\Models\ProvisionalAccount::create' ) && '' !== $id ) {
 				$currency = isset( $_POST['source_currency'] ) ? sanitize_text_field( $_POST['source_currency'] ) : 'usd';
+				$token = \SureCart\Models\ApiToken::get();
+				if ( ! empty( $token ) ) {
+					\SureCart\Models\ApiToken::clear();
+				}
 				$result = SureCart\Models\ProvisionalAccount::create(
 					array(
 						'account_currency'  => $currency, // It will default to USD.

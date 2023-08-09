@@ -1728,6 +1728,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 			$default_page_builder = ( 'installed-and-active' === $spectra_theme ) ? 'fse' : Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 
+			if ( is_callable( '\SureCart\Models\ApiToken::get()' ) ) {
+				$surecart_store_exist = \SureCart\Models\ApiToken::get();
+			}
+
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
@@ -1821,6 +1825,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'isRTLEnabled' => is_rtl(),
 					/* translators: %s Anchor link to support URL. */
 					'support_text' => sprintf( __( 'Please report this error %1$shere%2$s, so we can fix it.', 'astra-sites' ), '<a href="https://wpastra.com/support/open-a-ticket/" target="_blank">', '</a>' ),
+					'surecart_store_exists' => isset( $surecart_store_exist ) ? $surecart_store_exist : false,
 				)
 			);
 
