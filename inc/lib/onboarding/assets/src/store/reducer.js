@@ -47,6 +47,7 @@ export const initialState = {
 	templateResponse: null,
 	requiredPlugins: null,
 	fileSystemPermissions: null,
+	selectedTemplateID: '',
 	selectedTemplateName: '',
 	selectedTemplateType: '',
 

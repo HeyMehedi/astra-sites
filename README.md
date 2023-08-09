@@ -133,6 +133,11 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.3.1 - 09-August-2023
+- New: Added eCommerce Plugin Selection Screen.
+- New: Added compatibility to SureCart based templates.
+- Fix: Resolved an issue of Import progress percentage exceeding 100%.
+
 v3.3.0 - 02-August-2023
 - New: Added compatibility to FSE based Spectra One theme.
 - Improvement: Added Plugin Name in a few admin notices in order to make it better readable and understandable.

@@ -1,0 +1,33 @@
+.customizer-ecommerce-selection{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    label.ist-customizer-heading {
+        border-color: var(--st-color-accent);
+        background: var(--st-background-primary);
+        border: 1px solid var(--st-border-color);
+        box-sizing: border-box;
+        border-radius: var(--st-border-radius-4);
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        justify-content: space-between;
+        .ist-image-section{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            span{
+                font-weight: 600;
+            }
+        }
+    }
+    .stc-tooltip-content{
+        min-width: 250px;
+        line-height: inherit;
+        left: -100px;
+    }
+}
+

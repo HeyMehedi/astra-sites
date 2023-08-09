@@ -502,7 +502,7 @@ const ImportSite = () => {
 		percentage += 10;
 		dispatch( {
 			type: 'set',
-			importPercent: percentage,
+			importPercent: percentage >= 50 ? 50 : percentage,
 			importStatus: __( 'Reset for old website is done.', 'astra-sites' ),
 		} );
 
@@ -542,7 +542,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage <= 70 ? percentage : 70,
+							importPercent: percentage >= 50 ? 50 : percentage,
 						} );
 					} else {
 						throw result;
@@ -1000,7 +1000,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 60 ? 60 : percentage,
 						} );
 						return true;
 					}
@@ -1039,7 +1039,7 @@ const ImportSite = () => {
 			percentage += 5;
 			dispatch( {
 				type: 'set',
-				importPercent: percentage,
+				importPercent: percentage >= 65 ? 65 : percentage,
 			} );
 			return true;
 		}
@@ -1064,7 +1064,7 @@ const ImportSite = () => {
 						percentage += 5;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 65 ? 65 : percentage,
 						} );
 						return true;
 					}
@@ -1104,7 +1104,7 @@ const ImportSite = () => {
 			percentage += 20;
 			dispatch( {
 				type: 'set',
-				importPercent: percentage,
+				importPercent: percentage >= 80 ? 80 : percentage,
 				xmlImportDone: true,
 			} );
 			return true;
@@ -1148,7 +1148,7 @@ const ImportSite = () => {
 					percentage += 2;
 					dispatch( {
 						type: 'set',
-						importPercent: percentage <= 80 ? percentage : 80,
+						importPercent: percentage >= 80 ? 80 : percentage,
 					} );
 					if ( false === data.success ) {
 						const errorMsg = data.data.error || data.data;
@@ -1217,7 +1217,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 75 ? 75 : percentage,
 						} );
 						return true;
 					}
@@ -1278,7 +1278,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 75 ? 75 : percentage,
 						} );
 						return true;
 					}
@@ -1404,7 +1404,7 @@ const ImportSite = () => {
 						percentage += 5;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 90 ? 90 : percentage,
 						} );
 						return true;
 					}
