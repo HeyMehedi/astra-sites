@@ -133,7 +133,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
-v3.4.0 - 09-August-2023
+v3.4.0 - 10-August-2023
 - New: Added SureCart variation for every eCommerce based template.
 - Fix: Resolved an issue where the import progress percentage would overflow the limit.
 

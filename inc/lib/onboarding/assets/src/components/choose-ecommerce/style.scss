@@ -4,6 +4,7 @@
     gap: 15px;
     margin-top: 10px;
     label.ist-customizer-heading {
+        position: relative;
         border-color: var(--st-color-accent);
         background: var(--st-background-primary);
         border: 1px solid var(--st-border-color);
@@ -24,10 +25,16 @@
             }
         }
     }
-    .stc-tooltip-content{
-        min-width: 250px;
-        line-height: inherit;
-        left: -100px;
+    .stc-tooltip {
+        position: unset;
+        path{
+            fill: #6B7280 !important;
+        }
+        .stc-tooltip-content{
+            top: 85%;
+            line-height: inherit;
+            min-width: 200px;
+        }
     }
 }
 
