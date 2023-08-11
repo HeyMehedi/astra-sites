@@ -152,7 +152,7 @@ const ImportLoader = () => {
 					</span>
 				</div>
 				<div className="ist-import-progress-info-precent">
-					{ importPercent }%
+					{ importPercent > 100 ? 90 : importPercent }%
 				</div>
 			</div>
 			<div className="ist-import-progress-bar-wrap">
