@@ -95,6 +95,7 @@
     flex-direction: row;
     align-items: flex-start;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .astra-sites-welcome .notice-content-container {
@@ -176,7 +177,18 @@
     font-weight: 500;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1280px) {
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+    .astra-sites-welcome .notice-content-container{
+        display: flex;
+        grid-template-columns: repeat(2,1fr);
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-size: auto;
+        gap: 20px;
+   }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
     .astra-sites-welcome .astra-notice-container .notice-welcome-container {
         grid-template-columns: repeat(2,1fr);       
         flex-direction: row;
@@ -263,6 +275,7 @@
     }
     .astra-sites-welcome .notice-content-container .content-section {
         margin-left: 32px;
+        margin-bottom: 0px;
     }
 }
 
