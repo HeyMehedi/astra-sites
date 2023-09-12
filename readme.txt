@@ -19,6 +19,8 @@ Create professional designed pixel perfect websites in minutes with the Starter 
 
 This plugin gives you access to 280+ pre-made full website templates and individual pages for your favorite page builder such as Elementor, Beaver Builder and the Block Editor.
 
+[Try it out on a free dummy site](https://bsf.io/starter-templates-demo)
+
 All you need to do is select the demo that suits your needs, import, tweak and go live!
 
 > I love the fact that the Astra Starter Sites plugin comes with dozens of pre-built sites that were built using Elementor and that can be used to create a full website with one click. – Ben Pines, CMO at Elementor
