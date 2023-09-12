@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 6.2
-Stable tag: 3.4.0
+Stable tag: 3.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,12 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.4.1 - 12-September-2023
+- Improvement: Improved the Starter Template Modal for users using Elementor in Dark Mode.
+- Fix: Addressed broken links and alignment issues in the welcome banner, especially on different resolutions.
+- Improvement: Added compatibility for the latest webpack CLI.
+- Fix: Fixed the issue of displaying HTML Markup in the notice when a block is not found in Elementor.
 
 v3.4.0 - 11-August-2023
 - New: Added SureCart variation for every eCommerce based template.
