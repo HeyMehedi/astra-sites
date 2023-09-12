@@ -20,7 +20,8 @@ const ChooseEcommerce = () => {
 	const [ checkedTemplateID, setCheckedTemplateID ] = useState();
 	const selectedTemplate = allSitesData[ `id-${ selectedTemplateID }` ];
 	const relatedTemplateID =
-		selectedTemplate?.related_ecommerce_template !== ''
+		selectedTemplate?.related_ecommerce_template !== '' &&
+		selectedTemplate?.related_ecommerce_template !== undefined
 			? selectedTemplate.related_ecommerce_template
 			: '';
 	if ( ! relatedTemplateID ) {
