@@ -2621,9 +2621,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @return void
 		 */
 		public function admin_dashboard_notices() {
-			if ( is_plugin_active( 'astra-sites/astra-sites.php' ) ) {
+			if ( defined( 'ASTRA_SITES_VER' ) ) {
 				add_action( 'admin_notices', array( $this, 'admin_welcome_notices' ) );
-			} elseif ( is_plugin_active( 'astra-pro-sites/astra-pro-sites.php' ) ) {
+			} elseif ( defined( 'ASTRA_PRO_SITES_VER' ) ) {
 				add_action( 'admin_notices', array( $this, 'admin_welcome_notices' ) );
 			}
 		}
