@@ -135,7 +135,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
-v3.4.1 - 12-September-2023
+v3.4.1 - 13-September-2023
 - Improvement: Improved the Starter Template Modal for users using Elementor in Dark Mode.
 - Fix: Addressed broken links and alignment issues in the welcome banner, especially on different resolutions.
 - Fix: Fixed the issue of displaying HTML Markup in the notice when a block is not found in Elementor.
