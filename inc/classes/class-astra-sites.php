@@ -2623,7 +2623,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		public function admin_dashboard_notices() {
 			if ( is_plugin_active( 'astra-sites/astra-sites.php' ) ) {
 				add_action( 'admin_notices', array( $this, 'admin_welcome_notices' ) );
-			} elseif( is_plugin_active( 'astra-pro-sites/astra-pro-sites.php') ) {
+			} elseif ( is_plugin_active( 'astra-pro-sites/astra-pro-sites.php' ) ) {
 				add_action( 'admin_notices', array( $this, 'admin_welcome_notices' ) );
 			}
 		}
