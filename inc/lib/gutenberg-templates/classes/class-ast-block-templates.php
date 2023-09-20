@@ -443,7 +443,7 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 				return false;
 			}
 
-			if ( 'site-editor' !== $current_screen->base && ! array_key_exists( $current_screen->post_type, $post_types ) ) {
+			if ( ! array_key_exists( $current_screen->post_type, $post_types ) ) {
 				return;
 			}
 
