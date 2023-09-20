@@ -3,7 +3,7 @@
  * Plugin Name: Gutenberg Starter Templates
  * Plugin URI: https://wpastra.com/
  * Description: Gutenberg single page templates, and blocks library to imported your website easily.
- * Version: 1.3.2
+ * Version: 1.3.3
  * Author: Brainstorm Force
  * Author URI: https://www.brainstormforce.com
  * Text Domain: ast-block-templates
