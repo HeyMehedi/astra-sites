@@ -92,7 +92,7 @@ if ( ! function_exists( 'astra_pro_sites_activation_redirect' ) ) :
 	 * @return void
 	 */
 	function astra_pro_sites_activation_redirect( $plugin ) {
-		if ( ( ! defined('WP_CLI') || ! WP_CLI ) && ( plugin_basename( __FILE__ ) == $plugin ) ) {
+		if ( ( ! defined( 'WP_CLI' ) || ! WP_CLI ) && ( plugin_basename( __FILE__ ) == $plugin ) ) {
 			wp_safe_redirect( admin_url( 'themes.php?page=starter-templates' ) );
 			exit();
 		}
