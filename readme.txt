@@ -136,7 +136,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v3.4.2 - 20-September-2023
-- Fix: Plugin causes redirect URL related warnings with WP CLI Activate Command.
+- Fix: Plugin causes redirect URL related warnings with WP CLI plugin activate command.
 
 v3.4.1 - 13-September-2023
 - Improvement: Improved the Starter Template Modal for users using Elementor in Dark Mode.
