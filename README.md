@@ -135,6 +135,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.4.3 - 26-September-2023
+- Fix: Fixed a fatal error issue with widgets import in the process.
+
 v3.4.2 - 20-September-2023
 - Fix: Plugin causes redirect URL related warnings with WP CLI plugin activate command.
 
