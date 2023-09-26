@@ -632,8 +632,16 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			}
 
 			$data = astra_get_site_data( 'astra-site-widgets-data' );
-
-			$widgets_data = ( isset( $data ) ) ? (object) json_decode( $data ) : (object) $widgets_data;
+			if ( isset( $data ) && is_object( $data ) ) {
+				// $data is set and is an object.
+				$widgets_data = $data;
+			} elseif ( isset( $data ) && is_string( $data ) ) {
+				// $data is set but is not an object.
+				$widgets_data = (object) json_decode( $data );
+			} else {
+				// $data is not set.
+				$widgets_data = (object) $widgets_data;
+			}
 
 			if ( ! empty( $widgets_data ) ) {
 
