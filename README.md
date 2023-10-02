@@ -135,6 +135,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.4.4 - 02-October-2023
+- Fix: Fixed an issue where the Free Images feature was missing in the Premium Starter Templates plugin.
+
 v3.4.3 - 26-September-2023
 - Fix: Fixed a fatal error issue with widgets import in the process.
 
