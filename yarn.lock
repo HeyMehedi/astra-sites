@@ -1041,9 +1041,9 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@brainstormforce/starter-templates-components@git+https://github.com/brainstormforce/starter-templates-components.git#9135bcd":
+"@brainstormforce/starter-templates-components@https://git@github.com/brainstormforce/starter-templates-components.git#9135bcd":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/brainstormforce/starter-templates-components.git#9135bcdb5d7f44a9909e7ae5cd0aec56d3b2eb82"
+  resolved "git+https://git@github.com/brainstormforce/starter-templates-components.git#9135bcdb5d7f44a9909e7ae5cd0aec56d3b2eb82"
   dependencies:
     "@wordpress/html-entities" "^3.2.3"
     "@wordpress/i18n" "^4.2.4"
@@ -1131,12 +1131,7 @@
   dependencies:
     "@emotion/memoize" "^0.8.1"
 
-"@emotion/memoize@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.8.0.tgz"
-  integrity sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==
-
-"@emotion/memoize@^0.8.1":
+"@emotion/memoize@^0.8.0", "@emotion/memoize@^0.8.1":
   version "0.8.1"
   resolved "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.8.1.tgz"
   integrity sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==

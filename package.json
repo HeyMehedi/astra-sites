@@ -55,7 +55,7 @@
     "webpack": "^5.88.2"
   },
   "dependencies": {
-    "@brainstormforce/starter-templates-components": "git+https://github.com/brainstormforce/starter-templates-components.git#9135bcd",
+    "@brainstormforce/starter-templates-components": "https://git@github.com/brainstormforce/starter-templates-components.git#9135bcd",
     "@material-ui/core": "^4.11.4",
     "@material-ui/lab": "4.0.0-alpha.61",
     "@wordpress/api-fetch": "^6.25.0",
