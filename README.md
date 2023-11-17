@@ -135,6 +135,11 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.4.6 - 17-November-2023
+- Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
+- Improvement: Enable/disable the Elementor page builder from the selection drop-down.
+- Fix: Fixed deprecated error in get_page_by_title function.
+
 v3.4.5 - 02-November-2023
 - Improvement: Added extra checks for filesystem permission during template import.
 - Improvement: Display a notice if filesystem permissions are insufficient.
