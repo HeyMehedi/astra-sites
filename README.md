@@ -137,9 +137,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 v3.4.6 - 17-November-2023
 - Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
-- Improvement: Enable/disable the Elementor page builder from the selection drop-down.
+- Improvement: Ability to remove Elementor as a Page Builder from the selection list.
 - Fix: Prevented CartFlows plugin redirection when import is in progress.
-- Fix: Fixed deprecated error in get_page_by_title function.
+- Fix: Handled usage of deprecated  function get_page_by_title
 
 v3.4.5 - 02-November-2023
 - Improvement: Added extra checks for filesystem permission during template import.
