@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 6.3.1  
-**Stable tag:** 3.4.5  
+**Stable tag:** 3.4.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -134,6 +134,11 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.4.6 - 17-November-2023
+- Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
+- Improvement: Enable/disable the Elementor page builder from the selection drop-down.
+- Fix: Fixed deprecated error in get_page_by_title function.
 
 v3.4.5 - 02-November-2023
 - Improvement: Added extra checks for filesystem permission during template import.
