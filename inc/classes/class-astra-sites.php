@@ -172,7 +172,63 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_filter( 'status_header', array( $this, 'status_header' ), 10, 4 );
 			add_filter( 'wp_php_error_message', array( $this, 'php_error_message' ), 10, 2 );
 			add_filter( 'wp_import_post_data_processed', array( $this, 'wp_slash_after_xml_import' ), 99, 2 );
+			add_filter( 'zip_ai_enable_chat_sidebar', array( $this, 'disable_zip_ai_assistant' ) );
+			add_filter( 'ast_block_templates_authorization_url_param', array( $this, 'add_auth_url_param' ) );
+
 		}
+
+		/**
+		 * Set plugin param for auth URL.
+		 *
+		 * @param array $url_param url parameters.
+		 *
+		 * @since  3.5.0
+		 */
+		public function add_auth_url_param( $url_param ) {
+
+			$url_param['plugin'] = 'starter-templates';
+
+			return $url_param;
+		}
+
+		/**
+		 * Disable ZipAI Assistant.
+		 *
+		 * @since 3.5.0
+		 *
+		 * @return boolean
+		 */
+		public function disable_zip_ai_assistant() {
+
+			if ( 'active' === $this->get_plugin_status( 'ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php' ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Get plugin status
+		 *
+		 * @since 3.5.0
+		 *
+		 * @param  string $plugin_init_file Plguin init file.
+		 * @return string
+		 */
+		public function get_plugin_status( $plugin_init_file ) {
+
+			$installed_plugins = get_plugins();
+
+			if ( ! isset( $installed_plugins[ $plugin_init_file ] ) ) {
+				return 'not-installed';
+			} elseif ( is_plugin_active( $plugin_init_file ) ) {
+				return 'active';
+			} else {
+				return 'inactive';
+			}
+		}
+
+
 
 		/**
 		 * Add slashes while importing the XML with WordPress Importer v2.
@@ -860,7 +916,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
 			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
 			$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
-			
+
 			if ( 'astra-blocks' == $type ) {
 				$url = trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id;
 			} else {
@@ -1732,7 +1788,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$enable_block_builder = apply_filters( 'st_enable_block_page_builder', false );
 			$default_page_builder = ( 'installed-and-active' === $spectra_theme ) ? 'fse' : Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 			$default_page_builder = ( $enable_block_builder && empty( $default_page_builder ) ) ? 'gutenberg' : $default_page_builder;
-			
+
 			if ( is_callable( '\SureCart\Models\ApiToken::get()' ) ) {
 				$surecart_store_exist = \SureCart\Models\ApiToken::get();
 			}
@@ -1987,11 +2043,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			/* translators: %s are link. */
-			$license_msg = sprintf( __( 'This is a premium template available with Essential Bundle and Growth Bundle. you can purchase it from <a href="%s" target="_blank">here</a>.', 'astra-sites' ), 'https://wpastra.com/starter-templates-plans/' );
+			$license_msg = sprintf( __( 'This is a premium template available with Essential Bundle and Business Toolkits. you can purchase it from <a href="%s" target="_blank">here</a>.', 'astra-sites' ), 'https://wpastra.com/starter-templates-plans/' );
 
 			if ( defined( 'ASTRA_PRO_SITES_NAME' ) ) {
 				/* translators: %s are link. */
-				$license_msg = sprintf( __( 'This is a premium template available with Essential Bundle and Growth Bundle. <a href="%s" target="_blank">Validate Your License</a> Key to import this template.', 'astra-sites' ), esc_url( admin_url( 'plugins.php?bsf-inline-license-form=astra-pro-sites' ) ) );
+				$license_msg = sprintf( __( 'This is a premium template available with Essential Bundle and Business Toolkits. <a href="%s" target="_blank">Validate Your License</a> Key to import this template.', 'astra-sites' ), esc_url( admin_url( 'plugins.php?bsf-inline-license-form=astra-pro-sites' ) ) );
 			}
 
 			$last_viewed_block_data = array();
@@ -2000,7 +2056,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( ! empty( $id ) ) {
 				$last_viewed_block_data = get_option( 'astra_sites_import_elementor_data_' . $id ) !== false ? get_option( 'astra_sites_import_elementor_data_' . $id ) : array();
 			}
-			
+
 			$data = apply_filters(
 				'astra_sites_render_localize_vars',
 				array(
@@ -2131,6 +2187,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-wp-cli.php';
 			require_once ASTRA_SITES_DIR . 'inc/lib/class-astra-sites-ast-block-templates.php';
 			require_once ASTRA_SITES_DIR . 'inc/lib/onboarding/class-onboarding.php';
+			require_once ASTRA_SITES_DIR . 'inc/lib/zip-ai/zip-ai.php';
 
 			// Batch Import.
 			require_once ASTRA_SITES_DIR . 'inc/classes/batch-import/class-astra-sites-batch-import.php';
@@ -2207,7 +2264,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @return array                     The array of required plugins data.
 		 */
 		public function get_required_plugins_data( $response, $required_plugins ) {
-			
+
 			$learndash_course_grid = 'https://www.learndash.com/add-on/course-grid/';
 			$learndash_woocommerce = 'https://www.learndash.com/add-on/woocommerce/';
 			if ( is_plugin_active( 'sfwd-lms/sfwd_lms.php' ) ) {
@@ -2647,7 +2704,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'show_if' => ( false === Astra_Sites_White_Label::get_instance()->is_white_labeled() && empty( $first_import_status ) ),
 					/* translators: %1$s white label plugin name and %2$s deactivation link */
 					'message' => sprintf(
-						'<div class="notice-welcome-container">	
+						'<div class="notice-welcome-container">
 							<div class="text-section">
 								<h1 class="text-heading">' . __( 'Welcome to Starter Templates!', 'astra-sites' ) . '</h1>
 								<p>' . __( 'Create professionally designed pixel-perfect websites in minutes.', 'astra-sites' ) . '</p>
@@ -2734,7 +2791,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			foreach ( $permissions as $file_permission => $value ) {
 				$permissions[ $file_permission ] = $file_permission( $wp_upload_path['basedir'] );
 			}
-			
+
 			$permissions['is_wp_filesystem'] = true;
 			if ( ! WP_Filesystem() ) {
 				$permissions['is_wp_filesystem'] = false;

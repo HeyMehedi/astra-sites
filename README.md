@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 6.4  
-**Stable tag:** 3.4.6  
+**Stable tag:** 3.5.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -134,6 +134,12 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 ## Changelog ##
+
+v3.5.0 - 05-December-2023
+- New: All new AI based Template Kit library
+- Fix: WooCommerce description & shortdescription not displayed.
+- Fix: alert box pops up when leave the page after import done. 
+- Improvement: Update Essential and Business Toolkits instead of Essential and Growth Bundles.
 
 v3.4.6 - 17-November-2023
 - Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
