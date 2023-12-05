@@ -135,6 +135,12 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.5.0 - 05-December-2023
+- New: All new AI based Template Kit library
+- Fix: WooCommerce description & shortdescription not displayed.
+- Fix: alert box pops up when leave the page after import done. 
+- Improvement: Update Essential and Business Toolkits instead of Essential and Growth Bundles.
+
 v3.4.6 - 17-November-2023
 - Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
 - Improvement: Ability to remove Elementor as a Page Builder from the selection list.
