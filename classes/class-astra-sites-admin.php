@@ -108,7 +108,7 @@ if ( ! class_exists( 'Astra_Sites_Admin' ) ) :
 				'astra_sites_custom_cta_vars',
 				array(
 					'text'        => __( 'Get unlimited access to all premium Starter Templates and more, at a single low cost!', 'astra-sites' ),
-					'button_text' => __( 'Get Essential Bundle', 'astra-sites' ),
+					'button_text' => __( 'Get Essential Toolkit', 'astra-sites' ),
 					'cta_link'    => Astra_Sites::get_instance()->get_cta_link(),
 				)
 			);
