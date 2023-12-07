@@ -48,7 +48,7 @@ Businesses like restaurants, lawyers, agencies, interior designers, artist shops
 - [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
 - [Block Editor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free)
 
-You can extend this library with premium ready-to-use website demos by purchasing of Essential and Business Toolkits.
+You can extend this library with premium ready-to-use website demos by purchasing one of the Essential or Business Toolkits.
 
 ### WHY PEOPLE LOVE THE ASTRA THEME? ###
 
