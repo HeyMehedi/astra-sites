@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 6.4  
-**Stable tag:** 3.5.0  
+**Stable tag:** 3.5.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -48,7 +48,7 @@ Businesses like restaurants, lawyers, agencies, interior designers, artist shops
 - [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
 - [Block Editor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free)
 
-You can extend this library with premium ready-to-use website demos by purchasing one of the Astra Bundles, i.e. either the Essential and Business Toolkit.
+You can extend this library with premium ready-to-use website demos by purchasing one of the Astra Bundles, i.e. either the Essential Bundle or the Growth Bundle.
 
 ### WHY PEOPLE LOVE THE ASTRA THEME? ###
 
@@ -135,11 +135,17 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
+v3.5.2 - 07-December-2023
+- New: All new AI based Template Kit library.
+
+v3.5.1 - 05-December-2023
+- Fix: Revert to Template Kit library v1.3.3
+
 v3.5.0 - 05-December-2023
-- New: All new AI based Template Kit library
-- Fix: WooCommerce description & shortdescription not displayed.
-- Fix: alert box pops up when leave the page after import done. 
-- Improvement: Update Essential and Business Toolkits instead of Essential and Growth Bundles.
+- New: All new AI based Template Kit library.
+- Improvement: Update the existing nomenclatures for the premium plans for Essential and Business Toolkits to Essential and Growth Bundles.
+- Fix: Fixed an issue where the WooCommerce description & short description are not displayed.
+- Fix: Removed the alert box that pops up when a user tries to leave the page after import process is done.
 
 v3.4.6 - 17-November-2023
 - Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
@@ -253,7 +259,7 @@ v3.1.13 - 18-July-2022
 v3.1.12 - 12-July-2022
 - Improvement: Disable promotes Essential & Growth bundle when white label is enabled.
 - Fix: Templates are not displayed when we install plugin from Astra notice.
-- Fix: Display "Install Required Plugins" checkbox option if required plugins are not installed. 
+- Fix: Display "Install Required Plugins" checkbox option if required plugins are not installed.
 
 v3.1.11 - 03-June-2022
 - Improvement: Activate plugins using WP-CLI when importing demo using cli command.
