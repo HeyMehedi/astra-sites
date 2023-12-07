@@ -4,32 +4,32 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe490cfa91b9ab49cb09556e583247ed",
+    "content-hash": "ce7da499c8ce60312d7366b7d1b39493",
     "packages": [
         {
             "name": "automattic/vipwpcs",
-            "version": "2.3.3",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/VIP-Coding-Standards.git",
-                "reference": "6cd0a6a82bc0ac988dbf9d6a7c2e293dc8ac640b"
+                "reference": "b8610e3837f49c5f2fcc4b663b6c0a7c9b3509b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/VIP-Coding-Standards/zipball/6cd0a6a82bc0ac988dbf9d6a7c2e293dc8ac640b",
-                "reference": "6cd0a6a82bc0ac988dbf9d6a7c2e293dc8ac640b",
+                "url": "https://api.github.com/repos/Automattic/VIP-Coding-Standards/zipball/b8610e3837f49c5f2fcc4b663b6c0a7c9b3509b6",
+                "reference": "b8610e3837f49c5f2fcc4b663b6c0a7c9b3509b6",
                 "shasum": ""
             },
             "require": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.1 || ^0.5 || ^0.6.2 || ^0.7",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.1 || ^0.5 || ^0.6.2 || ^0.7 || ^1.0",
                 "php": ">=5.4",
-                "sirbrillig/phpcs-variable-analysis": "^2.11.1",
-                "squizlabs/php_codesniffer": "^3.5.5",
+                "sirbrillig/phpcs-variable-analysis": "^2.11.17",
+                "squizlabs/php_codesniffer": "^3.7.1",
                 "wp-coding-standards/wpcs": "^2.3"
             },
             "require-dev": {
-                "php-parallel-lint/php-console-highlighter": "^0.5",
-                "php-parallel-lint/php-parallel-lint": "^1.0",
+                "php-parallel-lint/php-console-highlighter": "^1.0.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3.2",
                 "phpcompatibility/php-compatibility": "^9",
                 "phpcsstandards/phpcsdevtools": "^1.0",
                 "phpunit/phpunit": "^4 || ^5 || ^6 || ^7"
@@ -49,6 +49,7 @@
             "keywords": [
                 "phpcs",
                 "standards",
+                "static analysis",
                 "wordpress"
             ],
             "support": {
@@ -56,7 +57,7 @@
                 "source": "https://github.com/Automattic/VIP-Coding-Standards",
                 "wiki": "https://github.com/Automattic/VIP-Coding-Standards/wiki"
             },
-            "time": "2021-09-29T16:20:23+00:00"
+            "time": "2023-08-24T15:11:13+00:00"
         },
         {
             "name": "brainstormforce/astra-notices",
@@ -105,16 +106,16 @@
         },
         {
             "name": "brainstormforce/gutenberg-templates",
-            "version": "1.3.2",
+            "version": "2.0.13",
             "source": {
                 "type": "git",
                 "url": "git@github.com:brainstormforce/gutenberg-templates.git",
-                "reference": "86f92e9c39c861b5a35cbcb263845fced61a2006"
+                "reference": "d4a000a8fd8f2afdbb30bf4bf7bed04707d60ab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brainstormforce/gutenberg-templates/zipball/86f92e9c39c861b5a35cbcb263845fced61a2006",
-                "reference": "86f92e9c39c861b5a35cbcb263845fced61a2006",
+                "url": "https://api.github.com/repos/brainstormforce/gutenberg-templates/zipball/d4a000a8fd8f2afdbb30bf4bf7bed04707d60ab5",
+                "reference": "d4a000a8fd8f2afdbb30bf4bf7bed04707d60ab5",
                 "shasum": ""
             },
             "require": {
@@ -122,18 +123,38 @@
                 "composer/installers": "^2"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "0.7.0",
+                "automattic/vipwpcs": "^2.3",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+                "php-stubs/generator": "^0.8.2",
+                "php-stubs/wordpress-stubs": "^6.1",
                 "phpcompatibility/phpcompatibility-wp": "*",
-                "wp-cli/dist-archive-command": "^2.0",
+                "phpstan/phpstan": "^1.9",
+                "squizlabs/php_codesniffer": "^3.5",
+                "szepeviktor/phpstan-wordpress": "^1.1",
                 "wp-coding-standards/wpcs": "^2.3"
             },
             "type": "wordpress-plugin",
             "scripts": {
                 "format": [
-                    "phpcbf --standard=phpcs.xml.dist --report-summary --report-source"
+                    "vendor/bin/phpcbf"
                 ],
                 "lint": [
-                    "phpcs --standard=phpcs.xml.dist --report-summary --report-source"
+                    "vendor/bin/phpcs"
+                ],
+                "lint:fix": [
+                    "vendor/bin/phpcbf"
+                ],
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "vendor/bin/phpstan --memory-limit=2048M analyse"
+                ],
+                "gen-stubs": [
+                    "vendor/bin/generate-stubs artifact/phpstan/gutenberg-templates/ --out=tests/php/stubs/ast-block-templates-stubs.php && rm -rf artifact/phpstan"
+                ],
+                "update-stubs": [
+                    "rm -f tests/php/stubs/ast-block-templates-stubs.php && bash bin/build-folder-phpstan.sh && composer gen-stubs"
                 ]
             },
             "license": [
@@ -147,10 +168,10 @@
             ],
             "description": "Gutenberg single page templates, and blocks library to imported your website easily.",
             "support": {
-                "source": "https://github.com/brainstormforce/gutenberg-templates/tree/1.3.2",
+                "source": "https://github.com/brainstormforce/gutenberg-templates/tree/2.0.13",
                 "issues": "https://github.com/brainstormforce/gutenberg-templates/issues"
             },
-            "time": "2023-07-11T11:42:58+00:00"
+            "time": "2023-12-07T08:13:50+00:00"
         },
         {
             "name": "composer/installers",
@@ -722,5 +743,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
