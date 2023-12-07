@@ -135,7 +135,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
-v3.5.2 - 06-December-2023
+v3.5.2 - 07-December-2023
 - New: All new AI based Template Kit library.
 
 v3.5.1 - 05-December-2023

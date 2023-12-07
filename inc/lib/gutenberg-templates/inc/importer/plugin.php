@@ -854,8 +854,8 @@ class Plugin {
 					'credit_purchased' => isset( $_GET['ast_action'] ) && 'credits' === sanitize_text_field( $_GET['ast_action'] ) ? true : false, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					'show_pages_onboarding' => get_option( 'ast-show-pages-onboarding', 'yes' ) === 'yes',
 					'flat_rates' => array(
-						'patterns_library' => 3000,
-						'pages_library' => 3000,
+						'patterns_library' => 5000,
+						'pages_library' => 5000,
 						'patterns_category' => 500,
 						'pages_category' => 1000,
 					),

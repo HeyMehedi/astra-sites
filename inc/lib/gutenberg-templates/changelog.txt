@@ -1,3 +1,7 @@
+v2.0.13 - 07-December-2023
+- Improvement: Showing Server Traffic Surge toaster.
+- Improvement: Updated the flat rates for Pages and Patterns library from 3000 to 5000.
+
 v2.0.12 - 05-December-2023
 - Improvement: Added no credit notice in AI onoarding.
 - Improvement: Removed Generate Content button if showing welcome scrren.

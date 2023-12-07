@@ -220,8 +220,9 @@ class Ai_Content {
 			$response_code = wp_remote_retrieve_response_code( $response );
 			$response_body = wp_remote_retrieve_body( $response );
 
+			$response_data = json_decode( $response_body, true );
+
 			if ( 200 === $response_code ) {
-				$response_data = json_decode( $response_body, true );
 				if ( $response_data['status'] ) {
 
 					if ( ! $post_data['regenerate'] ) {
@@ -286,6 +287,8 @@ class Ai_Content {
 					array(
 						'data' => 'Failed',
 						'status'  => false,
+						'code' => $response_data['code'],
+						'error' => $response_data['message'],
 					)
 				);
 			}
