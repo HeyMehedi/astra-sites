@@ -27,10 +27,10 @@ const Survey = () => {
 
 	const notInstalled = requiredPlugins?.required_plugins?.notinstalled;
 	const notActivated = requiredPlugins?.required_plugins?.inactive;
-	const allPuginList = [];
+	const allPluginList = [];
 	if ( notInstalled.length > 0 ) {
 		notInstalled.map( ( plugin ) => {
-			return allPuginList.push( {
+			return allPluginList.push( {
 				plugin,
 				action: __( 'Install & Activate', 'astra-sites' ),
 			} );
@@ -39,7 +39,7 @@ const Survey = () => {
 
 	if ( notActivated.length > 0 ) {
 		notActivated.map( ( plugin ) => {
-			return allPuginList.push( {
+			return allPluginList.push( {
 				plugin,
 				action: __( 'Activate', 'astra-sites' ),
 			} );
@@ -64,7 +64,7 @@ const Survey = () => {
 				</p>
 				<h5>{ __( 'Required plugins -', 'astra-sites' ) }</h5>
 				<ul className="manual-required-plugins-list">
-					{ allPuginList.map( ( value, index ) => {
+					{ allPluginList.map( ( value, index ) => {
 						return (
 							<li key={ index }>
 								{ value.plugin.name }
@@ -91,13 +91,13 @@ const Survey = () => {
 		);
 	};
 
-	const thirtPartyPlugins =
+	const thirdPartyPlugins =
 		requiredPlugins !== null
 			? requiredPlugins.third_party_required_plugins
 			: [];
-	const isThirtPartyPlugins = thirtPartyPlugins.length > 0;
+	const isThirdPartyPlugins = thirdPartyPlugins.length > 0;
 
-	const [ skipPlugins, setSkipPlugins ] = useState( isThirtPartyPlugins );
+	const [ skipPlugins, setSkipPlugins ] = useState( isThirdPartyPlugins );
 
 	const compatibilities = astraSitesVars.compatibilities;
 	const requirementsErrors = compatibilities.errors;
@@ -105,10 +105,10 @@ const Survey = () => {
 
 	if (
 		requiredPlugins &&
-		requiredPlugins.update_avilable_plugins.length > 0
+		requiredPlugins.update_available_plugins.length > 0
 	) {
 		const updatePluginsList = [];
-		requiredPlugins.update_avilable_plugins.map( ( plugin ) => {
+		requiredPlugins.update_available_plugins.map( ( plugin ) => {
 			return updatePluginsList.push( plugin.name );
 		} );
 
@@ -284,7 +284,7 @@ const Survey = () => {
 				</p>
 				<h5>{ __( 'Required plugins -', 'astra-sites' ) }</h5>
 				<ul className="third-party-required-plugins-list">
-					{ thirtPartyPlugins.map( ( plugin, index ) => {
+					{ thirdPartyPlugins.map( ( plugin, index ) => {
 						return (
 							<li
 								data-slug={ plugin.slug }
@@ -512,7 +512,7 @@ const Survey = () => {
 
 	let defaultStepContent = surveyForm();
 
-	if ( pluginInstallationAttempts > 2 && allPuginList.length > 0 ) {
+	if ( pluginInstallationAttempts > 2 && allPluginList.length > 0 ) {
 		// If plugin installation fails more than 3 times.
 		defaultStepContent = manualPluginInstallation();
 	} else if (

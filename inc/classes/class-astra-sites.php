@@ -2293,7 +2293,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			);
 
 			$plugin_updates          = get_plugin_updates();
-			$update_avilable_plugins = array();
+			$update_available_plugins = array();
 			$incompatible_plugins = array();
 
 			if ( ! empty( $required_plugins ) ) {
@@ -2321,7 +2321,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					if ( $plugin_pro ) {
 
 						if ( array_key_exists( $plugin_pro['init'], $plugin_updates ) ) {
-							$update_avilable_plugins[] = $plugin_pro;
+							$update_available_plugins[] = $plugin_pro;
 						}
 
 						// Pro - Active.
@@ -2336,7 +2336,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						}
 					} else {
 						if ( array_key_exists( $plugin['init'], $plugin_updates ) ) {
-							$update_avilable_plugins[] = $plugin;
+							$update_available_plugins[] = $plugin;
 						}
 
 						// Lite - Installed but Inactive.
@@ -2407,7 +2407,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$data = array(
 				'required_plugins'             => $response,
 				'third_party_required_plugins' => $third_party_required_plugins,
-				'update_avilable_plugins'      => $update_avilable_plugins,
+				'update_available_plugins'      => $update_available_plugins,
 				'incompatible_plugins'         => $incompatible_plugins,
 			);
 
