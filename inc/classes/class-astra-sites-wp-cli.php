@@ -140,7 +140,7 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 		 *     # Import demo site.
 		 *     $ wp astra-sites import 34184 --reset --yes
 		 *     Activating Plugins..
-		 *     Reseting Posts..
+		 *     Resetting Posts..
 		 *     ..
 		 *
 		 * @since 1.4.0
@@ -371,14 +371,14 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 
 			// Delete tracked posts.
 			if ( isset( $reset_data['reset_posts'] ) && ! empty( $reset_data['reset_posts'] ) ) {
-				WP_CLI::line( __( 'Reseting Posts..', 'astra-sites' ) );
+				WP_CLI::line( __( 'Resetting Posts..', 'astra-sites' ) );
 				foreach ( $reset_data['reset_posts'] as $key => $post_id ) {
 					Astra_Sites_Importer::get_instance()->delete_imported_posts( $post_id );
 				}
 			}
 			// Delete tracked terms.
 			if ( isset( $reset_data['reset_terms'] ) && ! empty( $reset_data['reset_terms'] ) ) {
-				WP_CLI::line( __( 'Reseting Terms..', 'astra-sites' ) );
+				WP_CLI::line( __( 'Resetting Terms..', 'astra-sites' ) );
 				foreach ( $reset_data['reset_terms'] as $key => $post_id ) {
 					Astra_Sites_Importer::get_instance()->delete_imported_terms( $post_id );
 				}

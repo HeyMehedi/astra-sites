@@ -436,7 +436,7 @@ const ImportSite = () => {
 		percentage += 2;
 		dispatch( {
 			type: 'set',
-			importStatus: __( 'Reseting site.', 'astra-sites' ),
+			importStatus: __( 'Resetting site.', 'astra-sites' ),
 			importPercent: percentage,
 		} );
 
@@ -1097,7 +1097,7 @@ const ImportSite = () => {
 	};
 
 	/**
-	 * 5. Import Site Comtent XML.
+	 * 5. Import Site Content XML.
 	 */
 	const importSiteContent = async () => {
 		if ( ! contentImportFlag ) {
@@ -1668,7 +1668,7 @@ const ImportSite = () => {
 	}, [ requiredPluginsDone, themeStatus ] );
 
 	/**
-	 * Start Part 2 of the import once the XML is imported sucessfully.
+	 * Start Part 2 of the import once the XML is imported successfully.
 	 */
 	useEffect( () => {
 		if ( xmlImportDone ) {
