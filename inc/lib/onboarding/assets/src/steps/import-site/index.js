@@ -444,7 +444,7 @@ const ImportSite = () => {
 		let resetCustomizerStatus = false;
 		let resetWidgetStatus = false;
 		let resetOptionsStatus = false;
-		let reseteTermsStatus = false;
+		let resetTermsStatus = false;
 		let resetPostsStatus = false;
 
 		/**
@@ -477,13 +477,13 @@ const ImportSite = () => {
 		 * Reset Terms, Forms.
 		 */
 		if ( resetWidgetStatus ) {
-			reseteTermsStatus = await performResetTermsAndForms();
+			resetTermsStatus = await performResetTermsAndForms();
 		}
 
 		/**
 		 * Reset Posts.
 		 */
-		if ( reseteTermsStatus ) {
+		if ( resetTermsStatus ) {
 			resetPostsStatus = await performResetPosts();
 		}
 
@@ -492,7 +492,7 @@ const ImportSite = () => {
 				resetCustomizerStatus &&
 				resetOptionsStatus &&
 				resetWidgetStatus &&
-				reseteTermsStatus &&
+				resetTermsStatus &&
 				resetPostsStatus
 			)
 		) {
