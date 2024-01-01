@@ -231,7 +231,7 @@ class Intelligent_Starter_Templates_Loader {
 	public function should_report_error() {
 
 		/**
-		 * Byassing error reporting for a few hosting providers.
+		 * Bypassing error reporting for a few hosting providers.
 		 */
 		foreach( $this->hosting_providers as $provider ) {
 			if ( strpos( ABSPATH, $provider ) !== false ) {
@@ -242,7 +242,7 @@ class Intelligent_Starter_Templates_Loader {
 	}
 
 	/**
-	 * Genereate and return the Google fonts url.
+	 * Generate and return the Google fonts url.
 	 *
 	 * @since 3.0.0-beta.1
 	 * @return string

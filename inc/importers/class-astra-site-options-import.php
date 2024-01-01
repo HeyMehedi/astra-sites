@@ -26,7 +26,7 @@ class Astra_Site_Options_Import {
 	private static $instance = null;
 
 	/**
-	 * Instanciate Astra_Site_Options_Importer
+	 * Instantiate Astra_Site_Options_Importer
 	 *
 	 * @since  1.0.0
 	 * @return (Object) Astra_Site_Options_Importer

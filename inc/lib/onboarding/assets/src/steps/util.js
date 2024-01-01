@@ -27,7 +27,7 @@ export const STEPS = [
 		class: 'step-survey',
 	},
 	{
-		title: 'We are buiding your website...',
+		title: 'We are building your website...',
 		content: <ImportSite />,
 		class: 'step-import-site',
 	},

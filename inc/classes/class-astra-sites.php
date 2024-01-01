@@ -212,7 +212,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 *
 		 * @since 3.5.0
 		 *
-		 * @param  string $plugin_init_file Plguin init file.
+		 * @param  string $plugin_init_file Plugin init file.
 		 * @return string
 		 */
 		public function get_plugin_status( $plugin_init_file ) {

@@ -63,11 +63,11 @@ const SiteGrid = ( { sites } ) => {
 			formData.append( 'is_favorite', favoriteStatus );
 			formData.append( 'site_id', siteId );
 			formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-			const resonse = await fetch( ajaxurl, {
+			const response = await fetch( ajaxurl, {
 				method: 'post',
 				body: formData,
 			} );
-			const data = await resonse.json();
+			const data = await response.json();
 
 			// Toggle fail so unset favorite.
 			if ( ! data.success ) {

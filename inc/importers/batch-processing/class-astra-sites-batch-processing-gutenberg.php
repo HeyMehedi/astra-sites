@@ -159,11 +159,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 
 				if ( isset( $tax_mapping['post'] ) ) {
 
-					$catogory_mapping = ( isset( $tax_mapping['post']['category'] ) ) ? $tax_mapping['post']['category'] : array();
+					$category_mapping = ( isset( $tax_mapping['post']['category'] ) ) ? $tax_mapping['post']['category'] : array();
 
-					if ( is_array( $catogory_mapping ) && ! empty( $catogory_mapping ) ) {
+					if ( is_array( $category_mapping ) && ! empty( $category_mapping ) ) {
 
-						foreach ( $catogory_mapping as $key => $value ) {
+						foreach ( $category_mapping as $key => $value ) {
 
 							$this_site_term = get_term_by( 'slug', $value['slug'], 'category' );
 							if ( ! is_wp_error( $this_site_term ) && $this_site_term ) {

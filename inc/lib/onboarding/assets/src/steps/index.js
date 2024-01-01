@@ -22,7 +22,7 @@ const Steps = () => {
 		designStep,
 		importError,
 	} = stateValue;
-	const [ settingHistory, setSettinghistory ] = useState( true );
+	const [ settingHistory, setSettingHistory ] = useState( true );
 	const [ settingIndex, setSettingIndex ] = useState( true );
 	const current = STEPS[ currentIndex ];
 	const history = useNavigate();
@@ -106,7 +106,7 @@ const Steps = () => {
 			localStorage.removeItem( 'starter-templates-onboarding' );
 		}
 
-		setSettinghistory( false );
+		setSettingHistory( false );
 	}, [ history ] );
 
 	useEffect( () => {
